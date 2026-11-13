@@ -1,2 +1,2 @@
 // ===== Démarrage =====
-if(!TEST){go('londres');dessiner()}else{ui()}
+if(!TEST){go('appart');dessiner()}else{ui()}

@@ -8,14 +8,22 @@ function charger(){
   const ctx={window:{TEST:{log:[],choix:[]}},document,setTimeout,Promise,console,Math,Date,Error,Object,requestAnimationFrame:()=>{}};
   vm.createContext(ctx);
   const h=fs.readFileSync(__dirname+'/../dist/index.html','utf8');
-  vm.runInContext(h.match(/<script>([\s\S]*)<\/script>/)[1]+';this.S=S;this.action=action;this.go=go;this.switchPerso=switchPerso;this.aObjet=aObjet;this.drawPerso=drawPerso;this.SCENES=SCENES;this.postEffets=postEffets;this.reflets=reflets;this.passer=passer',ctx);
+  vm.runInContext(h.match(/<script>([\s\S]*)<\/script>/)[1]+';this.S=S;this.action=action;this.go=go;this.switchPerso=switchPerso;this.aObjet=aObjet;this.drawPerso=drawPerso;this.SCENES=SCENES;this.tenue=tenue;this.postEffets=postEffets;this.reflets=reflets;this.passer=passer',ctx);
   return ctx;
 }
 const v=(nom,c)=>{if(c){ok++}else{ko++;console.log('ÉCHEC :',nom)}};
 const dit=(G,t)=>G.window.TEST.log.some(l=>l.includes(t));
 const scenarios={
   async graphisme(G){let ok2=true;try{for(const n of['yvan','rod','solene'])for(const d of['face','d','g','dos']){G.S.anim[n]={dir:d,pas:7,marche:true};G.drawPerso(n,100)}
-    for(const k in G.SCENES){G.S.f.traverse=0;G.SCENES[k].dessin(CTX);G.S.scene=k;G.SCENES[k].dessinAvant&&G.SCENES[k].dessinAvant();G.postEffets(G.SCENES[k]);G.reflets()}}catch(e){ok2=false;console.log(e.message)}v('dessin persos, décors, lumières, particules, reflets',ok2)},
+    for(const k in G.SCENES){G.S.f.traverse=0;G.SCENES[k].dessin(CTX);G.SCENES[k].devant&&G.SCENES[k].devant();G.S.scene=k;G.SCENES[k].dessinAvant&&G.SCENES[k].dessinAvant();G.postEffets(G.SCENES[k]);G.reflets()}}catch(e){ok2=false;console.log(e.message)}v('dessin persos, décors, lumières, particules, reflets',ok2)},
+  async intro(G){
+    await G.go('appart');
+    v('intro : réplique « quel âge »',dit(G,'quel âge'));
+    v('intro : canapé d\'Yvan',dit(G,'ces bêtises'));
+    v('carton « Un an plus tard »',dit(G,'carton: Un an plus tard'));
+    v('chapitre 1 : Londres, titre puis tuto',G.S.scene==='londres'&&dit(G,'nous voici à Londres')&&dit(G,'titre')&&dit(G,'tuto'));
+    v('Yvan en magicien au chapitre 1',!!G.tenue('yvan').chapeau&&G.S.posY.yvan==null);
+  },
   async passer(G){
     G.window.TEST.lent=1;const p=G.go('quai');await null;G.passer();await p;
     v('Passer saute toute la séquence',dit(G,'LA photo')&&!G.S.busy&&!G.S.passe);G.window.TEST.lent=0;

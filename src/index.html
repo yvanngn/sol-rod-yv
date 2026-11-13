@@ -1,11 +1,20 @@
 <!doctype html>
 <html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>La Traversée</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Mystery+Quest&family=Fondamento&display=swap" rel="stylesheet"><style>/*CSS*/</style></head>
+<title>Magical Mystery World</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Mystery+Quest&family=Fondamento&display=swap" rel="stylesheet"><style>/*CSS*/</style></head>
 <body>
 <div id="jeu">
-  <header><h1>La Traversée</h1><div id="heros"></div></header>
+  <header><h1>Magical Mystery World</h1><div id="heros"></div></header>
   <div id="scene"><canvas id="cv" width="320" height="180"></canvas>
     <div id="info"></div><div id="etiquette" hidden></div><div id="roue" hidden></div>
+    <div id="noir"></div>
+    <div id="titre" hidden><span class="etoiles">✦ ✧ ✦</span><h2>Magical<br>Mystery World</h2><small>Cliquer pour continuer</small></div>
+    <div id="tuto" hidden><div class="carte"><h3>Comment jouer</h3>
+      <div class="ligne"><span class="ic">🖱️</span><div><b>Clic gauche</b> : se déplacer, et faire l'action évidente (parler à quelqu'un, passer une porte, regarder un décor).</div></div>
+      <div class="ligne"><span class="ic">✨</span><div><b>Clic droit</b> (appui long sur mobile) : la <b>roue des actions</b> — Regarder 👁 · Prendre ✋ · Utiliser ⚙ · Parler 💬.</div></div>
+      <div class="ligne"><span class="ic">🎒</span><div><b>Inventaire</b> : clique un objet, puis sa cible pour l'utiliser ou le donner. Clic droit sur un objet : le regarder.</div></div>
+      <div class="ligne"><span class="ic">👥</span><div><b>Ronds en haut</b> : changer de personnage. <b>Passer</b> (Échap) saute un dialogue.</div></div>
+      <button id="tutoOK">C'est parti !</button></div></div>
+    <div id="carton" hidden></div>
     <div id="bulle" hidden></div><button id="passer" hidden title="Échap">Passer ⏭</button><div id="choix" hidden></div></div>
   <div id="inv"></div>
   <p class="aide">Clic : action · Clic droit / appui long : plus d'actions · Objet puis cible : utiliser ou donner</p>

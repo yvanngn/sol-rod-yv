@@ -16,11 +16,13 @@ S.anim={};
 const anim=n=>S.anim[n]||(S.anim[n]={dir:'face',pas:0,marche:false});
 
 function drawPerso(n,x,y=SOL){
-  const s=SPEC[n],a=anim(n);x=Math.round(x);
+  const s=tenue(n),a=anim(n);x=Math.round(x);
   if(!S.reflet){g.fillStyle='rgba(0,0,0,.32)';g.beginPath();g.ellipse(x,y,9,2.5,0,0,7);g.fill()}
-  const f=a.marche?Math.floor(a.pas/5)%4:0,bob=f%2?-1:0;
+  const f=a.marche?Math.floor(a.pas/5)%4:0,bob=a.rire?((Date.now()/110|0)%2?-1:0):(f%2?-1:0),pr=a.dir==='g'||a.dir==='d';
   g.save();g.translate(x,y);if(a.dir==='g')g.scale(-1,1);
-  if(a.dir==='g'||a.dir==='d')profil(s,f,bob);else face(s,f,bob,a.dir==='dos');
+  if(s.cape)cape(s,bob,pr,a.dir==='dos');
+  if(pr)profil(s,f,bob);else face(s,f,bob,a.dir==='dos');
+  if(s.robe)robe(s,bob,pr);if(s.chapeau)chapeau(s,bob,pr);
   g.restore();
   if(n===S.perso&&!TEST&&!S.reflet){const t=Date.now()/300;P(x-1,y-48+Math.round(Math.sin(t)),3,2,'#f0c766');P(x,y-46+Math.round(Math.sin(t)),1,1,'#f0c766')}
 }
@@ -92,3 +94,19 @@ marcher=function(n,x){x=Math.max(8,Math.min(W-8,x));const a=anim(n);
   return new Promise(r=>{const pas=()=>{const d=x-S.pos[n];
     if(Math.abs(d)<1.5){S.pos[n]=x;a.marche=false;a.dir='face';return r()}
     a.marche=true;a.dir=d>0?'d':'g';a.pas++;S.pos[n]+=Math.sign(d)*Math.min(1.5,Math.abs(d));setTimeout(pas,16)};pas()})};
+
+// ----- Tenues : neutre (intro), magicien pour Yvan à partir du chapitre 1 -----
+const NEUTRE={yvan:{top:'#6c727c',veste:0,sac:0,capuche:0,robe:0,cape:0,chapeau:0},rod:{top:'#3b5a7a',capuche:0,blason:0},solene:{top:'#d9cfbf',maille:0}};
+Object.assign(SPEC.yvan,{top:'#2a2f78',veste:0,capuche:0,robe:'#2a2f78',cape:'#5b1f6e',chapeau:'#2a2f78',etoile:'#f0c766'});
+S.tenue='';
+function tenue(n){return S.tenue==='neutre'?Object.assign({},SPEC[n],NEUTRE[n]):SPEC[n]}
+function cape(s,bob,pr,dos){const T=-28+bob,c=s.cape;
+  if(pr){P(-7,T,5,24,shade(c,.75));P(-8,T+6,2,18,shade(c,.6))}
+  else{P(-9,T,18,dos?26:24,dos?c:shade(c,.7));if(dos){P(-9,T,1,26,shade(c,1.25));for(let i=0;i<3;i++)P(-6+i*5,T+8+i*5,1,1,s.etoile)}P(-9,T+(dos?25:23),18,1,s.etoile)}}
+function robe(s,bob,pr){const T=-28+bob,r=s.robe;
+  if(pr){P(-4,T+14,9,6,r);P(-4,T+19,9,1,s.etoile)}else{P(-7,T+14,14,6,r);P(-7,T+19,14,1,s.etoile);P(-1,T+3,2,11,shade(r,.7))}
+  [[-4,4],[3,8],[-2,11],[4,15],[-5,16]].forEach(([i,j])=>!pr||i>-4?P(i,T+j,1,1,s.etoile):0)}
+function chapeau(s,bob,pr){const H0=-39+bob,c=s.chapeau,dx=pr?1:0;
+  P(-8+dx,H0-2,16,2,shade(c,.7));P(-8+dx,H0-2,16,1,shade(c,1.1));
+  for(let i=0;i<11;i++){const w=11-i;P(Math.round(-w/2)+dx+(i>7?i-7:0),H0-3-i,w,1,c)}
+  P(-5+dx,H0-4,10,1,s.etoile);P(-1+dx,H0-8,2,2,s.etoile);P(5+dx,H0-14,2,1,c);P(6+dx,H0-15,1,1,s.etoile)}

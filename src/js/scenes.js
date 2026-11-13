@@ -48,11 +48,13 @@ SCENES.londres={nom:'Londres',
     },with:{billets:async()=>{retirer('billets');ajouter('billets','rod');await say('rod',"Ok, je les garde. Comme je gardais la setlist du groupe. Enfin… presque.")}}},
     yvan:{with:{billets:async()=>{retirer('billets');ajouter('billets','yvan');await say('yvan',"Merci ! Je fonce.")}}},
   },
-  async entree(){await dire([
-    ['narr',"Londres, un samedi gris. Trois amis d'enfance s'offrent enfin le week-end promis depuis le lycée."],
-    ['rod',"Bon, le studio c'est juste là. Après, pub. Après, re-pub."],
-    ['solene',"Après, on joue. C'est moi qui masterise, je vous rappelle."],
-    ['yvan',"(Clic : action. Clic droit ou appui long : plus d'actions. Ronds en bas : changer de personnage.)"]])}
+  async entree(){
+    await noir(false);
+    await say('narr',"Et nous voici à Londres.");
+    await titreJeu();
+    await tuto();
+    await dire([['rod',"Bon, le studio c'est juste là. Après, pub. Après, re-pub."],
+      ['solene',"Après, on joue. C'est moi qui masterise, je vous rappelle."]])}
 };
 
 // ===== Scène 2 : le quai du studio =====

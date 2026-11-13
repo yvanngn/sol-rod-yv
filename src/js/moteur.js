@@ -3,7 +3,7 @@ const W=320,H=180,SOL=160;
 const TEST=typeof window!=='undefined'&&window.TEST;
 const cv=document.getElementById('cv'),g=cv.getContext('2d');
 const $=id=>document.getElementById(id);
-const S={scene:null,perso:'yvan',f:{},verbe:'regarder',sel:null,busy:false,
+const S={posY:{},scene:null,perso:'yvan',f:{},verbe:'regarder',sel:null,busy:false,
   persos:{yvan:{inv:['telephone']},rod:{inv:['echarpe']},solene:{inv:['billets','tetine']}},
   pos:{yvan:70,rod:110,solene:150},cache:{}};
 const NOMS={yvan:'Yvan',rod:'Rod',solene:'Solène'};
@@ -79,14 +79,15 @@ function dessiner(){
   const sc=SCENES[S.scene];if(TEST)return;requestAnimationFrame(dessiner);if(!sc)return;g.clearRect(0,0,W,H);sc.dessin(g);
   (sc.objets||[]).forEach(o=>o.dessin&&(!o.cache||!o.cache())&&o.dessin(g));
   sc.reflet&&reflets();
-  Object.keys(NOMS).filter(n=>S.pos[n]!=null).sort((a,b)=>S.pos[a]-S.pos[b]).forEach(n=>drawPerso(n,S.pos[n]));
+  Object.keys(NOMS).filter(n=>S.pos[n]!=null).sort((a,b)=>S.pos[a]-S.pos[b]).forEach(n=>drawPerso(n,S.pos[n],S.posY[n]??SOL));
+  sc.devant&&sc.devant();
   postEffets(sc);
   if(S.flash>0){g.fillStyle=`rgba(255,255,255,${S.flash})`;g.fillRect(0,0,W,H);S.flash-=.05}
 }
 function marcher(n,x){x=Math.max(8,Math.min(W-8,x));if(TEST){S.pos[n]=x;return Promise.resolve()}return new Promise(r=>{const pas=()=>{
   const d=x-S.pos[n];if(Math.abs(d)<2){S.pos[n]=x;return r()}S.pos[n]+=Math.sign(d)*2;setTimeout(pas,16)};pas()})}
 const pause=ms=>TEST?Promise.resolve():new Promise(r=>setTimeout(r,ms));
-async function go(id,positions){S.scene=id;if(positions)Object.assign(S.pos,positions);S.sel=null;ui();
+async function go(id,positions){S.scene=id;S.passe=false;if(positions)Object.assign(S.pos,positions);S.sel=null;ui();
   const sc=SCENES[id];if(sc.entree&&!S.f['vu_'+id]){S.f['vu_'+id]=1;S.busy=true;await sc.entree();S.busy=false;S.passe=false}}
 
 async function lancer(h){if(typeof h==='string')await say('moi',h);else await h()}
@@ -130,3 +131,14 @@ cv.addEventListener('mousemove',e=>{const t=$('etiquette');if(S.busy){t.hidden=t
 cv.addEventListener('mouseleave',()=>$('etiquette').hidden=true);
 // Pour les tests : action(id, verbe?, objetSélectionné?)
 async function action(id,v,sel){S.sel=sel||null;const o=objetsCliquables().find(o=>o.id===id);if(!o)throw new Error('introuvable: '+id+' dans '+S.scene);await agir(o,v);S.sel=null}
+
+// ----- Mise en scène : fondus, cartons, titre, tutoriel -----
+function attendreClic(el,ms){return new Promise(r=>{let fini=false;const f=()=>{if(fini)return;fini=true;clicSuivant=null;$('passer').hidden=true;r()};
+  clicSuivant=f;$('passer').hidden=false;el.onclick=e=>{e.stopPropagation();f()};if(ms)setTimeout(f,ms)})}
+async function noir(on){if(TEST)return;$('noir').classList.toggle('on',on);if(!S.passe)await pause(900)}
+async function carton(txt,ms=2800){if(TEST){TEST.log.push('carton: '+txt);return}if(S.passe)return;
+  const c=$('carton');c.textContent=txt;c.style.animationDuration=ms+'ms';c.hidden=false;await attendreClic(c,ms);c.hidden=true}
+async function titreJeu(){if(TEST){TEST.log.push('titre');return}const t=$('titre');t.classList.remove('part');t.hidden=false;
+  await attendreClic(t,7000);t.classList.add('part');await pause(600);t.hidden=true}
+async function tuto(){if(TEST){TEST.log.push('tuto');return}const t=$('tuto');t.hidden=false;
+  await new Promise(r=>$('tutoOK').onclick=e=>{e.stopPropagation();r()});t.hidden=true;S.passe=false}

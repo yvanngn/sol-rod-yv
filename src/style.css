@@ -37,3 +37,24 @@ button:hover{background:#3b2f5e;border-color:var(--bord)}
 #bulle b{font-family:"Mystery Quest",cursive;font-size:1.25em;letter-spacing:.04em;text-transform:none;text-shadow:0 1px 0 #000,0 0 10px currentColor}
 #bulle,#choix{font-size:clamp(16px,2.5vw,21px);line-height:1.45;color:#fff8e8;text-shadow:0 1px 2px #000;background:rgba(14,10,26,.92)}
 .avatar{font-size:18px}
+[hidden]{display:none!important}
+#noir{position:absolute;inset:0;background:#000;opacity:0;pointer-events:none;transition:opacity .9s;z-index:3}
+#noir.on{opacity:1}
+#carton{position:absolute;inset:0;z-index:6;background:#000;display:flex;align-items:center;justify-content:center;text-align:center;cursor:pointer;
+  font-family:"Mystery Quest",cursive;color:var(--or);font-size:clamp(30px,6.5vw,60px);text-shadow:0 0 18px rgba(240,199,102,.6);animation:fonduTexte 2.8s ease both}
+@keyframes fonduTexte{0%{opacity:0;letter-spacing:.2em}25%,80%{opacity:1;letter-spacing:.04em}100%{opacity:0}}
+#titre{position:absolute;inset:0;z-index:4;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;
+  background:radial-gradient(ellipse at center,rgba(12,6,30,.7),rgba(12,6,30,.15) 70%);transition:opacity .6s}
+#titre.part{opacity:0}
+#titre h2{font-family:"Mystery Quest",cursive;font-weight:normal;margin:0;text-align:center;line-height:1;color:#ffe9a8;font-size:clamp(36px,8.5vw,82px);
+  text-shadow:0 0 6px rgba(255,255,255,.4),0 0 26px #b48cff,0 4px 0 #3a1a5a;animation:apparait 1.6s ease both,flotte 3.2s ease-in-out 1.6s infinite}
+#titre .etoiles{color:var(--or);letter-spacing:.6em;font-size:20px;animation:clig 1.4s infinite}
+#titre small{margin-top:14px;color:var(--doux);font-size:15px;animation:clig 1.8s infinite}
+@keyframes flotte{50%{transform:translateY(-10px) rotate(-1.5deg)}}
+@keyframes apparait{from{opacity:0;filter:blur(10px);transform:scale(.75)}}
+#tuto{position:absolute;inset:0;z-index:5;display:flex;align-items:center;justify-content:center;background:rgba(8,5,18,.55)}
+#tuto .carte{width:min(560px,92%);max-height:94%;overflow:auto;background:var(--verre);backdrop-filter:blur(10px);border:1px solid var(--bord);border-radius:16px;padding:14px 18px;animation:monte .25s}
+#tuto h3{font-family:"Mystery Quest",cursive;font-weight:normal;color:var(--or);font-size:26px;margin:0 0 8px;text-align:center}
+#tuto .ligne{display:flex;gap:10px;align-items:flex-start;margin:7px 0;font-size:clamp(13px,1.9vw,16px);line-height:1.35}
+#tuto .ic{font-size:20px;width:28px;text-align:center}
+#tutoOK{display:block;margin:12px auto 0;background:var(--or);color:#1b1407;border-radius:20px;padding:8px 22px;font-size:16px}

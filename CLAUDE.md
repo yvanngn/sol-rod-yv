@@ -1,4 +1,4 @@
-# La Traversée — règles du projet (font foi)
+# Magical Mystery World — règles du projet (font foi)
 
 Jeu point and click pixel art : Yvan, Rod et Solène traversent le mur d'un studio de cinéma londonien
 et basculent dans un monde de sorciers **original** (aucun nom, lieu, personnage ou logo des films/livres
@@ -8,6 +8,12 @@ existants : on invente tout — Académie d'Hiverlune, Quai des Brumes…).
 - `src/index.html` (gabarit), `src/style.css`, `src/js/*.js` (ordre fixé dans `build.py`).
 - `python3 build.py` → `dist/index.html` (fichier unique). **Ne jamais éditer `dist/`.**
 - Tout est dessiné par le code (pas d'images ni de sons externes). Polices Google : « Mystery Quest » (titre, noms des bulles, avatars, jamais en petit) et « Fondamento » (dialogues). Panneaux dessinés dans le canvas : Georgia gras (une police décorative est illisible à 7-9 px).
+
+## Déroulé
+- Intro (`intro.js`) : `appart` (anniversaire, cadeau = tenue de magicien, tenue neutre `S.tenue='neutre'`) → `salon` (Yvan sur son canapé)
+  → carton « Un an plus tard » → **Chapitre 1** `londres` : « Et nous voici à Londres », titre flottant `titreJeu()`, tutoriel `tuto()`.
+- Ensuite : `quai` (studio, photo du chariot) → `autre` (Quai des Brumes). À venir : une scène avec Yvan seul, puis Rod et Solène, qui se retrouvent.
+- Yvan porte la tenue de magicien (robe, cape, chapeau) à partir du chapitre 1. Tenues : `SPEC` (chapitre en cours) et `NEUTRE` (intro), via `tenue(n)`.
 
 ## Moteur (src/js/moteur.js)
 - Personnages jouables : `yvan`, `rod`, `solene`. Inventaire par personnage `S.persos[nom].inv`.
@@ -23,10 +29,11 @@ existants : on invente tout — Académie d'Hiverlune, Quai des Brumes…).
 - Verbes internes : Regarder, Prendre, Utiliser, Parler, Donner. Donner = toujours « objet → personne »
   (`humain:true`), réactions dans `with:{objet:…}`. Utiliser X avec Y : `with` aussi.
 - Une scène = `SCENES.id = {nom, dessin(), objets:[…], heros:{nom:{parler,with}}, entree()}`.
-- Drapeaux d'histoire : `S.f`.
+- Drapeaux d'histoire : `S.f`. Personnage assis/caché derrière un meuble : `S.posY[nom]` + meuble dessiné dans `devant()` de la scène.
+- Mise en scène : `noir(true/false)` (fondu), `carton(texte)`, `titreJeu()`, `tuto()`, `anim(n).rire`.
 
 ## Tests
-- `sh tester.sh` (tout) ou `sh tester.sh quai` (groupes : graphisme, passer, londres, quai, autre). Scénarios dans `tests/test.js`.
+- `sh tester.sh` (tout) ou `sh tester.sh quai` (groupes : graphisme, intro, passer, londres, quai, autre). Scénarios dans `tests/test.js`.
 - Mode test : `window.TEST` → dialogues instantanés, choix pris dans `TEST.choix`, `action(id,verbe,objet)`.
 - Toute fonctionnalité ou correction = un test dans le groupe concerné. Ne tester que le groupe modifié.
 
