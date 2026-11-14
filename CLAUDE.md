@@ -13,7 +13,7 @@ existants : on invente tout — Académie d'Hiverlune, Quai des Brumes…).
 - Intro (`intro.js`) : `appart` (anniversaire, cadeau = tenue de sorcier, tenue neutre `S.tenue='neutre'`) → `salon` (Yvan sur son canapé)
   → carton « Un an plus tard » → **Chapitre 1** `londres` : « Et nous voici à Londres », titre flottant `titreJeu()`, tutoriel `tuto()`.
 - Ensuite : `quai` (studio, photo du chariot) → `autre` (Quai des Brumes). À venir : une scène avec Yvan seul, puis Rod et Solène, qui se retrouvent.
-- Yvan porte la tenue de sorcier (robe, cape, chapeau) à partir du chapitre 1. Tenues : `SPEC` (chapitre en cours) et `NEUTRE` (intro), via `tenue(n)`.
+- Yvan porte la tenue de sorcier (robe et cape noires, écharpe rouge, **pas de chapeau**) à partir du chapitre 1. Tenues : `SPEC` (chapitre en cours) et `NEUTRE` (intro), via `tenue(n)`.
 
 ## Moteur (src/js/moteur.js)
 - Personnages jouables : `yvan`, `rod`, `solene`. Inventaire par personnage `S.persos[nom].inv`.

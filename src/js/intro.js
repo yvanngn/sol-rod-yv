@@ -5,6 +5,7 @@ function boite(x,y,ouverte){
   if(!ouverte){P(x-9,y-3,18,3,'#c8304a');P(x-1,y-3,2,3,'#f0c766');P(x-4,y-6,3,3,'#f0c766');P(x+1,y-6,3,3,'#f0c766');P(x-1,y-5,2,2,'#c99a3a')}
   else{P(x-12,y-4,6,2,'#c8304a');P(x-14,y-2,4,1,'#8a1c2a');P(x-7,y-2,14,2,'#2a2f78');}
 }
+function tenueCadeau(x,y){P(x-7,y-6,14,7,'#24202c');P(x-7,y-6,14,1,'#3e3850');P(x-8,y-2,16,3,'#b8202c');P(x-8,y-2,16,1,'#e04a54');P(x+4,y+1,3,8,'#b8202c');P(x+4,y+4,3,1,'#7a1018')}
 function chapeauCadeau(x,y){P(x-7,y,14,2,'#20245e');for(let i=0;i<10;i++){const w=10-i;P(x-Math.round(w/2)+(i>6?i-6:0),y-1-i,w,1,'#2a2f78')}
   P(x-4,y-2,9,1,'#f0c766');P(x-1,y-6,2,2,'#f0c766');P(x+4,y-11,1,1,'#f0c766')}
 
@@ -32,7 +33,7 @@ SCENES.appart={nom:'Chez Solène',
     P(100,130,6,4,'#f2f2f2');P(101,128,4,2,'#f0c766');P(216,129,5,5,'#d8e8f0'); // verres
     P(126,131,28,3,'#f2ece0');P(132,126,16,5,'#7a3a22');P(132,126,16,1,'#e8d0a0');P(139,121,1,5,'#f2f2f2');P(139,119,1,2,'#ffcf5a'); // gâteau
     if(CADEAU.etape===0)boite(184,123);
-    else{const x=S.pos.yvan;boite(x,128,CADEAU.etape===2);if(CADEAU.etape===2){chapeauCadeau(x+15,121);P(x-12,127,4,8,'#5b1f6e')}}
+    else{const x=S.pos.yvan;boite(x,128,CADEAU.etape===2);if(CADEAU.etape===2){tenueCadeau(x+15,124)}}
   },
   ambiance:{nuit:.38,voile:'#1a0e10',teinte:'rgba(255,170,100,.3)'},
   lumieres:()=>[{x:160,y:70,r:95,c:'rgba(255,214,150,.4)'},{x:50,y:70,r:40,c:'rgba(255,150,100,.25)'},{x:139,y:118,r:16,c:'rgba(255,200,90,.6)',vacille:1}],
@@ -47,10 +48,10 @@ SCENES.appart={nom:'Chez Solène',
     CADEAU.etape=1;await pause(500);
     await say('yvan',"Voyons voir…");
     CADEAU.etape=2;S.flash=.5;await pause(700);
-    await say('yvan',"…Une tenue de sorcier. Avec le chapeau pointu.");
+    await say('yvan',"…Une tenue de sorcier. Avec l'écharpe rouge.");
     await say('yvan',"Vous avez cru que j'avais quel âge ?");
     anim('rod').rire=anim('solene').rire=true;
-    await dire([['rod',"Hahaha ! Regarde sa tête !"],['solene',"Pardon, pardon… mais le chapeau va super bien avec ta moustache."]]);
+    await dire([['rod',"Hahaha ! Regarde sa tête !"],['solene',"Pardon, pardon… mais l'écharpe va super bien avec ta moustache."]]);
     anim('rod').rire=anim('solene').rire=false;
     await noir(true);
     await go('salon',{yvan:92,rod:null,solene:null});
@@ -73,7 +74,7 @@ SCENES.salon={nom:"Chez Yvan",
   devant(){
     P(56,138,118,18,'#4a2e52');P(56,138,118,2,'#6a4a74');P(50,114,10,46,'#3e2646');P(170,114,10,46,'#3e2646');P(50,114,10,2,'#6a4a74');P(170,114,10,2,'#6a4a74');
     P(60,156,4,4,'#2a1a1a');P(166,156,4,4,'#2a1a1a');
-    boite(136,127,true);chapeauCadeau(137,124);P(126,128,4,9,'#5b1f6e');
+    boite(136,127,true);tenueCadeau(137,126);
   },
   ambiance:{nuit:.62,voile:'#05060f',teinte:'rgba(90,120,220,.35)'},
   lumieres:()=>[{x:286,y:90,r:80,c:'rgba(110,160,255,.3)',vacille:1},{x:230,y:40,r:40,c:'rgba(190,190,255,.2)'},{x:120,y:118,r:46},{x:137,y:116,r:14,c:'rgba(255,214,120,.35)',vacille:1}],

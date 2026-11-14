@@ -22,7 +22,7 @@ function drawPerso(n,x,y=SOL){
   g.save();g.translate(x,y);if(a.dir==='g')g.scale(-1,1);
   if(s.cape)cape(s,bob,pr,a.dir==='dos');
   if(pr)profil(s,f,bob);else face(s,f,bob,a.dir==='dos');
-  if(s.robe)robe(s,bob,pr);if(s.chapeau)chapeau(s,bob,pr);
+  if(s.robe)robe(s,bob,pr);if(s.echarpe)echarpe(s,bob,pr,a.dir==='dos');if(s.chapeau)chapeau(s,bob,pr);
   g.restore();
   if(n===S.perso&&!TEST&&!S.reflet){const t=Date.now()/300;P(x-1,y-48+Math.round(Math.sin(t)),3,2,'#f0c766');P(x,y-46+Math.round(Math.sin(t)),1,1,'#f0c766')}
 }
@@ -96,17 +96,22 @@ marcher=function(n,x){x=Math.max(8,Math.min(W-8,x));const a=anim(n);
     a.marche=true;a.dir=d>0?'d':'g';a.pas++;S.pos[n]+=Math.sign(d)*Math.min(1.5,Math.abs(d));setTimeout(pas,16)};pas()})};
 
 // ----- Tenues : neutre (intro), sorcier pour Yvan à partir du chapitre 1 -----
-const NEUTRE={yvan:{top:'#6c727c',veste:0,sac:0,capuche:0,robe:0,cape:0,chapeau:0},rod:{top:'#3b5a7a',capuche:0,blason:0},solene:{top:'#d9cfbf',maille:0}};
-Object.assign(SPEC.yvan,{top:'#2a2f78',veste:0,capuche:0,robe:'#2a2f78',cape:'#5b1f6e',chapeau:'#2a2f78',etoile:'#f0c766'});
+const NEUTRE={yvan:{top:'#6c727c',veste:0,sac:0,capuche:0,robe:0,cape:0,chapeau:0,echarpe:0},rod:{top:'#3b5a7a',capuche:0,blason:0},solene:{top:'#d9cfbf',maille:0}};
+Object.assign(SPEC.yvan,{top:'#24202c',veste:0,capuche:0,sac:0,robe:'#24202c',cape:'#1a1720',echarpe:'#b8202c',etoile:'#3e3850'});
 S.tenue='';
 function tenue(n){return S.tenue==='neutre'?Object.assign({},SPEC[n],NEUTRE[n]):SPEC[n]}
 function cape(s,bob,pr,dos){const T=-28+bob,c=s.cape;
   if(pr){P(-7,T,5,24,shade(c,.75));P(-8,T+6,2,18,shade(c,.6))}
-  else{P(-9,T,18,dos?26:24,dos?c:shade(c,.7));if(dos){P(-9,T,1,26,shade(c,1.25));for(let i=0;i<3;i++)P(-6+i*5,T+8+i*5,1,1,s.etoile)}P(-9,T+(dos?25:23),18,1,s.etoile)}}
+  else{P(-9,T,18,dos?26:24,dos?c:shade(c,.7));if(dos){P(-9,T,1,26,shade(c,1.25));if(s.etoiles)for(let i=0;i<3;i++)P(-6+i*5,T+8+i*5,1,1,s.etoile)}P(-9,T+(dos?25:23),18,1,s.etoile)}}
 function robe(s,bob,pr){const T=-28+bob,r=s.robe;
   if(pr){P(-4,T+14,9,6,r);P(-4,T+19,9,1,s.etoile)}else{P(-7,T+14,14,6,r);P(-7,T+19,14,1,s.etoile);P(-1,T+3,2,11,shade(r,.7))}
-  [[-4,4],[3,8],[-2,11],[4,15],[-5,16]].forEach(([i,j])=>!pr||i>-4?P(i,T+j,1,1,s.etoile):0)}
+  if(s.etoiles)[[-4,4],[3,8],[-2,11],[4,15],[-5,16]].forEach(([i,j])=>!pr||i>-4?P(i,T+j,1,1,s.etoile):0)}
 function chapeau(s,bob,pr){const H0=-39+bob,c=s.chapeau,dx=pr?1:0;
   P(-8+dx,H0-2,16,2,shade(c,.7));P(-8+dx,H0-2,16,1,shade(c,1.1));
   for(let i=0;i<11;i++){const w=11-i;P(Math.round(-w/2)+dx+(i>7?i-7:0),H0-3-i,w,1,c)}
   P(-5+dx,H0-4,10,1,s.etoile);P(-1+dx,H0-8,2,2,s.etoile);P(5+dx,H0-14,2,1,c);P(6+dx,H0-15,1,1,s.etoile)}
+function echarpe(s,bob,pr,dos){const T=-28+bob,c=s.echarpe,f=shade(c,.65),h=shade(c,1.25);
+  if(pr){P(-3,T-1,8,3,c);P(-3,T-1,8,1,h);P(-6,T+1,3,10,c);P(-6,T+4,3,1,f);P(-6,T+8,3,1,f);return}
+  P(-5,T-1,10,3,c);P(-5,T-1,10,1,h);
+  if(dos){P(-3,T+2,3,7,c);P(-3,T+5,3,1,f);return}
+  P(1,T+2,3,11,c);P(1,T+5,3,1,f);P(1,T+9,3,1,f);P(1,T+13,1,1,c);P(3,T+13,1,1,c)}
