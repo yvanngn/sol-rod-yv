@@ -22,7 +22,7 @@ const scenarios={
     v('intro : canapé d\'Yvan',dit(G,'ces bêtises'));
     v('carton « Un an plus tard »',dit(G,'carton: Un an plus tard'));
     v('chapitre 1 : Londres, titre puis tuto',G.S.scene==='londres'&&dit(G,'nous voici à Londres')&&dit(G,'titre')&&dit(G,'tuto'));
-    v('Yvan en magicien au chapitre 1',!!G.tenue('yvan').chapeau&&G.S.posY.yvan==null);
+    v('Yvan en sorcier au chapitre 1',!!G.tenue('yvan').chapeau&&G.S.posY.yvan==null);
   },
   async passer(G){
     G.window.TEST.lent=1;const p=G.go('quai');await null;G.passer();await p;

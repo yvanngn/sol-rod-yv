@@ -1,4 +1,4 @@
-# Magical Mystery World — règles du projet (font foi)
+# Witch'rok — règles du projet (font foi)
 
 Jeu point and click pixel art : Yvan, Rod et Solène traversent le mur d'un studio de cinéma londonien
 et basculent dans un monde de sorciers **original** (aucun nom, lieu, personnage ou logo des films/livres
@@ -10,10 +10,10 @@ existants : on invente tout — Académie d'Hiverlune, Quai des Brumes…).
 - Tout est dessiné par le code (pas d'images ni de sons externes). Polices Google : « Mystery Quest » (titre, noms des bulles, avatars, jamais en petit) et « Fondamento » (dialogues). Panneaux dessinés dans le canvas : Georgia gras (une police décorative est illisible à 7-9 px).
 
 ## Déroulé
-- Intro (`intro.js`) : `appart` (anniversaire, cadeau = tenue de magicien, tenue neutre `S.tenue='neutre'`) → `salon` (Yvan sur son canapé)
+- Intro (`intro.js`) : `appart` (anniversaire, cadeau = tenue de sorcier, tenue neutre `S.tenue='neutre'`) → `salon` (Yvan sur son canapé)
   → carton « Un an plus tard » → **Chapitre 1** `londres` : « Et nous voici à Londres », titre flottant `titreJeu()`, tutoriel `tuto()`.
 - Ensuite : `quai` (studio, photo du chariot) → `autre` (Quai des Brumes). À venir : une scène avec Yvan seul, puis Rod et Solène, qui se retrouvent.
-- Yvan porte la tenue de magicien (robe, cape, chapeau) à partir du chapitre 1. Tenues : `SPEC` (chapitre en cours) et `NEUTRE` (intro), via `tenue(n)`.
+- Yvan porte la tenue de sorcier (robe, cape, chapeau) à partir du chapitre 1. Tenues : `SPEC` (chapitre en cours) et `NEUTRE` (intro), via `tenue(n)`.
 
 ## Moteur (src/js/moteur.js)
 - Personnages jouables : `yvan`, `rod`, `solene`. Inventaire par personnage `S.persos[nom].inv`.

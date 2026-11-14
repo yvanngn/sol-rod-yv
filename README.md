@@ -1,4 +1,4 @@
-# Magical Mystery World
+# Witch'rok
 
 Point and click pixel art : Yvan, Rod et Solène visitent un studio de cinéma à Londres, tentent la photo du chariot qui fonce dans le mur… et le traversent pour de vrai, vers un monde de sorciers original.
 

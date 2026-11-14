@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Magical Mystery World</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Mystery+Quest&family=Fondamento&display=swap" rel="stylesheet"><style>:root{--fond:#0f0b18;--verre:rgba(24,18,40,.82);--texte:#f3ecdc;--or:#f0c766;--bord:rgba(240,199,102,.35);--doux:#a99fc4}
+<title>Witch'rok</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Mystery+Quest&family=Fondamento&display=swap" rel="stylesheet"><style>:root{--fond:#0f0b18;--verre:rgba(24,18,40,.82);--texte:#f3ecdc;--or:#f0c766;--bord:rgba(240,199,102,.35);--doux:#a99fc4}
 *{box-sizing:border-box}
 body{margin:0;min-height:100vh;background:radial-gradient(circle at 50% 0,#2a1f45,var(--fond) 70%);color:var(--texte);font-family:"Fondamento",Georgia,serif;display:flex;justify-content:center}
 #jeu{width:min(980px,100vw);padding:12px 16px}
@@ -63,11 +63,11 @@ button:hover{background:#3b2f5e;border-color:var(--bord)}
 </style></head>
 <body>
 <div id="jeu">
-  <header><h1>Magical Mystery World</h1><div id="heros"></div></header>
+  <header><h1>Witch'rok</h1><div id="heros"></div></header>
   <div id="scene"><canvas id="cv" width="320" height="180"></canvas>
     <div id="info"></div><div id="etiquette" hidden></div><div id="roue" hidden></div>
     <div id="noir"></div>
-    <div id="titre" hidden><span class="etoiles">✦ ✧ ✦</span><h2>Magical<br>Mystery World</h2><small>Cliquer pour continuer</small></div>
+    <div id="titre" hidden><span class="etoiles">✦ ✧ ✦</span><h2>Witch'rok</h2><small>Cliquer pour continuer</small></div>
     <div id="tuto" hidden><div class="carte"><h3>Comment jouer</h3>
       <div class="ligne"><span class="ic">🖱️</span><div><b>Clic gauche</b> : se déplacer, et faire l'action évidente (parler à quelqu'un, passer une porte, regarder un décor).</div></div>
       <div class="ligne"><span class="ic">✨</span><div><b>Clic droit</b> (appui long sur mobile) : la <b>roue des actions</b> — Regarder 👁 · Prendre ✋ · Utiliser ⚙ · Parler 💬.</div></div>
@@ -321,7 +321,7 @@ marcher=function(n,x){x=Math.max(8,Math.min(W-8,x));const a=anim(n);
     if(Math.abs(d)<1.5){S.pos[n]=x;a.marche=false;a.dir='face';return r()}
     a.marche=true;a.dir=d>0?'d':'g';a.pas++;S.pos[n]+=Math.sign(d)*Math.min(1.5,Math.abs(d));setTimeout(pas,16)};pas()})};
 
-// ----- Tenues : neutre (intro), magicien pour Yvan à partir du chapitre 1 -----
+// ----- Tenues : neutre (intro), sorcier pour Yvan à partir du chapitre 1 -----
 const NEUTRE={yvan:{top:'#6c727c',veste:0,sac:0,capuche:0,robe:0,cape:0,chapeau:0},rod:{top:'#3b5a7a',capuche:0,blason:0},solene:{top:'#d9cfbf',maille:0}};
 Object.assign(SPEC.yvan,{top:'#2a2f78',veste:0,capuche:0,robe:'#2a2f78',cape:'#5b1f6e',chapeau:'#2a2f78',etoile:'#f0c766'});
 S.tenue='';
@@ -657,7 +657,7 @@ SCENES.appart={nom:'Chez Solène',
     CADEAU.etape=1;await pause(500);
     await say('yvan',"Voyons voir…");
     CADEAU.etape=2;S.flash=.5;await pause(700);
-    await say('yvan',"…Une tenue de magicien. Avec le chapeau pointu.");
+    await say('yvan',"…Une tenue de sorcier. Avec le chapeau pointu.");
     await say('yvan',"Vous avez cru que j'avais quel âge ?");
     anim('rod').rire=anim('solene').rire=true;
     await dire([['rod',"Hahaha ! Regarde sa tête !"],['solene',"Pardon, pardon… mais le chapeau va super bien avec ta moustache."]]);

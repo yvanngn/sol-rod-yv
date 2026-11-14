@@ -47,7 +47,7 @@ SCENES.appart={nom:'Chez Solène',
     CADEAU.etape=1;await pause(500);
     await say('yvan',"Voyons voir…");
     CADEAU.etape=2;S.flash=.5;await pause(700);
-    await say('yvan',"…Une tenue de magicien. Avec le chapeau pointu.");
+    await say('yvan',"…Une tenue de sorcier. Avec le chapeau pointu.");
     await say('yvan',"Vous avez cru que j'avais quel âge ?");
     anim('rod').rire=anim('solene').rire=true;
     await dire([['rod',"Hahaha ! Regarde sa tête !"],['solene',"Pardon, pardon… mais le chapeau va super bien avec ta moustache."]]);
