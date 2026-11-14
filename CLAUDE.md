@@ -30,6 +30,7 @@ existants : on invente tout — Académie d'Hiverlune, Quai des Brumes…).
   (`humain:true`), réactions dans `with:{objet:…}`. Utiliser X avec Y : `with` aussi.
 - Une scène = `SCENES.id = {nom, dessin(), objets:[…], heros:{nom:{parler,with}}, entree()}`.
 - Drapeaux d'histoire : `S.f`. Personnage assis/caché derrière un meuble : `S.posY[nom]` + meuble dessiné dans `devant()` de la scène.
+- Mobile (≤ 760 px) : la bulle et les choix s'affichent sous l'image (zone réservée sous le canvas), jamais par-dessus les personnages.
 - Mise en scène : `noir(true/false)` (fondu), `carton(texte)`, `titreJeu()`, `tuto()`, `anim(n).rire`.
 
 ## Tests

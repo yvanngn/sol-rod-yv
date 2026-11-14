@@ -58,3 +58,13 @@ button:hover{background:#3b2f5e;border-color:var(--bord)}
 #tuto .ligne{display:flex;gap:10px;align-items:flex-start;margin:7px 0;font-size:clamp(13px,1.9vw,16px);line-height:1.35}
 #tuto .ic{font-size:20px;width:28px;text-align:center}
 #tutoOK{display:block;margin:12px auto 0;background:var(--or);color:#1b1407;border-radius:20px;padding:8px 22px;font-size:16px}
+/* Mobile : la bulle passe SOUS l'image pour ne jamais cacher les personnages */
+@media (max-width:760px){
+  #jeu{padding:8px 8px}
+  #scene{aspect-ratio:auto;padding-bottom:8.2em;background:#0d0a16}
+  #cv{height:auto;aspect-ratio:16/9}
+  #bulle,#choix{left:6px;right:6px;bottom:6px;font-size:16px;padding:10px 12px}
+  #bulle{min-height:7.4em}
+  #choix{max-height:calc(100% - 12px);overflow:auto}
+  .aide{display:none}
+}
