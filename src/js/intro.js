@@ -45,12 +45,12 @@ SCENES.appart={nom:'Chez Solène',
     await dire([
       ['solene',"Bon. Avant le gâteau, on a un petit quelque chose pour toi."],
       ['rod',"De la part de nous deux. Allez, ouvre !"]]);
-    CADEAU.etape=1;await pause(500);
+    CADEAU.etape=1;sfx('papier');await pause(500);
     await say('yvan',"Voyons voir…");
-    CADEAU.etape=2;S.flash=.5;await pause(700);
+    CADEAU.etape=2;sfx('magie');S.flash=.5;await pause(700);
     await say('yvan',"…Une tenue de sorcier. Avec l'écharpe rouge.");
     await say('yvan',"Vous avez cru que j'avais quel âge ?");
-    anim('rod').rire=anim('solene').rire=true;
+    anim('rod').rire=anim('solene').rire=true;sfx('rire');
     await dire([['rod',"Hahaha ! Regarde sa tête !"],['solene',"Pardon, pardon… mais l'écharpe va super bien avec ta moustache."]]);
     anim('rod').rire=anim('solene').rire=false;
     await noir(true);

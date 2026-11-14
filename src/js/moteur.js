@@ -22,7 +22,7 @@ let clicSuivant=null;
 function say(qui,txt){
   const q=qui==='moi'?S.perso:qui;
   const b=$('bulle');b.innerHTML=`<b style="color:${COUL[q]||COUL.narr}">${NOMS[q]||''}</b>${txt}`;b.hidden=false;
-  S.derniere=b.innerHTML;
+  S.derniere=b.innerHTML;sfx('voix',q);
   if(TEST)TEST.log.push(q+': '+txt);
   if((TEST&&!TEST.lent)||S.passe){b.hidden=true;return Promise.resolve()}
   $('passer').hidden=false;
@@ -87,7 +87,7 @@ function dessiner(){
 function marcher(n,x){x=Math.max(8,Math.min(W-8,x));if(TEST){S.pos[n]=x;return Promise.resolve()}return new Promise(r=>{const pas=()=>{
   const d=x-S.pos[n];if(Math.abs(d)<2){S.pos[n]=x;return r()}S.pos[n]+=Math.sign(d)*2;setTimeout(pas,16)};pas()})}
 const pause=ms=>TEST?Promise.resolve():new Promise(r=>setTimeout(r,ms));
-async function go(id,positions){S.scene=id;S.passe=false;if(positions)Object.assign(S.pos,positions);S.sel=null;ui();
+async function go(id,positions){S.scene=id;sonScene(id);S.passe=false;if(positions)Object.assign(S.pos,positions);S.sel=null;ui();
   const sc=SCENES[id];if(sc.entree&&!S.f['vu_'+id]){S.f['vu_'+id]=1;S.busy=true;await sc.entree();S.busy=false;S.passe=false}}
 
 async function lancer(h){if(typeof h==='string')await say('moi',h);else await h()}
@@ -137,8 +137,8 @@ function attendreClic(el,ms){return new Promise(r=>{let fini=false;const f=()=>{
   clicSuivant=f;$('passer').hidden=false;el.onclick=e=>{e.stopPropagation();f()};if(ms)setTimeout(f,ms)})}
 async function noir(on){if(TEST)return;$('noir').classList.toggle('on',on);if(!S.passe)await pause(900)}
 async function carton(txt,ms=2800){if(TEST){TEST.log.push('carton: '+txt);return}if(S.passe)return;
-  const c=$('carton');c.textContent=txt;c.style.animationDuration=ms+'ms';c.hidden=false;await attendreClic(c,ms);c.hidden=true}
-async function titreJeu(){if(TEST){TEST.log.push('titre');return}const t=$('titre');t.classList.remove('part');t.hidden=false;
+  sfx('gong');const c=$('carton');c.textContent=txt;c.style.animationDuration=ms+'ms';c.hidden=false;await attendreClic(c,ms);c.hidden=true}
+async function titreJeu(){if(TEST){TEST.log.push('titre');return}sfx('titre');const t=$('titre');t.classList.remove('part');t.hidden=false;
   await attendreClic(t,7000);t.classList.add('part');await pause(600);t.hidden=true}
 async function tuto(){if(TEST){TEST.log.push('tuto');return}const t=$('tuto');t.hidden=false;
   await new Promise(r=>$('tutoOK').onclick=e=>{e.stopPropagation();r()});t.hidden=true;S.passe=false}

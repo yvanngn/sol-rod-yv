@@ -30,7 +30,7 @@ SCENES.londres={nom:'Londres',
       regarder:"L'entrée du studio des films de sorciers. File d'attente modérée, excitation maximale.",
       utiliser:async()=>{
         if(!aObjet('billets'))return say('moi',S.perso==='solene'?"Les billets sont dans mon sac, il faut que je les présente.":"Sans billets, on ne passe pas. C'est Solène qui les a.");
-        await say('narr',"Le contrôleur scanne les trois billets. Bip, bip, bip.");
+        sfx('bip');await say('narr',"Le contrôleur scanne les trois billets. Bip, bip, bip.");
         await go('quai',{yvan:80,rod:120,solene:160});
       }},
   ],
@@ -91,14 +91,14 @@ async function photo(){
   if(S.perso!=='yvan'&&!aObjet('telephone'))return say('moi',"C'est Yvan qui a le téléphone.");
   if(!S.f.pose)return say('moi',"Personne ne pose. Faut que Rod se mette au chariot.");
   if(S.perso==='rod')return say('rod',"Je peux pas me prendre en photo en poussant. Je suis pas une pieuvre.");
-  S.flash=1;await pause(400);
+  sfx('photo');S.flash=1;await pause(400);
   await dire([['moi',"Clic ! Attends… Rod, pousse un peu, pour faire genre."],['rod',"Comme ça ?"]]);
   anim('rod').dir='d';anim('rod').marche=true;for(let i=0;i<20;i++){S.pos.rod+=1;anim('rod').pas++;await pause(40)}anim('rod').marche=false;
   await dire([['rod',"Euh. Les gars. Le mur. Il est… mou."],['solene',"Rod ? ROD !"]]);
-  S.pos.rod=null;S.f.traverse=1;await pause(500);
+  sfx('whoosh');S.pos.rod=null;S.f.traverse=1;await pause(500);
   await dire([['solene',"Il a disparu. Dans le mur. Ok. Respire, Solène."],['moi',"On le suit ?"],['solene',"Évidemment qu'on le suit."]]);
   await marcher('solene',232);S.pos.solene=null;await marcher('yvan',232);S.pos.yvan=null;
-  S.flash=1;await pause(800);
+  sfx('whoosh');S.flash=1;await pause(800);
   await go('autre',{yvan:120,rod:160,solene:200});
 }
 
@@ -122,4 +122,4 @@ SCENES.autre={nom:'Quai des Brumes',
   },
   async entree(){await dire([['narr',"De l'autre côté du mur, pas de boutique. Une gare plongée dans une nuit violette."],['rod',"…On est où, là ?"]])}
 };
-async function fin(){if(S.f.fin)return;S.f.fin=1;await say('narr',"Un sifflet retentit. Le train ouvre ses portes, rien que pour eux.");await say('narr',"FIN DE L'INTRODUCTION — à suivre…")}
+async function fin(){if(S.f.fin)return;S.f.fin=1;sfx('sifflet');await say('narr',"Un sifflet retentit. Le train ouvre ses portes, rien que pour eux.");await say('narr',"FIN DE L'INTRODUCTION — à suivre…")}

@@ -93,7 +93,7 @@ marcher=function(n,x){x=Math.max(8,Math.min(W-8,x));const a=anim(n);
   if(TEST){S.pos[n]=x;return Promise.resolve()}
   return new Promise(r=>{const pas=()=>{const d=x-S.pos[n];
     if(Math.abs(d)<1.5){S.pos[n]=x;a.marche=false;a.dir='face';return r()}
-    a.marche=true;a.dir=d>0?'d':'g';a.pas++;S.pos[n]+=Math.sign(d)*Math.min(1.5,Math.abs(d));setTimeout(pas,16)};pas()})};
+    a.marche=true;a.dir=d>0?'d':'g';a.pas++;if(a.pas%14===0)sfx('pas');S.pos[n]+=Math.sign(d)*Math.min(1.5,Math.abs(d));setTimeout(pas,16)};pas()})};
 
 // ----- Tenues : neutre (intro), sorcier pour Yvan à partir du chapitre 1 -----
 const NEUTRE={yvan:{top:'#6c727c',veste:0,sac:0,capuche:0,robe:0,cape:0,chapeau:0,echarpe:0},rod:{top:'#3b5a7a',capuche:0,blason:0},solene:{top:'#d9cfbf',maille:0}};

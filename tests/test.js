@@ -8,7 +8,7 @@ function charger(){
   const ctx={window:{TEST:{log:[],choix:[]}},document,setTimeout,Promise,console,Math,Date,Error,Object,requestAnimationFrame:()=>{}};
   vm.createContext(ctx);
   const h=fs.readFileSync(__dirname+'/../dist/index.html','utf8');
-  vm.runInContext(h.match(/<script>([\s\S]*)<\/script>/)[1]+';this.S=S;this.action=action;this.go=go;this.switchPerso=switchPerso;this.aObjet=aObjet;this.drawPerso=drawPerso;this.SCENES=SCENES;this.tenue=tenue;this.postEffets=postEffets;this.reflets=reflets;this.passer=passer',ctx);
+  vm.runInContext(h.match(/<script>([\s\S]*)<\/script>/)[1]+';this.S=S;this.action=action;this.go=go;this.switchPerso=switchPerso;this.aObjet=aObjet;this.drawPerso=drawPerso;this.SCENES=SCENES;this.SON=SON;this.regler=regler;this.tenue=tenue;this.postEffets=postEffets;this.reflets=reflets;this.passer=passer',ctx);
   return ctx;
 }
 const v=(nom,c)=>{if(c){ok++}else{ko++;console.log('ÉCHEC :',nom)}};
@@ -18,11 +18,16 @@ const scenarios={
     for(const k in G.SCENES){G.S.f.traverse=0;G.SCENES[k].dessin(CTX);G.SCENES[k].devant&&G.SCENES[k].devant();G.S.scene=k;G.SCENES[k].dessinAvant&&G.SCENES[k].dessinAvant();G.postEffets(G.SCENES[k]);G.reflets()}}catch(e){ok2=false;console.log(e.message)}v('dessin persos, décors, lumières, particules, reflets',ok2)},
   async intro(G){
     await G.go('appart');
-    v('intro : réplique « quel âge »',dit(G,'quel âge'));
+    v('musique anniversaire dans l\'appartement',G.SON.voulu!=null);v('intro : réplique « quel âge »',dit(G,'quel âge'));
     v('intro : canapé d\'Yvan',dit(G,'ces bêtises'));
     v('carton « Un an plus tard »',dit(G,'carton: Un an plus tard'));
     v('chapitre 1 : Londres, titre puis tuto',G.S.scene==='londres'&&dit(G,'nous voici à Londres')&&dit(G,'titre')&&dit(G,'tuto'));
     v('Yvan en sorcier au chapitre 1',!!G.tenue('yvan').echarpe&&!G.tenue('yvan').chapeau&&G.S.posY.yvan==null);
+  },
+  async son(G){
+    await G.go('appart');v('musique anniversaire au début puis thème magique à Londres',G.S.scene==='londres'&&G.SON.voulu==='magie');
+    await G.go('autre');v('musique des brumes de l\'autre côté',G.SON.voulu==='brumes');
+    G.regler('mus',false);G.regler('sfx',false);v('couper musique et bruitages',!G.SON.mus&&!G.SON.sfx);
   },
   async passer(G){
     G.window.TEST.lent=1;const p=G.go('quai');await null;G.passer();await p;

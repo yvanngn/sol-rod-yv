@@ -1,6 +1,6 @@
 import pathlib
 R = pathlib.Path(__file__).parent
-JS = ["moteur.js", "graphisme.js", "effets.js", "scenes.js", "decor.js", "intro.js", "main.js"]
+JS = ["moteur.js", "graphisme.js", "effets.js", "son.js", "scenes.js", "decor.js", "intro.js", "main.js"]
 html = (R/"src/index.html").read_text(encoding="utf-8")
 css = (R/"src/style.css").read_text(encoding="utf-8")
 js = "\n".join((R/"src/js"/f).read_text(encoding="utf-8") for f in JS)

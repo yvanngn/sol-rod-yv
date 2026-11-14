@@ -31,10 +31,12 @@ existants : on invente tout — Académie d'Hiverlune, Quai des Brumes…).
 - Une scène = `SCENES.id = {nom, dessin(), objets:[…], heros:{nom:{parler,with}}, entree()}`.
 - Drapeaux d'histoire : `S.f`. Personnage assis/caché derrière un meuble : `S.posY[nom]` + meuble dessiné dans `devant()` de la scène.
 - Mobile (≤ 760 px) : la bulle et les choix s'affichent sous l'image (zone réservée sous le canvas), jamais par-dessus les personnages.
+- Son (`son.js`, Web Audio synthétisé) : musique par scène `MUSIQUE_SCENE` (thèmes `THEMES` : anniv, soir, magie, brumes ; voix = [instrument, [[midi|accord|null, temps]…]]),
+  ambiances `AMBIANCE_SCENE`, bruitages `sfx(nom)`. Menu ⚙ : musique / bruitages (mémorisés), revoir le tuto. Démarre au premier geste du joueur.
 - Mise en scène : `noir(true/false)` (fondu), `carton(texte)`, `titreJeu()`, `tuto()`, `anim(n).rire`.
 
 ## Tests
-- `sh tester.sh` (tout) ou `sh tester.sh quai` (groupes : graphisme, intro, passer, londres, quai, autre). Scénarios dans `tests/test.js`.
+- `sh tester.sh` (tout) ou `sh tester.sh quai` (groupes : graphisme, intro, son, passer, londres, quai, autre). Scénarios dans `tests/test.js`.
 - Mode test : `window.TEST` → dialogues instantanés, choix pris dans `TEST.choix`, `action(id,verbe,objet)`.
 - Toute fonctionnalité ou correction = un test dans le groupe concerné. Ne tester que le groupe modifié.
 
