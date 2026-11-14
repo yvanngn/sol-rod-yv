@@ -8,7 +8,7 @@ function charger(){
   const ctx={window:{TEST:{log:[],choix:[]}},document,setTimeout,Promise,console,Math,Date,Error,Object,requestAnimationFrame:()=>{}};
   vm.createContext(ctx);
   const h=fs.readFileSync(__dirname+'/../dist/index.html','utf8');
-  vm.runInContext(h.match(/<script>([\s\S]*)<\/script>/)[1]+';this.S=S;this.action=action;this.go=go;this.switchPerso=switchPerso;this.aObjet=aObjet;this.drawPerso=drawPerso;this.SCENES=SCENES;this.SON=SON;this.regler=regler;this.tenue=tenue;this.postEffets=postEffets;this.reflets=reflets;this.passer=passer',ctx);
+  vm.runInContext(h.match(/<script>([\s\S]*)<\/script>/)[1]+';this.S=S;this.action=action;this.go=go;this.switchPerso=switchPerso;this.aObjet=aObjet;this.drawPerso=drawPerso;this.SCENES=SCENES;this.SON=SON;this.regler=regler;this.volume=volume;this.tenue=tenue;this.postEffets=postEffets;this.reflets=reflets;this.passer=passer',ctx);
   return ctx;
 }
 const v=(nom,c)=>{if(c){ok++}else{ko++;console.log('ÉCHEC :',nom)}};
@@ -28,6 +28,7 @@ const scenarios={
     await G.go('appart');v('musique anniversaire au début puis thème magique à Londres',G.S.scene==='londres'&&G.SON.voulu==='magie');
     await G.go('autre');v('musique des brumes de l\'autre côté',G.SON.voulu==='brumes');
     G.regler('mus',false);G.regler('sfx',false);v('couper musique et bruitages',!G.SON.mus&&!G.SON.sfx);
+    G.volume('mus',.3);G.volume('sfx',.8);v('volumes réglables (et remonter le volume réactive le son)',G.SON.volmus===.3&&G.SON.volsfx===.8&&G.SON.mus&&G.SON.sfx);
   },
   async passer(G){
     G.window.TEST.lent=1;const p=G.go('quai');await null;G.passer();await p;

@@ -1,6 +1,8 @@
 // ===== Son : musiques et bruitages synthétisés (Web Audio, aucun fichier) =====
-const SON={ctx:null,mus:true,sfx:true,voulu:null,joue:null,voix:[],timer:null,amb:null};
-try{SON.mus=localStorage.getItem('witchrok_mus')!=='0';SON.sfx=localStorage.getItem('witchrok_sfx')!=='0'}catch(e){}
+const SON={ctx:null,mus:true,sfx:true,volmus:.65,volsfx:.7,voulu:null,joue:null,voix:[],timer:null,amb:null};
+try{SON.mus=localStorage.getItem('witchrok_mus')!=='0';SON.sfx=localStorage.getItem('witchrok_sfx')!=='0';
+  for(const k of['volmus','volsfx']){const v=parseFloat(localStorage.getItem('witchrok_'+k));if(v>=0&&v<=1)SON[k]=v}}catch(e){}
+const gainSon=t=>t==='mus'?(SON.mus?SON.volmus*.5:0):(SON.sfx?SON.volsfx:0);
 const MIDI=m=>440*2**((m-69)/12);
 
 function initSon(){
@@ -8,8 +10,8 @@ function initSon(){
   const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;
   const c=SON.ctx=new AC();
   SON.master=c.createGain();SON.master.connect(c.destination);
-  SON.musG=c.createGain();SON.musG.gain.value=SON.mus?.32:0;
-  SON.sfxG=c.createGain();SON.sfxG.gain.value=SON.sfx?.7:0;
+  SON.musG=c.createGain();SON.musG.gain.value=gainSon('mus');
+  SON.sfxG=c.createGain();SON.sfxG.gain.value=gainSon('sfx');
   // réverbération (impulsion générée)
   const n=c.sampleRate*2.2,ir=c.createBuffer(2,n,c.sampleRate);
   for(let k=0;k<2;k++){const d=ir.getChannelData(k);for(let i=0;i<n;i++)d[i]=(Math.random()*2-1)*(1-i/n)**3}
@@ -107,13 +109,22 @@ function sfx(nom,arg){
 document.addEventListener('click',e=>{if(e.target&&e.target.closest&&e.target.closest('button'))sfx('clic')});
 
 // ----- menu -----
-function majMenu(){$('tMus').textContent=(SON.mus?'🎵 Musique : oui':'🎵 Musique : non');$('tSfx').textContent=(SON.sfx?'🔔 Bruitages : oui':'🔔 Bruitages : non');
+function majMenu(){$('tMus').textContent=SON.mus&&SON.volmus>0?'🎵':'🔇';$('tSfx').textContent=SON.sfx&&SON.volsfx>0?'🔔':'🔕';
+  $('tMus').title=SON.mus?'Couper la musique':'Remettre la musique';$('tSfx').title=SON.sfx?'Couper les bruitages':'Remettre les bruitages';
+  $('vMus').value=Math.round(SON.volmus*100);$('vSfx').value=Math.round(SON.volsfx*100);
+  $('pMus').textContent=SON.mus?Math.round(SON.volmus*100)+' %':'coupée';$('pSfx').textContent=SON.sfx?Math.round(SON.volsfx*100)+' %':'coupés';
   $('menuBtn').textContent=SON.mus||SON.sfx?'⚙':'🔇'}
 function regler(type,val){SON[type]=val;try{localStorage.setItem('witchrok_'+type,val?'1':'0')}catch(e){}
-  if(SON.ctx){const g=type==='mus'?SON.musG:SON.sfxG;g.gain.setTargetAtTime(val?(type==='mus'?.32:.7):0,SON.ctx.currentTime,.1)}majMenu()}
+  if(SON.ctx){const g=type==='mus'?SON.musG:SON.sfxG;g.gain.setTargetAtTime(gainSon(type),SON.ctx.currentTime,.1)}majMenu()}
+function volume(type,v){SON['vol'+type]=v;try{localStorage.setItem('witchrok_vol'+type,v)}catch(e){}
+  if(v>0&&!SON[type])regler(type,true);else{if(SON.ctx){const g=type==='mus'?SON.musG:SON.sfxG;g.gain.setTargetAtTime(gainSon(type),SON.ctx.currentTime,.05)}majMenu()}}
 $('menuBtn').onclick=e=>{e.stopPropagation();initSon();$('menu').hidden=!$('menu').hidden};
 $('tMus').onclick=e=>{e.stopPropagation();regler('mus',!SON.mus)};
 $('tSfx').onclick=e=>{e.stopPropagation();regler('sfx',!SON.sfx)};
+$('vMus').oninput=e=>{initSon();volume('mus',e.target.value/100)};
+$('vSfx').oninput=e=>{initSon();volume('sfx',e.target.value/100)};
+$('vSfx').onchange=()=>sfx('magie');
+['vMus','vSfx'].forEach(i=>$(i).onclick=e=>e.stopPropagation());
 $('tTuto').onclick=e=>{e.stopPropagation();$('menu').hidden=true;tuto()};
 document.addEventListener('pointerdown',e=>{if(!$('menu').hidden&&e.target.closest&&!e.target.closest('#menu,#menuBtn'))$('menu').hidden=true});
 majMenu();
