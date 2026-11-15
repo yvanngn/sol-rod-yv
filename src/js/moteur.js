@@ -92,7 +92,7 @@ async function go(id,positions){S.scene=id;sonScene(id);S.passe=false;if(positio
 
 async function lancer(h){if(typeof h==='string')await say('moi',h);else await h()}
 async function agir(o,v=verbeParDefaut(o)){
-  if(!o.loin){const cx=o.x+o.w/2;if(Math.abs(S.pos[S.perso]-cx)>20)await marcher(S.perso,cx+(S.pos[S.perso]<cx?-16:16))}
+  if(!o.loin&&S.pos[S.perso]!=null&&!SCENES[S.scene].fixe){const cx=o.x+o.w/2;if(Math.abs(S.pos[S.perso]-cx)>20)await marcher(S.perso,cx+(S.pos[S.perso]<cx?-16:16))}
   if(v==='donner'){
     if(!S.sel)return say('moi',DEF.donnerSansObjet);
     if(!o.humain&&!o.giveOK)return say('moi',DEF.donnerPasHumain);
@@ -107,7 +107,7 @@ async function agir(o,v=verbeParDefaut(o)){
 function cible(e){const r=cv.getBoundingClientRect(),x=(e.clientX-r.left)*W/r.width,y=(e.clientY-r.top)*H/r.height;
   return{x,y,o:objetsCliquables().reverse().find(o=>x>=o.x&&x<=o.x+o.w&&y>=o.y&&y<=o.y+o.h)}}
 async function executer(o,v,x){S.busy=true;fermerRoue();$('etiquette').hidden=true;
-  try{if(o)await agir(o,v);else{S.sel=null;await marcher(S.perso,x)}}finally{S.busy=false;S.passe=false;if(o&&S.sel&&v!=='regarder')S.sel=null;ui()}}
+  try{if(o)await agir(o,v);else{S.sel=null;if(S.pos[S.perso]!=null&&!SCENES[S.scene].fixe)await marcher(S.perso,x)}}finally{S.busy=false;S.passe=false;if(o&&S.sel&&v!=='regarder')S.sel=null;ui()}}
 function fermerRoue(){$('roue').hidden=true}
 function ouvrirRoue(e,o){const r=$('scene').getBoundingClientRect(),w=$('roue');w.innerHTML=`<div class="titre">${o.nom}</div>`;
   for(const v of['regarder','prendre','utiliser','parler']){const b=document.createElement('button');b.innerHTML=`<span>${ICONES[v]}</span>${v[0].toUpperCase()+v.slice(1)}`;

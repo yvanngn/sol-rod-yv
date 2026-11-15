@@ -46,8 +46,8 @@ Drapeaux d'histoire utilisés : `S.f.pose`, `S.f.traverse`, `S.f.fin`, `S.f.cabi
 ## 4 bis. Énigmes et déclencheurs
 | Énigme | Il faut | Résultat |
 |---|---|---|
-| Cabine | Utiliser la cabine : Yvan entre **dedans** (on le voit derrière les vitres) | Une pièce brille à côté du combiné |
-| Pièce | Prendre la pièce | Le téléphone sonne, appel mystérieux |
+| Cabine | Utiliser la cabine → **vue zoomée de l'intérieur** (téléphone, combiné, tablette, annuaire, vitres sous la pluie) | La pièce brille sur la tablette, à côté du combiné |
+| Pièce | Prendre la pièce | Le téléphone sonne (le combiné vibre), **Yvan décroche** (sa main tient le combiné), appel mystérieux, on raccroche |
 | Bus-musée | Utiliser le bus → l'hôte (« gratuit »), Yvan tremble, « …Mais c'est gratuit. », **pause**, il avance vers le centre, puis « ça a l'air plus grand dedans » (gag voulu par l'utilisateur) | Intérieur géant plein de curiosités |
 | Singe | Examiner le singe (action par défaut ; la fente est toujours visible) ; Utiliser la pièce sur le singe | Scintillement, Yvan ébloui, le bus redevient normal |
 | Sortie du bus | Bus normal | L'homme au manteau entre ; transition vers Rod |
@@ -64,6 +64,7 @@ Drapeaux d'histoire utilisés : `S.f.pose`, `S.f.traverse`, `S.f.fin`, `S.f.cabi
 - (aucune en attente)
 
 ## 7. Abandonné
+- ❌ Yvan vu dans la cabine depuis la rue : remplacé le 16/11/2026 par une vue zoomée de l'intérieur.
 - ❌ Momie deux fois plus grande qu'Yvan : remise à sa taille le 15/11/2026.
 - ❌ **Méditants** (sosies de John Lennon) : remplacés par l'alien vert et le lapin géant, le 15/11/2026.
 - ❌ **Visiteur** touriste à l'intérieur du bus : retiré le 15/11/2026 (il reste parmi les passants dehors).

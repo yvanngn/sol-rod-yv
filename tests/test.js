@@ -40,7 +40,9 @@ const scenarios={
     v('Rod et Solène partent ; Yvan seul, pas de changement de perso',G.S.pos.rod==null&&G.S.pos.solene==null&&G.S.verrou==='yvan'&&G.S.perso==='yvan');
     v('répliques du départ',dit(G,'toilettes')&&dit(G,'bonbons')&&dit(G,'pour changer'));
     await G.action('porte');v('pas de studio sans les autres',G.S.scene==='londres');
-    await G.action('cabine');v('Yvan entre dans la cabine, la pièce près du combiné',G.S.dansCabine&&G.S.pos.yvan===39&&G.S.f.cabine);await G.action('piece','prendre');
+    await G.action('cabine');v('vue zoomée dans la cabine, la pièce près du combiné',G.S.scene==='cabine'&&G.S.f.cabine&&dit(G,'à côté du combiné'));
+    await G.action('combine','regarder');await G.action('piece');v('Yvan décroche, puis raccroché',G.S.cab===null&&dit(G,'Hop, dans la poche'));
+    await G.action('sortie_cab');v('retour dans la rue',G.S.scene==='londres'&&G.S.pos.yvan===56);
     v('pièce prise, appel mystérieux',G.aObjet('piece')&&dit(G,'pas ce qui était prévu'));
     await G.action('bus');v('Yvan avance au centre puis trouve ça plus grand',G.S.pos.yvan===150&&dit(G,'plus grand dedans'));
     v('bus-musée : hôte à l\'intérieur « gratuit », Yvan entre',G.S.scene==='bus'&&dit(G,'gratuit')&&!G.SCENES.londres.objets.some(o=>o.id==='hote'));
