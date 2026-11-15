@@ -42,9 +42,9 @@ const scenarios={
     await G.action('porte');v('pas de studio sans les autres',G.S.scene==='londres');
     await G.action('cabine');await G.action('piece','prendre');
     v('pièce prise, appel mystérieux',G.aObjet('piece')&&dit(G,'pas ce qui était prévu'));
-    await G.action('bus');v('bus-musée : hôte « gratuit », Yvan entre',G.S.scene==='bus'&&dit(G,'gratuit'));
-    for(const o of['momie','vaudou','citrouilles','lennons','visiteuse','visiteur'])await G.action(o,'regarder');
-    await G.action('singe','regarder');v('le singe a une fente',G.S.f.fente);
+    await G.action('bus');v('bus-musée : hôte à l\'intérieur « gratuit », Yvan entre',G.S.scene==='bus'&&dit(G,'gratuit')&&!G.SCENES.londres.objets.some(o=>o.id==='hote'));
+    for(const o of['hote','momie','vaudou','citrouilles','alien','lapin','visiteuse'])await G.action(o,'regarder');
+    await G.action('singe');v('le singe : examiner par défaut, la fente',G.S.f.fente&&dit(G,'fente'));
     await G.action('singe',undefined,'piece');v('pièce dans le singe : bus redevenu normal',G.S.f.busNormal&&!G.aObjet('piece'));
     await G.action('sortie');v('sortie : homme au manteau, transition vers Rod',G.S.scene==='londres'&&G.S.f.manteau&&dit(G,'Pendant ce temps'));
   },

@@ -14,9 +14,10 @@ Yvan, Rod et Solène visitent un studio de cinéma à Londres. Ils tentent la ph
 | Yvan | Fan de foot (écharpe vue plus de défaites que de victoires… c'est celle de Rod), adore photographier la bouffe (4 000 photos). Porte la tenue de sorcier dès le chapitre 1 : robe et cape noires, écharpe rouge, pas de chapeau. | ✅ |
 | Rod | A une écharpe de foot porte-bonheur ; jouait dans un groupe (« la setlist du groupe »). Au début du chapitre 1, part aux toilettes vers la gauche (où il y aura un pub anglais). | ✅ |
 | Solène | Garde les billets ; a « confisqué la carte bleue » d'Yvan. Au début du chapitre 1, part acheter des bonbons (vers le bas). | ✅ |
-| L'hôte (PNJ) | À l'entrée du bus-musée : « dit de rentrer, que c'est gratuit et de ne pas avoir peur ». Disparaît quand le bus redevient normal. | — |
-| Visiteuse / visiteur (PNJ) | « 1 ou 2 personnes loufoques visitent » : dame aux cheveux roses et jumelles ; touriste bermuda-chaussettes-sandales. Entrent et ressortent du bus dehors. | — |
-| Méditants (PNJ) | « Des sosies de John Lennon qui font de la méditation » (dessinés comme méditants à cheveux longs et lunettes, sans nom). | — |
+| L'hôte (PNJ) | **À l'intérieur du bus, près de l'entrée** (corrigé le 15/11) : « dit de rentrer, que c'est gratuit et de ne pas avoir peur ». Disparaît quand le bus redevient normal. | — |
+| Visiteuse (PNJ) | Dame aux cheveux roses et jumelles, dans le bus. Le visiteur (touriste) a été retiré de l'intérieur le 15/11 ; les deux passent encore dehors (gens qui entrent et ressortent). | — |
+| Alien vert (curiosité) | « Un alien vert classique » : grosse tête, grands yeux noirs, cligne des yeux. | — |
+| Lapin géant (curiosité) | « Un lapin géant humanoïde creepy » : debout, costume marron, yeux noirs à point rouge, grand sourire plein de dents, tête qui penche. | — |
 | Voix au téléphone | « Bzrkkks c'est toi ? » … « Ce n'est pas ce qui était prévu. » Identité inconnue. | — |
 | L'homme au manteau (PNJ) | « Un type aux cheveux longs, un manteau noir comme Néo de Matrix » qui entre dans le bus quand Yvan en sort. | — |
 
@@ -48,7 +49,7 @@ Drapeaux d'histoire utilisés : `S.f.pose`, `S.f.traverse`, `S.f.fin`, `S.f.cabi
 | Cabine | Utiliser la cabine (Yvan y entre) | Une pièce brille à côté du combiné |
 | Pièce | Prendre la pièce | Le téléphone sonne, appel mystérieux |
 | Bus-musée | Utiliser le bus (l'hôte, Yvan tremble) | Intérieur géant plein de curiosités |
-| Singe | Regarder le singe (on voit la fente) ; Utiliser la pièce sur le singe | Scintillement, Yvan ébloui, le bus redevient normal |
+| Singe | Examiner le singe (action par défaut ; la fente est toujours visible) ; Utiliser la pièce sur le singe | Scintillement, Yvan ébloui, le bus redevient normal |
 | Sortie du bus | Bus normal | L'homme au manteau entre ; transition vers Rod |
 
 ## 5. Contradictions et points à vérifier
@@ -63,4 +64,6 @@ Drapeaux d'histoire utilisés : `S.f.pose`, `S.f.traverse`, `S.f.fin`, `S.f.cabi
 - (aucune en attente)
 
 ## 7. Abandonné
+- ❌ **Méditants** (sosies de John Lennon) : remplacés par l'alien vert et le lapin géant, le 15/11/2026.
+- ❌ **Visiteur** touriste à l'intérieur du bus : retiré le 15/11/2026 (il reste parmi les passants dehors).
 - ❌ **Raphaël** (bébé de Solène) et la **Tétine** : retirés le 15/11/2026, il n'était pas encore né à ce moment de l'histoire (demande de l'utilisateur).
