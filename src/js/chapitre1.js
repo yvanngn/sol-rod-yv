@@ -40,7 +40,7 @@ const ob=id=>SCENES.londres.objets.find(o=>o.id===id);
   porte.utiliser=async()=>S.f.retrouves?avant():say('moi',"Je ne vais pas visiter le studio sans les autres. Ils m'en voudraient à vie.")}
 Object.assign(ob('cabine'),{defaut:'utiliser',
   regarder:()=>say('moi',S.f.piece?"La cabine. Le téléphone est raccroché, sage comme une image. Trop sage.":"Une cabine rouge. Plus personne ne s'en sert, sauf pour les selfies."),
-  utiliser:async()=>{await marcher('yvan',39);
+  utiliser:async()=>{await marcher('yvan',39);S.dansCabine=1;anim('yvan').dir='face';
     if(S.f.piece)return say('moi',"Je ne décroche plus. Ce téléphone a des projets pour moi, et moi aucun pour lui.");
     if(!S.f.cabine){S.f.cabine=1;return say('moi',"Il fait sombre là-dedans… Tiens ? Une pièce qui brille, posée à côté du combiné.")}
     return say('moi',"La pièce brille toujours à côté du combiné.")}});
@@ -52,11 +52,10 @@ SCENES.londres.objets.push(
     cache:()=>S.f.busNormal,regarder:()=>ob('bus').regarder()},
   {id:'passants',nom:'',x:0,y:0,w:0,h:0,dessin:passants},
   {id:'manteau',nom:'',x:0,y:0,w:0,h:0,cache:()=>S.pnj.manteau==null,dessin(){drawPerso('manteau',S.pnj.manteau)}},
-  {id:'piece',nom:'pièce brillante',x:36,y:117,w:11,h:11,defaut:'prendre',cache:()=>!S.f.cabine||S.f.piece,
-    dessin(){const b=.5+.5*Math.sin(Date.now()/150);g.globalAlpha=.4+b*.4;P(39,120,6,6,'#fff3b0');g.globalAlpha=1;P(40,121,4,4,'#f0c766');P(41,122,2,2,'#ffe9a0')},
+  {id:'piece',nom:'pièce brillante',x:29,y:120,w:12,h:14,defaut:'prendre',cache:()=>!S.f.cabine||S.f.piece,
     regarder:"Une pièce dorée, toute chaude. Je n'ai jamais vu cette monnaie.",prendre:prendrePiece},
 );
-Object.assign(SCENES.londres,{lumieres:(f=>()=>[...f(),...(S.f.cabine&&!S.f.piece?[{x:42,y:123,r:12,c:'rgba(255,220,120,.5)',vacille:1}]:[])])(SCENES.londres.lumieres)});
+Object.assign(SCENES.londres,{lumieres:(f=>()=>[...f(),...(S.f.cabine&&!S.f.piece?[{x:37,y:129,r:12,c:'rgba(255,220,120,.5)',vacille:1}]:[]),...(S.dansCabine&&S.pos.yvan===39?[{x:39,y:118,r:30,c:'rgba(255,230,180,.25)'}]:[])])(SCENES.londres.lumieres)});
 
 function passants(){if(S.f.busNormal)return;const t=Date.now()/1000;
   [['visiteur',0],['visiteuse',4.5]].forEach(([n,ph])=>{const c=(t+ph)%9;let x,d;
@@ -64,7 +63,7 @@ function passants(){if(S.f.busNormal)return;const t=Date.now()/1000;
     const a=anim(n);a.dir=d;a.marche=true;a.pas=t*12|0;drawPerso(n,x)})}
 
 async function prendrePiece(){
-  await marcher('yvan',39);S.f.piece=1;ajouter('piece');
+  if(S.pos.yvan!==39)await marcher('yvan',39);S.dansCabine=1;S.f.piece=1;ajouter('piece');
   await say('moi',"Hop, dans la poche.");
   sfx('sonnerie');await pause(1200);
   await say('moi',"…Le téléphone sonne ?!");
@@ -75,7 +74,7 @@ async function prendrePiece(){
 async function entrerBus(){
   if(S.f.busNormal)return say('moi',"Non merci. J'ai assez donné.");
   await marcher('yvan',206);
-  await go('bus',{yvan:16});
+  await go('bus',{yvan:12});
 }
 
 // ----- Le bus-musée (plus grand dedans que dehors) -----
@@ -110,19 +109,21 @@ SCENES.bus={nom:'Bus-musée',
   },
   objets:[
     {id:'sortie',nom:'sortie',x:0,y:94,w:16,h:66,defaut:'utiliser',regarder:"La sortie. Ma meilleure amie dans ce bus.",utiliser:sortirBus},
-    {id:'hote',nom:"l'hôte",humain:true,x:23,y:118,w:14,h:42,cache:BIZARRE,dessin(){const a=anim('hote');a.marche=false;a.dir='face';drawPerso('hote',30)},
+    {id:'hote',nom:"l'hôte",humain:true,x:30,y:112,w:24,h:48,cache:BIZARRE,dessin(){const a=anim('hote');a.marche=false;a.dir='face';drawPerso('hote',40);
+        P(24,132,32,28,'#5a3020');P(22,130,36,3,'#8a5a30');P(22,130,36,1,'#b88a50');for(let y=137;y<158;y+=7)P(26,y,28,1,'#4a2418');
+        P(43,121,12,9,'#2a2a2e');P(44,122,10,3,'#5aff8a');P(45,127,2,1,'#888');P(49,127,2,1,'#888');P(25,124,6,6,'#f0ece0');P(26,125,4,1,'#8a8a8a');
+        P(27,140,24,9,'#f3e2b0');g.fillStyle='#5a1020';g.font="bold 7px Georgia";g.fillText('0 £',33,147)},
       regarder:"Un monsieur à moustache blanche et gilet bordeaux. Il sourit beaucoup. Peut-être trop.",
       parler:()=>dire([['hote',"Entrez, entrez ! C'est gratuit ! N'ayez pas peur !"],['moi',"C'est le « n'ayez pas peur » qui me fait peur."]]),
       with:{piece:()=>say('hote',"Gardez-la, mon ami. Ici, tout est gratuit… presque tout.")}},
-    {id:'momie',nom:'momie',x:40,y:66,w:40,h:94,cache:BIZARRE,
-      dessin(){const x=40,y=66;P(x,y,40,94,'#b88a30');P(x,y,40,3,'#e8c35a');P(x+2,y+3,2,91,'#e8c35a');P(x+36,y+3,2,91,'#8a6420');
-        P(x+6,y+6,28,86,'#d8d0b0');for(let j=y+12;j<y+90;j+=5)P(x+6,j,28,1,'#b0a888');for(let j=y+14;j<y+90;j+=11)P(x+8,j,10,1,'#c8c0a0');
-        P(x+11,y+15,18,14,'#e0d8c0');P(x+13,y+20,5,2,'#120808');P(x+22,y+20,5,2,'#120808');P(x+15,y+26,10,1,'#6a5a40');
-        P(x+6,y+92,28,2,'#8a6420');P(x+4,y+4,32,2,'#3a6ab0')},
-      regarder:"Une momie dans son sarcophage, plus grande que moi. Elle a un bracelet en plastique « VISITEUR ». Je préfère ne pas savoir.",
+    {id:'momie',nom:'momie',x:62,y:108,w:24,h:52,cache:BIZARRE,
+      dessin(){const x=62,y=108;P(x,y,24,52,'#b88a30');P(x,y,24,2,'#e8c35a');P(x+1,y+2,1,50,'#e8c35a');P(x+22,y+2,1,50,'#8a6420');
+        P(x+4,y+4,16,46,'#d8d0b0');for(let j=y+9;j<y+49;j+=4)P(x+4,j,16,1,'#b0a888');P(x+5,y+12,7,1,'#c8c0a0');P(x+12,y+24,7,1,'#c8c0a0');
+        P(x+7,y+6,10,8,'#e0d8c0');P(x+8,y+9,3,1,'#120808');P(x+13,y+9,3,1,'#120808');P(x+9,y+12,6,1,'#6a5a40');P(x+3,y+3,18,1,'#3a6ab0')},
+      regarder:"Une momie dans son sarcophage, à peu près de ma taille. Elle a un bracelet en plastique « VISITEUR ». Je préfère ne pas savoir.",
       prendre:"Je ne prends pas de momie. Même gratuite.",parler:"…Elle n'a pas répondu. Ouf."},
-    {id:'vaudou',nom:'table vaudou',x:86,y:108,w:44,h:52,cache:BIZARRE,
-      dessin(){g.save();g.translate(32,0);P(54,130,44,4,'#4a2a1a');P(56,134,3,26,'#3a1e12');P(93,134,3,26,'#3a1e12');
+    {id:'vaudou',nom:'table vaudou',x:94,y:108,w:44,h:52,cache:BIZARRE,
+      dessin(){g.save();g.translate(40,0);P(54,130,44,4,'#4a2a1a');P(56,134,3,26,'#3a1e12');P(93,134,3,26,'#3a1e12');
         P(62,117,9,13,'#a08060');P(63,111,7,7,'#a08060');P(64,113,2,1,'#2a1a10');P(67,113,2,1,'#2a1a10');[[62,119,'#c22'],[69,121,'#f0c766'],[65,124,'#c22'],[66,112,'#f0c766']].forEach(([x,y,c])=>{P(x,y,1,1,c);P(x-1,y-1,1,1,'#ccc')});
         P(76,123,9,7,'#e8e0d0');P(78,125,2,2,'#1a1010');P(81,125,2,2,'#1a1010');P(79,128,3,1,'#1a1010');
         P(89,119,2,11,'#f0e0c0');P(93,121,2,9,'#f0e0c0');const f=(Date.now()/90|0)%2;P(89,117-f,2,2,'#ffb030');P(93,119+f-1,2,2,'#ffb030');g.restore()},
@@ -155,7 +156,7 @@ SCENES.bus={nom:'Bus-musée',
       regarder:"Un lapin géant, debout, en costume marron. Ses yeux sont deux trous noirs avec un point rouge au fond. Et ce sourire… pourquoi il a autant de dents ?",
       parler:()=>dire([['moi',"…Salut, grand lapin."],['moi',"Il n'a rien dit. Mais j'ai l'impression qu'il a souri un peu plus."]]),
       prendre:"Je ne touche pas au lapin. Je ne regarde même plus le lapin."},
-    {id:'visiteuse',nom:'visiteuse',humain:true,x:133,y:118,w:14,h:42,cache:BIZARRE,dessin(){const a=anim('visiteuse');a.marche=false;a.dir='face';drawPerso('visiteuse',140)},
+    {id:'visiteuse',nom:'visiteuse',humain:true,x:193,y:118,w:14,h:42,cache:BIZARRE,dessin(){const a=anim('visiteuse');a.marche=false;a.dir='face';drawPerso('visiteuse',200)},
       regarder:"Une dame aux cheveux roses, jumelles autour du cou. Elle observe la momie comme un oiseau rare.",
       parler:()=>dire([['visiteuse',"Chut ! Elle a cligné de l'œil. Je l'ai vu. Personne ne me croit jamais."],['moi',"…Moi, je vous crois. C'est bien ça le problème."]])},
     {id:'singe',nom:'singe aux cymbales',x:148,y:80,w:24,h:26,cache:BIZARRE,defaut:'regarder',
@@ -169,14 +170,16 @@ SCENES.bus={nom:'Bus-musée',
     if(S.singeBrille)emettre(80,()=>({k:'singe',scene:'bus',x:160+(Math.random()-.5)*40,y:92+(Math.random()-.5)*30,vx:(Math.random()-.5)*1.5,vy:(Math.random()-.5)*1.5,vie:30+Math.random()*30,t:1,c:'#fff3b0',glow:1}));
     emettre(18,()=>({k:'pous',scene:'bus',x:Math.random()*W,y:40+Math.random()*100,vx:(Math.random()-.5)*.1,vy:-.05,vie:200+Math.random()*200,t:1,c:'#f0c0ff',a:.5}))},
   get ambiance(){return S.f.busNormal?{nuit:.12,voile:'#000',teinte:'rgba(255,240,200,.12)'}:{nuit:.5,voile:'#10040c',teinte:'rgba(200,80,160,.3)'}},
-  lumieres:()=>S.f.busNormal?[{x:160,y:40,r:160}]:[{x:160,y:92,r:44,c:'rgba(255,220,140,.4)'},{x:123,y:118,r:22,c:'rgba(255,180,80,.45)',vacille:1},{x:160,y:36,r:90,c:'rgba(255,200,80,.2)'},{x:238,y:118,r:30,c:'rgba(120,255,120,.25)'},{x:285,y:110,r:32},{x:60,y:100,r:40},{x:30,y:130,r:22},{x:140,y:130,r:24},...persoLumiere(30)],
+  lumieres:()=>S.f.busNormal?[{x:160,y:40,r:160}]:[{x:160,y:92,r:44,c:'rgba(255,220,140,.4)'},{x:131,y:118,r:22,c:'rgba(255,180,80,.45)',vacille:1},{x:160,y:36,r:90,c:'rgba(255,200,80,.2)'},{x:238,y:118,r:30,c:'rgba(120,255,120,.25)'},{x:285,y:110,r:32},{x:74,y:126,r:32},{x:40,y:122,r:26,c:'rgba(120,255,160,.15)'},{x:200,y:130,r:24},...persoLumiere(30)],
   dessinAvant:()=>vignette(),
   async entree(){
     await say('hote',"Entrez, entrez ! C'est gratuit ! N'ayez pas peur !");
     anim('yvan').tremble=true;
     await dire([['yvan',"J'ai peur. J'ai très peur."],['yvan',"…Mais c'est gratuit."]]);
     anim('yvan').tremble=false;
-    await dire([['moi',"…Waouh. C'est beaucoup plus grand dedans que dehors."],['moi',"Comment c'est possible ? C'est un bus. J'ai vu les roues."]])},
+    await pause(1300);
+    await marcher('yvan',150);
+    await dire([['moi',"…Waouh. Ça a l'air beaucoup plus grand dedans que dehors."],['moi',"Comment c'est possible ? C'est un bus. J'ai vu les roues."]])},
 };
 function busNormal(){
   vgrad(0,SOL,'#d8c8a0','#b8a880');P(0,20,W,2,'#8a7a5a');
@@ -209,3 +212,14 @@ async function sortirBus(){
   await carton("À suivre…");
   await noir(false);
 }
+
+// Devant les personnages, rue de Londres : la cabine quand Yvan est dedans, le combiné et la pièce
+SCENES.londres.devant=function(){
+  const dedans=S.dansCabine&&S.pos.yvan===39;
+  if(dedans){g.globalAlpha=.18;P(31,104,16,40,'#cfe6ff');g.globalAlpha=1;
+    P(29,98,2,62,'#c3202b');P(47,98,2,62,'#a51a24');P(29,98,20,6,'#c3202b');P(32,99,14,3,'#fff');
+    for(let y=110;y<144;y+=6)P(31,y,16,1,'#c3202b');P(38,104,1,40,'#c3202b');P(29,144,20,16,'#a51a24');P(29,144,20,1,'#e0434c')}
+  if(dedans||S.f.cabine&&!S.f.piece){
+    P(31,117,2,10,'#111');P(30,116,4,2,'#111');P(30,126,4,2,'#111');P(33,121,1,6,'#333');
+    if(!S.f.piece){const b=.5+.5*Math.sin(Date.now()/150);g.globalAlpha=.35+b*.45;P(33,127,7,7,'#fff3b0');g.globalAlpha=1;P(34,128,5,5,'#f0c766');P(35,129,3,3,'#ffe9a0')}}
+};

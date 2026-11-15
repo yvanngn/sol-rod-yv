@@ -14,7 +14,7 @@ Yvan, Rod et Solène visitent un studio de cinéma à Londres. Ils tentent la ph
 | Yvan | Fan de foot (écharpe vue plus de défaites que de victoires… c'est celle de Rod), adore photographier la bouffe (4 000 photos). Porte la tenue de sorcier dès le chapitre 1 : robe et cape noires, écharpe rouge, pas de chapeau. | ✅ |
 | Rod | A une écharpe de foot porte-bonheur ; jouait dans un groupe (« la setlist du groupe »). Au début du chapitre 1, part aux toilettes vers la gauche (où il y aura un pub anglais). | ✅ |
 | Solène | Garde les billets ; a « confisqué la carte bleue » d'Yvan. Au début du chapitre 1, part acheter des bonbons (vers le bas). | ✅ |
-| L'hôte (PNJ) | **À l'intérieur du bus, près de l'entrée** (corrigé le 15/11) : « dit de rentrer, que c'est gratuit et de ne pas avoir peur ». Disparaît quand le bus redevient normal. | — |
+| L'hôte (PNJ) | **À l'intérieur du bus, derrière sa caisse à l'entrée** (corrigé le 15/11) : « dit de rentrer, que c'est gratuit et de ne pas avoir peur ». Disparaît quand le bus redevient normal. | — |
 | Visiteuse (PNJ) | Dame aux cheveux roses et jumelles, dans le bus. Le visiteur (touriste) a été retiré de l'intérieur le 15/11 ; les deux passent encore dehors (gens qui entrent et ressortent). | — |
 | Alien vert (curiosité) | « Un alien vert classique » : grosse tête, grands yeux noirs, cligne des yeux. | — |
 | Lapin géant (curiosité) | « Un lapin géant humanoïde creepy » : debout, costume marron, yeux noirs à point rouge, grand sourire plein de dents, tête qui penche. | — |
@@ -46,9 +46,9 @@ Drapeaux d'histoire utilisés : `S.f.pose`, `S.f.traverse`, `S.f.fin`, `S.f.cabi
 ## 4 bis. Énigmes et déclencheurs
 | Énigme | Il faut | Résultat |
 |---|---|---|
-| Cabine | Utiliser la cabine (Yvan y entre) | Une pièce brille à côté du combiné |
+| Cabine | Utiliser la cabine : Yvan entre **dedans** (on le voit derrière les vitres) | Une pièce brille à côté du combiné |
 | Pièce | Prendre la pièce | Le téléphone sonne, appel mystérieux |
-| Bus-musée | Utiliser le bus (l'hôte, Yvan tremble) | Intérieur géant plein de curiosités |
+| Bus-musée | Utiliser le bus → l'hôte (« gratuit »), Yvan tremble, « …Mais c'est gratuit. », **pause**, il avance vers le centre, puis « ça a l'air plus grand dedans » (gag voulu par l'utilisateur) | Intérieur géant plein de curiosités |
 | Singe | Examiner le singe (action par défaut ; la fente est toujours visible) ; Utiliser la pièce sur le singe | Scintillement, Yvan ébloui, le bus redevient normal |
 | Sortie du bus | Bus normal | L'homme au manteau entre ; transition vers Rod |
 
@@ -64,6 +64,7 @@ Drapeaux d'histoire utilisés : `S.f.pose`, `S.f.traverse`, `S.f.fin`, `S.f.cabi
 - (aucune en attente)
 
 ## 7. Abandonné
+- ❌ Momie deux fois plus grande qu'Yvan : remise à sa taille le 15/11/2026.
 - ❌ **Méditants** (sosies de John Lennon) : remplacés par l'alien vert et le lapin géant, le 15/11/2026.
 - ❌ **Visiteur** touriste à l'intérieur du bus : retiré le 15/11/2026 (il reste parmi les passants dehors).
 - ❌ **Raphaël** (bébé de Solène) et la **Tétine** : retirés le 15/11/2026, il n'était pas encore né à ce moment de l'histoire (demande de l'utilisateur).
