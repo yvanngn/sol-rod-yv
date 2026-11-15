@@ -2,7 +2,6 @@
 Object.assign(OBJETS,{
   telephone:{nom:'Téléphone',desc:"Mon téléphone. 12 % de batterie, 4 000 photos de bouffe.",icone:c=>{R(3,1,6,10,'#222',c);R(4,2,4,7,'#6ad',c)}},
   billets:{nom:'Billets',desc:"Trois billets pour la visite du studio. Créneau de 14 h.",icone:c=>{R(1,3,10,6,'#e8c35a',c);R(3,5,6,1,'#7a5',c)}},
-  tetine:{nom:'Tétine',desc:"La tétine de rechange de Raphaël. Je l'ai emportée par réflexe. Il est à Paris.",icone:c=>{R(4,4,4,4,'#8cf',c);R(5,8,2,3,'#fff',c)}},
   echarpe:{nom:'Écharpe de foot',desc:"Mon écharpe porte-bonheur. Elle a vu plus de défaites que de victoires.",icone:c=>{for(let i=0;i<5;i++)R(1+i*2,2+i,2,3,i%2?'#fff':'#c22',c)}},
 });
 
@@ -37,9 +36,8 @@ SCENES.londres={nom:'Londres',
   heros:{
     solene:{parler:async()=>{
       await say('moi',"Solène ?");
-      const c=await choose([["Tu as les billets ?",'b'],["Des nouvelles de Raphaël ?",'r'],["Rien.",'x']]);
+      const c=await choose([["Tu as les billets ?",'b'],["Rien.",'x']]);
       if(c==='b')await dire([['solene',"Dans mon sac. Si quelqu'un veut les tenir, qu'il me les demande gentiment."]]);
-      if(c==='r')await dire([['solene',"Il dort chez sa grand-mère. J'ai déjà regardé le babyphone vidéo onze fois."],['solene',"Ce qui est, cliniquement, tout à fait normal."]]);
     }},
     rod:{parler:async()=>{
       const c=await choose([["Prêt pour le studio ?",'s'],["Le match de ce soir ?",'m']]);

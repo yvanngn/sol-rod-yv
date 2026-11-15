@@ -16,7 +16,7 @@ S.anim={};
 const anim=n=>S.anim[n]||(S.anim[n]={dir:'face',pas:0,marche:false});
 
 function drawPerso(n,x,y=SOL){
-  const s=tenue(n),a=anim(n);x=Math.round(x);
+  const s=tenue(n),a=anim(n);x=Math.round(x);if(a.tremble)x+=(Date.now()/45|0)%2?1:-1;
   if(!S.reflet){g.fillStyle='rgba(0,0,0,.32)';g.beginPath();g.ellipse(x,y,9,2.5,0,0,7);g.fill()}
   const f=a.marche?Math.floor(a.pas/5)%4:0,bob=a.rire?((Date.now()/110|0)%2?-1:0):(f%2?-1:0),pr=a.dir==='g'||a.dir==='d';
   g.save();g.translate(x,y);if(a.dir==='g')g.scale(-1,1);

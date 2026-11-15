@@ -12,7 +12,10 @@ existants : on invente tout — Académie d'Hiverlune, Quai des Brumes…).
 ## Déroulé
 - Intro (`intro.js`) : `appart` (anniversaire, cadeau = tenue de sorcier, tenue neutre `S.tenue='neutre'`) → `salon` (Yvan sur son canapé)
   → carton « Un an plus tard » → **Chapitre 1** `londres` : « Et nous voici à Londres », titre flottant `titreJeu()`, tutoriel `tuto()`.
-- Ensuite : `quai` (studio, photo du chariot) → `autre` (Quai des Brumes). À venir : une scène avec Yvan seul, puis Rod et Solène, qui se retrouvent.
+- Chapitre 1 (`chapitre1.js`) : Rod part aux toilettes (gauche, futur pub), Solène acheter des bonbons (bas) → **Yvan seul** (`S.verrou='yvan'` : pas de changement de perso)
+  → cabine (pièce brillante, appel mystérieux) → bus-musée `bus` (hôte, curiosités, singe à fente) → pièce dans le singe : bus normal (`S.f.busNormal`) → sortie : l'homme au manteau entre → « Pendant ce temps, du côté de Rod… » (à suivre).
+- Plus tard (quand ils se retrouvent, `S.f.retrouves`) : `quai` (studio, photo du chariot) → `autre` (Quai des Brumes).
+- PNJ : apparence dans `SPEC` (hote, visiteur, visiteuse, lennon, manteau), noms/couleurs des voix dans `AUTRES`/`COUL`. Sortie de scène : `partir(n,x)`, `descendre(n)` ; `anim(n).tremble`.
 - Yvan porte la tenue de sorcier (robe et cape noires, écharpe rouge, **pas de chapeau**) à partir du chapitre 1. Tenues : `SPEC` (chapitre en cours) et `NEUTRE` (intro), via `tenue(n)`.
 
 ## Moteur (src/js/moteur.js)
@@ -36,7 +39,7 @@ existants : on invente tout — Académie d'Hiverlune, Quai des Brumes…).
 - Mise en scène : `noir(true/false)` (fondu), `carton(texte)`, `titreJeu()`, `tuto()`, `anim(n).rire`.
 
 ## Tests
-- `sh tester.sh` (tout) ou `sh tester.sh quai` (groupes : graphisme, intro, son, passer, londres, quai, autre). Scénarios dans `tests/test.js`.
+- `sh tester.sh` (tout) ou `sh tester.sh quai` (groupes : graphisme, intro, son, yvan, passer, londres, quai, autre). Durées : suite complète ~1 s (Node, sans navigateur). Scénarios dans `tests/test.js`.
 - Mode test : `window.TEST` → dialogues instantanés, choix pris dans `TEST.choix`, `action(id,verbe,objet)`.
 - Toute fonctionnalité ou correction = un test dans le groupe concerné. Ne tester que le groupe modifié.
 

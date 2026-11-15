@@ -4,7 +4,7 @@ const TEST=typeof window!=='undefined'&&window.TEST;
 const cv=document.getElementById('cv'),g=cv.getContext('2d');
 const $=id=>document.getElementById(id);
 const S={posY:{},scene:null,perso:'yvan',f:{},verbe:'regarder',sel:null,busy:false,
-  persos:{yvan:{inv:['telephone']},rod:{inv:['echarpe']},solene:{inv:['billets','tetine']}},
+  persos:{yvan:{inv:['telephone']},rod:{inv:['echarpe']},solene:{inv:['billets']}},
   pos:{yvan:70,rod:110,solene:150},cache:{}};
 const NOMS={yvan:'Yvan',rod:'Rod',solene:'Solène'};
 const COUL={yvan:'#9fd3ff',rod:'#ff8a7a',solene:'#ffd27a',narr:'#cfc6e6'};
@@ -21,7 +21,7 @@ const R=(x,y,w,h,c,ctx=g)=>{ctx.fillStyle=c;ctx.fillRect(Math.round(x),Math.roun
 let clicSuivant=null;
 function say(qui,txt){
   const q=qui==='moi'?S.perso:qui;
-  const b=$('bulle');b.innerHTML=`<b style="color:${COUL[q]||COUL.narr}">${NOMS[q]||''}</b>${txt}`;b.hidden=false;
+  const b=$('bulle');b.innerHTML=`<b style="color:${COUL[q]||COUL.narr}">${NOMS[q]||AUTRES[q]||''}</b>${txt}`;b.hidden=false;
   S.derniere=b.innerHTML;sfx('voix',q);
   if(TEST)TEST.log.push(q+': '+txt);
   if((TEST&&!TEST.lent)||S.passe){b.hidden=true;return Promise.resolve()}
@@ -47,7 +47,7 @@ const inv=()=>S.persos[S.perso].inv;
 const aObjet=(o,p=S.perso)=>S.persos[p].inv.includes(o);
 function ajouter(o,p=S.perso){if(!aObjet(o,p))S.persos[p].inv.push(o);ui()}
 function retirer(o,p=S.perso){const i=S.persos[p].inv.indexOf(o);if(i>=0)S.persos[p].inv.splice(i,1);if(S.sel===o)S.sel=null;ui()}
-function switchPerso(n){if(S.busy)return;S.perso=n;S.sel=null;ui()}
+function switchPerso(n){if(S.busy||(S.verrou&&n!==S.verrou))return;S.perso=n;S.sel=null;ui()}
 
 // ----- Interface (sans barre de verbes) -----
 const ICONES={regarder:'👁',prendre:'✋',utiliser:'⚙',parler:'💬'};
@@ -57,7 +57,7 @@ function ui(){
     const l=document.createElement('span');l.textContent=OBJETS[o].nom;b.append(c,l);b.title=OBJETS[o].nom;
     b.onclick=()=>clicObjetInv(o);b.oncontextmenu=e=>{e.preventDefault();regarderInv(o)};$('inv').appendChild(b)}
   if(!inv().length)$('inv').innerHTML='<span class="vide">Inventaire vide</span>';
-  $('heros').innerHTML='';for(const n in NOMS){const b=document.createElement('button');b.className='avatar'+(S.perso===n?' on':'');
+  $('heros').innerHTML='';for(const n in NOMS){const b=document.createElement('button');b.className='avatar'+(S.perso===n?' on':'')+(S.verrou&&n!==S.verrou?' verrou':'');
     b.style.setProperty('--c',COUL[n]);b.textContent=NOMS[n][0];b.title=NOMS[n];b.onclick=()=>switchPerso(n);$('heros').appendChild(b)}
   info();
 }
@@ -73,7 +73,7 @@ function heroObjets(){
 }
 const PORTRAITS={yvan:"Yvan. Lunettes, moustache, sac de parc d'attractions. Ex-guitariste du groupe.",
   rod:"Rod. Barbe, pull rouge, avis tranché sur le foot, le rap et la politique.",
-  solene:"Solène. Psy, lectrice de BD compulsive, et maman toute neuve de Raphaël."};
+  solene:"Solène. Psy, lectrice de BD compulsive, amie d'enfance des deux autres."};
 function objetsCliquables(){const sc=SCENES[S.scene];return[...(sc.objets||[]).filter(o=>!o.cache||!o.cache()),...heroObjets()]}
 function dessiner(){
   const sc=SCENES[S.scene];if(TEST)return;requestAnimationFrame(dessiner);if(!sc)return;g.clearRect(0,0,W,H);sc.dessin(g);

@@ -15,7 +15,7 @@ const v=(nom,c)=>{if(c){ok++}else{ko++;console.log('ÉCHEC :',nom)}};
 const dit=(G,t)=>G.window.TEST.log.some(l=>l.includes(t));
 const scenarios={
   async graphisme(G){let ok2=true;try{for(const n of['yvan','rod','solene'])for(const d of['face','d','g','dos']){G.S.anim[n]={dir:d,pas:7,marche:true};G.drawPerso(n,100)}
-    for(const k in G.SCENES){G.S.f.traverse=0;G.SCENES[k].dessin(CTX);G.SCENES[k].devant&&G.SCENES[k].devant();G.S.scene=k;G.SCENES[k].dessinAvant&&G.SCENES[k].dessinAvant();G.postEffets(G.SCENES[k]);G.reflets()}}catch(e){ok2=false;console.log(e.message)}v('dessin persos, décors, lumières, particules, reflets',ok2)},
+    for(const k in G.SCENES){G.S.f.traverse=0;G.SCENES[k].dessin(CTX);(G.SCENES[k].objets||[]).forEach(o=>o.dessin&&o.dessin(CTX));if(k==='bus'){G.S.f.busNormal=1;G.SCENES[k].dessin(CTX);G.S.f.busNormal=0}G.SCENES[k].devant&&G.SCENES[k].devant();G.S.scene=k;G.SCENES[k].dessinAvant&&G.SCENES[k].dessinAvant();G.postEffets(G.SCENES[k]);G.reflets()}}catch(e){ok2=false;console.log(e.message)}v('dessin persos, décors, lumières, particules, reflets',ok2)},
   async intro(G){
     await G.go('appart');
     v('musique anniversaire dans l\'appartement',G.SON.voulu!=null);v('intro : réplique « quel âge »',dit(G,'quel âge'));
@@ -34,8 +34,23 @@ const scenarios={
     G.window.TEST.lent=1;const p=G.go('quai');await null;G.passer();await p;
     v('Passer saute toute la séquence',dit(G,'LA photo')&&!G.S.busy&&!G.S.passe);G.window.TEST.lent=0;
   },
+  async yvan(G){
+    await G.go('londres');
+    G.switchPerso('rod');
+    v('Rod et Solène partent ; Yvan seul, pas de changement de perso',G.S.pos.rod==null&&G.S.pos.solene==null&&G.S.verrou==='yvan'&&G.S.perso==='yvan');
+    v('répliques du départ',dit(G,'toilettes')&&dit(G,'bonbons')&&dit(G,'pour changer'));
+    await G.action('porte');v('pas de studio sans les autres',G.S.scene==='londres');
+    await G.action('cabine');await G.action('piece','prendre');
+    v('pièce prise, appel mystérieux',G.aObjet('piece')&&dit(G,'pas ce qui était prévu'));
+    await G.action('bus');v('bus-musée : hôte « gratuit », Yvan entre',G.S.scene==='bus'&&dit(G,'gratuit'));
+    for(const o of['momie','vaudou','citrouilles','lennons','visiteuse','visiteur'])await G.action(o,'regarder');
+    await G.action('singe','regarder');v('le singe a une fente',G.S.f.fente);
+    await G.action('singe',undefined,'piece');v('pièce dans le singe : bus redevenu normal',G.S.f.busNormal&&!G.aObjet('piece'));
+    await G.action('sortie');v('sortie : homme au manteau, transition vers Rod',G.S.scene==='londres'&&G.S.f.manteau&&dit(G,'Pendant ce temps'));
+  },
   async londres(G){
     await G.go('londres');v('scène de départ',G.S.scene==='londres');
+    G.S.f.retrouves=1;G.S.verrou=null;Object.assign(G.S.pos,{rod:110,solene:150});
     await G.action('porte');v('bloqué sans billets',G.S.scene==='londres');
     G.switchPerso('solene');await G.action('rod',undefined,'billets');v('Donner billets à Rod',G.aObjet('billets','rod'));
     G.switchPerso('rod');await G.action('porte');v('entrée au studio',G.S.scene==='quai');
