@@ -60,6 +60,9 @@ Drapeaux d'histoire utilisés : `S.f.pose`, `S.f.traverse`, `S.f.fin`, `S.f.cabi
 - Qui est la voix au téléphone, que « prévoyait »-elle, et qui est l'homme au manteau ? À définir par l'utilisateur.
 - La description de l'écharpe dit « Mon écharpe porte-bonheur » alors que c'est Rod qui la porte : c'est cohérent seulement si la description est lue dans la voix de Rod (à vérifier en jeu avec Yvan).
 
+## Lots
+- 16/11/2026 : répliques du chapitre 1 corrigées par l'utilisateur (77 lignes, appliquées telles quelles, accents ajoutés). Homme au manteau plus lent. Cabine : la main d'Yvan décroche et porte le combiné à son oreille (on voit le côté de sa tête), puis raccroche.
+
 ## 6. Idées de Claude (💡 à valider)
 - (aucune en attente)
 

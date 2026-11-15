@@ -39,10 +39,10 @@ const ob=id=>SCENES.londres.objets.find(o=>o.id===id);
 {const porte=ob('porte'),avant=porte.utiliser;
   porte.utiliser=async()=>S.f.retrouves?avant():say('moi',"Je ne vais pas visiter le studio sans les autres. Ils m'en voudraient à vie.")}
 Object.assign(ob('cabine'),{defaut:'utiliser',
-  regarder:()=>say('moi',S.f.piece?"La cabine. Le téléphone est raccroché, sage comme une image. Trop sage.":"Une cabine rouge. Plus personne ne s'en sert, sauf pour les selfies."),
+  regarder:()=>say('moi',S.f.piece?"Un vestige d'une autre époque.":"Une cabine téléphonique. Plus personne ne s'en sert, sauf pour les selfies."),
   utiliser:async()=>{await marcher('yvan',39);S.cabineX=S.pos.yvan;await go('cabine',{yvan:null})}});
 Object.assign(ob('bus'),{nom:'bus-musée',defaut:'utiliser',
-  regarder:()=>say('moi',S.f.busNormal?"Un bus. Juste un bus. Ça me rassure et ça m'inquiète à la fois.":"Un bus rouge avec une pancarte : « MUSÉE DES CURIOSITÉS — ENTRÉE LIBRE ». Des gens entrent, ressortent… l'air un peu secoués."),
+  regarder:()=>say('moi',S.f.busNormal?"Juste un bus. Ça me rassure et ça m'inquiète à la fois.":"Un bus avec une pancarte : « MUSÉE DES CURIOSITÉS — ENTRÉE LIBRE »."),
   utiliser:entrerBus});
 SCENES.londres.objets.push(
   {id:'pancarte',nom:'pancarte du bus',x:154,y:141,w:34,h:9,loin:1,dessin(){if(S.f.busNormal)return;P(154,141,34,9,'#f3e2b0');P(154,141,34,1,'#fff6d8');g.fillStyle='#5a1020';g.font="bold 7px Georgia";g.fillText('MUSÉE',159,148)},
@@ -62,14 +62,15 @@ async function prendrePiece(){
   await say('moi',"Hop, dans la poche.");
   S.cab='sonne';sfx('sonnerie');await pause(1200);
   await say('moi',"…Le téléphone sonne ?!");
-  S.cab='decroche';await pause(300);
+  S.cab='decroche';S.cabT=Date.now();await pause(1100);
   await dire([['tel',"Bzrkkks… c'est toi ?"],['yvan',"Bah oui, j'suis moi !"],['tel',"Je ne reconnais pas ta voix…"],['yvan',"Qui est-ce ?"],['tel',"Ce n'est pas ce qui était prévu."]]);
-  sfx('raccroche');await pause(400);
-  await say('moi',"…Il a raccroché. Super. Très rassurant.");
-  S.cab=null;
+  S.cab='raccroche';S.cabT=Date.now();sfx('raccroche');await pause(900);S.cab=null;
+  await say('moi',"…Il a raccroché. Super.");
 }
 
 // ----- Vue zoomée : l'intérieur de la cabine -----
+function combine(x,y,rot){g.save();g.translate(Math.round(x),Math.round(y));g.rotate(rot);P(-5,-28,10,8,'#111');P(-3,-20,6,40,'#111');P(-5,20,10,8,'#111');P(-2,-19,1,38,'#2a2a30');P(-4,-27,8,1,'#333');g.restore()}
+function combineK(){const d=Date.now()-(S.cabT||0);if(S.cab==='decroche')return Math.min(1,d/1000);if(S.cab==='raccroche')return Math.max(0,1-d/800);return 0}
 SCENES.cabine={nom:'Cabine téléphonique',fixe:1,
   dessin(){const t=Date.now();
     // vitres sur les côtés : rue floue sous la pluie
@@ -94,29 +95,35 @@ SCENES.cabine={nom:'Cabine téléphonique',fixe:1,
     // tablette
     P(100,122,120,6,'#6a4426');P(100,122,120,1,'#a8784a');P(104,128,112,3,'#3a2414');
     P(106,108,22,14,'#d8c070');P(106,108,22,2,'#f0d890');P(108,113,18,1,'#8a7030');P(108,116,14,1,'#8a7030');
-    // fil du combiné
-    const ca=S.cab==='decroche';
+    // combiné : sur son crochet, puis la main d'Yvan le porte à son oreille (k : 0 → 1)
+    const k=combineK(),e=u=>u<.5?2*u*u:1-(-2*u+2)**2/2;
+    let hx,hy,cx=111,cy=66,rot=0;
+    if(k<.4){const u=e(k/.4);hx=10+(111-10)*u;hy=200+(74-200)*u}
+    else{const u=e((k-.4)/.6);cx=111+(50-111)*u;cy=66+(60-66)*u;rot=-.9*u;hx=cx+4*(1-u);hy=cy+8}
+    const tr=S.cab==='sonne'?((t/40|0)%2?1:-1):0,parle=S.cab==='decroche'&&k>=1?Math.sin(t/260)*1.2:0;
+    if(k>0){const ap=Math.min(1,k/.4),dx=-70*(1-ap);
+      g.fillStyle='#141216';g.beginPath();g.ellipse(14+dx,58,34,42,0,0,7);g.fill();P(30+dx,24,8,4,'#2a2830');
+      P(38+dx,54,7,13,'#d9a77c');P(40+dx,57,3,7,'#b8845a');P(34+dx,70,16,26,'#d9a77c');P(44+dx,74,6,3,'#2a2018');
+      P(40+dx,50,26,2,'#0c0c0c');P(20+dx,96,40,14,'#b8202c');P(20+dx,96,40,2,'#e04a54')}
     g.strokeStyle='#111';g.lineWidth=2;g.beginPath();g.moveTo(128,96);
-    if(ca)g.bezierCurveTo(110,140,90,120,70,86);else g.bezierCurveTo(108,110,106,96,112,90);g.stroke();g.lineWidth=1;
-    if(!ca){const tr=S.cab==='sonne'?((t/40|0)%2?1:-1):0;
-      P(106+tr,38,10,8,'#111');P(108+tr,46,6,40,'#111');P(106+tr,86,10,8,'#111');P(108+tr,47,1,38,'#2a2a30');
-      if(S.cab==='sonne'){g.strokeStyle='rgba(255,240,180,.8)';for(let k=0;k<2;k++){g.beginPath();g.arc(111,62,20+k*7+((t/80)%6),-.6,.6);g.stroke();g.beginPath();g.arc(111,62,20+k*7+((t/80)%6),Math.PI-.6,Math.PI+.6);g.stroke()}}}
-    else{ // la main d'Yvan (manche noire) tient le combiné contre son oreille, hors champ
-      poly([[0,H],[34,H],[86,102],[70,90]],'#1c1a22');poly([[0,H],[12,H],[74,94],[70,90]],'#2a2632');
-      P(66,78,14,14,'#d9a77c');P(64,82,4,8,'#c8946a');P(78,80,3,8,'#c8946a');
-      g.save();g.translate(74,70);g.rotate(-.7);P(-5,-20,10,8,'#111');P(-3,-12,6,30,'#111');P(-5,18,10,8,'#111');g.restore()}
+    const bx=cx+Math.sin(-rot)*22,by=cy+Math.cos(rot)*22;g.bezierCurveTo(118,130,bx+10,by+30,bx,by);g.stroke();g.lineWidth=1;
+    if(k>0){g.lineCap='round';g.strokeStyle='#1c1a22';g.lineWidth=15;g.beginPath();g.moveTo(-6,H+10);g.quadraticCurveTo(hx-30,hy+40,hx,hy+6);g.stroke();
+      g.strokeStyle='#2c2834';g.lineWidth=5;g.beginPath();g.moveTo(-2,H+10);g.quadraticCurveTo(hx-28,hy+36,hx-2,hy+4);g.stroke();g.lineWidth=1;g.lineCap='butt'}
+    combine(cx+tr,cy+parle,rot);
+    if(S.cab==='sonne'){g.strokeStyle='rgba(255,240,180,.8)';for(let q=0;q<2;q++){const r=20+q*7+((t/80)%6);g.beginPath();g.arc(111,62,r,-.6,.6);g.stroke();g.beginPath();g.arc(111,62,r,Math.PI-.6,Math.PI+.6);g.stroke()}}
+    if(k>0){P(hx-6,hy-4+parle,12,12,'#d9a77c');P(hx-8,hy-1+parle,3,8,'#c8946a');P(hx+5,hy+parle,3,7,'#c8946a');P(hx-6,hy-4+parle,12,1,'#ecc09a')}
     // la pièce sur la tablette, à côté du combiné
     if(!S.f.piece){const b=.5+.5*Math.sin(t/150);halo(150,118,14,'rgb(255,220,120)',.4+b*.3);P(146,114,8,8,'#f0c766');P(147,115,6,6,'#ffe9a0');P(149,117,2,2,'#c99a3a');P(147,114,2,1,'#fff')}
   },
   objets:[
     {id:'piece',nom:'pièce brillante',x:142,y:110,w:16,h:14,defaut:'prendre',cache:()=>S.f.piece,
-      regarder:"Une pièce dorée, toute chaude, posée juste à côté du combiné. Je n'ai jamais vu cette monnaie.",prendre:prendrePiece},
+      regarder:"Une pièce oubliée juste à côté du combiné. Étrange, je ne vois pas de quel pays ça peut venir.",prendre:prendrePiece},
     {id:'combine',nom:'combiné',x:102,y:36,w:20,h:60,
       regarder:()=>say('moi',S.f.piece?"Le combiné. Raccroché. J'aimerais qu'il le reste.":"Un vieux combiné noir, bien lourd. Le fil est tout entortillé."),
       utiliser:()=>say('moi',S.f.piece?"Je ne décroche plus. Ce téléphone a des projets pour moi, et moi aucun pour lui.":"Je décroche… tonalité. Personne au bout. Je raccroche."),
       prendre:"Il est attaché. Et puis je n'ai personne à appeler."},
     {id:'telephone_cab',nom:'téléphone',x:126,y:26,w:72,h:84,regarder:"Un téléphone à pièces. L'écran dit « INSÉRER ». Insérer quoi ? Et où ?",utiliser:"Je n'ai pas de monnaie anglaise. Enfin… pas encore."},
-    {id:'annuaire',nom:'annuaire',x:104,y:106,w:26,h:16,regarder:"Un annuaire tout gondolé par la pluie. Toutes les pages du « Y » ont été arrachées. Charmant.",prendre:"Il est trempé. Non merci."},
+    {id:'annuaire',nom:'annuaire',x:104,y:106,w:26,h:16,regarder:"Un annuaire tout gondolé par la pluie. Toutes les pages du « Y » ont été arrachées. Y… mais qu'est-ce que ça peut bien vouloir dire ?",prendre:"Il est trempé. Non merci."},
     {id:'sortie_cab',nom:'sortir de la cabine',x:0,y:150,w:W,h:30,defaut:'utiliser',regarder:"La porte. Et la pluie derrière.",
       utiliser:async()=>{await go('londres',{yvan:56});anim('yvan').dir='face'}},
   ],
@@ -169,14 +176,14 @@ SCENES.bus={nom:'Bus-musée',
         P(24,132,32,28,'#5a3020');P(22,130,36,3,'#8a5a30');P(22,130,36,1,'#b88a50');for(let y=137;y<158;y+=7)P(26,y,28,1,'#4a2418');
         P(43,121,12,9,'#2a2a2e');P(44,122,10,3,'#5aff8a');P(45,127,2,1,'#888');P(49,127,2,1,'#888');P(25,124,6,6,'#f0ece0');P(26,125,4,1,'#8a8a8a');
         P(27,140,24,9,'#f3e2b0');g.fillStyle='#5a1020';g.font="bold 7px Georgia";g.fillText('0 £',33,147)},
-      regarder:"Un monsieur à moustache blanche et gilet bordeaux. Il sourit beaucoup. Peut-être trop.",
+      regarder:"Un drôle de gus qui a l'air de faire la tronche.",
       parler:()=>dire([['hote',"Entrez, entrez ! C'est gratuit ! N'ayez pas peur !"],['moi',"C'est le « n'ayez pas peur » qui me fait peur."]]),
       with:{piece:()=>say('hote',"Gardez-la, mon ami. Ici, tout est gratuit… presque tout.")}},
     {id:'momie',nom:'momie',x:62,y:108,w:24,h:52,cache:BIZARRE,
       dessin(){const x=62,y=108;P(x,y,24,52,'#b88a30');P(x,y,24,2,'#e8c35a');P(x+1,y+2,1,50,'#e8c35a');P(x+22,y+2,1,50,'#8a6420');
         P(x+4,y+4,16,46,'#d8d0b0');for(let j=y+9;j<y+49;j+=4)P(x+4,j,16,1,'#b0a888');P(x+5,y+12,7,1,'#c8c0a0');P(x+12,y+24,7,1,'#c8c0a0');
         P(x+7,y+6,10,8,'#e0d8c0');P(x+8,y+9,3,1,'#120808');P(x+13,y+9,3,1,'#120808');P(x+9,y+12,6,1,'#6a5a40');P(x+3,y+3,18,1,'#3a6ab0')},
-      regarder:"Une momie dans son sarcophage, à peu près de ma taille. Elle a un bracelet en plastique « VISITEUR ». Je préfère ne pas savoir.",
+      regarder:"Une momie dans son sarcophage, à peu près de ma taille. Elle a un bracelet en plastique « TOURISTE PARISIEN ».",
       prendre:"Je ne prends pas de momie. Même gratuite.",parler:"…Elle n'a pas répondu. Ouf."},
     {id:'vaudou',nom:'table vaudou',x:94,y:108,w:44,h:52,cache:BIZARRE,
       dessin(){g.save();g.translate(40,0);P(54,130,44,4,'#4a2a1a');P(56,134,3,26,'#3a1e12');P(93,134,3,26,'#3a1e12');
@@ -184,11 +191,11 @@ SCENES.bus={nom:'Bus-musée',
         P(76,123,9,7,'#e8e0d0');P(78,125,2,2,'#1a1010');P(81,125,2,2,'#1a1010');P(79,128,3,1,'#1a1010');
         P(89,119,2,11,'#f0e0c0');P(93,121,2,9,'#f0e0c0');const f=(Date.now()/90|0)%2;P(89,117-f,2,2,'#ffb030');P(93,119+f-1,2,2,'#ffb030');g.restore()},
       regarder:"Une poupée pleine d'épingles, un crâne et des bougies. L'étiquette dit : « Souvenir de vacances ». De qui ?",
-      prendre:"Toucher la poupée ? Et si c'était quelqu'un que je connais ?",utiliser:"Je ne pique rien. Je ne souffle rien. Je ne touche rien."},
+      prendre:"Toucher la poupée ? Et si c'était quelqu'un que je connais ?",utiliser:"Je ne touche à rien."},
     {id:'citrouilles',nom:'citrouilles dorées volantes',x:80,y:20,w:160,h:46,loin:1,cache:BIZARRE,
       dessin(){const t=Date.now()/700;[[100,0],[160,2],[214,4]].forEach(([x,p])=>{const y=34+Math.sin(t+p)*6,xx=x+Math.sin(t*.7+p)*8;
         halo(xx,y,14,'rgb(255,200,80)',.35);g.fillStyle='#e8a820';g.beginPath();g.ellipse(xx,y,7,5,0,0,7);g.fill();P(xx-1,y-1-4,1,6,'#c88a10');P(xx+3,y-1-3,1,5,'#c88a10');P(xx-5,y-2,1,4,'#c88a10');P(xx,y-7,2,2,'#3a7a2a');P(xx-3,y-3,2,1,'#fff6c0')})},
-      regarder:"Des citrouilles en or qui volent. Sans fil, sans aimant, sans aucune explication raisonnable.",
+      regarder:"Des citrouilles en or qui volent… pourquoi ?",
       prendre:"Trop haut. Et puis on ne vole pas ce qui vole déjà."},
     {id:'alien',nom:'alien vert',x:226,y:96,w:24,h:64,cache:BIZARRE,
       dessin(){const x=238,t=Date.now(),cl=(t/130|0)%30===0;
@@ -196,7 +203,7 @@ SCENES.bus={nom:'Bus-musée',
         g.fillStyle='#5ad05a';g.beginPath();g.ellipse(x,SOL-42,10,12,0,0,7);g.fill();P(x-6,SOL-50,4,3,'#8af08a');
         if(!cl){g.fillStyle='#050508';g.beginPath();g.ellipse(x-4,SOL-42,3.5,5,-.5,0,7);g.fill();g.beginPath();g.ellipse(x+4,SOL-42,3.5,5,.5,0,7);g.fill();P(x-5,SOL-45,1,1,'#fff');P(x+3,SOL-45,1,1,'#fff')}
         else{P(x-6,SOL-42,4,1,'#050508');P(x+2,SOL-42,4,1,'#050508')}P(x-1,SOL-34,2,1,'#2a7a2a');P(x-1,SOL-54,2,4,'#4ab04a');P(x-2,SOL-57,4,3,'#c8ff60')},
-      regarder:"Un alien vert. Le classique : grosse tête, grands yeux noirs, petit corps. Il cligne des yeux. Les statues ne clignent pas des yeux.",
+      regarder:"Un alien vert. Le classique : grosse tête, grands yeux noirs, petit corps. Heuuu, il vient de cligner des yeux.",
       parler:()=>dire([['moi',"Euh… je viens en paix ?"],['moi',"…Il a penché la tête. Je ne sais pas si c'est bon signe."]]),
       prendre:"Je ne kidnappe pas d'extraterrestre. C'est plutôt eux qui font ça, normalement."},
     {id:'lapin',nom:'lapin géant',x:268,y:74,w:34,h:86,cache:BIZARRE,
@@ -209,14 +216,14 @@ SCENES.bus={nom:'Bus-musée',
         P(-6,-5,4,5,'#000');P(2,-5,4,5,'#000');P(-5,-4,1,1,'#c02020');P(3,-4,1,1,'#c02020');
         P(-1,1,2,2,'#c88a90');P(-6,4,12,3,'#200808');for(let i=-5;i<6;i+=2)P(i,4,1,2,'#f0ecd0');
         g.restore()},
-      regarder:"Un lapin géant, debout, en costume marron. Ses yeux sont deux trous noirs avec un point rouge au fond. Et ce sourire… pourquoi il a autant de dents ?",
+      regarder:"Un lapin géant, debout, en costume marron. Ce sourire… pourquoi il a autant de dents ?",
       parler:()=>dire([['moi',"…Salut, grand lapin."],['moi',"Il n'a rien dit. Mais j'ai l'impression qu'il a souri un peu plus."]]),
       prendre:"Je ne touche pas au lapin. Je ne regarde même plus le lapin."},
     {id:'visiteuse',nom:'visiteuse',humain:true,x:193,y:118,w:14,h:42,cache:BIZARRE,dessin(){const a=anim('visiteuse');a.marche=false;a.dir='face';drawPerso('visiteuse',200)},
-      regarder:"Une dame aux cheveux roses, jumelles autour du cou. Elle observe la momie comme un oiseau rare.",
+      regarder:"Une dame aux cheveux roses, jumelles autour du cou. C'est elle qui m'effraie le plus.",
       parler:()=>dire([['visiteuse',"Chut ! Elle a cligné de l'œil. Je l'ai vu. Personne ne me croit jamais."],['moi',"…Moi, je vous crois. C'est bien ça le problème."]])},
     {id:'singe',nom:'singe aux cymbales',x:148,y:80,w:24,h:26,cache:BIZARRE,defaut:'regarder',
-      regarder:async()=>{S.f.fente=1;await dire([['moi',"Un singe mécanique avec ses cymbales. Enfin quelque chose de normal."],['moi',"…Normal. Sauf ce regard. On dirait qu'il me suit des yeux."],['moi',"Et sur le dessus de sa tête… il y a une fente ?"]])},
+      regarder:async()=>{S.f.fente=1;await dire([['moi',"Un singe mécanique avec ses cymbales. J'ai déjà vu ça quelque part… et ça finissait mal."],['moi',"…Normal. Sauf ce regard. On dirait qu'il me suit des yeux."],['moi',"Et sur le dessus de sa tête… il y a une fente ?"]])},
       prendre:"Ah non. Je ne le touche pas. Il me regarde.",utiliser:"Le remonter ? Pour qu'il se mette à taper ses cymbales tout seul la nuit ? Non.",
       parler:"Je ne parle pas au singe. Je ne veux surtout pas qu'il me réponde.",
       with:{piece:singePiece}},
@@ -235,7 +242,7 @@ SCENES.bus={nom:'Bus-musée',
     anim('yvan').tremble=false;
     await pause(1300);
     await marcher('yvan',150);
-    await dire([['moi',"…Waouh. Ça a l'air beaucoup plus grand dedans que dehors."],['moi',"Comment c'est possible ? C'est un bus. J'ai vu les roues."]])},
+    await dire([['moi',"…Waouh. Ça a l'air beaucoup plus grand dedans que dehors."],['moi',"Comment c'est possible ? C'est un bus."]])},
 };
 function busNormal(){
   vgrad(0,SOL,'#d8c8a0','#b8a880');P(0,20,W,2,'#8a7a5a');
@@ -251,7 +258,7 @@ async function singePiece(){
   sfx('eblouit');S.flash=1;await pause(250);S.flash=1;await pause(250);S.flash=1;
   await say('moi',"Aaah ! Mes yeux ! Ça brille !");
   S.singeBrille=0;S.f.busNormal=1;MUSIQUE_SCENE.bus='magie';sonScene('bus');S.flash=1;await pause(600);
-  await dire([['moi',"…"],['moi',"Hein ? C'est… un bus. Juste un bus normal. Où sont passés la momie, les citrouilles, les méditants… ?"],['moi',"Et je suis tout seul."]]);
+  await dire([['moi',"…"],['moi',"Hein ? C'est… un bus. Juste un bus normal. J'ai rêvé ou quoi ?"],['moi',"Et je suis tout seul."]]);
 }
 async function sortirBus(){
   await go('londres',{yvan:192});
@@ -259,9 +266,9 @@ async function sortirBus(){
   S.f.manteau=1;
   await say('moi',"Ouf. De l'air. De la pluie, mais de l'air.");
   const a=anim('manteau');S.pnj.manteau=330;
-  if(!TEST&&!S.passe)while(S.pnj.manteau>210){a.marche=true;a.dir='g';a.pas++;S.pnj.manteau-=1.3;await pause(16)}
+  if(!TEST&&!S.passe)while(S.pnj.manteau>210){a.marche=true;a.dir='g';a.pas++;S.pnj.manteau-=.55;await pause(16)}
   S.pnj.manteau=null;a.marche=false;
-  await dire([['moi',"…Un type aux cheveux longs, long manteau noir et lunettes noires, vient d'entrer dans le bus. Sans même me regarder."],['moi',"Il a l'air de savoir exactement où il va. Lui."]]);
+  await dire([['moi',"…Un drôle de gars vient de rentrer. Sans même me regarder."],['moi',"Il a l'air de savoir exactement où il va. Lui."]]);
   await noir(true);
   await carton("Pendant ce temps, du côté de Rod…");
   S.f.finYvan=1;

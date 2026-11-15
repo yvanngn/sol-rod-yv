@@ -23,10 +23,10 @@ Corrige directement le texte (garde le numéro) et renvoie-moi la liste. Génér
 14. **Solène** — Moi, je vais acheter des bonbons. Pour la route. Et pour le moral.  `chapitre1.js:33`
 15. **Yvan** — Encore seul… pour changer.  `chapitre1.js:35`
 16. **héros courant** — Je ne vais pas visiter le studio sans les autres. Ils m'en voudraient à vie.  `chapitre1.js:40`
-17. **héros courant** — La cabine. Le téléphone est raccroché, sage comme une image. Trop sage.  `chapitre1.js:42`
-18. — Une cabine rouge. Plus personne ne s'en sert, sauf pour les selfies.  `chapitre1.js:42`
-19. **héros courant** — Un bus. Juste un bus. Ça me rassure et ça m'inquiète à la fois.  `chapitre1.js:45`
-20. — Un bus rouge avec une pancarte : « MUSÉE DES CURIOSITÉS — ENTRÉE LIBRE ». Des gens entrent, ressortent… l'air un peu secoués.  `chapitre1.js:45`
+17. **héros courant** — Un vestige d'une autre époque.  `chapitre1.js:42`
+18. — Une cabine téléphonique. Plus personne ne s'en sert, sauf pour les selfies.  `chapitre1.js:42`
+19. **héros courant** — Juste un bus. Ça me rassure et ça m'inquiète à la fois.  `chapitre1.js:45`
+20. — Un bus avec une pancarte : « MUSÉE DES CURIOSITÉS — ENTRÉE LIBRE ».  `chapitre1.js:45`
 21. **héros courant** — Hop, dans la poche.  `chapitre1.js:62`
 22. **héros courant** — …Le téléphone sonne ?!  `chapitre1.js:64`
 23. **Voix au téléphone** — Bzrkkks… c'est toi ?  `chapitre1.js:66`
@@ -34,64 +34,64 @@ Corrige directement le texte (garde le numéro) et renvoie-moi la liste. Génér
 25. **Voix au téléphone** — Je ne reconnais pas ta voix…  `chapitre1.js:66`
 26. **Yvan** — Qui est-ce ?  `chapitre1.js:66`
 27. **Voix au téléphone** — Ce n'est pas ce qui était prévu.  `chapitre1.js:66`
-28. **héros courant** — …Il a raccroché. Super. Très rassurant.  `chapitre1.js:68`
-29. *regarder* — Une pièce dorée, toute chaude, posée juste à côté du combiné. Je n'ai jamais vu cette monnaie.  `chapitre1.js:113`
-30. **héros courant** — Le combiné. Raccroché. J'aimerais qu'il le reste.  `chapitre1.js:115`
-31. — Un vieux combiné noir, bien lourd. Le fil est tout entortillé.  `chapitre1.js:115`
-32. **héros courant** — Je ne décroche plus. Ce téléphone a des projets pour moi, et moi aucun pour lui.  `chapitre1.js:116`
-33. — Je décroche… tonalité. Personne au bout. Je raccroche.  `chapitre1.js:116`
-34. *prendre* — Il est attaché. Et puis je n'ai personne à appeler.  `chapitre1.js:117`
-35. *regarder* — Un téléphone à pièces. L'écran dit « INSÉRER ». Insérer quoi ? Et où ?  `chapitre1.js:118`
-36. *utiliser* — Je n'ai pas de monnaie anglaise. Enfin… pas encore.  `chapitre1.js:118`
-37. *regarder* — Un annuaire tout gondolé par la pluie. Toutes les pages du « Y » ont été arrachées. Charmant.  `chapitre1.js:119`
-38. *prendre* — Il est trempé. Non merci.  `chapitre1.js:119`
-39. *regarder* — La porte. Et la pluie derrière.  `chapitre1.js:120`
-40. **héros courant** — Il fait sombre là-dedans… Tiens ? Une pièce qui brille, posée à côté du combiné.  `chapitre1.js:126`
-41. **héros courant** — Non merci. J'ai assez donné.  `chapitre1.js:131`
-42. *regarder* — La sortie. Ma meilleure amie dans ce bus.  `chapitre1.js:167`
-43. *regarder* — Un monsieur à moustache blanche et gilet bordeaux. Il sourit beaucoup. Peut-être trop.  `chapitre1.js:172`
-44. **L'hôte** — Entrez, entrez ! C'est gratuit ! N'ayez pas peur !  `chapitre1.js:173`
-45. **héros courant** — C'est le « n'ayez pas peur » qui me fait peur.  `chapitre1.js:173`
-46. **L'hôte** — Gardez-la, mon ami. Ici, tout est gratuit… presque tout.  `chapitre1.js:174`
-47. *regarder* — Une momie dans son sarcophage, à peu près de ma taille. Elle a un bracelet en plastique « VISITEUR ». Je préfère ne pas savoir.  `chapitre1.js:179`
-48. *prendre* — Je ne prends pas de momie. Même gratuite.  `chapitre1.js:180`
-49. *parler* — …Elle n'a pas répondu. Ouf.  `chapitre1.js:180`
-50. *regarder* — Une poupée pleine d'épingles, un crâne et des bougies. L'étiquette dit : « Souvenir de vacances ». De qui ?  `chapitre1.js:186`
-51. *prendre* — Toucher la poupée ? Et si c'était quelqu'un que je connais ?  `chapitre1.js:187`
-52. *utiliser* — Je ne pique rien. Je ne souffle rien. Je ne touche rien.  `chapitre1.js:187`
-53. *regarder* — Des citrouilles en or qui volent. Sans fil, sans aimant, sans aucune explication raisonnable.  `chapitre1.js:191`
-54. *prendre* — Trop haut. Et puis on ne vole pas ce qui vole déjà.  `chapitre1.js:192`
-55. *regarder* — Un alien vert. Le classique : grosse tête, grands yeux noirs, petit corps. Il cligne des yeux. Les statues ne clignent pas des yeux.  `chapitre1.js:199`
-56. **héros courant** — Euh… je viens en paix ?  `chapitre1.js:200`
-57. **héros courant** — …Il a penché la tête. Je ne sais pas si c'est bon signe.  `chapitre1.js:200`
-58. *prendre* — Je ne kidnappe pas d'extraterrestre. C'est plutôt eux qui font ça, normalement.  `chapitre1.js:201`
-59. *regarder* — Un lapin géant, debout, en costume marron. Ses yeux sont deux trous noirs avec un point rouge au fond. Et ce sourire… pourquoi il a autant de dents ?  `chapitre1.js:212`
-60. **héros courant** — …Salut, grand lapin.  `chapitre1.js:213`
-61. **héros courant** — Il n'a rien dit. Mais j'ai l'impression qu'il a souri un peu plus.  `chapitre1.js:213`
-62. *prendre* — Je ne touche pas au lapin. Je ne regarde même plus le lapin.  `chapitre1.js:214`
-63. *regarder* — Une dame aux cheveux roses, jumelles autour du cou. Elle observe la momie comme un oiseau rare.  `chapitre1.js:216`
-64. **Visiteuse** — Chut ! Elle a cligné de l'œil. Je l'ai vu. Personne ne me croit jamais.  `chapitre1.js:217`
-65. **héros courant** — …Moi, je vous crois. C'est bien ça le problème.  `chapitre1.js:217`
-66. **héros courant** — Un singe mécanique avec ses cymbales. Enfin quelque chose de normal.  `chapitre1.js:219`
-67. **héros courant** — …Normal. Sauf ce regard. On dirait qu'il me suit des yeux.  `chapitre1.js:219`
-68. **héros courant** — Et sur le dessus de sa tête… il y a une fente ?  `chapitre1.js:219`
-69. *prendre* — Ah non. Je ne le touche pas. Il me regarde.  `chapitre1.js:220`
-70. *utiliser* — Le remonter ? Pour qu'il se mette à taper ses cymbales tout seul la nuit ? Non.  `chapitre1.js:220`
-71. *parler* — Je ne parle pas au singe. Je ne veux surtout pas qu'il me réponde.  `chapitre1.js:221`
-72. *regarder* — Des sièges rouges, un peu râpés. Aucune momie. Aucune citrouille. Aucun singe.  `chapitre1.js:223`
-73. **L'hôte** — Entrez, entrez ! C'est gratuit ! N'ayez pas peur !  `chapitre1.js:232`
-74. **Yvan** — J'ai peur. J'ai très peur.  `chapitre1.js:234`
-75. **Yvan** — …Mais c'est gratuit.  `chapitre1.js:234`
-76. **héros courant** — …Waouh. Ça a l'air beaucoup plus grand dedans que dehors.  `chapitre1.js:238`
-77. **héros courant** — Comment c'est possible ? C'est un bus. J'ai vu les roues.  `chapitre1.js:238`
-78. **héros courant** — Allez… dans la fente.  `chapitre1.js:249`
-79. **héros courant** — Aaah ! Mes yeux ! Ça brille !  `chapitre1.js:252`
-80. **héros courant** — Hein ? C'est… un bus. Juste un bus normal. Où sont passés la momie, les citrouilles, les méditants… ?  `chapitre1.js:254`
-81. **héros courant** — Et je suis tout seul.  `chapitre1.js:254`
-82. **héros courant** — Ouf. De l'air. De la pluie, mais de l'air.  `chapitre1.js:260`
-83. **héros courant** — …Un type aux cheveux longs, long manteau noir et lunettes noires, vient d'entrer dans le bus. Sans même me regarder.  `chapitre1.js:264`
-84. **héros courant** — Il a l'air de savoir exactement où il va. Lui.  `chapitre1.js:264`
-85. — Pendant ce temps, du côté de Rod…  `chapitre1.js:266`
+28. **héros courant** — …Il a raccroché. Super.  `chapitre1.js:68`
+29. *regarder* — Une pièce oubliée juste à côté du combiné. Étrange, je ne vois pas de quel pays ça peut venir.  `chapitre1.js:120`
+30. **héros courant** — Le combiné. Raccroché. J'aimerais qu'il le reste.  `chapitre1.js:122`
+31. — Un vieux combiné noir, bien lourd. Le fil est tout entortillé.  `chapitre1.js:122`
+32. **héros courant** — Je ne décroche plus. Ce téléphone a des projets pour moi, et moi aucun pour lui.  `chapitre1.js:123`
+33. — Je décroche… tonalité. Personne au bout. Je raccroche.  `chapitre1.js:123`
+34. *prendre* — Il est attaché. Et puis je n'ai personne à appeler.  `chapitre1.js:124`
+35. *regarder* — Un téléphone à pièces. L'écran dit « INSÉRER ». Insérer quoi ? Et où ?  `chapitre1.js:125`
+36. *utiliser* — Je n'ai pas de monnaie anglaise. Enfin… pas encore.  `chapitre1.js:125`
+37. *regarder* — Un annuaire tout gondolé par la pluie. Toutes les pages du « Y » ont été arrachées. Y… mais qu'est-ce que ça peut bien vouloir dire ?  `chapitre1.js:126`
+38. *prendre* — Il est trempé. Non merci.  `chapitre1.js:126`
+39. *regarder* — La porte. Et la pluie derrière.  `chapitre1.js:127`
+40. **héros courant** — Il fait sombre là-dedans… Tiens ? Une pièce qui brille, posée à côté du combiné.  `chapitre1.js:133`
+41. **héros courant** — Non merci. J'ai assez donné.  `chapitre1.js:138`
+42. *regarder* — La sortie. Ma meilleure amie dans ce bus.  `chapitre1.js:174`
+43. *regarder* — Un drôle de gus qui a l'air de faire la tronche.  `chapitre1.js:179`
+44. **L'hôte** — Entrez, entrez ! C'est gratuit ! N'ayez pas peur !  `chapitre1.js:180`
+45. **héros courant** — C'est le « n'ayez pas peur » qui me fait peur.  `chapitre1.js:180`
+46. **L'hôte** — Gardez-la, mon ami. Ici, tout est gratuit… presque tout.  `chapitre1.js:181`
+47. *regarder* — Une momie dans son sarcophage, à peu près de ma taille. Elle a un bracelet en plastique « TOURISTE PARISIEN ».  `chapitre1.js:186`
+48. *prendre* — Je ne prends pas de momie. Même gratuite.  `chapitre1.js:187`
+49. *parler* — …Elle n'a pas répondu. Ouf.  `chapitre1.js:187`
+50. *regarder* — Une poupée pleine d'épingles, un crâne et des bougies. L'étiquette dit : « Souvenir de vacances ». De qui ?  `chapitre1.js:193`
+51. *prendre* — Toucher la poupée ? Et si c'était quelqu'un que je connais ?  `chapitre1.js:194`
+52. *utiliser* — Je ne touche à rien.  `chapitre1.js:194`
+53. *regarder* — Des citrouilles en or qui volent… pourquoi ?  `chapitre1.js:198`
+54. *prendre* — Trop haut. Et puis on ne vole pas ce qui vole déjà.  `chapitre1.js:199`
+55. *regarder* — Un alien vert. Le classique : grosse tête, grands yeux noirs, petit corps. Heuuu, il vient de cligner des yeux.  `chapitre1.js:206`
+56. **héros courant** — Euh… je viens en paix ?  `chapitre1.js:207`
+57. **héros courant** — …Il a penché la tête. Je ne sais pas si c'est bon signe.  `chapitre1.js:207`
+58. *prendre* — Je ne kidnappe pas d'extraterrestre. C'est plutôt eux qui font ça, normalement.  `chapitre1.js:208`
+59. *regarder* — Un lapin géant, debout, en costume marron. Ce sourire… pourquoi il a autant de dents ?  `chapitre1.js:219`
+60. **héros courant** — …Salut, grand lapin.  `chapitre1.js:220`
+61. **héros courant** — Il n'a rien dit. Mais j'ai l'impression qu'il a souri un peu plus.  `chapitre1.js:220`
+62. *prendre* — Je ne touche pas au lapin. Je ne regarde même plus le lapin.  `chapitre1.js:221`
+63. *regarder* — Une dame aux cheveux roses, jumelles autour du cou. C'est elle qui m'effraie le plus.  `chapitre1.js:223`
+64. **Visiteuse** — Chut ! Elle a cligné de l'œil. Je l'ai vu. Personne ne me croit jamais.  `chapitre1.js:224`
+65. **héros courant** — …Moi, je vous crois. C'est bien ça le problème.  `chapitre1.js:224`
+66. **héros courant** — Un singe mécanique avec ses cymbales. J'ai déjà vu ça quelque part… et ça finissait mal.  `chapitre1.js:226`
+67. **héros courant** — …Normal. Sauf ce regard. On dirait qu'il me suit des yeux.  `chapitre1.js:226`
+68. **héros courant** — Et sur le dessus de sa tête… il y a une fente ?  `chapitre1.js:226`
+69. *prendre* — Ah non. Je ne le touche pas. Il me regarde.  `chapitre1.js:227`
+70. *utiliser* — Le remonter ? Pour qu'il se mette à taper ses cymbales tout seul la nuit ? Non.  `chapitre1.js:227`
+71. *parler* — Je ne parle pas au singe. Je ne veux surtout pas qu'il me réponde.  `chapitre1.js:228`
+72. *regarder* — Des sièges rouges, un peu râpés. Aucune momie. Aucune citrouille. Aucun singe.  `chapitre1.js:230`
+73. **L'hôte** — Entrez, entrez ! C'est gratuit ! N'ayez pas peur !  `chapitre1.js:239`
+74. **Yvan** — J'ai peur. J'ai très peur.  `chapitre1.js:241`
+75. **Yvan** — …Mais c'est gratuit.  `chapitre1.js:241`
+76. **héros courant** — …Waouh. Ça a l'air beaucoup plus grand dedans que dehors.  `chapitre1.js:245`
+77. **héros courant** — Comment c'est possible ? C'est un bus.  `chapitre1.js:245`
+78. **héros courant** — Allez… dans la fente.  `chapitre1.js:256`
+79. **héros courant** — Aaah ! Mes yeux ! Ça brille !  `chapitre1.js:259`
+80. **héros courant** — Hein ? C'est… un bus. Juste un bus normal. J'ai rêvé ou quoi ?  `chapitre1.js:261`
+81. **héros courant** — Et je suis tout seul.  `chapitre1.js:261`
+82. **héros courant** — Ouf. De l'air. De la pluie, mais de l'air.  `chapitre1.js:267`
+83. **héros courant** — …Un drôle de gars vient de rentrer. Sans même me regarder.  `chapitre1.js:271`
+84. **héros courant** — Il a l'air de savoir exactement où il va. Lui.  `chapitre1.js:271`
+85. — Pendant ce temps, du côté de Rod…  `chapitre1.js:273`
 
 ## Londres (base), studio, Quai des Brumes (`src/js/scenes.js`)
 
