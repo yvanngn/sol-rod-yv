@@ -52,3 +52,6 @@ existants : on invente tout — Académie d'Hiverlune, Quai des Brumes…).
 ## Republier
 Avant toute publication, même pour un simple changement de texte ou de police : `sh tester.sh` (ou au minimum `node --check`).
 Publier `dist/index.html` avec l'outil Artifact, toujours sur la même page (même chemin ou `url`).
+
+## Mémoire du projet
+- `docs/CARNET.md` : histoire, personnages, chapitres, inventaires, contradictions, idées. Le lire en début de séance, le compléter à la fin (skill `carnet-de-projet`).
