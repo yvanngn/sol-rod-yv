@@ -968,14 +968,18 @@ SCENES.cabine={nom:'Cabine téléphonique',fixe:1,
     if(k<.4){const u=e(k/.4);hx=10+(111-10)*u;hy=200+(74-200)*u}
     else{const u=e((k-.4)/.6);cx=111+(50-111)*u;cy=66+(60-66)*u;rot=-.9*u;hx=cx+4*(1-u);hy=cy+8}
     const tr=S.cab==='sonne'?((t/40|0)%2?1:-1):0,parle=S.cab==='decroche'&&k>=1?Math.sin(t/260)*1.2:0;
-    if(k>0){const ap=Math.min(1,k/.4),dx=-70*(1-ap);
+    const dx=-90*(1-Math.min(1,k/.4));
+    if(k>0){ // Yvan de trois quarts dos, au premier plan à gauche : corps, épaules, cou, tête
+      poly([[-40+dx,H],[96+dx,H],[90+dx,128],[70+dx,104],[44+dx,96],[-14+dx,96],[-40+dx,120]],'#2b2733');g.strokeStyle='rgba(150,140,190,.5)';g.beginPath();g.moveTo(-14+dx,96);g.lineTo(44+dx,96);g.lineTo(70+dx,104);g.lineTo(90+dx,128);g.stroke();
+      poly([[60+dx,H],[96+dx,H],[90+dx,128],[72+dx,108]],'#26232e');P(-14+dx,100,60,1,'#2c2834');
+      P(28+dx,84,18,16,'#c8946a');
       g.fillStyle='#141216';g.beginPath();g.ellipse(14+dx,58,34,42,0,0,7);g.fill();P(30+dx,24,8,4,'#2a2830');
       P(38+dx,54,7,13,'#d9a77c');P(40+dx,57,3,7,'#b8845a');P(34+dx,70,16,26,'#d9a77c');P(44+dx,74,6,3,'#2a2018');
-      P(40+dx,50,26,2,'#0c0c0c');P(20+dx,96,40,14,'#b8202c');P(20+dx,96,40,2,'#e04a54')}
+      P(40+dx,50,26,2,'#0c0c0c');P(8+dx,94,46,12,'#b8202c');P(8+dx,94,46,2,'#e04a54');P(40+dx,104,9,26,'#b8202c');P(40+dx,112,9,1,'#7a1018');P(40+dx,120,9,1,'#7a1018')}
     g.strokeStyle='#111';g.lineWidth=2;g.beginPath();g.moveTo(128,96);
     const bx=cx+Math.sin(-rot)*22,by=cy+Math.cos(rot)*22;g.bezierCurveTo(118,130,bx+10,by+30,bx,by);g.stroke();g.lineWidth=1;
-    if(k>0){g.lineCap='round';g.strokeStyle='#1c1a22';g.lineWidth=15;g.beginPath();g.moveTo(-6,H+10);g.quadraticCurveTo(hx-30,hy+40,hx,hy+6);g.stroke();
-      g.strokeStyle='#2c2834';g.lineWidth=5;g.beginPath();g.moveTo(-2,H+10);g.quadraticCurveTo(hx-28,hy+36,hx-2,hy+4);g.stroke();g.lineWidth=1;g.lineCap='butt'}
+    if(k>0){g.lineCap='round';g.strokeStyle='#2b2733';g.lineWidth=15;g.beginPath();g.moveTo(72+dx,112);g.quadraticCurveTo(hx+10,hy+60,hx,hy+6);g.stroke();
+      g.strokeStyle='#2c2834';g.lineWidth=5;g.beginPath();g.moveTo(76+dx,112);g.quadraticCurveTo(hx+14,hy+56,hx+2,hy+4);g.stroke();g.lineWidth=1;g.lineCap='butt'}
     combine(cx+tr,cy+parle,rot);
     if(S.cab==='sonne'){g.strokeStyle='rgba(255,240,180,.8)';for(let q=0;q<2;q++){const r=20+q*7+((t/80)%6);g.beginPath();g.arc(111,62,r,-.6,.6);g.stroke();g.beginPath();g.arc(111,62,r,Math.PI-.6,Math.PI+.6);g.stroke()}}
     if(k>0){P(hx-6,hy-4+parle,12,12,'#d9a77c');P(hx-8,hy-1+parle,3,8,'#c8946a');P(hx+5,hy+parle,3,7,'#c8946a');P(hx-6,hy-4+parle,12,1,'#ecc09a')}
