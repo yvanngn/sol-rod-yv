@@ -49,12 +49,13 @@ const scenarios={
     for(const o of['hote','momie','vaudou','citrouilles','alien','lapin','visiteuse'])await G.action(o,'regarder');
     await G.action('singe');v('le singe : examiner par défaut, la fente',G.S.f.fente&&dit(G,'fente'));
     await G.action('singe',undefined,'piece');v('pièce dans le singe : bus redevenu normal',G.S.f.busNormal&&!G.aObjet('piece'));
-    await G.action('sortie');v('sortie : homme au manteau, transition vers Rod au pub',G.S.f.manteau&&dit(G,'Pendant ce temps')&&G.S.scene==='pub'&&G.S.perso==='rod');
+    await G.action('sortie');v('sortie : homme au manteau, transition vers Rod devant le pub',G.S.f.manteau&&dit(G,'Pendant ce temps')&&G.S.scene==='devanture'&&G.S.perso==='rod');
   },
   async rod(G){
     await G.debutRod();
     G.switchPerso('yvan');
-    v('Rod au pub, seul jouable',G.S.scene==='pub'&&G.S.perso==='rod'&&G.S.verrou==='rod');
+    v('Rod devant le pub « Chaos Order », seul jouable',G.S.scene==='devanture'&&G.S.perso==='rod'&&G.S.verrou==='rod'&&dit(G,'Chaos Order'));
+    await G.action('porte_pub');v('Rod entre dans le pub',G.S.scene==='pub');
     await G.action('cacahuetes');v('cacahuètes : ça a du goût',dit(G,'ça a du goût'));
     await G.action('pailles');v('pailles : il y en a encore ici',dit(G,'il y en a encore ici'));
     await G.action('pailles','prendre');await G.action('flechette');v('paille et fléchette prises',G.aObjet('paille')&&G.aObjet('flechette'));
@@ -64,6 +65,7 @@ const scenarios={
     await G.combiner('flechette','paille');v('fléchette + paille = sarbacane',G.aObjet('sarbacane')&&!G.aObjet('paille')&&!G.aObjet('flechette'));
     await G.action('ballon',undefined,'sarbacane');v('ballon éclaté, boulette au sol',G.S.f.ballon);
     await G.action('boulette');v('« Je t\'appelle… », tout disparaît, transition vers Solène',dit(G,'Je t\'appelle')&&G.S.f.ballonParti&&!G.aObjet('boulette')&&dit(G,'côté de Solène')&&G.S.f.finRod);
+    v('Rod ressort : devanture « The English Pub »',G.S.scene==='devanture'&&G.S.f.vraiNom&&dit(G,'The English Pub'));
   },
   async londres(G){
     await G.go('londres');v('scène de départ',G.S.scene==='londres');

@@ -22,7 +22,7 @@ COMBOS[cle('flechette','paille')]=async()=>{retirer('flechette');retirer('paille
 // ----- passage d'Yvan à Rod -----
 async function debutRod(){
   S.f.finYvan=1;S.verrou='rod';S.perso='rod';S.tenue='';ui();
-  await go('pub',{rod:300,yvan:null,solene:null});
+  await go('devanture',{rod:292,yvan:null,solene:null});
 }
 
 // ----- Le pub -----
@@ -31,7 +31,7 @@ function cibleFlechettes(cx,cy){const r=[[11,'#1a1a1a'],[10,'#e8dcc0'],[7.5,'#c8
   g.strokeStyle='rgba(0,0,0,.4)';for(let i=0;i<10;i++){const a=i*Math.PI/5;g.beginPath();g.moveTo(cx,cy);g.lineTo(cx+Math.cos(a)*10,cy+Math.sin(a)*10);g.stroke()}}
 function lancers(){const t=Date.now()/1000;[[62,0],[88,1.3]].forEach(([x,ph])=>{const c=(t+ph)%2.6;if(c>.5)return;const u=c/.5;
   const px=x-8+(40-(x-8))*u,py=SOL-30+(66-(SOL-30))*u-Math.sin(u*Math.PI)*8;P(px-2,py,4,1,'#c0c0c8');P(px+2,py-1,2,3,'#f0c040')})}
-SCENES.pub={nom:'The Crooked Crown',
+SCENES.pub={nom:'Chaos Order',
   dessin(){const t=Date.now();
     vgrad(0,96,'#1f3a2c','#16281f');for(let x=0;x<W;x+=10)P(x,8,1,88,'rgba(255,255,255,.04)');
     P(0,0,W,8,'#1a0e08');for(let x=20;x<W;x+=70)P(x,0,8,10,'#2a160c');
@@ -42,7 +42,7 @@ SCENES.pub={nom:'The Crooked Crown',
     P(106,92,28,68,'#2a160c');if(S.porteWC){P(109,95,22,65,'#0e1a14');vgrad(95,160,'rgba(150,255,190,.25)','rgba(0,0,0,0)',109,22)}else{P(109,95,22,65,'#5a3420');P(112,100,16,24,'#4a2a18');P(112,130,16,24,'#4a2a18');P(126,128,3,3,'#c9a040')}
     P(112,82,16,9,'#c9a040');g.fillStyle='#2a160c';g.font="bold 7px Georgia";g.fillText('WC',114,89);
     // enseigne + étagères de bouteilles + miroir
-    P(176,22,120,14,'#1a0e08');P(176,22,120,1,'#c9a040');g.fillStyle='#e8c35a';g.font="bold 8px Georgia";g.fillText('THE CROOKED CROWN',184,32);
+    P(176,22,120,14,'#1a0e08');P(176,22,120,1,'#c9a040');g.fillStyle='#e8c35a';g.font="bold 8px Georgia";g.fillText('CHAOS ORDER',206,32);
     P(166,40,140,58,'#2a160c');vgrad(44,94,'rgba(200,220,230,.18)','rgba(120,140,150,.08)',196,80);
     for(let r=0;r<2;r++){P(166,64+r*26,140,3,'#6a4020');for(let i=0;i<22;i++){const x=168+i*6.2,h=10+(i*7+r*3)%6;P(x,64+r*26-h,4,h,['#2a6a3a','#8a4a1a','#c8c0a0','#3a2a5a','#a02a2a','#d8a030'][(i+r)%6]);P(x+1,64+r*26-h-2,2,2,'#222')}}
     // porte d'entrée
@@ -153,6 +153,11 @@ async function lireBoulette(){
   sfx('magie');S.papierBrille=1;await pause(1200);sfx('eblouit');S.flash=1;await pause(300);
   S.papierBrille=0;retirer('boulette');S.f.ballonParti=1;S.flash=1;await pause(500);
   await dire([['rod',"Hein ? Le papier… le ballon… Plus rien. J'ai rêvé ou quoi ?"],['rod',"Et j'ai même pas encore bu."]]);
+  // Rod ressort : la devanture porte son vrai nom
+  await noir(true);S.f.vraiNom=1;
+  await go('devanture',{rod:160});anim('rod').dir='face';
+  await noir(false);await pause(600);
+  await dire([['rod',"…« The English Pub » ?"],['rod',"C'était écrit « Chaos Order » tout à l'heure. J'en suis sûr. Enfin… presque sûr."]]);
   await noir(true);
   await carton("Pendant ce temps, du côté de Solène…");
   S.f.finRod=1;
@@ -160,3 +165,42 @@ async function lireBoulette(){
   await noir(false);
 }
 MUSIQUE_SCENE.pub='pub';MUSIQUE_SCENE.toilettes='pub';AMBIANCE_SCENE.pub='brouhaha';
+
+// ----- La devanture du pub (avant d'entrer, puis avec son vrai nom) -----
+SCENES.devanture={nom:'Devanture du pub',reflet:1,
+  dessin(){const t=Date.now(),vrai=S.f.vraiNom;
+    vgrad(0,60,'#3a4660','#6a7890');
+    for(let x=0;x<W;x+=16)for(let y=0;y<92;y+=6)P(x+((y/6)%2)*8,y,15,5,shade('#6a3a2a',.8+((x*7+y*3)%9)/40));
+    P(0,58,W,2,'#2a1810');for(let i=0;i<5;i++){P(14+i*64,18,26,30,'#2a2a38');P(16+i*64,20,22,26,'#e8c890');P(26+i*64,20,2,26,'#2a2a38');P(16+i*64,32,22,2,'#2a2a38')}
+    // façade en bois vert
+    P(20,60,280,100,'#1e4a34');P(20,60,280,2,'#3a7a5a');P(20,158,280,2,'#12301f');
+    // enseigne
+    P(30,64,260,22,'#0e2618');P(32,66,256,18,'#163a28');P(32,66,256,1,'#c9a040');P(32,83,256,1,'#c9a040');
+    g.fillStyle='#f0c766';g.font="bold 13px Georgia";g.textAlign='center';g.fillText(vrai?'THE ENGLISH PUB':'CHAOS ORDER',160,80);g.textAlign='left';
+    // vitrines éclairées
+    [[34,92],[196,92]].forEach(([x,y])=>{P(x,y,90,52,'#c8902a');vgrad(y,y+52,'#ffd890','#c87a2a',x+2,86);
+      for(let i=0;i<3;i++){P(x+8+i*28,y+24,10,28,'#3a2214');P(x+10+i*28,y+18,6,7,'#3a2214')}P(x+44,y,2,52,'#1e4a34');P(x,y+26,90,2,'#1e4a34');P(x,y+50,90,4,'#12301f')});
+    // porte
+    P(140,90,40,70,'#12301f');P(144,94,32,66,'#3a2214');P(148,98,24,26,'#e8b060');P(159,98,2,26,'#3a2214');P(170,130,3,3,'#c9a040');
+    // enseigne suspendue + lanternes
+    P(296,40,2,30,'#222');P(286,44,22,2,'#222');P(288,46,18,22,'#163a28');P(290,48,14,18,'#c9a040');P(292,50,10,14,'#163a28');
+    [[132,96],[188,96]].forEach(([x,y])=>{P(x-3,y,7,10,'#222');P(x-2,y+2,5,6,'#ffe0a0')});
+    // ardoise
+    P(232,124,26,34,'#3a2214');P(234,126,22,24,'#1a1a1a');for(let i=0;i<4;i++)P(237,130+i*5,10+(i*5)%8,1,'#e8e8e0');P(236,150,3,8,'#3a2214');P(252,150,3,8,'#3a2214');
+    vgrad(SOL,H,'#55555f','#383840');P(0,SOL,W,1,'#9c9ca6');
+    // pluie
+    for(let i=0;i<50;i++){const x=(i*61+t/12)%W,y=(i*37+t/3)%H;P(x,y,1,3,'rgba(210,225,240,.4)')}
+  },
+  objets:[
+    {id:'porte_pub',nom:'porte du pub',x:140,y:90,w:40,h:70,defaut:'utiliser',regarder:()=>say('rod',S.f.vraiNom?"La porte du pub. Je n'y retourne pas tout de suite.":"Une porte en bois, une poignée en laiton. Ça sent la bière d'ici."),
+      utiliser:async()=>{if(S.f.vraiNom)return say('rod',"Non. J'ai eu ma dose de mystère pour aujourd'hui.");await marcher('rod',160);anim('rod').dir='dos';await go('pub',{rod:296})}},
+    {id:'enseigne',nom:'enseigne',x:30,y:64,w:260,h:22,loin:1,regarder:()=>say('rod',S.f.vraiNom?"« The English Pub ». Original. Très original.":"« Chaos Order ». Drôle de nom pour un pub. Ça promet.")},
+    {id:'vitrines',nom:'vitrines',x:34,y:92,w:252,h:52,loin:1,regarder:"Des vitrines dorées, des silhouettes accoudées au comptoir. Ça a l'air chaleureux. Et poisseux."},
+    {id:'ardoise',nom:'ardoise',x:232,y:124,w:26,h:34,regarder:"« Happy hour de 17 h à 19 h ». Il est 14 h. Évidemment."},
+  ],
+  ambiance:{nuit:.3,voile:'#1a2440',teinte:'rgba(90,130,200,.3)'},
+  lumieres:()=>[{x:79,y:118,r:60,c:'rgba(255,200,120,.35)'},{x:241,y:118,r:60,c:'rgba(255,200,120,.35)'},{x:160,y:110,r:30,c:'rgba(255,190,110,.3)'},{x:132,y:100,r:18,c:'rgba(255,220,150,.5)',vacille:1},{x:188,y:100,r:18,c:'rgba(255,220,150,.5)',vacille:1},{x:160,y:76,r:80,c:'rgba(240,200,100,.15)'},...persoLumiere(30)],
+  dessinAvant:()=>vignette(),
+  async entree(){await noir(false);await say('rod',"« Chaos Order »… Drôle de nom pour un pub. Bon, tant qu'il y a des toilettes.")},
+};
+MUSIQUE_SCENE.devanture='magie';AMBIANCE_SCENE.devanture='pluie';

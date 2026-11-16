@@ -1,6 +1,6 @@
 # Witch'rok — toutes les répliques
 
-Corrige directement le texte (garde le numéro) et renvoie-moi la liste. Généré par `python3 tools/export_dialogues.py`.
+Corrige directement le texte (garde le numéro) et renvoie-moi la liste. 🆕 = réplique nouvelle ou modifiée depuis le dernier export. Généré par `python3 tools/export_dialogues.py`.
 
 ## Intro (`src/js/intro.js`)
 
@@ -95,132 +95,142 @@ Corrige directement le texte (garde le numéro) et renvoie-moi la liste. Génér
 
 ## Chapitre 1 — Rod : pub, toilettes, ballon (`src/js/chapitre1_rod.js`)
 
-86. *objet (inventaire)* — Une paille en plastique. Une espèce en voie de disparition.  `chapitre1_rod.js:13`
-87. *objet (inventaire)* — Une fléchette ramassée sous la cible. Pointe un peu tordue, plumes jaunes.  `chapitre1_rod.js:14`
-88. *objet (inventaire)* — Une paille avec une fléchette dedans. Ma sarbacane maison. Les ingénieurs n'ont qu'à bien se tenir.  `chapitre1_rod.js:15`
-89. *objet (inventaire)* — Une boulette de papier tombée du ballon.  `chapitre1_rod.js:16`
-90. **Rod** — Une fléchette dans une paille… et voilà une sarbacane. Les années de collège n'auront pas servi à rien.  `chapitre1_rod.js:20`
-91. *regarder* — Deux types qui jouent aux fléchettes. Concentration maximale. Comme des tireurs d'élite. Avec des pintes.  `chapitre1_rod.js:57`
-92. **héros courant** — …Il vise depuis dix minutes.  `chapitre1_rod.js:58`
-93. — Chut. Je vise.  `chapitre1_rod.js:58`
-94. *regarder* — Une cible de fléchettes. Un peu de travers. Comme les joueurs.  `chapitre1_rod.js:59`
-95. *prendre* — Je ne pars pas avec la cible. On me casserait les deux jambes.  `chapitre1_rod.js:59`
-96. *regarder* — Une fléchette par terre, sous la cible. Quelqu'un a raté son coup.  `chapitre1_rod.js:62`
-97. **Rod** — Personne ne la réclame ? Je la garde.  `chapitre1_rod.js:63`
-98. *regarder* — Les toilettes. Enfin.  `chapitre1_rod.js:64`
-99. *regarder* — Le barman. Il essuie le même verre depuis que je suis entré. Il doit être très propre, ce verre.  `chapitre1_rod.js:68`
-100. **Rod** — Juste les toilettes, merci.  `chapitre1_rod.js:69`
-101. — Qu'est-ce que je vous sers ?  `chapitre1_rod.js:69`
-102. — Au fond à gauche. Et on consomme après, hein.  `chapitre1_rod.js:69`
-103. *regarder* — Un vrai comptoir en bois, poisseux juste ce qu'il faut.  `chapitre1_rod.js:76`
-104. *regarder* — Des habitués, de dos, accoudés au comptoir. Ils n'ont pas bougé depuis 1987.  `chapitre1_rod.js:79`
-105. **héros courant** — Conversation passionnante. Je reviendrai.  `chapitre1_rod.js:80`
-106. *regarder* — Un bol de cacahuètes. Offertes. Touchées par cinquante mains avant moi.  `chapitre1_rod.js:81`
-107. **Rod** — Mmh. La différence avec la barre du métro, c'est que ça a du goût.  `chapitre1_rod.js:82`
-108. **Rod** — Encore une poignée… Bon, j'arrête, je vais devoir payer un loyer.  `chapitre1_rod.js:82`
-109. *regarder* — Un verre plein de pailles en plastique. Tiens, il y en a encore ici.  `chapitre1_rod.js:84`
-110. **Rod** — J'en ai déjà une. Pensons aux tortues.  `chapitre1_rod.js:85`
-111. **Rod** — Je t'emprunte une paille.  `chapitre1_rod.js:85`
-112. *regarder* — La porte qui donne sur la rue.  `chapitre1_rod.js:86`
-113. *utiliser* — Pas tout de suite. Je suis venu pour les toilettes, je repars avec les toilettes. Enfin… façon de parler.  `chapitre1_rod.js:86`
-114. **Rod** — Ah, un vrai pub anglais. Moquette qui colle, fléchettes et bière tiède. Parfait.  `chapitre1_rod.js:95`
-115. **Rod** — Mais d'abord : les toilettes.  `chapitre1_rod.js:95`
-116. **Rod** — …Pardon.  `chapitre1_rod.js:104`
-117. **Rod** — Long manteau noir et lunettes noires, dans un pub. Il se croit dans un film, lui.  `chapitre1_rod.js:104`
-118. *regarder* — La porte. Le pub est derrière.  `chapitre1_rod.js:129`
-119. *regarder* — Bon. Je suis venu pour ça.  `chapitre1_rod.js:130`
-120. *utiliser* — …C'est fait. On n'en parlera plus jamais.  `chapitre1_rod.js:130`
-121. *regarder* — Un lavabo et un miroir. J'ai une tête de type qui vient de traverser Londres sous la pluie.  `chapitre1_rod.js:131`
-122. *utiliser* — Je me lave les mains. Je suis prof, je montre l'exemple.  `chapitre1_rod.js:131`
-123. *regarder* — Un sèche-mains. Il souffle autant qu'un ministre en conférence de presse.  `chapitre1_rod.js:132`
-124. *utiliser* — Vrrrrr… Il sèche surtout ma patience.  `chapitre1_rod.js:132`
-125. *regarder* — Une cabine fermée. « OCCUPÉ ». Je préfère ne rien savoir.  `chapitre1_rod.js:133`
-126. *utiliser* — C'est occupé. Ou alors c'est fermé depuis 1987.  `chapitre1_rod.js:133`
-127. *regarder* — Un ballon de baudruche rouge, coincé au plafond. Avec un singe dessiné dessus… un singe aux cymbales. Il a un regard de fou.  `chapitre1_rod.js:135`
-128. *prendre* — Trop haut. Même en sautant. Surtout en sautant.  `chapitre1_rod.js:136`
-129. **Rod** — Allez… dans le mille !  `chapitre1_rod.js:137`
-130. **Rod** — …Elle monte, elle touche, et elle retombe à plat. Pas assez de force.  `chapitre1_rod.js:137`
-131. **Rod** — Je la ramasse. Il me faudrait de quoi la propulser.  `chapitre1_rod.js:137`
-132. — Souffler dans une paille vide sur un ballon ? Je vais juste le décoiffer.  `chapitre1_rod.js:138`
-133. **Rod** — BAM ! En plein dans le singe.  `chapitre1_rod.js:140`
-134. **Rod** — Tiens, une boulette de papier est tombée du ballon.  `chapitre1_rod.js:140`
-135. *regarder* — Une boulette de papier, tombée du ballon.  `chapitre1_rod.js:141`
-136. **Rod** — Des toilettes de pub anglais. Carrelage vert, néon qui clignote. Exactement comme dans les films.  `chapitre1_rod.js:147`
-137. **Rod** — Une boulette de papier… Il y a quelque chose d'écrit.  `chapitre1_rod.js:151`
-138. **Rod** — « Je t'appelle… »  `chapitre1_rod.js:152`
-139. **Rod** — Hein ? Le papier… le ballon… Plus rien. J'ai rêvé ou quoi ?  `chapitre1_rod.js:155`
-140. **Rod** — Et j'ai même pas encore bu.  `chapitre1_rod.js:155`
-141. — Pendant ce temps, du côté de Solène…  `chapitre1_rod.js:157`
+86. 🆕 *objet (inventaire)* — Une paille en plastique. Une espèce en voie de disparition.  `chapitre1_rod.js:13`
+87. 🆕 *objet (inventaire)* — Une fléchette ramassée sous la cible. Pointe un peu tordue, plumes jaunes.  `chapitre1_rod.js:14`
+88. 🆕 *objet (inventaire)* — Une paille avec une fléchette dedans. Ma sarbacane maison. Les ingénieurs n'ont qu'à bien se tenir.  `chapitre1_rod.js:15`
+89. 🆕 *objet (inventaire)* — Une boulette de papier tombée du ballon.  `chapitre1_rod.js:16`
+90. 🆕 **Rod** — Une fléchette dans une paille… et voilà une sarbacane. Les années de collège n'auront pas servi à rien.  `chapitre1_rod.js:20`
+91. 🆕 *regarder* — Deux types qui jouent aux fléchettes. Concentration maximale. Comme des tireurs d'élite. Avec des pintes.  `chapitre1_rod.js:57`
+92. 🆕 **héros courant** — …Il vise depuis dix minutes.  `chapitre1_rod.js:58`
+93. 🆕 — Chut. Je vise.  `chapitre1_rod.js:58`
+94. 🆕 *regarder* — Une cible de fléchettes. Un peu de travers. Comme les joueurs.  `chapitre1_rod.js:59`
+95. 🆕 *prendre* — Je ne pars pas avec la cible. On me casserait les deux jambes.  `chapitre1_rod.js:59`
+96. 🆕 *regarder* — Une fléchette par terre, sous la cible. Quelqu'un a raté son coup.  `chapitre1_rod.js:62`
+97. 🆕 **Rod** — Personne ne la réclame ? Je la garde.  `chapitre1_rod.js:63`
+98. 🆕 *regarder* — Les toilettes. Enfin.  `chapitre1_rod.js:64`
+99. 🆕 *regarder* — Le barman. Il essuie le même verre depuis que je suis entré. Il doit être très propre, ce verre.  `chapitre1_rod.js:68`
+100. 🆕 **Rod** — Juste les toilettes, merci.  `chapitre1_rod.js:69`
+101. 🆕 — Qu'est-ce que je vous sers ?  `chapitre1_rod.js:69`
+102. 🆕 — Au fond à gauche. Et on consomme après, hein.  `chapitre1_rod.js:69`
+103. 🆕 *regarder* — Un vrai comptoir en bois, poisseux juste ce qu'il faut.  `chapitre1_rod.js:76`
+104. 🆕 *regarder* — Des habitués, de dos, accoudés au comptoir. Ils n'ont pas bougé depuis 1987.  `chapitre1_rod.js:79`
+105. 🆕 **héros courant** — Conversation passionnante. Je reviendrai.  `chapitre1_rod.js:80`
+106. 🆕 *regarder* — Un bol de cacahuètes. Offertes. Touchées par cinquante mains avant moi.  `chapitre1_rod.js:81`
+107. 🆕 **Rod** — Mmh. La différence avec la barre du métro, c'est que ça a du goût.  `chapitre1_rod.js:82`
+108. 🆕 **Rod** — Encore une poignée… Bon, j'arrête, je vais devoir payer un loyer.  `chapitre1_rod.js:82`
+109. 🆕 *regarder* — Un verre plein de pailles en plastique. Tiens, il y en a encore ici.  `chapitre1_rod.js:84`
+110. 🆕 **Rod** — J'en ai déjà une. Pensons aux tortues.  `chapitre1_rod.js:85`
+111. 🆕 **Rod** — Je t'emprunte une paille.  `chapitre1_rod.js:85`
+112. 🆕 *regarder* — La porte qui donne sur la rue.  `chapitre1_rod.js:86`
+113. 🆕 *utiliser* — Pas tout de suite. Je suis venu pour les toilettes, je repars avec les toilettes. Enfin… façon de parler.  `chapitre1_rod.js:86`
+114. 🆕 **Rod** — Ah, un vrai pub anglais. Moquette qui colle, fléchettes et bière tiède. Parfait.  `chapitre1_rod.js:95`
+115. 🆕 **Rod** — Mais d'abord : les toilettes.  `chapitre1_rod.js:95`
+116. 🆕 **Rod** — …Pardon.  `chapitre1_rod.js:104`
+117. 🆕 **Rod** — Long manteau noir et lunettes noires, dans un pub. Il se croit dans un film, lui.  `chapitre1_rod.js:104`
+118. 🆕 *regarder* — La porte. Le pub est derrière.  `chapitre1_rod.js:129`
+119. 🆕 *regarder* — Bon. Je suis venu pour ça.  `chapitre1_rod.js:130`
+120. 🆕 *utiliser* — …C'est fait. On n'en parlera plus jamais.  `chapitre1_rod.js:130`
+121. 🆕 *regarder* — Un lavabo et un miroir. J'ai une tête de type qui vient de traverser Londres sous la pluie.  `chapitre1_rod.js:131`
+122. 🆕 *utiliser* — Je me lave les mains. Je suis prof, je montre l'exemple.  `chapitre1_rod.js:131`
+123. 🆕 *regarder* — Un sèche-mains. Il souffle autant qu'un ministre en conférence de presse.  `chapitre1_rod.js:132`
+124. 🆕 *utiliser* — Vrrrrr… Il sèche surtout ma patience.  `chapitre1_rod.js:132`
+125. 🆕 *regarder* — Une cabine fermée. « OCCUPÉ ». Je préfère ne rien savoir.  `chapitre1_rod.js:133`
+126. 🆕 *utiliser* — C'est occupé. Ou alors c'est fermé depuis 1987.  `chapitre1_rod.js:133`
+127. 🆕 *regarder* — Un ballon de baudruche rouge, coincé au plafond. Avec un singe dessiné dessus… un singe aux cymbales. Il a un regard de fou.  `chapitre1_rod.js:135`
+128. 🆕 *prendre* — Trop haut. Même en sautant. Surtout en sautant.  `chapitre1_rod.js:136`
+129. 🆕 **Rod** — Allez… dans le mille !  `chapitre1_rod.js:137`
+130. 🆕 **Rod** — …Elle monte, elle touche, et elle retombe à plat. Pas assez de force.  `chapitre1_rod.js:137`
+131. 🆕 **Rod** — Je la ramasse. Il me faudrait de quoi la propulser.  `chapitre1_rod.js:137`
+132. 🆕 — Souffler dans une paille vide sur un ballon ? Je vais juste le décoiffer.  `chapitre1_rod.js:138`
+133. 🆕 **Rod** — BAM ! En plein dans le singe.  `chapitre1_rod.js:140`
+134. 🆕 **Rod** — Tiens, une boulette de papier est tombée du ballon.  `chapitre1_rod.js:140`
+135. 🆕 *regarder* — Une boulette de papier, tombée du ballon.  `chapitre1_rod.js:141`
+136. 🆕 **Rod** — Des toilettes de pub anglais. Carrelage vert, néon qui clignote. Exactement comme dans les films.  `chapitre1_rod.js:147`
+137. 🆕 **Rod** — Une boulette de papier… Il y a quelque chose d'écrit.  `chapitre1_rod.js:151`
+138. 🆕 **Rod** — « Je t'appelle… »  `chapitre1_rod.js:152`
+139. 🆕 **Rod** — Hein ? Le papier… le ballon… Plus rien. J'ai rêvé ou quoi ?  `chapitre1_rod.js:155`
+140. 🆕 **Rod** — Et j'ai même pas encore bu.  `chapitre1_rod.js:155`
+141. 🆕 **Rod** — …« The English Pub » ?  `chapitre1_rod.js:160`
+142. 🆕 **Rod** — C'était écrit « Chaos Order » tout à l'heure. J'en suis sûr. Enfin… presque sûr.  `chapitre1_rod.js:160`
+143. 🆕 — Pendant ce temps, du côté de Solène…  `chapitre1_rod.js:162`
+144. 🆕 **Rod** — La porte du pub. Je n'y retourne pas tout de suite.  `chapitre1_rod.js:195`
+145. 🆕 — Une porte en bois, une poignée en laiton. Ça sent la bière d'ici.  `chapitre1_rod.js:195`
+146. 🆕 **Rod** — Non. J'ai eu ma dose de mystère pour aujourd'hui.  `chapitre1_rod.js:196`
+147. 🆕 **Rod** — « The English Pub ». Original. Très original.  `chapitre1_rod.js:197`
+148. 🆕 — « Chaos Order ». Drôle de nom pour un pub. Ça promet.  `chapitre1_rod.js:197`
+149. 🆕 *regarder* — Des vitrines dorées, des silhouettes accoudées au comptoir. Ça a l'air chaleureux. Et poisseux.  `chapitre1_rod.js:198`
+150. 🆕 *regarder* — « Happy hour de 17 h à 19 h ». Il est 14 h. Évidemment.  `chapitre1_rod.js:199`
+151. 🆕 **Rod** — « Chaos Order »… Drôle de nom pour un pub. Bon, tant qu'il y a des toilettes.  `chapitre1_rod.js:204`
 
 ## Londres (base), studio, Quai des Brumes (`src/js/scenes.js`)
 
-142. *objet (inventaire)* — Mon téléphone. 12 % de batterie, 4 000 photos de bouffe.  `scenes.js:3`
-143. *objet (inventaire)* — Trois billets pour la visite du studio. Créneau de 14 h.  `scenes.js:4`
-144. *objet (inventaire)* — Mon écharpe porte-bonheur. Elle a vu plus de défaites que de victoires.  `scenes.js:5`
-145. *regarder* — Une cabine rouge. Plus personne ne s'en sert, sauf pour les selfies.  `scenes.js:25`
-146. **héros courant** — Je décroche… tonalité. Personne au bout.  `scenes.js:26`
-147. **Rod** — Appelle le club, dis-leur qu'on achète un vrai numéro 9.  `scenes.js:26`
-148. *regarder* — Un bus à impériale. Rod a voulu monter devant en haut \"pour la vue\". On a vu la pluie.  `scenes.js:27`
-149. *regarder* — L'entrée du studio des films de sorciers. File d'attente modérée, excitation maximale.  `scenes.js:29`
-150. **héros courant** — Les billets sont dans mon sac, il faut que je les présente.  `scenes.js:31`
-151. — Sans billets, on ne passe pas. C'est Solène qui les a.  `scenes.js:31`
-152. **Narrateur** — Le contrôleur scanne les trois billets. Bip, bip, bip.  `scenes.js:32`
-153. **héros courant** — Solène ?  `scenes.js:38`
-154. — Tu as les billets ?  `scenes.js:39`
-155. **Solène** — Dans mon sac. Si quelqu'un veut les tenir, qu'il me les demande gentiment.  `scenes.js:40`
-156. — Prêt pour le studio ?  `scenes.js:43`
-157. — Le match de ce soir ?  `scenes.js:43`
-158. **Rod** — Grave. Mais je te préviens : si y a pas de section sur l'écologie des créatures magiques, je fais une réclamation.  `scenes.js:44`
-159. **Rod** — On va perdre. Mais on va perdre avec panache.  `scenes.js:45`
-160. **Rod** — Ok, je les garde. Comme je gardais la setlist du groupe. Enfin… presque.  `scenes.js:46`
-161. **Yvan** — Merci ! Je fonce.  `scenes.js:47`
-162. **Narrateur** — Et nous voici à Londres.  `scenes.js:51`
-163. **Rod** — Bon, le studio c'est juste là. Après, pub. Après, re-pub.  `scenes.js:54`
-164. **Solène** — Après, on joue. C'est moi qui masterise, je vous rappelle.  `scenes.js:55`
-165. *regarder* — Un chariot à moitié encastré dans le mur. Tout le monde fait la même photo. On va faire la même photo.  `scenes.js:71`
-166. *prendre* — Il est vissé au sol. Logique, sinon les gens partiraient avec.  `scenes.js:72`
-167. *utiliser* — Il faut quelqu'un qui pose et quelqu'un qui prend la photo.  `scenes.js:73`
-168. *regarder* — Des écharpes à 40 £. Rod a déjà la sienne, de foot.  `scenes.js:75`
-169. *utiliser* — Plus tard. Solène a confisqué ma carte bleue.  `scenes.js:75`
-170. **Rod** — Je bouge pas, je tiens la pose. Prends la photo !  `scenes.js:79`
-171. — Pose avec le chariot, Rod !  `scenes.js:80`
-172. **Rod** — Attends, je fais la pose du rappeur qui part en tournée.  `scenes.js:81`
-173. **Rod** — Vas-y, shoote !  `scenes.js:82`
-174. **Solène** — On dirait que ce mur a été pensé pour qu'on ait envie de le traverser.  `scenes.js:84`
-175. **Solène** — Note pour plus tard : demander aux concepteurs ce que ça dit d'eux.  `scenes.js:84`
-176. **Narrateur** — Dans le studio, un décor de gare. Un chariot sort à moitié d'un mur de briques.  `scenes.js:86`
-177. **Rod** — Ah, LA photo. Allez, on la fait.  `scenes.js:86`
-178. **héros courant** — C'est Yvan qui a le téléphone.  `scenes.js:89`
-179. **héros courant** — Personne ne pose. Faut que Rod se mette au chariot.  `scenes.js:90`
-180. **Rod** — Je peux pas me prendre en photo en poussant. Je suis pas une pieuvre.  `scenes.js:91`
-181. **héros courant** — Clic ! Attends… Rod, pousse un peu, pour faire genre.  `scenes.js:93`
-182. **Rod** — Comme ça ?  `scenes.js:93`
-183. **Rod** — Euh. Les gars. Le mur. Il est… mou.  `scenes.js:95`
-184. **Solène** — Rod ? ROD !  `scenes.js:95`
-185. **Solène** — Il a disparu. Dans le mur. Ok. Respire, Solène.  `scenes.js:97`
-186. **héros courant** — On le suit ?  `scenes.js:97`
-187. **Solène** — Évidemment qu'on le suit.  `scenes.js:97`
-188. *regarder* — Un train à vapeur vert émeraude. Il fume des volutes qui ont la forme de petits oiseaux.  `scenes.js:114`
-189. *regarder* — Des lanternes qui flottent. Sans fil. J'ai vérifié.  `scenes.js:115`
-190. **Solène** — Bon. Petit souci de cadre : d'habitude, c'est moi qui masterise la partie.  `scenes.js:118`
-191. **Solène** — Là, j'ai l'impression que quelqu'un d'autre tient l'écran du MJ.  `scenes.js:118`
-192. **Rod** — Je retire ce que j'ai dit. C'était pas un décor.  `scenes.js:119`
-193. **Narrateur** — De l'autre côté du mur, pas de boutique. Une gare plongée dans une nuit violette.  `scenes.js:121`
-194. **Rod** — …On est où, là ?  `scenes.js:121`
-195. **Narrateur** — Un sifflet retentit. Le train ouvre ses portes, rien que pour eux.  `scenes.js:123`
-196. **Narrateur** — FIN DE L'INTRODUCTION — à suivre…  `scenes.js:123`
+152. *objet (inventaire)* — Mon téléphone. 12 % de batterie, 4 000 photos de bouffe.  `scenes.js:3`
+153. *objet (inventaire)* — Trois billets pour la visite du studio. Créneau de 14 h.  `scenes.js:4`
+154. *objet (inventaire)* — Mon écharpe porte-bonheur. Elle a vu plus de défaites que de victoires.  `scenes.js:5`
+155. *regarder* — Une cabine rouge. Plus personne ne s'en sert, sauf pour les selfies.  `scenes.js:25`
+156. **héros courant** — Je décroche… tonalité. Personne au bout.  `scenes.js:26`
+157. **Rod** — Appelle le club, dis-leur qu'on achète un vrai numéro 9.  `scenes.js:26`
+158. *regarder* — Un bus à impériale. Rod a voulu monter devant en haut \"pour la vue\". On a vu la pluie.  `scenes.js:27`
+159. *regarder* — L'entrée du studio des films de sorciers. File d'attente modérée, excitation maximale.  `scenes.js:29`
+160. **héros courant** — Les billets sont dans mon sac, il faut que je les présente.  `scenes.js:31`
+161. — Sans billets, on ne passe pas. C'est Solène qui les a.  `scenes.js:31`
+162. **Narrateur** — Le contrôleur scanne les trois billets. Bip, bip, bip.  `scenes.js:32`
+163. **héros courant** — Solène ?  `scenes.js:38`
+164. — Tu as les billets ?  `scenes.js:39`
+165. **Solène** — Dans mon sac. Si quelqu'un veut les tenir, qu'il me les demande gentiment.  `scenes.js:40`
+166. — Prêt pour le studio ?  `scenes.js:43`
+167. — Le match de ce soir ?  `scenes.js:43`
+168. **Rod** — Grave. Mais je te préviens : si y a pas de section sur l'écologie des créatures magiques, je fais une réclamation.  `scenes.js:44`
+169. **Rod** — On va perdre. Mais on va perdre avec panache.  `scenes.js:45`
+170. **Rod** — Ok, je les garde. Comme je gardais la setlist du groupe. Enfin… presque.  `scenes.js:46`
+171. **Yvan** — Merci ! Je fonce.  `scenes.js:47`
+172. **Narrateur** — Et nous voici à Londres.  `scenes.js:51`
+173. **Rod** — Bon, le studio c'est juste là. Après, pub. Après, re-pub.  `scenes.js:54`
+174. **Solène** — Après, on joue. C'est moi qui masterise, je vous rappelle.  `scenes.js:55`
+175. *regarder* — Un chariot à moitié encastré dans le mur. Tout le monde fait la même photo. On va faire la même photo.  `scenes.js:71`
+176. *prendre* — Il est vissé au sol. Logique, sinon les gens partiraient avec.  `scenes.js:72`
+177. *utiliser* — Il faut quelqu'un qui pose et quelqu'un qui prend la photo.  `scenes.js:73`
+178. *regarder* — Des écharpes à 40 £. Rod a déjà la sienne, de foot.  `scenes.js:75`
+179. *utiliser* — Plus tard. Solène a confisqué ma carte bleue.  `scenes.js:75`
+180. **Rod** — Je bouge pas, je tiens la pose. Prends la photo !  `scenes.js:79`
+181. — Pose avec le chariot, Rod !  `scenes.js:80`
+182. **Rod** — Attends, je fais la pose du rappeur qui part en tournée.  `scenes.js:81`
+183. **Rod** — Vas-y, shoote !  `scenes.js:82`
+184. **Solène** — On dirait que ce mur a été pensé pour qu'on ait envie de le traverser.  `scenes.js:84`
+185. **Solène** — Note pour plus tard : demander aux concepteurs ce que ça dit d'eux.  `scenes.js:84`
+186. **Narrateur** — Dans le studio, un décor de gare. Un chariot sort à moitié d'un mur de briques.  `scenes.js:86`
+187. **Rod** — Ah, LA photo. Allez, on la fait.  `scenes.js:86`
+188. **héros courant** — C'est Yvan qui a le téléphone.  `scenes.js:89`
+189. **héros courant** — Personne ne pose. Faut que Rod se mette au chariot.  `scenes.js:90`
+190. **Rod** — Je peux pas me prendre en photo en poussant. Je suis pas une pieuvre.  `scenes.js:91`
+191. **héros courant** — Clic ! Attends… Rod, pousse un peu, pour faire genre.  `scenes.js:93`
+192. **Rod** — Comme ça ?  `scenes.js:93`
+193. **Rod** — Euh. Les gars. Le mur. Il est… mou.  `scenes.js:95`
+194. **Solène** — Rod ? ROD !  `scenes.js:95`
+195. **Solène** — Il a disparu. Dans le mur. Ok. Respire, Solène.  `scenes.js:97`
+196. **héros courant** — On le suit ?  `scenes.js:97`
+197. **Solène** — Évidemment qu'on le suit.  `scenes.js:97`
+198. *regarder* — Un train à vapeur vert émeraude. Il fume des volutes qui ont la forme de petits oiseaux.  `scenes.js:114`
+199. *regarder* — Des lanternes qui flottent. Sans fil. J'ai vérifié.  `scenes.js:115`
+200. **Solène** — Bon. Petit souci de cadre : d'habitude, c'est moi qui masterise la partie.  `scenes.js:118`
+201. **Solène** — Là, j'ai l'impression que quelqu'un d'autre tient l'écran du MJ.  `scenes.js:118`
+202. **Rod** — Je retire ce que j'ai dit. C'était pas un décor.  `scenes.js:119`
+203. **Narrateur** — De l'autre côté du mur, pas de boutique. Une gare plongée dans une nuit violette.  `scenes.js:121`
+204. **Rod** — …On est où, là ?  `scenes.js:121`
+205. **Narrateur** — Un sifflet retentit. Le train ouvre ses portes, rien que pour eux.  `scenes.js:123`
+206. **Narrateur** — FIN DE L'INTRODUCTION — à suivre…  `scenes.js:123`
 
 ## Réponses par défaut et portraits (`src/js/moteur.js`)
 
-197. *regarder* — Rien de spécial.  `moteur.js:12`
-198. *prendre* — Je ne peux pas prendre ça.  `moteur.js:12`
-199. *utiliser* — Ça ne donne rien.  `moteur.js:12`
-200. *parler* — Ça ne répond pas. Heureusement.  `moteur.js:13`
-201. *défaut* — Donner quoi ? Choisis d'abord un objet.  `moteur.js:13`
-202. *défaut* — On ne donne pas d'objets à ce qui n'est pas une personne.  `moteur.js:14`
-203. *défaut* — Non merci, garde-le.  `moteur.js:14`
-204. *défaut* — Pour une personne, essaie plutôt Donner.  `moteur.js:15`
-205. **héros courant** — Ces deux-là ne vont pas ensemble.  `moteur.js:67`
-206. *portrait* — Yvan. Lunettes, moustache, sac de parc d'attractions. Ex-guitariste du groupe.  `moteur.js:78`
-207. *portrait* — Rod. Barbe, pull rouge, avis tranché sur le foot, le rap et la politique.  `moteur.js:79`
-208. *portrait* — Solène. Psy, lectrice de BD compulsive, amie d'enfance des deux autres.  `moteur.js:80`
+207. *regarder* — Rien de spécial.  `moteur.js:12`
+208. *prendre* — Je ne peux pas prendre ça.  `moteur.js:12`
+209. *utiliser* — Ça ne donne rien.  `moteur.js:12`
+210. *parler* — Ça ne répond pas. Heureusement.  `moteur.js:13`
+211. *défaut* — Donner quoi ? Choisis d'abord un objet.  `moteur.js:13`
+212. *défaut* — On ne donne pas d'objets à ce qui n'est pas une personne.  `moteur.js:14`
+213. *défaut* — Non merci, garde-le.  `moteur.js:14`
+214. *défaut* — Pour une personne, essaie plutôt Donner.  `moteur.js:15`
+215. 🆕 **héros courant** — Ces deux-là ne vont pas ensemble.  `moteur.js:67`
+216. *portrait* — Yvan. Lunettes, moustache, sac de parc d'attractions. Ex-guitariste du groupe.  `moteur.js:78`
+217. *portrait* — Rod. Barbe, pull rouge, avis tranché sur le foot, le rap et la politique.  `moteur.js:79`
+218. *portrait* — Solène. Psy, lectrice de BD compulsive, amie d'enfance des deux autres.  `moteur.js:80`

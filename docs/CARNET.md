@@ -28,7 +28,7 @@ Yvan, Rod et Solène visitent un studio de cinéma à Londres. Ils tentent la ph
 | Intro | `appart` (anniversaire, cadeau = tenue de sorcier, tenue neutre) → `salon` (Yvan sur son canapé) → carton « Un an plus tard » | ✅ |
 | Chapitre 1 — départ | `londres` : « Et nous voici à Londres », titre, tuto ; Rod part aux toilettes, Solène acheter des bonbons ; Yvan : « Encore seul… pour changer. » On joue les 3 **successivement**, sans pouvoir changer de perso (verrou). | ✅ 15/11/2026 |
 | Chapitre 1 — Yvan | Cabine (pièce brillante, appel mystérieux) → bus-musée (plus grand dedans, curiosités, singe aux cymbales) → pièce dans le singe → éblouissement → bus normal → sortie, l'homme au manteau entre → « Pendant ce temps, du côté de Rod… » | ✅ 15/11/2026 |
-| Chapitre 1 — Rod | Pub anglais « The Crooked Crown » : clients de dos au comptoir, barman qui essuie un verre, joueurs de fléchettes à gauche. Cacahuètes (« la différence avec la barre de métro, c'est que ça a du goût »), verre de pailles (« tiens, il y en a encore ici »), fléchette par terre sous la cible. Porte des WC : l'homme au manteau en sort (1re fois). Toilettes : ballon rouge au singe ; fléchette lancée = tombe à plat ; paille + fléchette = sarbacane ; ballon éclaté → boulette « Je t'appelle… » → papier et ballon disparaissent en scintillant → étonnement de Rod → « Pendant ce temps, du côté de Solène… » | ✅ 16/11/2026 |
+| Chapitre 1 — Rod | Devanture du pub, enseigne « CHAOS ORDER » (on la voit avant que Rod entre). Pub anglais : clients de dos au comptoir, barman qui essuie un verre, joueurs de fléchettes à gauche. Cacahuètes (« la différence avec la barre de métro, c'est que ça a du goût »), verre de pailles (« tiens, il y en a encore ici »), fléchette par terre sous la cible. Porte des WC : l'homme au manteau en sort (1re fois). Toilettes : ballon rouge au singe ; fléchette lancée = tombe à plat ; paille + fléchette = sarbacane ; ballon éclaté → boulette « Je t'appelle… » → papier et ballon disparaissent en scintillant → étonnement de Rod → Rod ressort : la devanture porte son vrai nom « THE ENGLISH PUB » → « Pendant ce temps, du côté de Solène… » | ✅ 16/11/2026 |
 | Chapitre 1 — Solène | Achat de bonbons, puis les trois se retrouvent. Détails à venir. | ⏳ |
 | Plus tard | `quai` (studio, photo du chariot) → `autre` (Quai des Brumes) : accessibles quand ils se sont retrouvés (`S.f.retrouves`). | ✅ (code) |
 
@@ -72,6 +72,7 @@ Drapeaux d'histoire utilisés : `S.f.pose`, `S.f.traverse`, `S.f.fin`, `S.f.cabi
 - (aucune en attente)
 
 ## 7. Abandonné
+- ❌ Nom du pub « The Crooked Crown » (idée de Claude) : remplacé par « Chaos Order », puis « The English Pub » (vrai nom), le 16/11/2026.
 - ❌ Yvan vu dans la cabine depuis la rue : remplacé le 16/11/2026 par une vue zoomée de l'intérieur.
 - ❌ Momie deux fois plus grande qu'Yvan : remise à sa taille le 15/11/2026.
 - ❌ **Méditants** (sosies de John Lennon) : remplacés par l'alien vert et le lapin géant, le 15/11/2026.
