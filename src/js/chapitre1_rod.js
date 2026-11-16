@@ -1,0 +1,162 @@
+// ===== Chapitre 1 : la partie de Rod (pub anglais, toilettes, ballon au singe) =====
+Object.assign(AUTRES,{barman:'Le barman',joueur:'Joueur de fléchettes',client:'Un client'});
+Object.assign(COUL,{barman:'#ffd0a0',joueur:'#a0d0ff',client:'#d0c0a0'});
+Object.assign(SPEC,{
+  barman:{skin:'#e8b896',hair:'#3a2a1a',coiffure:'court',top:'#f0ece0',veste:'#1a1a1a',pants:'#1a1a22',shoes:'#111',moust:'#3a2a1a'},
+  client1:{skin:'#e8c0a0',hair:'#9a9a9a',coiffure:'court',top:'#3a5a3a',pants:'#2a2a30',shoes:'#2a1a10'},
+  client2:{skin:'#f0c8a8',hair:'#d8b060',coiffure:'long',top:'#7a2a2a',pants:'#2a2a3a',shoes:'#1a1a1a'},
+  client3:{skin:'#c89070',hair:'#1a1410',coiffure:'boucle',top:'#2a3a6a',pants:'#3a3028',shoes:'#1a1a1a'},
+  joueur1:{skin:'#f0c0a0',hair:'#c86a2a',coiffure:'court',top:'#c8a030',pants:'#2a3a5a',shoes:'#eee',barbe:'#c86a2a'},
+  joueur2:{skin:'#d8a080',hair:'#2a2a2a',coiffure:'court',top:'#5a2a6a',pants:'#2a2a2a',shoes:'#111',lunettes:1},
+});
+Object.assign(OBJETS,{
+  paille:{nom:'Paille',desc:"Une paille en plastique. Une espèce en voie de disparition.",icone:c=>{R(5,1,2,10,'#f2f2f2',c);R(5,3,2,1,'#e04a4a',c);R(5,6,2,1,'#e04a4a',c)}},
+  flechette:{nom:'Fléchette',desc:"Une fléchette ramassée sous la cible. Pointe un peu tordue, plumes jaunes.",icone:c=>{R(2,5,6,2,'#c0c0c8',c);R(1,5,1,2,'#888',c);R(8,3,3,6,'#f0c040',c)}},
+  sarbacane:{nom:'Sarbacane',desc:"Une paille avec une fléchette dedans. Ma sarbacane maison. Les ingénieurs n'ont qu'à bien se tenir.",icone:c=>{R(1,5,10,2,'#f2f2f2',c);R(3,5,1,2,'#e04a4a',c);R(10,4,2,4,'#f0c040',c)}},
+  boulette:{nom:'Boulette de papier',desc:"Une boulette de papier tombée du ballon.",icone:c=>{R(3,3,6,6,'#efe8d0',c);R(4,4,2,1,'#b8b0a0',c);R(6,7,2,1,'#b8b0a0',c)}},
+});
+// combinaisons d'objets de l'inventaire
+COMBOS[cle('flechette','paille')]=async()=>{retirer('flechette');retirer('paille');ajouter('sarbacane');sfx('clic');
+  await say('rod',"Une fléchette dans une paille… et voilà une sarbacane. Les années de collège n'auront pas servi à rien.")};
+
+// ----- passage d'Yvan à Rod -----
+async function debutRod(){
+  S.f.finYvan=1;S.verrou='rod';S.perso='rod';S.tenue='';ui();
+  await go('pub',{rod:300,yvan:null,solene:null});
+}
+
+// ----- Le pub -----
+function cibleFlechettes(cx,cy){const r=[[11,'#1a1a1a'],[10,'#e8dcc0'],[7.5,'#c8242c'],[6,'#e8dcc0'],[3.5,'#2a7a3a'],[1.6,'#c8242c']];
+  for(const[rr,c]of r){g.fillStyle=c;g.beginPath();g.arc(cx,cy,rr,0,7);g.fill()}
+  g.strokeStyle='rgba(0,0,0,.4)';for(let i=0;i<10;i++){const a=i*Math.PI/5;g.beginPath();g.moveTo(cx,cy);g.lineTo(cx+Math.cos(a)*10,cy+Math.sin(a)*10);g.stroke()}}
+function lancers(){const t=Date.now()/1000;[[62,0],[88,1.3]].forEach(([x,ph])=>{const c=(t+ph)%2.6;if(c>.5)return;const u=c/.5;
+  const px=x-8+(40-(x-8))*u,py=SOL-30+(66-(SOL-30))*u-Math.sin(u*Math.PI)*8;P(px-2,py,4,1,'#c0c0c8');P(px+2,py-1,2,3,'#f0c040')})}
+SCENES.pub={nom:'The Crooked Crown',
+  dessin(){const t=Date.now();
+    vgrad(0,96,'#1f3a2c','#16281f');for(let x=0;x<W;x+=10)P(x,8,1,88,'rgba(255,255,255,.04)');
+    P(0,0,W,8,'#1a0e08');for(let x=20;x<W;x+=70)P(x,0,8,10,'#2a160c');
+    P(0,94,W,3,'#6a4020');vgrad(97,SOL,'#4a2a18','#2e1a10');for(let x=4;x<W;x+=32){P(x,104,26,48,'#3e2214');P(x,104,26,1,'#6a4020')}
+    // cible + tableau des scores
+    P(24,50,32,32,'#2a160c');cibleFlechettes(40,66);P(60,52,20,26,'#1a1a18');P(60,52,20,1,'#6a4020');for(let i=0;i<5;i++)P(63,56+i*4,6+(i*5)%9,1,'#d8d8d0');
+    // porte des toilettes
+    P(106,92,28,68,'#2a160c');if(S.porteWC){P(109,95,22,65,'#0e1a14');vgrad(95,160,'rgba(150,255,190,.25)','rgba(0,0,0,0)',109,22)}else{P(109,95,22,65,'#5a3420');P(112,100,16,24,'#4a2a18');P(112,130,16,24,'#4a2a18');P(126,128,3,3,'#c9a040')}
+    P(112,82,16,9,'#c9a040');g.fillStyle='#2a160c';g.font="bold 7px Georgia";g.fillText('WC',114,89);
+    // enseigne + étagères de bouteilles + miroir
+    P(176,22,120,14,'#1a0e08');P(176,22,120,1,'#c9a040');g.fillStyle='#e8c35a';g.font="bold 8px Georgia";g.fillText('THE CROOKED CROWN',184,32);
+    P(166,40,140,58,'#2a160c');vgrad(44,94,'rgba(200,220,230,.18)','rgba(120,140,150,.08)',196,80);
+    for(let r=0;r<2;r++){P(166,64+r*26,140,3,'#6a4020');for(let i=0;i<22;i++){const x=168+i*6.2,h=10+(i*7+r*3)%6;P(x,64+r*26-h,4,h,['#2a6a3a','#8a4a1a','#c8c0a0','#3a2a5a','#a02a2a','#d8a030'][(i+r)%6]);P(x+1,64+r*26-h-2,2,2,'#222')}}
+    // porte d'entrée
+    P(300,92,20,68,'#2a160c');P(303,96,17,40,'#c8b070');P(303,96,17,40,'rgba(30,40,60,.6)');P(304,140,14,18,'#4a2a18');
+    vgrad(SOL,H,'#3a2214','#20120a');for(let x=0;x<W;x+=22)P(x,SOL,1,20,'#2a160c');for(let y=SOL+5;y<H;y+=6)P(0,y,W,1,'rgba(0,0,0,.15)');
+    // lampes
+    [[200,8],[262,8],[40,8]].forEach(([x,y])=>{P(x,y,1,26,'#111');P(x-6,y+26,13,5,'#1a3a2a');P(x-5,y+31,11,1,'#ffe0a0')});
+    lancers();
+  },
+  objets:[
+    {id:'joueurs',nom:'joueurs de fléchettes',humain:true,x:52,y:118,w:46,h:42,dessin(){[['joueur1',62],['joueur2',88]].forEach(([n,x])=>{const a=anim(n);a.marche=false;a.dir='g';drawPerso(n,x)})},
+      regarder:"Deux types qui jouent aux fléchettes. Concentration maximale. Comme des tireurs d'élite. Avec des pintes.",
+      parler:()=>dire([['joueur',"Chut. Je vise."],['moi',"…Il vise depuis dix minutes."]])},
+    {id:'cible',nom:'cible',x:28,y:54,w:24,h:24,regarder:"Une cible de fléchettes. Un peu de travers. Comme les joueurs.",prendre:"Je ne pars pas avec la cible. On me casserait les deux jambes."},
+    {id:'flechette',nom:'fléchette',x:30,y:150,w:18,h:10,defaut:'prendre',cache:()=>S.f.flechette,
+      dessin(){P(34,156,8,1,'#c0c0c8');P(33,156,1,1,'#888');P(42,155,3,3,'#f0c040')},
+      regarder:"Une fléchette par terre, sous la cible. Quelqu'un a raté son coup.",
+      prendre:async()=>{S.f.flechette=1;ajouter('flechette');await say('rod',"Personne ne la réclame ? Je la garde.")}},
+    {id:'toilettes',nom:'toilettes',x:106,y:82,w:28,h:78,defaut:'utiliser',regarder:"Les toilettes. Enfin.",utiliser:allerToilettes},
+    {id:'barman',nom:'barman',humain:true,x:261,y:96,w:20,h:18,
+      dessin(){const a=anim('barman');a.marche=false;a.dir='face';drawPerso('barman',270,SOL-12);
+        const t=Date.now()/220;P(271+Math.round(Math.cos(t)*2),112,6,8,'rgba(220,240,255,.6)');P(270+Math.round(Math.sin(t)*3),115,7,4,'#f0ece0')},
+      regarder:"Le barman. Il essuie le même verre depuis que je suis entré. Il doit être très propre, ce verre.",
+      parler:()=>dire([['barman',"Qu'est-ce que je vous sers ?"],['rod',"Juste les toilettes, merci."],['barman',"Au fond à gauche. Et on consomme après, hein."]])},
+    {id:'comptoir',nom:'comptoir',x:150,y:124,w:150,h:36,loin:1,
+      dessin(){P(150,122,150,5,'#7a4a24');P(150,122,150,1,'#a8784a');P(150,127,150,33,'#4a2814');for(let x=154;x<296;x+=24){P(x,131,20,20,'#3e2210');P(x,131,20,1,'#6a4020')}P(150,154,150,2,'#c9a040');
+        [[238],[248]].forEach(([x])=>{P(x,108,3,14,'#c9a040');P(x-1,104,5,5,'#1a1a1a')});
+        g.fillStyle='#e8d8b8';g.beginPath();g.ellipse(198,121,8,3,0,0,7);g.fill();if(!S.f.cacahuetesFin)for(let i=0;i<6;i++)P(192+i*2,118+(i%2),2,2,'#c89050');
+        P(222,108,7,14,'rgba(220,240,255,.5)');for(let i=0;i<7;i++)P(222+i,101+(i%3),1,9,['#f2f2f2','#e04a4a','#4a8ae0'][i%3]);
+        [178,226,286].forEach(x=>{P(x+8,112,5,10,'rgba(230,170,60,.85)');P(x+8,111,5,2,'#fff8e0')})},
+      regarder:"Un vrai comptoir en bois, poisseux juste ce qu'il faut."},
+    {id:'clients',nom:'clients au comptoir',humain:true,x:162,y:114,w:136,h:46,
+      dessin(){[['client1',172],['client2',222],['client3',284]].forEach(([n,x])=>{const a=anim(n);a.marche=false;a.dir='dos';drawPerso(n,x,152);P(x-7,140,14,3,'#6a4020');P(x-1,143,2,17,'#2a160c')})},
+      regarder:"Des habitués, de dos, accoudés au comptoir. Ils n'ont pas bougé depuis 1987.",
+      parler:()=>dire([['client',"Mmmh."],['moi',"Conversation passionnante. Je reviendrai."]])},
+    {id:'cacahuetes',nom:'cacahuètes',x:188,y:112,w:20,h:12,defaut:'prendre',regarder:"Un bol de cacahuètes. Offertes. Touchées par cinquante mains avant moi.",
+      prendre:async()=>{sfx('manger');if(!S.f.cacahuetes){S.f.cacahuetes=1;await say('rod',"Mmh. La différence avec la barre du métro, c'est que ça a du goût.")}else await say('rod',"Encore une poignée… Bon, j'arrête, je vais devoir payer un loyer.")}},
+    {id:'pailles',nom:'verre de pailles',x:219,y:98,w:13,h:24,defaut:'regarder',cache:()=>false,
+      regarder:"Un verre plein de pailles en plastique. Tiens, il y en a encore ici.",
+      prendre:async()=>{if(S.f.paille)return say('rod',"J'en ai déjà une. Pensons aux tortues.");S.f.paille=1;ajouter('paille');await say('rod',"Je t'emprunte une paille.")}},
+    {id:'entree',nom:'porte du pub',x:300,y:92,w:20,h:68,regarder:"La porte qui donne sur la rue.",utiliser:"Pas tout de suite. Je suis venu pour les toilettes, je repars avec les toilettes. Enfin… façon de parler."},
+    {id:'manteau_pub',nom:'',x:0,y:0,w:0,h:0,cache:()=>S.pnj.wc==null,dessin(){drawPerso('manteau',S.pnj.wc)}},
+  ],
+  ambiance:{nuit:.42,voile:'#120804',teinte:'rgba(255,160,70,.3)'},
+  lumieres:()=>[{x:200,y:60,r:70,c:'rgba(255,200,120,.35)',vacille:1},{x:262,y:60,r:70,c:'rgba(255,200,120,.35)',vacille:1},{x:40,y:62,r:40,c:'rgba(255,220,150,.3)'},{x:310,y:120,r:30},...(S.porteWC?[{x:120,y:120,r:30,c:'rgba(150,255,190,.3)'}]:[]),...persoLumiere(30)],
+  particules(){emettre(16,()=>({k:'fumee',scene:'pub',x:150+Math.random()*150,y:60+Math.random()*50,vx:(Math.random()-.5)*.1,vy:-.04,vie:300,t:1,c:'#f0d8b0',a:.3}))},
+  dessinAvant:()=>vignette(),
+  async entree(){
+    await noir(false);
+    await dire([['rod',"Ah, un vrai pub anglais. Moquette qui colle, fléchettes et bière tiède. Parfait."],['rod',"Mais d'abord : les toilettes."]]);
+  },
+};
+async function allerToilettes(){
+  await marcher('rod',98);anim('rod').dir='d';
+  if(!S.f.manteauWC){S.f.manteauWC=1;S.porteWC=1;sfx('chasse');await pause(700);
+    const a=anim('manteau');S.pnj.wc=120;
+    if(!TEST&&!S.passe)while(S.pnj.wc<330){a.marche=true;a.dir='d';a.pas++;S.pnj.wc+=.55;await pause(16)}
+    S.pnj.wc=null;a.marche=false;
+    await dire([['rod',"…Pardon."],['rod',"Long manteau noir et lunettes noires, dans un pub. Il se croit dans un film, lui."]]);
+  }
+  S.porteWC=0;
+  await go('toilettes',{rod:40});
+}
+
+// ----- Les toilettes -----
+function singeBallon(x,y){g.fillStyle='#d8242c';g.beginPath();g.ellipse(x,y,15,18,0,0,7);g.fill();P(x-8,y-12,4,6,'rgba(255,255,255,.35)');P(x-1,y+18,3,2,'#a01a20');
+  P(x-6,y-6,12,11,'#8a5a2a');P(x-9,y-3,3,4,'#8a5a2a');P(x+6,y-3,3,4,'#8a5a2a');P(x-4,y-4,8,7,'#e0b080');P(x-4,y-3,3,3,'#fff');P(x+1,y-3,3,3,'#fff');P(x-3,y-2,1,1,'#000');P(x+3,y-3,1,1,'#000');P(x-2,y+1,4,1,'#6a1010');
+  P(x-12,y+1,4,4,'#f0c766');P(x+8,y+1,4,4,'#f0c766');P(x-1,y-7,3,1,'#000')}
+SCENES.toilettes={nom:'Toilettes du pub',
+  dessin(){const t=Date.now(),fl=(t/70|0)%40===0?.5:1;
+    P(0,0,W,SOL,'#d8e8dc');for(let y=0;y<SOL;y+=8)P(0,y,W,1,'#b0c8b8');for(let x=0;x<W;x+=8)P(x,0,1,SOL,'#b0c8b8');P(0,96,W,64,'#2a6a4a');for(let y=96;y<SOL;y+=8)P(0,y,W,1,'#1e5038');for(let x=0;x<W;x+=8)P(x,96,1,64,'#1e5038');P(0,94,W,3,'#e8f0ea');
+    P(60,0,90,4,'#888');P(64,4,82,3,`rgba(240,255,250,${fl})`);
+    [80,110,140].forEach(x=>{P(x-8,104,16,30,'#f4f4f0');P(x-6,108,12,22,'#d8dcd8');P(x-1,96,2,8,'#c0c0c0')});
+    P(166,70,40,90,'#3a5a4a');P(168,72,36,86,'#4a7a62');P(198,112,3,4,'#c0c0c0');
+    P(232,84,34,26,'#9ab0b8');P(234,86,30,22,'#c8d8e0');P(236,112,30,8,'#f4f4f0');P(249,108,2,4,'#c0c0c0');P(248,120,4,40,'#d8dcd8');
+    P(286,96,18,14,'#e0e0e0');P(288,110,14,2,'#888');
+    P(0,92,14,68,'#4a2a18');P(10,126,2,4,'#c9a040');
+    vgrad(SOL,H,'#c8d0c8','#98a098');for(let x=0;x<W;x+=12)for(let y=SOL;y<H;y+=12)if(((x+y)/12)%2)P(x,y,12,12,'rgba(0,0,0,.12)');
+    if(!S.f.ballon){const y=34+Math.sin(t/900)*2;g.strokeStyle='#eee';g.beginPath();g.moveTo(186,y+18);g.quadraticCurveTo(180,y+40,190,y+56);g.stroke();singeBallon(186,y)}
+    else if(!S.f.ballonParti){P(196,155,12,4,'#c8242c');P(198,153,5,3,'#a01a20');P(205,156,6,2,'#e04a4a')}
+    if(S.f.ballon&&!S.f.boulette){P(178,153,7,6,'#efe8d0');P(179,154,3,1,'#b8b0a0');P(181,157,3,1,'#b8b0a0')}
+  },
+  objets:[
+    {id:'sortie_wc',nom:'retour au pub',x:0,y:92,w:16,h:68,defaut:'utiliser',regarder:"La porte. Le pub est derrière.",utiliser:()=>go('pub',{rod:98})},
+    {id:'urinoirs',nom:'urinoirs',x:70,y:100,w:80,h:36,regarder:"Bon. Je suis venu pour ça.",utiliser:"…C'est fait. On n'en parlera plus jamais."},
+    {id:'lavabo',nom:'lavabo',x:232,y:84,w:36,h:40,regarder:"Un lavabo et un miroir. J'ai une tête de type qui vient de traverser Londres sous la pluie.",utiliser:"Je me lave les mains. Je suis prof, je montre l'exemple."},
+    {id:'sechemain',nom:'sèche-mains',x:284,y:94,w:22,h:20,regarder:"Un sèche-mains. Il souffle autant qu'un ministre en conférence de presse.",utiliser:"Vrrrrr… Il sèche surtout ma patience."},
+    {id:'cabine_wc',nom:'cabine',x:166,y:70,w:40,h:90,regarder:"Une cabine fermée. « OCCUPÉ ». Je préfère ne rien savoir.",utiliser:"C'est occupé. Ou alors c'est fermé depuis 1987."},
+    {id:'ballon',nom:'ballon rouge',x:168,y:14,w:36,h:60,cache:()=>S.f.ballon,
+      regarder:"Un ballon de baudruche rouge, coincé au plafond. Avec un singe dessiné dessus… un singe aux cymbales. Il a un regard de fou.",
+      prendre:"Trop haut. Même en sautant. Surtout en sautant.",
+      with:{flechette:async()=>{sfx('fleche');await pause(500);await dire([['rod',"Allez… dans le mille !"],['rod',"…Elle monte, elle touche, et elle retombe à plat. Pas assez de force."],['rod',"Je la ramasse. Il me faudrait de quoi la propulser."]])},
+        paille:"Souffler dans une paille vide sur un ballon ? Je vais juste le décoiffer.",
+        sarbacane:async()=>{sfx('souffle');await pause(450);sfx('pop');S.f.ballon=1;S.flash=.5;await pause(400);
+          await dire([['rod',"BAM ! En plein dans le singe."],['rod',"Tiens, une boulette de papier est tombée du ballon."]])}}},
+    {id:'boulette',nom:'boulette de papier',x:172,y:148,w:18,h:14,defaut:'prendre',cache:()=>!S.f.ballon||S.f.boulette,regarder:"Une boulette de papier, tombée du ballon.",prendre:lireBoulette},
+  ],
+  ambiance:{nuit:.22,voile:'#000',teinte:'rgba(140,255,190,.2)'},
+  lumieres:()=>[{x:104,y:10,r:120,c:'rgba(220,255,240,.25)'},...(S.papierBrille?[{x:S.pos.rod??180,y:120,r:60,c:'rgba(255,230,150,.6)'}]:[]),...persoLumiere(30)],
+  particules(){if(S.papierBrille)emettre(60,()=>({k:'papier',scene:'toilettes',x:(S.pos.rod??180)+(Math.random()-.5)*50,y:110+(Math.random()-.5)*50,vx:(Math.random()-.5),vy:-.3-Math.random(),vie:40+Math.random()*30,t:1,c:'#fff3b0',glow:1}))},
+  dessinAvant:()=>vignette(),
+  async entree(){await say('rod',"Des toilettes de pub anglais. Carrelage vert, néon qui clignote. Exactement comme dans les films.")},
+};
+async function lireBoulette(){
+  S.f.boulette=1;ajouter('boulette');
+  await say('rod',"Une boulette de papier… Il y a quelque chose d'écrit.");
+  await say('rod',"« Je t'appelle… »");
+  sfx('magie');S.papierBrille=1;await pause(1200);sfx('eblouit');S.flash=1;await pause(300);
+  S.papierBrille=0;retirer('boulette');S.f.ballonParti=1;S.flash=1;await pause(500);
+  await dire([['rod',"Hein ? Le papier… le ballon… Plus rien. J'ai rêvé ou quoi ?"],['rod',"Et j'ai même pas encore bu."]]);
+  await noir(true);
+  await carton("Pendant ce temps, du côté de Solène…");
+  S.f.finRod=1;
+  await carton("À suivre…");
+  await noir(false);
+}
+MUSIQUE_SCENE.pub='pub';MUSIQUE_SCENE.toilettes='pub';AMBIANCE_SCENE.pub='brouhaha';

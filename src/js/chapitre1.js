@@ -275,8 +275,6 @@ async function sortirBus(){
   await dire([['moi',"…Un drôle de gars vient de rentrer. Sans même me regarder."],['moi',"Il a l'air de savoir exactement où il va. Lui."]]);
   await noir(true);
   await carton("Pendant ce temps, du côté de Rod…");
-  S.f.finYvan=1;
-  await carton("À suivre…");
-  await noir(false);
+  await debutRod();
 }
 

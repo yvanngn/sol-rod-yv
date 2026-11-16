@@ -19,6 +19,7 @@ Yvan, Rod et Solène visitent un studio de cinéma à Londres. Ils tentent la ph
 | Alien vert (curiosité) | « Un alien vert classique » : grosse tête, grands yeux noirs, cligne des yeux. | — |
 | Lapin géant (curiosité) | « Un lapin géant humanoïde creepy » : debout, costume marron, yeux noirs à point rouge, grand sourire plein de dents, tête qui penche. | — |
 | Voix au téléphone | « Bzrkkks c'est toi ? » … « Ce n'est pas ce qui était prévu. » Identité inconnue. | — |
+| Barman, clients, joueurs de fléchettes (PNJ du pub) | Barman qui essuie un verre ; trois habitués de dos au comptoir ; deux joueurs de fléchettes. | — |
 | L'homme au manteau (PNJ) | « Un type aux cheveux longs, un manteau noir comme Néo de Matrix » qui entre dans le bus quand Yvan en sort. | — |
 
 ## 3. Chapitres et scènes
@@ -27,7 +28,7 @@ Yvan, Rod et Solène visitent un studio de cinéma à Londres. Ils tentent la ph
 | Intro | `appart` (anniversaire, cadeau = tenue de sorcier, tenue neutre) → `salon` (Yvan sur son canapé) → carton « Un an plus tard » | ✅ |
 | Chapitre 1 — départ | `londres` : « Et nous voici à Londres », titre, tuto ; Rod part aux toilettes, Solène acheter des bonbons ; Yvan : « Encore seul… pour changer. » On joue les 3 **successivement**, sans pouvoir changer de perso (verrou). | ✅ 15/11/2026 |
 | Chapitre 1 — Yvan | Cabine (pièce brillante, appel mystérieux) → bus-musée (plus grand dedans, curiosités, singe aux cymbales) → pièce dans le singe → éblouissement → bus normal → sortie, l'homme au manteau entre → « Pendant ce temps, du côté de Rod… » | ✅ 15/11/2026 |
-| Chapitre 1 — Rod | Pub anglais à gauche, toilettes. Détails à venir (raconté par l'utilisateur). | ⏳ |
+| Chapitre 1 — Rod | Pub anglais « The Crooked Crown » : clients de dos au comptoir, barman qui essuie un verre, joueurs de fléchettes à gauche. Cacahuètes (« la différence avec la barre de métro, c'est que ça a du goût »), verre de pailles (« tiens, il y en a encore ici »), fléchette par terre sous la cible. Porte des WC : l'homme au manteau en sort (1re fois). Toilettes : ballon rouge au singe ; fléchette lancée = tombe à plat ; paille + fléchette = sarbacane ; ballon éclaté → boulette « Je t'appelle… » → papier et ballon disparaissent en scintillant → étonnement de Rod → « Pendant ce temps, du côté de Solène… » | ✅ 16/11/2026 |
 | Chapitre 1 — Solène | Achat de bonbons, puis les trois se retrouvent. Détails à venir. | ⏳ |
 | Plus tard | `quai` (studio, photo du chariot) → `autre` (Quai des Brumes) : accessibles quand ils se sont retrouvés (`S.f.retrouves`). | ✅ (code) |
 
@@ -39,6 +40,8 @@ Drapeaux d'histoire utilisés : `S.f.pose`, `S.f.traverse`, `S.f.fin`, `S.f.cabi
 | Début du chapitre 1 | Téléphone | Écharpe de foot | Billets |
 | Chapitre 1 — Yvan | + **Pièce brillante** (cabine) → **utilisée** dans le singe | — (parti) | — (partie, garde les Billets) |
 | Fin de la partie d'Yvan | Téléphone | Écharpe de foot | Billets |
+| Partie de Rod | — | + Fléchette (sous la cible) + Paille (comptoir) → combinées en **Sarbacane** → utilisée sur le ballon (reste dans l'inventaire) ; + Boulette (lue puis disparaît) | — |
+| Fin de la partie de Rod | Téléphone | Écharpe de foot, Sarbacane | Billets |
 | Rue de Londres | — | Solène peut donner les **Billets** à Rod ou à Yvan | Billets → donnés |
 | Studio (quai) | Téléphone **utilisé** pour la photo du chariot | — | — |
 | Fin (Quai des Brumes, plus tard) | Téléphone (+ Billets si on les lui a donnés) | Écharpe (+ Billets si on les lui a donnés) | (Billets s'ils ne sont pas donnés) |
@@ -51,13 +54,15 @@ Drapeaux d'histoire utilisés : `S.f.pose`, `S.f.traverse`, `S.f.fin`, `S.f.cabi
 | Bus-musée | Utiliser le bus → l'hôte (« gratuit »), Yvan tremble, « …Mais c'est gratuit. », **pause**, il avance vers le centre, puis « ça a l'air plus grand dedans » (gag voulu par l'utilisateur) | Intérieur géant plein de curiosités |
 | Singe | Examiner le singe (action par défaut ; la fente est toujours visible) ; Utiliser la pièce sur le singe | Scintillement, Yvan ébloui, le bus redevient normal |
 | Sortie du bus | Bus normal | L'homme au manteau entre ; transition vers Rod |
+| Ballon au singe (Rod) | Fléchette (pub) + Paille (pub) combinées en sarbacane, utilisée sur le ballon | Ballon éclaté, boulette « Je t'appelle… », tout disparaît ; transition vers Solène |
 
 ## 5. Contradictions et points à vérifier
 - Avant : le chapitre 1 se jouait à trois avec changement libre de personnage, et le studio venait juste après. Maintenant : les trois se séparent et on les joue l'un après l'autre (verrou). Le studio (photo du chariot) est gardé pour quand ils se retrouvent ; la porte du studio refuse d'ouvrir avant.
 - L'intro se passe « un an plus tôt » : Raphaël n'était pas né, d'où son retrait (voir Abandonné).
 - Les **Billets** peuvent finir chez Rod ou chez Yvan selon le choix du joueur : la suite de l'histoire devra marcher dans les deux cas (ou forcer l'un des deux).
 - L'**Écharpe** de Rod n'a encore aucun usage : à prévoir dans une énigme, sinon c'est un objet d'ambiance.
-- Qui est la voix au téléphone, que « prévoyait »-elle, et qui est l'homme au manteau ? À définir par l'utilisateur.
+- Qui est la voix au téléphone, que « prévoyait »-elle, et qui est l'homme au manteau ? Lien avec « Je t'appelle… » (papier du ballon) ? À définir par l'utilisateur.
+- La Sarbacane reste dans l'inventaire de Rod après le ballon : à réutiliser plus tard, ou à faire disparaître ?
 - La description de l'écharpe dit « Mon écharpe porte-bonheur » alors que c'est Rod qui la porte : c'est cohérent seulement si la description est lue dans la voix de Rod (à vérifier en jeu avec Yvan).
 
 ## Lots

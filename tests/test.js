@@ -8,7 +8,7 @@ function charger(){
   const ctx={window:{TEST:{log:[],choix:[]}},document,setTimeout,Promise,console,Math,Date,Error,Object,requestAnimationFrame:()=>{}};
   vm.createContext(ctx);
   const h=fs.readFileSync(__dirname+'/../dist/index.html','utf8');
-  vm.runInContext(h.match(/<script>([\s\S]*)<\/script>/)[1]+';this.S=S;this.action=action;this.go=go;this.switchPerso=switchPerso;this.aObjet=aObjet;this.drawPerso=drawPerso;this.SCENES=SCENES;this.SON=SON;this.regler=regler;this.volume=volume;this.tenue=tenue;this.postEffets=postEffets;this.reflets=reflets;this.passer=passer',ctx);
+  vm.runInContext(h.match(/<script>([\s\S]*)<\/script>/)[1]+';this.S=S;this.action=action;this.go=go;this.switchPerso=switchPerso;this.aObjet=aObjet;this.drawPerso=drawPerso;this.SCENES=SCENES;this.debutRod=debutRod;this.combiner=combiner;this.SON=SON;this.regler=regler;this.volume=volume;this.tenue=tenue;this.postEffets=postEffets;this.reflets=reflets;this.passer=passer',ctx);
   return ctx;
 }
 const v=(nom,c)=>{if(c){ok++}else{ko++;console.log('ÉCHEC :',nom)}};
@@ -49,7 +49,21 @@ const scenarios={
     for(const o of['hote','momie','vaudou','citrouilles','alien','lapin','visiteuse'])await G.action(o,'regarder');
     await G.action('singe');v('le singe : examiner par défaut, la fente',G.S.f.fente&&dit(G,'fente'));
     await G.action('singe',undefined,'piece');v('pièce dans le singe : bus redevenu normal',G.S.f.busNormal&&!G.aObjet('piece'));
-    await G.action('sortie');v('sortie : homme au manteau, transition vers Rod',G.S.scene==='londres'&&G.S.f.manteau&&dit(G,'Pendant ce temps'));
+    await G.action('sortie');v('sortie : homme au manteau, transition vers Rod au pub',G.S.f.manteau&&dit(G,'Pendant ce temps')&&G.S.scene==='pub'&&G.S.perso==='rod');
+  },
+  async rod(G){
+    await G.debutRod();
+    G.switchPerso('yvan');
+    v('Rod au pub, seul jouable',G.S.scene==='pub'&&G.S.perso==='rod'&&G.S.verrou==='rod');
+    await G.action('cacahuetes');v('cacahuètes : ça a du goût',dit(G,'ça a du goût'));
+    await G.action('pailles');v('pailles : il y en a encore ici',dit(G,'il y en a encore ici'));
+    await G.action('pailles','prendre');await G.action('flechette');v('paille et fléchette prises',G.aObjet('paille')&&G.aObjet('flechette'));
+    for(const o of['barman','clients','joueurs'])await G.action(o);
+    await G.action('toilettes');v('l\'homme au manteau sort des toilettes, Rod entre',G.S.scene==='toilettes'&&G.S.f.manteauWC);
+    await G.action('ballon',undefined,'flechette');v('fléchette seule : tombe à plat',dit(G,'à plat')&&G.aObjet('flechette')&&!G.S.f.ballon);
+    await G.combiner('flechette','paille');v('fléchette + paille = sarbacane',G.aObjet('sarbacane')&&!G.aObjet('paille')&&!G.aObjet('flechette'));
+    await G.action('ballon',undefined,'sarbacane');v('ballon éclaté, boulette au sol',G.S.f.ballon);
+    await G.action('boulette');v('« Je t\'appelle… », tout disparaît, transition vers Solène',dit(G,'Je t\'appelle')&&G.S.f.ballonParti&&!G.aObjet('boulette')&&dit(G,'côté de Solène')&&G.S.f.finRod);
   },
   async londres(G){
     await G.go('londres');v('scène de départ',G.S.scene==='londres');

@@ -63,7 +63,11 @@ function ui(){
 }
 function info(){$('info').textContent=S.sel?`${OBJETS[S.sel].nom} → sur quoi ?`:''}
 async function regarderInv(o){if(S.busy)return;S.busy=true;await say('moi',OBJETS[o].desc||OBJETS[o].nom);S.busy=false}
-function clicObjetInv(o){if(S.busy)return;S.sel=S.sel===o?null:o;ui()}
+const COMBOS={},cle=(a,b)=>[a,b].sort().join('+');
+async function combiner(a,b){const f=COMBOS[cle(a,b)];S.sel=null;if(!f)return say('moi',"Ces deux-là ne vont pas ensemble.");await f();ui()}
+function clicObjetInv(o){if(S.busy)return;
+  if(S.sel&&S.sel!==o){const a=S.sel;S.busy=true;combiner(a,o).finally(()=>{S.busy=false;ui()});return}
+  S.sel=S.sel===o?null:o;ui()}
 function verbeParDefaut(o){if(S.sel)return o.humain?'donner':'utiliser';return o.defaut||(o.humain?'parler':o.utiliser||o.with?'utiliser':'regarder')}
 // ----- Scène -----
 function heroObjets(){

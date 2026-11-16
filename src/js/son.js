@@ -60,6 +60,9 @@ const THEMES={
     ['pad',[[[52,59,64],4],[[48,55,60],4],[[45,52,57],4],[[47,54,59],4]]],
     ['flute',[[null,8],[83,3],[81,1],[79,4],[null,4]]]]},
 };
+THEMES.pub={bpm:150,voix:[
+  ['flute',[[74,.5],[76,.5],[78,1],[76,.5],[74,.5],[71,1],[69,1],[71,.5],[74,.5],[76,1],[78,1],[79,.5],[78,.5],[76,1],[74,.5],[76,.5],[78,1],[76,1],[73,1],[74,2]]],
+  ['pizz',[[50,1],[57,1],[50,1],[57,1],[43,1],[50,1],[43,1],[50,1],[50,1],[57,1],[50,1],[57,1],[45,1],[52,1],[50,2]]]]};
 THEMES.foire={bpm:132,voix:[
   ['boite',[[76,1],[75,1],[76,1],[72,2],[69,1],[71,1],[72,1],[74,1],[76,2],[null,1],[77,1],[76,1],[74,1],[72,2],[71,1],[69,1],[68,1],[69,1],[64,3]]],
   ['pizz',[45,40,45,40,38,45,40,45].flatMap(r=>[[r,1],[r+15,1],[r+19,1]])]]};
@@ -86,9 +89,9 @@ function sonScene(id){
 }
 function ambiance(nom){const c=SON.ctx;SON.ambNom=nom;
   if(SON.amb){const g=SON.amb;g.gain.linearRampToValueAtTime(.0001,c.currentTime+1);setTimeout(()=>g.disconnect(),1200);SON.amb=null}
-  if(nom!=='pluie')return;
-  const s=c.createBufferSource(),f=c.createBiquadFilter(),g=c.createGain();s.buffer=SON.bruit;s.loop=true;f.type='bandpass';f.frequency.value=2500;f.Q.value=.4;
-  g.gain.value=.0001;g.gain.linearRampToValueAtTime(.07,c.currentTime+1.5);s.connect(f);f.connect(g);g.connect(SON.sfxG);s.start();SON.amb=g}
+  if(nom!=='pluie'&&nom!=='brouhaha')return;const br=nom==='brouhaha';
+  const s=c.createBufferSource(),f=c.createBiquadFilter(),g=c.createGain();s.buffer=SON.bruit;s.loop=true;f.type='bandpass';f.frequency.value=br?450:2500;f.Q.value=br?.8:.4;
+  g.gain.value=.0001;g.gain.linearRampToValueAtTime(br?.09:.07,c.currentTime+1.5);s.connect(f);f.connect(g);g.connect(SON.sfxG);s.start();SON.amb=g}
 
 // ----- bruitages -----
 const VOIX={yvan:520,rod:360,solene:680,narr:300};
@@ -110,6 +113,11 @@ function sfx(nom,arg){
     case 'raccroche':bruit(t,.05,.3,'bandpass',900,o);osc('sine',425,t+.25,.5,.04,o,.01,.05);osc('sine',425,t+.9,.5,.04,o,.01,.05);break;
     case 'cymbales':for(let i=0;i<4;i++)bruit(t+i*.22,.28,.3,'highpass',5000,o);break;
     case 'eblouit':[0,4,7,11,14,19].forEach((n,i)=>osc('sine',MIDI(84+n),t+i*.03,1.6,.05,SON.rev));bruit(t,1,.2,'highpass',2000,o,9000);break;
+    case 'manger':for(let i=0;i<5;i++)bruit(t+i*.09,.05,.2,'bandpass',1200+Math.random()*800,o);break;
+    case 'chasse':bruit(t,1.6,.25,'lowpass',900,o,300);bruit(t+.2,1.2,.12,'bandpass',2000,o);break;
+    case 'fleche':bruit(t,.25,.15,'bandpass',3000,o,800);bruit(t+.3,.06,.3,'lowpass',500,o);break;
+    case 'souffle':bruit(t,.35,.25,'bandpass',900,o,2500);break;
+    case 'pop':bruit(t,.12,.6,'lowpass',2500,o);osc('sine',90,t,.2,.25,o);bruit(t+.02,.3,.2,'highpass',4000,o);break;
     case 'sifflet':[0,.05].forEach(d=>{const x=osc('sawtooth',880,t+d,1.6,.04,SON.rev,.1,.4);x.frequency.linearRampToValueAtTime(940,t+1.4)});bruit(t,1.8,.1,'highpass',4000,o);break;
   }
 }
