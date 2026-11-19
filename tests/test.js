@@ -55,6 +55,7 @@ const scenarios={
     await G.debutRod();
     G.switchPerso('yvan');
     v('Rod devant le pub « Chaos Order », seul jouable',G.S.scene==='devanture'&&G.S.perso==='rod'&&G.S.verrou==='rod'&&dit(G,'Chaos Order'));
+    v('la porte du pub est cliquable en son milieu',G.SCENES.devanture.objets.filter(o=>160>=o.x&&160<=o.x+o.w&&120>=o.y&&120<=o.y+o.h).pop().id==='porte_pub');
     await G.action('porte_pub');v('Rod entre dans le pub',G.S.scene==='pub');
     await G.action('cacahuetes');v('cacahuètes : ça a du goût',dit(G,'ça a du goût'));
     await G.action('pailles');v('pailles : regarder',dit(G,'Un verre plein de pailles'));
