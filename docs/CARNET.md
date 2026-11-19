@@ -69,6 +69,8 @@ Drapeaux d'histoire utilisés : `S.f.pose`, `S.f.traverse`, `S.f.fin`, `S.f.cabi
 ## Lots
 - 16/11/2026 : répliques du chapitre 1 corrigées par l'utilisateur (77 lignes, appliquées telles quelles, accents ajoutés). Homme au manteau plus lent. Cabine : la main d'Yvan décroche et porte le combiné à son oreille (on voit le côté de sa tête), puis raccroche.
 
+- 19/11/2026 : fléchettes du pub — cible plus basse, un lancer toutes les ~4-5 s (les joueurs alternent), la plupart des fléchettes se plantent dans le mur à côté, commentaires des joueurs (« Aïe, encore raté ! », « Je suis nul ce soir. », « La cible a bougé ou… ? »), au bout de 10 fléchettes un joueur va toutes les reprendre.
+
 ## 6. Idées de Claude (💡 à valider)
 - (aucune en attente)
 

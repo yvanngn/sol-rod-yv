@@ -29,15 +29,36 @@ async function debutRod(){
 function cibleFlechettes(cx,cy){const r=[[11,'#1a1a1a'],[10,'#e8dcc0'],[7.5,'#c8242c'],[6,'#e8dcc0'],[3.5,'#2a7a3a'],[1.6,'#c8242c']];
   for(const[rr,c]of r){g.fillStyle=c;g.beginPath();g.arc(cx,cy,rr,0,7);g.fill()}
   g.strokeStyle='rgba(0,0,0,.4)';for(let i=0;i<10;i++){const a=i*Math.PI/5;g.beginPath();g.moveTo(cx,cy);g.lineTo(cx+Math.cos(a)*10,cy+Math.sin(a)*10);g.stroke()}}
-function lancers(){const t=Date.now()/1000;[[62,0],[88,1.3]].forEach(([x,ph])=>{const c=(t+ph)%2.6;if(c>.5)return;const u=c/.5;
-  const px=x-8+(40-(x-8))*u,py=SOL-30+(66-(SOL-30))*u-Math.sin(u*Math.PI)*8;P(px-2,py,4,1,'#c0c0c8');P(px+2,py-1,2,3,'#f0c040')})}
+// ----- Les joueurs de fléchettes : lancers, ratés, commentaires, ramassage au bout de 10 -----
+const DARTS={list:[],vol:null,next:0,tour:0,ramasse:null,px:{joueur1:62,joueur2:88},bulle:null};
+const RATES=["Aïe, encore raté !","Je suis nul ce soir.","La cible a bougé ou… ?"];
+function pubFlechettes(){const t=Date.now(),D=DARTS;
+  if(!D.next)D.next=t+1500;
+  if(D.ramasse){const r=D.ramasse,a=anim(r.n);
+    if(r.phase==='aller'){D.px[r.n]-=.6;a.marche=true;a.dir='g';a.pas++;if(D.px[r.n]<=50){D.px[r.n]=50;r.phase='prend';r.t=t;a.marche=false;a.dir='dos'}}
+    else if(r.phase==='prend'){if(t-r.t>350){r.t=t;D.list.pop();if(!D.list.length)r.phase='retour'}}
+    else{D.px[r.n]+=.6;a.marche=true;a.dir='d';a.pas++;if(D.px[r.n]>=r.x0){D.px[r.n]=r.x0;a.marche=false;a.dir='g';D.ramasse=null;D.next=t+1500}}}
+  else if(!D.vol&&t>D.next){const n=D.tour%2?'joueur2':'joueur1',touche=Math.random()<.3,an=Math.random()*7;D.tour++;
+    const r=touche?Math.random()*8:13+Math.random()*10,x1=40+Math.cos(an)*r,y1=100+Math.sin(an)*r*(touche?1:.85);
+    D.vol={n,x0:D.px[n]-8,y0:SOL-30,x1,y1,t0:t,touche}}
+  if(D.vol){const v=D.vol,u=Math.min(1,(t-v.t0)/450),x=v.x0+(v.x1-v.x0)*u,y=v.y0+(v.y1-v.y0)*u-Math.sin(u*Math.PI)*6;
+    P(x-2,y,4,1,'#c0c0c8');P(x+2,y-1,2,3,'#f0c040');
+    if(u>=1){D.list.push({x:v.x1,y:v.y1});sfx('toc');
+      if(!v.touche&&Math.random()<.65)D.bulle={n:v.n,txt:RATES[Math.random()*RATES.length|0],t};
+      D.vol=null;D.next=t+3500+Math.random()*1500;
+      if(D.list.length>=10)D.ramasse={n:'joueur1',phase:'aller',x0:D.px.joueur1}}}
+  for(const d of D.list){P(Math.round(d.x),Math.round(d.y),3,1,'#c0c0c8');P(Math.round(d.x)+3,Math.round(d.y)-1,2,3,'#f0c040')}
+}
+function bulleJoueur(){const D=DARTS;if(!D.bulle||Date.now()-D.bulle.t>2200)return;
+  g.font="bold 7px Georgia";const w=g.measureText(D.bulle.txt).width+8,x=Math.max(w/2+2,Math.min(W-w/2-2,D.px[D.bulle.n])),y=SOL-52;
+  g.fillStyle='rgba(10,6,4,.75)';g.fillRect(Math.round(x-w/2),y-8,Math.round(w),11);g.fillStyle='#fff3d0';g.textAlign='center';g.fillText(D.bulle.txt,x,y);g.textAlign='left'}
 SCENES.pub={nom:'Chaos Order',
   dessin(){const t=Date.now();
     vgrad(0,96,'#1f3a2c','#16281f');for(let x=0;x<W;x+=10)P(x,8,1,88,'rgba(255,255,255,.04)');
     P(0,0,W,8,'#1a0e08');for(let x=20;x<W;x+=70)P(x,0,8,10,'#2a160c');
     P(0,94,W,3,'#6a4020');vgrad(97,SOL,'#4a2a18','#2e1a10');for(let x=4;x<W;x+=32){P(x,104,26,48,'#3e2214');P(x,104,26,1,'#6a4020')}
     // cible + tableau des scores
-    P(24,50,32,32,'#2a160c');cibleFlechettes(40,66);P(60,52,20,26,'#1a1a18');P(60,52,20,1,'#6a4020');for(let i=0;i<5;i++)P(63,56+i*4,6+(i*5)%9,1,'#d8d8d0');
+    P(22,82,36,36,'#2a160c');cibleFlechettes(40,100);P(64,84,20,26,'#1a1a18');P(64,84,20,1,'#6a4020');for(let i=0;i<5;i++)P(67,88+i*4,6+(i*5)%9,1,'#d8d8d0');
     // porte des toilettes
     P(106,92,28,68,'#2a160c');if(S.porteWC){P(109,95,22,65,'#0e1a14');vgrad(95,160,'rgba(150,255,190,.25)','rgba(0,0,0,0)',109,22)}else{P(109,95,22,65,'#5a3420');P(112,100,16,24,'#4a2a18');P(112,130,16,24,'#4a2a18');P(126,128,3,3,'#c9a040')}
     P(112,82,16,9,'#c9a040');g.fillStyle='#2a160c';g.font="bold 7px Georgia";g.fillText('WC',114,89);
@@ -49,14 +70,14 @@ SCENES.pub={nom:'Chaos Order',
     P(300,92,20,68,'#2a160c');P(303,96,17,40,'#c8b070');P(303,96,17,40,'rgba(30,40,60,.6)');P(304,140,14,18,'#4a2a18');
     vgrad(SOL,H,'#3a2214','#20120a');for(let x=0;x<W;x+=22)P(x,SOL,1,20,'#2a160c');for(let y=SOL+5;y<H;y+=6)P(0,y,W,1,'rgba(0,0,0,.15)');
     // lampes
-    [[200,8],[262,8],[40,8]].forEach(([x,y])=>{P(x,y,1,26,'#111');P(x-6,y+26,13,5,'#1a3a2a');P(x-5,y+31,11,1,'#ffe0a0')});
-    lancers();
+    [[200,8,26],[262,8,26],[40,8,58]].forEach(([x,y,l])=>{P(x,y,1,l,'#111');y+=l-26;P(x-6,y+26,13,5,'#1a3a2a');P(x-5,y+31,11,1,'#ffe0a0')});
+    pubFlechettes();
   },
   objets:[
-    {id:'joueurs',nom:'joueurs de fléchettes',humain:true,x:52,y:118,w:46,h:42,dessin(){[['joueur1',62],['joueur2',88]].forEach(([n,x])=>{const a=anim(n);a.marche=false;a.dir='g';drawPerso(n,x)})},
+    {id:'joueurs',nom:'joueurs de fléchettes',humain:true,x:52,y:118,w:46,h:42,dessin(){['joueur1','joueur2'].forEach(n=>{const a=anim(n);if(!DARTS.ramasse||DARTS.ramasse.n!==n){a.marche=false;a.dir='g'}drawPerso(n,DARTS.px[n])})},
       regarder:"Ils ont l'air irra…cibles ! Haha",
       parler:()=>dire([['joueur',"Chut. Je vise."],['moi',"…Il vise depuis dix minutes."]])},
-    {id:'cible',nom:'cible',x:28,y:54,w:24,h:24,regarder:"Une cible de fléchettes.",prendre:"Je ne suis pas un voleur."},
+    {id:'cible',nom:'cible',x:26,y:86,w:28,h:28,regarder:"Une cible de fléchettes.",prendre:"Je ne suis pas un voleur."},
     {id:'flechette',nom:'fléchette',x:30,y:150,w:18,h:10,defaut:'prendre',cache:()=>S.f.flechette,
       dessin(){P(34,156,8,1,'#c0c0c8');P(33,156,1,1,'#888');P(42,155,3,3,'#f0c040')},
       regarder:"Quelqu'un a raté son coup.",
@@ -87,8 +108,9 @@ SCENES.pub={nom:'Chaos Order',
     {id:'manteau_pub',nom:'',x:0,y:0,w:0,h:0,cache:()=>S.pnj.wc==null,dessin(){drawPerso('manteau',S.pnj.wc)}},
   ],
   ambiance:{nuit:.42,voile:'#120804',teinte:'rgba(255,160,70,.3)'},
-  lumieres:()=>[{x:200,y:60,r:70,c:'rgba(255,200,120,.35)',vacille:1},{x:262,y:60,r:70,c:'rgba(255,200,120,.35)',vacille:1},{x:40,y:62,r:40,c:'rgba(255,220,150,.3)'},{x:310,y:120,r:30},...(S.porteWC?[{x:120,y:120,r:30,c:'rgba(150,255,190,.3)'}]:[]),...persoLumiere(30)],
+  lumieres:()=>[{x:200,y:60,r:70,c:'rgba(255,200,120,.35)',vacille:1},{x:262,y:60,r:70,c:'rgba(255,200,120,.35)',vacille:1},{x:40,y:96,r:44,c:'rgba(255,220,150,.3)'},{x:310,y:120,r:30},...(S.porteWC?[{x:120,y:120,r:30,c:'rgba(150,255,190,.3)'}]:[]),...persoLumiere(30)],
   particules(){emettre(16,()=>({k:'fumee',scene:'pub',x:150+Math.random()*150,y:60+Math.random()*50,vx:(Math.random()-.5)*.1,vy:-.04,vie:300,t:1,c:'#f0d8b0',a:.3}))},
+  devant:bulleJoueur,
   dessinAvant:()=>vignette(),
   async entree(){
     await noir(false);

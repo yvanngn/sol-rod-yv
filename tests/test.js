@@ -8,7 +8,7 @@ function charger(){
   const ctx={window:{TEST:{log:[],choix:[]}},document,setTimeout,Promise,console,Math,Date,Error,Object,requestAnimationFrame:()=>{}};
   vm.createContext(ctx);
   const h=fs.readFileSync(__dirname+'/../dist/index.html','utf8');
-  vm.runInContext(h.match(/<script>([\s\S]*)<\/script>/)[1]+';this.S=S;this.action=action;this.go=go;this.switchPerso=switchPerso;this.aObjet=aObjet;this.drawPerso=drawPerso;this.SCENES=SCENES;this.motDePasse=motDePasse;this.debutRod=debutRod;this.combiner=combiner;this.SON=SON;this.regler=regler;this.volume=volume;this.tenue=tenue;this.postEffets=postEffets;this.reflets=reflets;this.passer=passer',ctx);
+  vm.runInContext(h.match(/<script>([\s\S]*)<\/script>/)[1]+';this.S=S;this.action=action;this.go=go;this.switchPerso=switchPerso;this.aObjet=aObjet;this.drawPerso=drawPerso;this.SCENES=SCENES;this.DARTS=DARTS;this.pubFlechettes=pubFlechettes;this.motDePasse=motDePasse;this.debutRod=debutRod;this.combiner=combiner;this.SON=SON;this.regler=regler;this.volume=volume;this.tenue=tenue;this.postEffets=postEffets;this.reflets=reflets;this.passer=passer',ctx);
   return ctx;
 }
 const v=(nom,c)=>{if(c){ok++}else{ko++;console.log('ÉCHEC :',nom)}};
@@ -61,6 +61,9 @@ const scenarios={
     await G.action('pailles');v('pailles : regarder',dit(G,'Un verre plein de pailles'));
     await G.action('pailles','prendre');await G.action('flechette');v('paille et fléchette prises',G.aObjet('paille')&&G.aObjet('flechette'));
     for(const o of['barman','clients','joueurs'])await G.action(o);
+    G.DARTS.list=Array(9).fill({x:30,y:96});G.DARTS.ramasse=null;G.DARTS.vol={n:'joueur2',x0:80,y0:130,x1:52,y1:96,t0:0,touche:false};G.pubFlechettes();
+    v('10e fléchette plantée : un joueur part les ramasser',G.DARTS.list.length===10&&G.DARTS.ramasse&&G.DARTS.ramasse.phase==='aller');
+    for(let i=0;i<40;i++)G.pubFlechettes();v('le joueur marche vers le mur',G.DARTS.px.joueur1<62);
     await G.action('toilettes');v('l\'homme au manteau sort des toilettes, Rod entre',G.S.scene==='toilettes'&&G.S.f.manteauWC);
     await G.action('ballon',undefined,'flechette');v('fléchette seule : pas assez de force',dit(G,'Pas assez de force')&&G.aObjet('flechette')&&!G.S.f.ballon);
     await G.combiner('flechette','paille');v('fléchette + paille = sarbacane',G.aObjet('sarbacane')&&!G.aObjet('paille')&&!G.aObjet('flechette'));
