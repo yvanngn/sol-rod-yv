@@ -38,10 +38,11 @@ existants : on invente tout — Académie d'Hiverlune, Quai des Brumes…).
 - Mobile (≤ 760 px) : la bulle et les choix s'affichent sous l'image (zone réservée sous le canvas), jamais par-dessus les personnages.
 - Son (`son.js`, Web Audio synthétisé) : musique par scène `MUSIQUE_SCENE` (thèmes `THEMES` : anniv, soir, magie, brumes ; voix = [instrument, [[midi|accord|null, temps]…]]),
   ambiances `AMBIANCE_SCENE`, bruitages `sfx(nom)`. Menu ⚙ : musique / bruitages avec bouton couper + curseur de volume (`volume(type,v)`, `regler(type,oui)`, mémorisés), revoir le tuto. Démarre au premier geste du joueur.
+- Mots de passe (menu ⚙, `main.js`) : `CHAPITRES` = { '0': intro, '1': chapitre 1 } ; le code recharge la page avec `#chN`. Ajouter un chapitre = une entrée dans `CHAPITRES`.
 - Mise en scène : `noir(true/false)` (fondu), `carton(texte)`, `titreJeu()`, `tuto()`, `anim(n).rire`.
 
 ## Tests
-- `sh tester.sh` (tout) ou `sh tester.sh quai` (groupes : graphisme, intro, son, yvan, rod, passer, londres, quai, autre). Durées : suite complète ~1 s (Node, sans navigateur). Scénarios dans `tests/test.js`.
+- `sh tester.sh` (tout) ou `sh tester.sh quai` (groupes : graphisme, intro, son, yvan, rod, mdp, passer, londres, quai, autre). Durées : suite complète ~1 s (Node, sans navigateur). Scénarios dans `tests/test.js`.
 - Mode test : `window.TEST` → dialogues instantanés, choix pris dans `TEST.choix`, `action(id,verbe,objet)`.
 - Toute fonctionnalité ou correction = un test dans le groupe concerné. Ne tester que le groupe modifié.
 

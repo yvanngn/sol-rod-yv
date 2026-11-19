@@ -8,7 +8,7 @@ function charger(){
   const ctx={window:{TEST:{log:[],choix:[]}},document,setTimeout,Promise,console,Math,Date,Error,Object,requestAnimationFrame:()=>{}};
   vm.createContext(ctx);
   const h=fs.readFileSync(__dirname+'/../dist/index.html','utf8');
-  vm.runInContext(h.match(/<script>([\s\S]*)<\/script>/)[1]+';this.S=S;this.action=action;this.go=go;this.switchPerso=switchPerso;this.aObjet=aObjet;this.drawPerso=drawPerso;this.SCENES=SCENES;this.debutRod=debutRod;this.combiner=combiner;this.SON=SON;this.regler=regler;this.volume=volume;this.tenue=tenue;this.postEffets=postEffets;this.reflets=reflets;this.passer=passer',ctx);
+  vm.runInContext(h.match(/<script>([\s\S]*)<\/script>/)[1]+';this.S=S;this.action=action;this.go=go;this.switchPerso=switchPerso;this.aObjet=aObjet;this.drawPerso=drawPerso;this.SCENES=SCENES;this.motDePasse=motDePasse;this.debutRod=debutRod;this.combiner=combiner;this.SON=SON;this.regler=regler;this.volume=volume;this.tenue=tenue;this.postEffets=postEffets;this.reflets=reflets;this.passer=passer',ctx);
   return ctx;
 }
 const v=(nom,c)=>{if(c){ok++}else{ko++;console.log('ÉCHEC :',nom)}};
@@ -66,6 +66,11 @@ const scenarios={
     await G.action('ballon',undefined,'sarbacane');v('ballon éclaté, boulette au sol',G.S.f.ballon);
     await G.action('boulette');v('« Je t\'appelle… », tout disparaît, transition vers Solène',dit(G,'Je t\'appelle')&&G.S.f.ballonParti&&!G.aObjet('boulette')&&dit(G,'côté de Solène')&&G.S.f.finRod);
     v('Rod ressort : devanture « The English Pub »',G.S.scene==='devanture'&&G.S.f.vraiNom&&dit(G,'The English Pub'));
+  },
+  async mdp(G){
+    v('mot de passe inconnu refusé',G.motDePasse('9')===false);
+    G.S.tenue='neutre';v('mot de passe 1 : chapitre 1 à Londres, tenue de sorcier',G.motDePasse('1')&&G.S.scene==='londres'&&G.S.tenue==='');
+    await null;v('mot de passe 0 : intro',G.motDePasse(' 0 ')&&G.S.scene==='appart');
   },
   async londres(G){
     await G.go('londres');v('scène de départ',G.S.scene==='londres');

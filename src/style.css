@@ -79,3 +79,5 @@ header{position:relative}
 .reglage button{min-width:0!important;width:34px;height:30px;padding:0;text-align:center!important;font-size:16px}
 .reglage input{grid-column:1/-1;width:100%;accent-color:var(--or);height:22px}
 .avatar.verrou{opacity:.3;cursor:not-allowed;filter:grayscale(1)}
+.reglage.mdp{grid-template-columns:1fr auto}.reglage.mdp .pct{grid-column:1/-1;order:3}.reglage.mdp input{grid-column:auto;font:inherit;background:#1a1430;color:var(--texte);border:1px solid var(--bord);border-radius:8px;padding:4px 8px;height:auto;width:100%}.reglage.mdp button{width:auto!important;padding:0 12px}
+.reglage.mdp .nom{grid-column:1/-1}.reglage.mdp #mdpOK{background:var(--or);color:#1b1407;border-radius:8px;height:30px}

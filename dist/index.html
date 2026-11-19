@@ -81,13 +81,16 @@ header{position:relative}
 .reglage button{min-width:0!important;width:34px;height:30px;padding:0;text-align:center!important;font-size:16px}
 .reglage input{grid-column:1/-1;width:100%;accent-color:var(--or);height:22px}
 .avatar.verrou{opacity:.3;cursor:not-allowed;filter:grayscale(1)}
+.reglage.mdp{grid-template-columns:1fr auto}.reglage.mdp .pct{grid-column:1/-1;order:3}.reglage.mdp input{grid-column:auto;font:inherit;background:#1a1430;color:var(--texte);border:1px solid var(--bord);border-radius:8px;padding:4px 8px;height:auto;width:100%}.reglage.mdp button{width:auto!important;padding:0 12px}
+.reglage.mdp .nom{grid-column:1/-1}.reglage.mdp #mdpOK{background:var(--or);color:#1b1407;border-radius:8px;height:30px}
 </style></head>
 <body>
 <div id="jeu">
   <header><h1>Witch'rok</h1><div class="droite"><div id="heros"></div><button id="menuBtn" title="Menu">⚙</button></div>
     <div id="menu" hidden>
       <div class="reglage"><span class="nom">Musique</span><span class="pct" id="pMus"></span><button id="tMus"></button><input type="range" id="vMus" min="0" max="100" aria-label="Volume de la musique"></div>
-      <div class="reglage"><span class="nom">Bruitages</span><span class="pct" id="pSfx"></span><button id="tSfx"></button><input type="range" id="vSfx" min="0" max="100" aria-label="Volume des bruitages"></div><button id="tTuto">❓ Revoir le tuto</button></div></header>
+      <div class="reglage"><span class="nom">Bruitages</span><span class="pct" id="pSfx"></span><button id="tSfx"></button><input type="range" id="vSfx" min="0" max="100" aria-label="Volume des bruitages"></div><div class="reglage mdp"><span class="nom">🔑 Mot de passe</span><span class="pct" id="mdpMsg">0 intro · 1 chapitre 1</span><input id="mdp" inputmode="numeric" autocomplete="off" placeholder="ex. 1" aria-label="Mot de passe"><button id="mdpOK">Aller</button></div>
+      <button id="tTuto">❓ Revoir le tuto</button></div></header>
   <div id="scene"><canvas id="cv" width="320" height="180"></canvas>
     <div id="info"></div><div id="etiquette" hidden></div><div id="roue" hidden></div>
     <div id="noir"></div>
@@ -1365,7 +1368,24 @@ SCENES.devanture={nom:'Devanture du pub',reflet:1,
 };
 MUSIQUE_SCENE.devanture='magie';AMBIANCE_SCENE.devanture='pluie';
 
+// ===== Chapitres et mots de passe (0 = intro, 1 = chapitre 1, …) =====
+const CHAPITRES={
+  '0':{nom:"Intro",lancer:()=>go('appart')},
+  '1':{nom:"Chapitre 1 — Londres",lancer:()=>{S.tenue='';S.posY={};return go('londres',{yvan:70,rod:110,solene:150})}},
+};
+function demarrer(code){const c=CHAPITRES[String(code).trim()];if(!c)return false;c.lancer();return true}
+function motDePasse(code){code=String(code).trim();const c=CHAPITRES[code];
+  if(!c){$('mdpMsg').textContent='Mot de passe inconnu';return false}
+  if(TEST){demarrer(code);return true}
+  $('mdpMsg').textContent=c.nom+'…';
+  try{location.hash='ch'+code;location.reload()}catch(e){demarrer(code)}return true}
+$('mdpOK').onclick=e=>{e.stopPropagation();motDePasse($('mdp').value)};
+$('mdp').onkeydown=e=>{e.stopPropagation();if(e.key==='Enter')motDePasse($('mdp').value)};
+$('mdp').onclick=e=>e.stopPropagation();
+
 // ===== Démarrage =====
-if(!TEST){go('appart');dessiner()}else{ui()}
+if(!TEST){let d='0';const m=(location.hash||'').match(/^#ch(\d+)/);
+  if(m&&CHAPITRES[m[1]]){d=m[1];try{history.replaceState(null,'',location.pathname+location.search)}catch(e){}}
+  demarrer(d);dessiner()}else{ui()}
 </script>
 </body></html>
