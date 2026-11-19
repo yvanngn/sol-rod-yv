@@ -14,7 +14,7 @@ existants : on invente tout — Académie d'Hiverlune, Quai des Brumes…).
   → carton « Un an plus tard » → **Chapitre 1** `londres` : « Et nous voici à Londres », titre flottant `titreJeu()`, tutoriel `tuto()`.
 - Chapitre 1 (`chapitre1.js`) : Rod part aux toilettes (gauche, futur pub), Solène acheter des bonbons (bas) → **Yvan seul** (`S.verrou='yvan'` : pas de changement de perso)
   → cabine : vue zoomée `cabine` (scène `fixe:1` sans perso qui marche ; `S.cab` = sonne / decroche pour le combiné ; pièce brillante, appel mystérieux) → bus-musée `bus` (hôte derrière sa caisse à l'entrée, momie, vaudou, citrouilles, alien, lapin géant, visiteuse, singe à fente — examiner par défaut) → pièce dans le singe : bus normal (`S.f.busNormal`) → sortie : l'homme au manteau entre → « Pendant ce temps, du côté de Rod… ».
-- Partie de Rod (`chapitre1_rod.js`, `debutRod()`, `S.verrou='rod'`) : `devanture` (enseigne « CHAOS ORDER ») → `pub` (barman, clients de dos, joueurs de fléchettes, cacahuètes, pailles, fléchette par terre) → porte WC : l'homme au manteau sort → `toilettes` (ballon rouge au singe) : fléchette seule = tombe à plat ; **fléchette + paille = sarbacane** ; sarbacane → ballon éclate → boulette « Je t'appelle… » → tout disparaît → Rod ressort : `devanture` avec le vrai nom « THE ENGLISH PUB » (`S.f.vraiNom`) → « Pendant ce temps, du côté de Solène… » (à suivre).
+- **Chapitre 2** = partie de Rod (`chapitre1_rod.js`, `debutRod()`, `S.verrou='rod'`) : `devanture` (enseigne « CHAOS ORDER ») → `pub` (barman, clients de dos, joueurs de fléchettes, cacahuètes, pailles, fléchette par terre) → porte WC : l'homme au manteau sort → `toilettes` (ballon rouge au singe) : fléchette seule = tombe à plat ; **fléchette + paille = sarbacane** ; sarbacane → ballon éclate → boulette « Je t'appelle… » → tout disparaît → Rod ressort : `devanture` avec le vrai nom « THE ENGLISH PUB » (`S.f.vraiNom`) → « Pendant ce temps, du côté de Solène… » (à suivre).
 - Combinaisons d'objets dans l'inventaire : `COMBOS[cle(a,b)]=async()=>…`, `combiner(a,b)` (clic objet sélectionné puis autre objet).
 - Plus tard (quand ils se retrouvent, `S.f.retrouves`) : `quai` (studio, photo du chariot) → `autre` (Quai des Brumes).
 - PNJ : apparence dans `SPEC` (hote, visiteur, visiteuse, manteau ; alien et lapin dessinés à la main dans `bus`), noms/couleurs des voix dans `AUTRES`/`COUL`. Sortie de scène : `partir(n,x)`, `descendre(n)` ; `anim(n).tremble`.
@@ -38,7 +38,7 @@ existants : on invente tout — Académie d'Hiverlune, Quai des Brumes…).
 - Mobile (≤ 760 px) : la bulle et les choix s'affichent sous l'image (zone réservée sous le canvas), jamais par-dessus les personnages.
 - Son (`son.js`, Web Audio synthétisé) : musique par scène `MUSIQUE_SCENE` (thèmes `THEMES` : anniv, soir, magie, brumes ; voix = [instrument, [[midi|accord|null, temps]…]]),
   ambiances `AMBIANCE_SCENE`, bruitages `sfx(nom)`. Menu ⚙ : musique / bruitages avec bouton couper + curseur de volume (`volume(type,v)`, `regler(type,oui)`, mémorisés), revoir le tuto. Démarre au premier geste du joueur.
-- Mots de passe (menu ⚙, `main.js`) : `CHAPITRES` = { '0': intro, '1': chapitre 1 } ; le code recharge la page avec `#chN`. Ajouter un chapitre = une entrée dans `CHAPITRES`.
+- Mots de passe (menu ⚙, `main.js`) : `CHAPITRES` = { '0': intro, '1': chapitre 1 (Yvan), '2': chapitre 2 (Rod) } ; le code recharge la page avec `#chN`. Ajouter un chapitre = une entrée dans `CHAPITRES`.
 - Mise en scène : `noir(true/false)` (fondu), `carton(texte)`, `titreJeu()`, `tuto()`, `anim(n).rire`.
 
 ## Tests

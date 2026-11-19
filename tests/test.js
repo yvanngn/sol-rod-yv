@@ -70,6 +70,7 @@ const scenarios={
   async mdp(G){
     v('mot de passe inconnu refusé',G.motDePasse('9')===false);
     G.S.tenue='neutre';v('mot de passe 1 : chapitre 1 à Londres, tenue de sorcier',G.motDePasse('1')&&G.S.scene==='londres'&&G.S.tenue==='');
+    await null;v('mot de passe 2 : chapitre de Rod devant le pub',G.motDePasse('2')&&G.S.scene==='devanture'&&G.S.perso==='rod'&&G.S.verrou==='rod'&&G.S.f.busNormal);
     await null;v('mot de passe 0 : intro',G.motDePasse(' 0 ')&&G.S.scene==='appart');
   },
   async londres(G){
