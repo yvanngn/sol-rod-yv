@@ -83,13 +83,14 @@ header{position:relative}
 .avatar.verrou{opacity:.3;cursor:not-allowed;filter:grayscale(1)}
 .reglage.mdp{grid-template-columns:1fr auto}.reglage.mdp .pct{grid-column:1/-1;order:3}.reglage.mdp input{grid-column:auto;font:inherit;background:#1a1430;color:var(--texte);border:1px solid var(--bord);border-radius:8px;padding:4px 8px;height:auto;width:100%}.reglage.mdp button{width:auto!important;padding:0 12px}
 .reglage.mdp .nom{grid-column:1/-1}.reglage.mdp #mdpOK{background:var(--or);color:#1b1407;border-radius:8px;height:30px}
+#bulleJ{position:absolute;transform:translate(-50%,-100%);background:rgba(10,6,4,.82);color:#fff3d0;font-family:"Fondamento",Georgia,serif;font-size:clamp(11px,1.6vw,15px);padding:3px 9px;border-radius:10px;border:1px solid var(--bord);white-space:nowrap;pointer-events:none;z-index:2}
 </style></head>
 <body>
 <div id="jeu">
   <header><h1>Witch'rok</h1><div class="droite"><div id="heros"></div><button id="menuBtn" title="Menu">⚙</button></div>
     <div id="menu" hidden>
       <div class="reglage"><span class="nom">Musique</span><span class="pct" id="pMus"></span><button id="tMus"></button><input type="range" id="vMus" min="0" max="100" aria-label="Volume de la musique"></div>
-      <div class="reglage"><span class="nom">Bruitages</span><span class="pct" id="pSfx"></span><button id="tSfx"></button><input type="range" id="vSfx" min="0" max="100" aria-label="Volume des bruitages"></div><div class="reglage mdp"><span class="nom">🔑 Mot de passe</span><span class="pct" id="mdpMsg">0 intro · 1 Yvan · 2 Rod</span><input id="mdp" inputmode="numeric" autocomplete="off" placeholder="ex. 1" aria-label="Mot de passe"><button id="mdpOK">Aller</button></div>
+      <div class="reglage"><span class="nom">Bruitages</span><span class="pct" id="pSfx"></span><button id="tSfx"></button><input type="range" id="vSfx" min="0" max="100" aria-label="Volume des bruitages"></div><div class="reglage mdp"><span class="nom">🔑 Mot de passe</span><span class="pct" id="mdpMsg">0 intro · 1 Yvan · 2 Rod · 3 Solène</span><input id="mdp" inputmode="numeric" autocomplete="off" placeholder="ex. 1" aria-label="Mot de passe"><button id="mdpOK">Aller</button></div>
       <button id="tTuto">❓ Revoir le tuto</button></div></header>
   <div id="scene"><canvas id="cv" width="320" height="180"></canvas>
     <div id="info"></div><div id="etiquette" hidden></div><div id="roue" hidden></div>
@@ -102,6 +103,7 @@ header{position:relative}
       <div class="ligne"><span class="ic">👥</span><div><b>Ronds en haut</b> : changer de personnage. <b>Passer</b> (Échap) saute un dialogue.</div></div>
       <button id="tutoOK">C'est parti !</button></div></div>
     <div id="carton" hidden></div>
+    <div id="bulleJ" hidden></div>
     <div id="bulle" hidden></div><button id="passer" hidden title="Échap">Passer ⏭</button><div id="choix" hidden></div></div>
   <div id="inv"></div>
   <p class="aide">Clic : action · Clic droit / appui long : plus d'actions · Objet puis cible : utiliser ou donner</p>
@@ -199,7 +201,7 @@ function dessiner(){
 function marcher(n,x){x=Math.max(8,Math.min(W-8,x));if(TEST){S.pos[n]=x;return Promise.resolve()}return new Promise(r=>{const pas=()=>{
   const d=x-S.pos[n];if(Math.abs(d)<2){S.pos[n]=x;return r()}S.pos[n]+=Math.sign(d)*2;setTimeout(pas,16)};pas()})}
 const pause=ms=>TEST?Promise.resolve():new Promise(r=>setTimeout(r,ms));
-async function go(id,positions){S.scene=id;sonScene(id);S.passe=false;if(positions)Object.assign(S.pos,positions);S.sel=null;ui();
+async function go(id,positions){S.scene=id;if(!TEST&&$('bulleJ'))$('bulleJ').hidden=true;sonScene(id);S.passe=false;if(positions)Object.assign(S.pos,positions);S.sel=null;ui();
   const sc=SCENES[id];if(sc.entree&&!S.f['vu_'+id]){S.f['vu_'+id]=1;S.busy=true;await sc.entree();S.busy=false;S.passe=false}}
 
 async function lancer(h){if(typeof h==='string')await say('moi',h);else await h()}
@@ -222,7 +224,7 @@ async function executer(o,v,x){S.busy=true;fermerRoue();$('etiquette').hidden=tr
   try{if(o)await agir(o,v);else{S.sel=null;if(S.pos[S.perso]!=null&&!SCENES[S.scene].fixe)await marcher(S.perso,x)}}finally{S.busy=false;S.passe=false;if(o&&S.sel&&v!=='regarder')S.sel=null;ui()}}
 function fermerRoue(){$('roue').hidden=true}
 function ouvrirRoue(e,o){const r=$('scene').getBoundingClientRect(),w=$('roue');w.innerHTML=`<div class="titre">${o.nom}</div>`;
-  for(const v of['regarder','prendre','utiliser','parler']){const b=document.createElement('button');b.innerHTML=`<span>${ICONES[v]}</span>${v[0].toUpperCase()+v.slice(1)}`;
+  for(const v of['regarder','prendre','utiliser','parler']){const b=document.createElement('button');b.innerHTML=`<span>${ICONES[v]}</span>${v==='prendre'&&o.voler?'Voler':v[0].toUpperCase()+v.slice(1)}`;
     b.onclick=ev=>{ev.stopPropagation();const s0=S.sel;S.sel=null;executer(o,v)};w.appendChild(b)}
   w.style.left=Math.min(e.clientX-r.left,r.width-170)+'px';w.style.top=Math.max(0,e.clientY-r.top-60)+'px';w.hidden=false}
 let appui=null,longOK=false;
@@ -238,7 +240,7 @@ cv.addEventListener('click',e=>{
 cv.addEventListener('contextmenu',e=>{e.preventDefault();if(S.busy||clicSuivant)return;const{o}=cible(e);if(o)ouvrirRoue(e,o);else fermerRoue()});
 cv.addEventListener('mousemove',e=>{const t=$('etiquette');if(S.busy){t.hidden=true;return}const{o}=cible(e);
   if(!o){t.hidden=true;return}const r=$('scene').getBoundingClientRect(),v=verbeParDefaut(o);
-  t.innerHTML=`<span>${ICONES[v==='donner'?'prendre':v]||''}</span> ${S.sel?OBJETS[S.sel].nom+' → ':''}${o.nom}`;
+  t.innerHTML=`<span>${ICONES[v==='donner'?'prendre':v]||''}</span> ${v==='prendre'&&o.voler&&!S.sel?'Voler ':''}${S.sel?OBJETS[S.sel].nom+' → ':''}${o.nom}`;
   t.style.left=(e.clientX-r.left+14)+'px';t.style.top=(e.clientY-r.top+10)+'px';t.hidden=false});
 cv.addEventListener('mouseleave',()=>$('etiquette').hidden=true);
 // Pour les tests : action(id, verbe?, objetSélectionné?)
@@ -487,6 +489,10 @@ const THEMES={
 THEMES.pub={bpm:150,voix:[
   ['flute',[[74,.5],[76,.5],[78,1],[76,.5],[74,.5],[71,1],[69,1],[71,.5],[74,.5],[76,1],[78,1],[79,.5],[78,.5],[76,1],[74,.5],[76,.5],[78,1],[76,1],[73,1],[74,2]]],
   ['pizz',[[50,1],[57,1],[50,1],[57,1],[43,1],[50,1],[43,1],[50,1],[50,1],[57,1],[50,1],[57,1],[45,1],[52,1],[50,2]]]]};
+THEMES.bonbons={bpm:126,voix:[
+  ['celesta',ARP([[72,76,79,84],[69,72,76,81],[65,69,72,77],[67,71,74,79]])],
+  ['boite',[[84,1],[83,.5],[84,.5],[88,2],[86,1],[84,1],[81,2],[79,1],[81,1],[84,2],[86,1],[83,1],[79,2]]],
+  ['pizz',[[48,1],[55,1],[48,1],[55,1],[45,1],[52,1],[45,1],[52,1],[41,1],[48,1],[41,1],[48,1],[43,1],[50,1],[43,1],[50,1]]]]};
 THEMES.foire={bpm:132,voix:[
   ['boite',[[76,1],[75,1],[76,1],[72,2],[69,1],[71,1],[72,1],[74,1],[76,2],[null,1],[77,1],[76,1],[74,1],[72,2],[71,1],[69,1],[68,1],[69,1],[64,3]]],
   ['pizz',[45,40,45,40,38,45,40,45].flatMap(r=>[[r,1],[r+15,1],[r+19,1]])]]};
@@ -1213,9 +1219,9 @@ function pubFlechettes(){const t=Date.now(),D=DARTS;
       if(D.list.length>=10)D.ramasse={n:'joueur1',phase:'aller',x0:D.px.joueur1}}}
   for(const d of D.list){P(Math.round(d.x),Math.round(d.y),3,1,'#c0c0c8');P(Math.round(d.x)+3,Math.round(d.y)-1,2,3,'#f0c040')}
 }
-function bulleJoueur(){const D=DARTS;if(!D.bulle||Date.now()-D.bulle.t>2200)return;
-  g.font="bold 7px Georgia";const w=g.measureText(D.bulle.txt).width+8,x=Math.max(w/2+2,Math.min(W-w/2-2,D.px[D.bulle.n])),y=SOL-52;
-  g.fillStyle='rgba(10,6,4,.75)';g.fillRect(Math.round(x-w/2),y-8,Math.round(w),11);g.fillStyle='#fff3d0';g.textAlign='center';g.fillText(D.bulle.txt,x,y);g.textAlign='left'}
+function bulleJoueur(){const D=DARTS,el=$('bulleJ');if(TEST||!el)return;
+  if(!D.bulle||Date.now()-D.bulle.t>2200){el.hidden=true;return}
+  if(el.textContent!==D.bulle.txt)el.textContent=D.bulle.txt;el.style.left=(D.px[D.bulle.n]/W*100)+'%';el.style.top=((SOL-60)/H*100)+'%';el.hidden=false}
 SCENES.pub={nom:'Chaos Order',
   dessin(){const t=Date.now();
     vgrad(0,96,'#1f3a2c','#16281f');for(let x=0;x<W;x+=10)P(x,8,1,88,'rgba(255,255,255,.04)');
@@ -1287,7 +1293,7 @@ async function allerToilettes(){
     const a=anim('manteau');S.pnj.wc=120;
     if(!TEST&&!S.passe)while(S.pnj.wc<330){a.marche=true;a.dir='d';a.pas++;S.pnj.wc+=.55;await pause(16)}
     S.pnj.wc=null;a.marche=false;
-    await dire([['rod',"…Pardon."],['rod',"Quel drôle de zigoto. Il fait peur."]]);
+    await say('rod',"Quel drôle de zigoto. Il fait peur.");
   }
   S.porteWC=0;
   await go('toilettes',{rod:40});
@@ -1330,7 +1336,7 @@ SCENES.toilettes={nom:'Toilettes du pub',
   lumieres:()=>[{x:104,y:10,r:120,c:'rgba(220,255,240,.25)'},...(S.papierBrille?[{x:S.pos.rod??180,y:120,r:60,c:'rgba(255,230,150,.6)'}]:[]),...persoLumiere(30)],
   particules(){if(S.papierBrille)emettre(60,()=>({k:'papier',scene:'toilettes',x:(S.pos.rod??180)+(Math.random()-.5)*50,y:110+(Math.random()-.5)*50,vx:(Math.random()-.5),vy:-.3-Math.random(),vie:40+Math.random()*30,t:1,c:'#fff3b0',glow:1}))},
   dessinAvant:()=>vignette(),
-  async entree(){await say('rod',"Des toilettes de pub anglais.")},
+  async entree(){await say('rod',"Qu'est-ce que c'est que ça ?")},
 };
 async function lireBoulette(){
   S.f.boulette=1;ajouter('boulette');
@@ -1346,9 +1352,7 @@ async function lireBoulette(){
   await dire([['rod',"…« The English Pub » ?"],['rod',"Il y a quelque chose d'étrange dans ce coin…"]]);
   await noir(true);
   await carton("Pendant ce temps, du côté de Solène…");
-  S.f.finRod=1;
-  await carton("À suivre…");
-  await noir(false);
+  await debutSolene();
 }
 MUSIQUE_SCENE.pub='pub';MUSIQUE_SCENE.toilettes='pub';AMBIANCE_SCENE.pub='brouhaha';
 
@@ -1392,6 +1396,157 @@ SCENES.devanture={nom:'Devanture du pub',reflet:1,
 };
 MUSIQUE_SCENE.devanture='magie';AMBIANCE_SCENE.devanture='pluie';
 
+// ===== Chapitre 3 : la partie de Solène (magasin de bonbons, joute avec le vigile) puis retrouvailles =====
+Object.assign(AUTRES,{vigile:'Le vigile',enfant:'Un enfant',tous:'Yvan, Rod et Solène'});
+Object.assign(COUL,{vigile:'#c0c8ff',enfant:'#ffe080',tous:'#f0c766'});
+Object.assign(SPEC,{
+  vigile:{skin:'#8a5a3a',hair:'#111',coiffure:'court',top:'#151515',veste:'#0a0a0a',pants:'#0a0a0a',shoes:'#050505',lunettes:1},
+  enfant1:{skin:'#f0c8a8',hair:'#6a4020',coiffure:'court',top:'#f0c030',pants:'#3a6ab0',shoes:'#e84a4a'},
+  enfant2:{skin:'#e8b890',hair:'#e8c060',coiffure:'long',top:'#ff7ab0',pants:'#7a4ab0',shoes:'#ffffff'},
+});
+OBJETS.nounours={nom:'Gros nounours en chocolat',desc:"Un gros nounours en chocolat, au fond de mon sac à dos. Je n'ai rien vu. Je ne sais rien.",
+  icone:c=>{R(3,2,2,2,'#6a3a1a',c);R(7,2,2,2,'#6a3a1a',c);R(3,3,6,8,'#7a4a24',c);R(4,4,4,3,'#9a6a3a',c)}};
+const melange=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+// Phrases du vigile (dans l'ordre) et la bonne réplique de Solène pour chacune
+const JOUTE=[
+  ["Je vous ai vue.","Et mes fesses aussi ?"],
+  ["Vous allez me suivre.","Sur instagroom ?"],
+  ["Venez ou j'appelle la police.","Ohla, don't stand so close to me."],
+  ["Payez ou partez.","J'ai un 3e choix ?"],
+  ["Cette jeunesse…","Cette vieillesse…"],
+  ["Bon, ça ira pour cette fois.","Pour la prochaine aussi, j'espère."],
+  ["Dépêchez-vous de partir avant que je ne change d'avis.","OK, mais je peux avoir un bonbon ?"],
+];
+
+async function debutSolene(){
+  S.f.finRod=1;S.verrou='solene';S.perso='solene';S.tenue='';S.posY={};ui();
+  await go('bonbons',{solene:30,yvan:null,rod:null});
+}
+
+// ----- Le magasin de bonbons -----
+const enfantX=i=>{const t=Date.now()/1000+i*2.3,c=(t%6)/6,u=c<.5?c*2:2-c*2;return 50+u*170};
+const enfantDir=i=>{const t=Date.now()/1000+i*2.3,c=(t%6)/6;return c<.5?'d':'g'};
+function bocal(x,y,c1,c2){P(x,y,16,20,'rgba(220,240,255,.35)');P(x+1,y+6,14,13,c1);for(let i=0;i<10;i++)P(x+2+(i*5)%12,y+7+(i*3)%11,2,2,i%2?c2:'#fff');P(x-1,y-2,18,3,'#e84a8a');P(x+2,y,1,18,'rgba(255,255,255,.5)')}
+function singeChoco(x,y){P(x-4,y-8,8,9,'#6a3a1a');P(x-5,y-6,2,3,'#6a3a1a');P(x+3,y-6,2,3,'#6a3a1a');P(x-3,y-6,6,5,'#9a6a3a');P(x-2,y-5,2,2,'#f0e8d8');P(x+1,y-5,2,2,'#f0e8d8');P(x-2,y-4,1,1,'#000');P(x+2,y-5,1,1,'#000');P(x-1,y-2,3,1,'#3a1a0a');
+  P(x-4,y+1,8,9,'#7a4a24');P(x-3,y+2,6,3,'#c8242c');P(x-8,y+2,4,4,'#f0c766');P(x+4,y+2,4,4,'#f0c766');P(x-7,y+3,2,2,'#fff3b0');P(x+5,y+3,2,2,'#fff3b0');P(x-1,y-9,3,1,'#2a1408')}
+SCENES.bonbons={nom:'Le magasin de bonbons',
+  dessin(){const t=Date.now();
+    vgrad(0,SOL,'#ffd6e8','#ffb8d6');for(let x=0;x<W;x+=16)P(x,0,8,SOL,'rgba(255,255,255,.25)');
+    P(0,0,W,10,'#e84a8a');for(let x=0;x<W;x+=12){g.fillStyle=x%24?'#ffe080':'#7ad0ff';g.beginPath();g.moveTo(x,10);g.lineTo(x+12,10);g.lineTo(x+6,18);g.fill()}
+    // étagères à bocaux
+    for(let r=0;r<3;r++){P(20,46+r*30,200,3,'#b86a3a');P(20,49+r*30,200,1,'#8a4a2a')}
+    const coul=[['#ff4a4a','#ffe040'],['#4ab0ff','#ffffff'],['#7ae07a','#ff7ab0'],['#ffa040','#7a4ab0'],['#c84aff','#ffe040'],['#ff7ab0','#4ab0ff']];
+    for(let r=0;r<3;r++)for(let i=0;i<9;i++){const[c1,c2]=coul[(i+r*2)%6];bocal(24+i*22,24+r*30,c1,c2)}
+    // grandes sucettes au mur
+    [[244,34,'#ff4a8a'],[276,30,'#4ab0ff'],[260,62,'#7ae07a']].forEach(([x,y,c])=>{P(x-1,y+10,2,26,'#f2f2f2');for(let k=0;k<5;k++){g.strokeStyle=k%2?'#fff':c;g.lineWidth=2;g.beginPath();g.arc(x,y,11-k*2,0,7);g.stroke()}g.lineWidth=1});
+    // présentoir bas : chocolats, nounours, bonbons bleus, berlingots, cannes
+    P(20,128,200,32,'#c8783a');P(20,128,200,2,'#e8a060');for(let x=24;x<216;x+=48){P(x,134,44,22,'#a85a2a')}
+    for(let i=0;i<6;i++){P(28+i*6,120-i%2*2,5,8,'#5a2a10');P(29+i*6,121-i%2*2,3,1,'#c99a3a')}
+    for(let i=0;i<7;i++){const c=['#ff4a4a','#ffe040','#7ae07a','#ffa040','#ff7ab0'][i%5];P(72+i*5,121,4,5,c);P(73+i*5,119,2,2,c)}
+    for(let i=0;i<8;i++)P(114+i*4,122+(i%2),3,4,'#4ab0ff');
+    for(let i=0;i<6;i++){g.fillStyle=['#ff4a4a','#ffe040','#7ae07a'][i%3];g.beginPath();g.moveTo(152+i*6,126);g.lineTo(155+i*6,120);g.lineTo(158+i*6,126);g.fill()}
+    [[194,0],[200,1],[206,0]].forEach(([x,k])=>{P(x,104,2,24,'#fff');for(let y=106;y<128;y+=4)P(x,y,2,2,'#e82a2a');P(x-4+k,100,6,2,'#fff');P(x-5+k,100,2,6,'#fff')});
+    // barbe à papa
+    P(232,112,22,48,'#e8e8f0');P(230,108,26,6,'#c0c0d0');g.fillStyle='#ffb0e0';for(let i=0;i<6;i++){g.beginPath();g.arc(238+i*2+Math.sin(t/300+i)*1,98-(i%3)*3,6,0,7);g.fill()}P(242,96,2,14,'#f2f2f2');
+    // gros nounours au chocolat sur son socle
+    P(150,92,26,6,'#e84a8a');P(150,92,26,1,'#ffb0d0');
+    if(!S.f.nounours){P(156,74,4,4,'#5a2a10');P(166,74,4,4,'#5a2a10');P(155,76,16,16,'#6a3a1a');P(158,79,10,6,'#8a5a2a');P(159,80,2,2,'#2a1408');P(165,80,2,2,'#2a1408');P(161,83,4,2,'#2a1408');P(157,86,12,6,'#7a4a24');P(155,90,16,2,'#c99a3a')}
+    // porte et clochette
+    P(296,60,24,100,'#7a3a5a');P(300,64,16,40,'#cfe6ff');P(300,64,16,40,'rgba(255,255,255,.3)');P(298,108,20,50,'#8a4a6a');P(298,58,6,4,'#f0c766');
+    vgrad(SOL,H,'#f0e0f0','#d8c0d8');for(let x=0;x<W;x+=12)for(let y=SOL;y<H;y+=12)if(((x+y)/12)%2)P(x,y,12,12,'rgba(232,74,138,.15)');
+    // le singe en chocolat dans la main de Solène
+    if(S.choco&&S.pos.solene!=null)singeChoco(S.pos.solene+12,SOL-26);
+  },
+  objets:[
+    {id:'etageres',nom:'bocaux de bonbons',x:20,y:20,w:200,h:96,regarder:"Des dizaines de bocaux : réglisse, fraises Tagada, bonbons acidulés, crocodiles… Mon dentiste va pleurer."},
+    {id:'sucettes',nom:'sucettes géantes',x:230,y:20,w:60,h:76,regarder:"Des sucettes plus grosses que ma tête. Spirales de toutes les couleurs. N'importe quel enfant serait aux anges."},
+    {id:'chocolats',nom:'chocolats',x:24,y:114,w:38,h:16,regarder:"Des tablettes de chocolat. Au lait, noir, aux noisettes. Mes trois amours."},
+    {id:'nounours_etal',nom:'nounours en guimauve',x:68,y:114,w:38,h:14,regarder:"Des nounours en guimauve de toutes les couleurs. Ils me regardent avec leurs petits yeux tout mous."},
+    {id:'bonbons_bleus',nom:'schtroumpfs en bonbon',x:110,y:114,w:36,h:14,regarder:"Des schtroumpfs en bonbon. Bleus, gélatineux, et d'un goût que personne n'a jamais su décrire."},
+    {id:'berlingots',nom:'berlingots',x:148,y:114,w:40,h:14,regarder:"Des berlingots. Les bonbons de grand-mère, ceux qui collent aux dents pour toujours."},
+    {id:'cannes',nom:'cannes en sucre',x:188,y:96,w:24,h:32,regarder:"Des cannes en sucre rayées rouge et blanc. Noël avant l'heure."},
+    {id:'barbe',nom:'barbe à papa',x:228,y:88,w:30,h:72,regarder:"Une machine à barbe à papa. Un nuage rose qui tourne tout seul. Hypnotique."},
+    {id:'gros_nounours',nom:'gros nounours en chocolat',x:152,y:70,w:22,h:24,defaut:'prendre',voler:1,cache:()=>S.f.nounours,
+      regarder:"Un gros nounours en chocolat, de la taille d'un doudou. Il me fait de l'œil. Enfin… il me semble.",
+      prendre:async()=>{S.f.nounours=1;ajouter('nounours');sfx('papier');await dire([['solene',"Hop. Dans le sac à dos."],['solene',"…J'ai fait ça, moi ? Une psy. Qui vole un nounours. Il faudra que j'en parle à quelqu'un."]])}},
+    {id:'enfants',nom:'enfants',humain:true,get x(){return enfantX(0)-6},y:126,w:12,h:34,
+      dessin(){[0,1].forEach(i=>{const n='enfant'+(i+1),a=anim(n);a.marche=true;a.dir=enfantDir(i);a.pas=Date.now()/40|0;g.save();g.translate(enfantX(i),SOL);g.scale(.7,.7);drawPerso(n,0,0);g.restore()})},
+      regarder:"Deux enfants qui courent partout, du sucre plein les poches. Ils ne vont pas dormir avant jeudi.",
+      parler:()=>dire([['enfant',"On a le droit à UN bonbon ! UN ! UN !"],['solene',"…Et vous en êtes à combien ?"],['enfant',"Quarante-deux !"]])},
+    {id:'vigile',nom:'vigile',humain:true,x:270,y:104,w:24,h:56,
+      dessin(){const a=anim('vigile');a.marche=false;a.dir='face';g.save();g.translate(282,SOL);g.scale(1.25,1.25);drawPerso('vigile',0,0);g.restore()},
+      regarder:"Un vigile immense, près de l'entrée. Il n'a pas bougé d'un millimètre depuis que je suis entrée. Il cligne, au moins ?",
+      parler:()=>dire([['solene',"Bonjour !"],['vigile',"…"],['solene',"Très bavard. J'adore."]])},
+    {id:'porte_bonbons',nom:'sortie',x:296,y:60,w:24,h:100,defaut:'utiliser',regarder:"La porte du magasin, avec sa petite clochette.",utiliser:sortirBonbons},
+  ],
+  ambiance:{nuit:.12,voile:'#200010',teinte:'rgba(255,150,200,.2)'},
+  lumieres:()=>[{x:120,y:20,r:140,c:'rgba(255,230,240,.25)'},{x:163,y:84,r:22,c:'rgba(255,200,120,.3)'},...persoLumiere(30)],
+  particules(){emettre(20,()=>({k:'sucre',scene:'bonbons',x:Math.random()*W,y:Math.random()*150,vx:(Math.random()-.5)*.1,vy:.05,vie:300,t:1,c:['#fff','#ffb0e0','#b0e0ff'][Math.random()*3|0],a:.6}))},
+  dessinAvant:()=>vignette(),
+  async entree(){await noir(false);await say('solene',"Ohlala, j'en aurai jamais assez ! C'est sûr !")},
+};
+async function sortirBonbons(){
+  await marcher('solene',262);
+  if(!S.f.nounours)return say('solene',"Je ne vais quand même pas repartir sans rien.");
+  if(S.f.joute)return;
+  S.f.joute=1;
+  await say('vigile',"Halte.");
+  // Joute verbale : les 7 répliques sont proposées à chaque fois, dans un ordre différent ; erreur = il répète
+  for(const[phrase,bonne]of JOUTE){
+    for(;;){
+      await say('vigile',phrase);
+      let c;if(TEST&&!TEST.choix.length)c=bonne;else c=await choose(melange(JOUTE.map(x=>x[1])).map(t=>[t,t]));
+      await say('solene',c);
+      if(c===bonne)break;
+    }
+  }
+  anim('vigile').tremble=true;await pause(900);anim('vigile').tremble=false;
+  await say('solene',"…Bon, bon. Je fouille mon sac.");
+  sfx('papier');await pause(500);retirer('nounours');S.choco=1;
+  await dire([['solene',"Tenez… je pensais que c'était un nounours."],['solene',"…C'est un singe. En chocolat. Avec des cymbales. J'aurais juré que c'était un nounours."]]);
+  sfx('magie');S.papierBrille=1;await pause(1100);sfx('eblouit');S.flash=1;await pause(300);S.flash=1;S.choco=0;S.papierBrille=0;
+  await go('vetements',{solene:150});
+}
+SCENES.bonbons.particules=(f=>function(){f();if(S.papierBrille&&S.scene==='bonbons')emettre(60,()=>({k:'choco',scene:'bonbons',x:(S.pos.solene??200)+(Math.random()-.5)*60,y:110+(Math.random()-.5)*50,vx:(Math.random()-.5),vy:-.3-Math.random(),vie:40+Math.random()*30,t:1,c:'#fff3b0',glow:1}))})(SCENES.bonbons.particules);
+
+// ----- Le magasin de vêtements (après le scintillement) -----
+SCENES.vetements={nom:'Magasin de vêtements',
+  dessin(){vgrad(0,SOL,'#e8e4dc','#cfc8bc');P(0,0,W,10,'#2a2a2a');P(20,16,80,14,'#c8242c');g.fillStyle='#fff';g.font="bold 9px Georgia";g.fillText('SOLDES -50 %',27,26);
+    [[40,'#3a6ab0'],[110,'#c8a030'],[220,'#7a2a5a']].forEach(([x,c])=>{P(x,52,60,2,'#888');for(let i=0;i<8;i++){P(x+2+i*7,54,1,4,'#888');P(x+i*7,58,6,30,shade(c,.8+(i%3)*.15))}P(x+2,54,2,106,'#888');P(x+56,54,2,106,'#888')});
+    [[180,'#f2f2f2'],[290,'#1a1a1a']].forEach(([x,c])=>{P(x-6,70,12,12,'#d8c8b0');P(x-8,82,16,30,c);P(x-1,112,2,36,'#888');P(x-8,148,16,3,'#888')});
+    P(140,60,26,80,'#9ab0b8');P(142,62,22,76,'#c8d8e0');vgrad(SOL,H,'#b8b0a8','#988f88')},
+  objets:[],
+  ambiance:{nuit:.1,voile:'#000',teinte:'rgba(255,255,240,.1)'},
+  lumieres:()=>[{x:160,y:20,r:160},...persoLumiere(30)],
+  dessinAvant:()=>vignette(),
+  async entree(){
+    await dire([['solene',"…Hein ?"],['solene',"Un magasin de vêtements ? Où sont passés les bonbons… et le vigile ?"],['solene',"J'ai rêvé ou quoi ?"]]);
+    await retrouvailles();
+  },
+};
+
+// ----- Les retrouvailles dans la rue, puis le studio -----
+async function arriverGauche(n,x){S.pos[n]=-20;const a=anim(n);if(TEST||S.passe){S.pos[n]=x;return}
+  while(S.pos[n]<x){a.marche=true;a.dir='d';a.pas++;if(a.pas%14===0)sfx('pas');S.pos[n]+=1.5;await pause(16)}a.marche=false;a.dir='face'}
+async function arriverBas(n,x){S.pos[n]=x;const a=anim(n);if(TEST||S.passe){delete S.posY[n];return}
+  a.dir='face';let y=H+50;while(y>SOL){a.marche=true;y-=1.1;S.posY[n]=y;a.pas++;if(a.pas%14===0)sfx('pas');await pause(16)}a.marche=false;delete S.posY[n]}
+async function retrouvailles(){
+  await noir(true);
+  S.verrou=null;S.f.vu_londres=1;S.f.retrouves=1;
+  await go('londres',{yvan:150,rod:null,solene:null});anim('yvan').dir='face';
+  await noir(false);
+  await arriverGauche('rod',110);
+  await arriverBas('solene',192);
+  await say('tous',"Vous n'allez pas me croire !");
+  await noir(true);
+  sfx('bip');await say('narr',"Le contrôleur scanne les trois billets. Bip, bip, bip.");
+  S.f.vu_quai=1;await go('quai',{yvan:80,rod:120,solene:160});
+  await noir(false);
+  await SCENES.quai.entree();
+  await carton("À suivre…");
+}
+MUSIQUE_SCENE.bonbons='bonbons';MUSIQUE_SCENE.vetements='magie';
+
 // ===== Chapitres et mots de passe (0 = intro, 1 = chapitre 1, …) =====
 const CHAPITRES={
   '0':{nom:"Intro",lancer:()=>go('appart')},
@@ -1399,6 +1554,9 @@ const CHAPITRES={
   '2':{nom:"Chapitre 2 — Rod",lancer:()=>{S.tenue='';S.posY={};
     Object.assign(S.f,{vu_londres:1,cabine:1,piece:1,hote:1,fente:1,singe:1,busNormal:1,manteau:1});MUSIQUE_SCENE.bus='magie';
     return debutRod()}},
+  '3':{nom:"Chapitre 3 — Solène",lancer:()=>{S.tenue='';S.posY={};
+    Object.assign(S.f,{vu_londres:1,cabine:1,piece:1,hote:1,fente:1,singe:1,busNormal:1,manteau:1,finYvan:1,flechette:1,paille:1,manteauWC:1,ballon:1,boulette:1,ballonParti:1,vraiNom:1});
+    MUSIQUE_SCENE.bus='magie';S.persos.rod.inv=['echarpe','sarbacane'];return debutSolene()}},
 };
 function demarrer(code){const c=CHAPITRES[String(code).trim()];if(!c)return false;c.lancer();return true}
 function motDePasse(code){code=String(code).trim();const c=CHAPITRES[code];

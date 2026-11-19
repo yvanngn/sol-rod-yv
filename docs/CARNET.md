@@ -20,6 +20,8 @@ Yvan, Rod et Solène visitent un studio de cinéma à Londres. Ils tentent la ph
 | Lapin géant (curiosité) | « Un lapin géant humanoïde creepy » : debout, costume marron, yeux noirs à point rouge, grand sourire plein de dents, tête qui penche. | — |
 | Voix au téléphone | « Bzrkkks c'est toi ? » … « Ce n'est pas ce qui était prévu. » Identité inconnue. | — |
 | Barman, clients, joueurs de fléchettes (PNJ du pub) | Barman qui essuie un verre ; trois habitués de dos au comptoir ; deux joueurs de fléchettes. | — |
+| Vigile (PNJ) | Grand, costume noir, lunettes ; immobile près de l'entrée du magasin de bonbons jusqu'à ce que Solène sorte avec le nounours. Joute verbale. | — |
+| Enfants (PNJ) | Deux enfants qui courent dans le magasin de bonbons. | — |
 | L'homme au manteau (PNJ) | « Un type aux cheveux longs, un manteau noir comme Néo de Matrix » qui entre dans le bus quand Yvan en sort. | — |
 
 ## 3. Chapitres et scènes
@@ -29,7 +31,7 @@ Yvan, Rod et Solène visitent un studio de cinéma à Londres. Ils tentent la ph
 | Chapitre 1 — départ | `londres` : « Et nous voici à Londres », titre, tuto ; Rod part aux toilettes, Solène acheter des bonbons ; Yvan : « Encore seul… pour changer. » On joue les 3 **successivement**, sans pouvoir changer de perso (verrou). | ✅ 15/11/2026 |
 | Chapitre 1 — Yvan | Cabine (pièce brillante, appel mystérieux) → bus-musée (plus grand dedans, curiosités, singe aux cymbales) → pièce dans le singe → éblouissement → bus normal → sortie, l'homme au manteau entre → « Pendant ce temps, du côté de Rod… » | ✅ 15/11/2026 |
 | Chapitre 2 — Rod | Devanture du pub, enseigne « CHAOS ORDER » (on la voit avant que Rod entre). Pub anglais : clients de dos au comptoir, barman qui essuie un verre, joueurs de fléchettes à gauche. Cacahuètes (« la différence avec la barre de métro, c'est que ça a du goût »), verre de pailles (« tiens, il y en a encore ici »), fléchette par terre sous la cible. Porte des WC : l'homme au manteau en sort (1re fois). Toilettes : ballon rouge au singe ; fléchette lancée = tombe à plat ; paille + fléchette = sarbacane ; ballon éclaté → boulette « Je t'appelle… » → papier et ballon disparaissent en scintillant → étonnement de Rod → Rod ressort : la devanture porte son vrai nom « THE ENGLISH PUB » → « Pendant ce temps, du côté de Solène… » | ✅ 16/11/2026 |
-| Chapitre 3 — Solène | Achat de bonbons, puis les trois se retrouvent. Détails à venir. | ⏳ |
+| Chapitre 3 — Solène | Magasin de bonbons très coloré (bocaux, sucettes, chocolats, nounours, schtroumpfs en bonbon, cannes, berlingots, barbe à papa), 2 enfants qui courent, vigile immobile près de l'entrée. « Ohlala, j'en aurai jamais assez ! C'est sûr ! ». Gros nounours en chocolat (taille doudou) : le prendre = « Voler », dans le sac à dos. En sortant : joute verbale avec le vigile (7 phrases dans l'ordre, les 7 réponses proposées à chaque fois dans un ordre mélangé, erreur = il répète). Puis Solène tend le « nounours » : c'est un singe aux cymbales en chocolat (« je pensais que c'était un nounours »). Scintillement → magasin de vêtements → retrouvailles dans la rue : « Vous n'allez pas me croire ! » → studio → à suivre. | ✅ 19/11/2026 |
 | Plus tard | `quai` (studio, photo du chariot) → `autre` (Quai des Brumes) : accessibles quand ils se sont retrouvés (`S.f.retrouves`). | ✅ (code) |
 
 Drapeaux d'histoire utilisés : `S.f.pose`, `S.f.traverse`, `S.f.fin`, `S.f.cabine`, `S.f.piece`, `S.f.hote`, `S.f.fente`, `S.f.singe`, `S.f.busNormal`, `S.f.manteau`, `S.f.finYvan`, `S.f.retrouves` (pas encore posé par l'histoire).
@@ -42,6 +44,8 @@ Drapeaux d'histoire utilisés : `S.f.pose`, `S.f.traverse`, `S.f.fin`, `S.f.cabi
 | Fin de la partie d'Yvan | Téléphone | Écharpe de foot | Billets |
 | Partie de Rod | — | + Fléchette (sous la cible) + Paille (comptoir) → combinées en **Sarbacane** → utilisée sur le ballon (reste dans l'inventaire) ; + Boulette (lue puis disparaît) | — |
 | Fin de la partie de Rod | Téléphone | Écharpe de foot, Sarbacane | Billets |
+| Chapitre 3 — Solène | — | — | + Gros nounours en chocolat (volé) → rendu au vigile (c'était un singe en chocolat) |
+| Fin du chapitre 3 (studio) | Téléphone | Écharpe de foot, Sarbacane | Billets |
 | Rue de Londres | — | Solène peut donner les **Billets** à Rod ou à Yvan | Billets → donnés |
 | Studio (quai) | Téléphone **utilisé** pour la photo du chariot | — | — |
 | Fin (Quai des Brumes, plus tard) | Téléphone (+ Billets si on les lui a donnés) | Écharpe (+ Billets si on les lui a donnés) | (Billets s'ils ne sont pas donnés) |
@@ -54,9 +58,12 @@ Drapeaux d'histoire utilisés : `S.f.pose`, `S.f.traverse`, `S.f.fin`, `S.f.cabi
 | Bus-musée | Utiliser le bus → l'hôte (« gratuit »), Yvan tremble, « …Mais c'est gratuit. », **pause**, il avance vers le centre, puis « ça a l'air plus grand dedans » (gag voulu par l'utilisateur) | Intérieur géant plein de curiosités |
 | Singe | Examiner le singe (action par défaut ; la fente est toujours visible) ; Utiliser la pièce sur le singe | Scintillement, Yvan ébloui, le bus redevient normal |
 | Sortie du bus | Bus normal | L'homme au manteau entre ; transition vers Rod |
+| Vigile (Solène) | Voler le gros nounours, puis sortir ; gagner la joute (7 bonnes répliques dans l'ordre) | Singe en chocolat rendu, scintillement, magasin de vêtements, retrouvailles |
 | Ballon au singe (Rod) | Fléchette (pub) + Paille (pub) combinées en sarbacane, utilisée sur le ballon | Ballon éclaté, boulette « Je t'appelle… », tout disparaît ; transition vers Solène |
 
 ## 5. Contradictions et points à vérifier
+- Joute : « Je vous ai vu » écrit « Je vous ai vue » (le vigile parle à Solène) ; « vieilesse » corrigé en « vieillesse », « 3eme » en « 3e ».
+- Les schtroumpfs en bonbon sont nommés dans le texte mais dessinés comme de simples bonbons bleus (pas de personnage connu dessiné).
 - Numérotation (19/11/2026, demande de l'utilisateur) : chapitre 1 = Yvan, chapitre 2 = Rod, chapitre 3 = Solène (à venir). Mots de passe du menu : 0 intro, 1, 2. Le fichier de code de Rod s'appelle encore `chapitre1_rod.js`.
 - Avant : le chapitre 1 se jouait à trois avec changement libre de personnage, et le studio venait juste après. Maintenant : les trois se séparent et on les joue l'un après l'autre (verrou). Le studio (photo du chariot) est gardé pour quand ils se retrouvent ; la porte du studio refuse d'ouvrir avant.
 - L'intro se passe « un an plus tôt » : Raphaël n'était pas né, d'où son retrait (voir Abandonné).
@@ -70,6 +77,8 @@ Drapeaux d'histoire utilisés : `S.f.pose`, `S.f.traverse`, `S.f.fin`, `S.f.cabi
 - 16/11/2026 : répliques du chapitre 1 corrigées par l'utilisateur (77 lignes, appliquées telles quelles, accents ajoutés). Homme au manteau plus lent. Cabine : la main d'Yvan décroche et porte le combiné à son oreille (on voit le côté de sa tête), puis raccroche.
 
 - 19/11/2026 : fléchettes du pub — cible plus basse, un lancer toutes les ~4-5 s (les joueurs alternent), la plupart des fléchettes se plantent dans le mur à côté, commentaires des joueurs (« Aïe, encore raté ! », « Je suis nul ce soir. », « La cible a bougé ou… ? »), au bout de 10 fléchettes un joueur va toutes les reprendre.
+
+- 19/11/2026 : bulle des joueurs de fléchettes nette (texte HTML). Rod : plus de « …Pardon. » quand l'homme au manteau sort ; en entrant aux toilettes : « Qu'est-ce que c'est que ça ? ». Chapitre 3 (Solène) codé jusqu'au studio. Mot de passe 3.
 
 ## 6. Idées de Claude (💡 à valider)
 - (aucune en attente)

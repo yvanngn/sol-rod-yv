@@ -91,7 +91,7 @@ function dessiner(){
 function marcher(n,x){x=Math.max(8,Math.min(W-8,x));if(TEST){S.pos[n]=x;return Promise.resolve()}return new Promise(r=>{const pas=()=>{
   const d=x-S.pos[n];if(Math.abs(d)<2){S.pos[n]=x;return r()}S.pos[n]+=Math.sign(d)*2;setTimeout(pas,16)};pas()})}
 const pause=ms=>TEST?Promise.resolve():new Promise(r=>setTimeout(r,ms));
-async function go(id,positions){S.scene=id;sonScene(id);S.passe=false;if(positions)Object.assign(S.pos,positions);S.sel=null;ui();
+async function go(id,positions){S.scene=id;if(!TEST&&$('bulleJ'))$('bulleJ').hidden=true;sonScene(id);S.passe=false;if(positions)Object.assign(S.pos,positions);S.sel=null;ui();
   const sc=SCENES[id];if(sc.entree&&!S.f['vu_'+id]){S.f['vu_'+id]=1;S.busy=true;await sc.entree();S.busy=false;S.passe=false}}
 
 async function lancer(h){if(typeof h==='string')await say('moi',h);else await h()}
@@ -114,7 +114,7 @@ async function executer(o,v,x){S.busy=true;fermerRoue();$('etiquette').hidden=tr
   try{if(o)await agir(o,v);else{S.sel=null;if(S.pos[S.perso]!=null&&!SCENES[S.scene].fixe)await marcher(S.perso,x)}}finally{S.busy=false;S.passe=false;if(o&&S.sel&&v!=='regarder')S.sel=null;ui()}}
 function fermerRoue(){$('roue').hidden=true}
 function ouvrirRoue(e,o){const r=$('scene').getBoundingClientRect(),w=$('roue');w.innerHTML=`<div class="titre">${o.nom}</div>`;
-  for(const v of['regarder','prendre','utiliser','parler']){const b=document.createElement('button');b.innerHTML=`<span>${ICONES[v]}</span>${v[0].toUpperCase()+v.slice(1)}`;
+  for(const v of['regarder','prendre','utiliser','parler']){const b=document.createElement('button');b.innerHTML=`<span>${ICONES[v]}</span>${v==='prendre'&&o.voler?'Voler':v[0].toUpperCase()+v.slice(1)}`;
     b.onclick=ev=>{ev.stopPropagation();const s0=S.sel;S.sel=null;executer(o,v)};w.appendChild(b)}
   w.style.left=Math.min(e.clientX-r.left,r.width-170)+'px';w.style.top=Math.max(0,e.clientY-r.top-60)+'px';w.hidden=false}
 let appui=null,longOK=false;
@@ -130,7 +130,7 @@ cv.addEventListener('click',e=>{
 cv.addEventListener('contextmenu',e=>{e.preventDefault();if(S.busy||clicSuivant)return;const{o}=cible(e);if(o)ouvrirRoue(e,o);else fermerRoue()});
 cv.addEventListener('mousemove',e=>{const t=$('etiquette');if(S.busy){t.hidden=true;return}const{o}=cible(e);
   if(!o){t.hidden=true;return}const r=$('scene').getBoundingClientRect(),v=verbeParDefaut(o);
-  t.innerHTML=`<span>${ICONES[v==='donner'?'prendre':v]||''}</span> ${S.sel?OBJETS[S.sel].nom+' → ':''}${o.nom}`;
+  t.innerHTML=`<span>${ICONES[v==='donner'?'prendre':v]||''}</span> ${v==='prendre'&&o.voler&&!S.sel?'Voler ':''}${S.sel?OBJETS[S.sel].nom+' → ':''}${o.nom}`;
   t.style.left=(e.clientX-r.left+14)+'px';t.style.top=(e.clientY-r.top+10)+'px';t.hidden=false});
 cv.addEventListener('mouseleave',()=>$('etiquette').hidden=true);
 // Pour les tests : action(id, verbe?, objetSélectionné?)

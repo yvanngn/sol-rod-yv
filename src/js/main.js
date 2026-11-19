@@ -5,6 +5,9 @@ const CHAPITRES={
   '2':{nom:"Chapitre 2 — Rod",lancer:()=>{S.tenue='';S.posY={};
     Object.assign(S.f,{vu_londres:1,cabine:1,piece:1,hote:1,fente:1,singe:1,busNormal:1,manteau:1});MUSIQUE_SCENE.bus='magie';
     return debutRod()}},
+  '3':{nom:"Chapitre 3 — Solène",lancer:()=>{S.tenue='';S.posY={};
+    Object.assign(S.f,{vu_londres:1,cabine:1,piece:1,hote:1,fente:1,singe:1,busNormal:1,manteau:1,finYvan:1,flechette:1,paille:1,manteauWC:1,ballon:1,boulette:1,ballonParti:1,vraiNom:1});
+    MUSIQUE_SCENE.bus='magie';S.persos.rod.inv=['echarpe','sarbacane'];return debutSolene()}},
 };
 function demarrer(code){const c=CHAPITRES[String(code).trim()];if(!c)return false;c.lancer();return true}
 function motDePasse(code){code=String(code).trim();const c=CHAPITRES[code];

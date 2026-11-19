@@ -49,9 +49,9 @@ function pubFlechettes(){const t=Date.now(),D=DARTS;
       if(D.list.length>=10)D.ramasse={n:'joueur1',phase:'aller',x0:D.px.joueur1}}}
   for(const d of D.list){P(Math.round(d.x),Math.round(d.y),3,1,'#c0c0c8');P(Math.round(d.x)+3,Math.round(d.y)-1,2,3,'#f0c040')}
 }
-function bulleJoueur(){const D=DARTS;if(!D.bulle||Date.now()-D.bulle.t>2200)return;
-  g.font="bold 7px Georgia";const w=g.measureText(D.bulle.txt).width+8,x=Math.max(w/2+2,Math.min(W-w/2-2,D.px[D.bulle.n])),y=SOL-52;
-  g.fillStyle='rgba(10,6,4,.75)';g.fillRect(Math.round(x-w/2),y-8,Math.round(w),11);g.fillStyle='#fff3d0';g.textAlign='center';g.fillText(D.bulle.txt,x,y);g.textAlign='left'}
+function bulleJoueur(){const D=DARTS,el=$('bulleJ');if(TEST||!el)return;
+  if(!D.bulle||Date.now()-D.bulle.t>2200){el.hidden=true;return}
+  if(el.textContent!==D.bulle.txt)el.textContent=D.bulle.txt;el.style.left=(D.px[D.bulle.n]/W*100)+'%';el.style.top=((SOL-60)/H*100)+'%';el.hidden=false}
 SCENES.pub={nom:'Chaos Order',
   dessin(){const t=Date.now();
     vgrad(0,96,'#1f3a2c','#16281f');for(let x=0;x<W;x+=10)P(x,8,1,88,'rgba(255,255,255,.04)');
@@ -123,7 +123,7 @@ async function allerToilettes(){
     const a=anim('manteau');S.pnj.wc=120;
     if(!TEST&&!S.passe)while(S.pnj.wc<330){a.marche=true;a.dir='d';a.pas++;S.pnj.wc+=.55;await pause(16)}
     S.pnj.wc=null;a.marche=false;
-    await dire([['rod',"…Pardon."],['rod',"Quel drôle de zigoto. Il fait peur."]]);
+    await say('rod',"Quel drôle de zigoto. Il fait peur.");
   }
   S.porteWC=0;
   await go('toilettes',{rod:40});
@@ -166,7 +166,7 @@ SCENES.toilettes={nom:'Toilettes du pub',
   lumieres:()=>[{x:104,y:10,r:120,c:'rgba(220,255,240,.25)'},...(S.papierBrille?[{x:S.pos.rod??180,y:120,r:60,c:'rgba(255,230,150,.6)'}]:[]),...persoLumiere(30)],
   particules(){if(S.papierBrille)emettre(60,()=>({k:'papier',scene:'toilettes',x:(S.pos.rod??180)+(Math.random()-.5)*50,y:110+(Math.random()-.5)*50,vx:(Math.random()-.5),vy:-.3-Math.random(),vie:40+Math.random()*30,t:1,c:'#fff3b0',glow:1}))},
   dessinAvant:()=>vignette(),
-  async entree(){await say('rod',"Des toilettes de pub anglais.")},
+  async entree(){await say('rod',"Qu'est-ce que c'est que ça ?")},
 };
 async function lireBoulette(){
   S.f.boulette=1;ajouter('boulette');
@@ -182,9 +182,7 @@ async function lireBoulette(){
   await dire([['rod',"…« The English Pub » ?"],['rod',"Il y a quelque chose d'étrange dans ce coin…"]]);
   await noir(true);
   await carton("Pendant ce temps, du côté de Solène…");
-  S.f.finRod=1;
-  await carton("À suivre…");
-  await noir(false);
+  await debutSolene();
 }
 MUSIQUE_SCENE.pub='pub';MUSIQUE_SCENE.toilettes='pub';AMBIANCE_SCENE.pub='brouhaha';
 

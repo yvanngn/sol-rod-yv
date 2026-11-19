@@ -8,7 +8,7 @@ function charger(){
   const ctx={window:{TEST:{log:[],choix:[]}},document,setTimeout,Promise,console,Math,Date,Error,Object,requestAnimationFrame:()=>{}};
   vm.createContext(ctx);
   const h=fs.readFileSync(__dirname+'/../dist/index.html','utf8');
-  vm.runInContext(h.match(/<script>([\s\S]*)<\/script>/)[1]+';this.S=S;this.action=action;this.go=go;this.switchPerso=switchPerso;this.aObjet=aObjet;this.drawPerso=drawPerso;this.SCENES=SCENES;this.DARTS=DARTS;this.pubFlechettes=pubFlechettes;this.motDePasse=motDePasse;this.debutRod=debutRod;this.combiner=combiner;this.SON=SON;this.regler=regler;this.volume=volume;this.tenue=tenue;this.postEffets=postEffets;this.reflets=reflets;this.passer=passer',ctx);
+  vm.runInContext(h.match(/<script>([\s\S]*)<\/script>/)[1]+';this.S=S;this.action=action;this.go=go;this.switchPerso=switchPerso;this.aObjet=aObjet;this.drawPerso=drawPerso;this.SCENES=SCENES;this.debutSolene=debutSolene;this.JOUTE=JOUTE;this.DARTS=DARTS;this.pubFlechettes=pubFlechettes;this.motDePasse=motDePasse;this.debutRod=debutRod;this.combiner=combiner;this.SON=SON;this.regler=regler;this.volume=volume;this.tenue=tenue;this.postEffets=postEffets;this.reflets=reflets;this.passer=passer',ctx);
   return ctx;
 }
 const v=(nom,c)=>{if(c){ok++}else{ko++;console.log('ÉCHEC :',nom)}};
@@ -64,18 +64,34 @@ const scenarios={
     G.DARTS.list=Array(9).fill({x:30,y:96});G.DARTS.ramasse=null;G.DARTS.vol={n:'joueur2',x0:80,y0:130,x1:52,y1:96,t0:0,touche:false};G.pubFlechettes();
     v('10e fléchette plantée : un joueur part les ramasser',G.DARTS.list.length===10&&G.DARTS.ramasse&&G.DARTS.ramasse.phase==='aller');
     for(let i=0;i<40;i++)G.pubFlechettes();v('le joueur marche vers le mur',G.DARTS.px.joueur1<62);
-    await G.action('toilettes');v('l\'homme au manteau sort des toilettes, Rod entre',G.S.scene==='toilettes'&&G.S.f.manteauWC);
+    await G.action('toilettes');v('l\'homme au manteau sort des toilettes, Rod entre : « Qu\'est-ce que c\'est que ça ? »',G.S.scene==='toilettes'&&G.S.f.manteauWC&&dit(G,"Qu'est-ce que c'est que ça")&&!dit(G,'Pardon'));
     await G.action('ballon',undefined,'flechette');v('fléchette seule : pas assez de force',dit(G,'Pas assez de force')&&G.aObjet('flechette')&&!G.S.f.ballon);
     await G.combiner('flechette','paille');v('fléchette + paille = sarbacane',G.aObjet('sarbacane')&&!G.aObjet('paille')&&!G.aObjet('flechette'));
     await G.action('ballon',undefined,'sarbacane');v('ballon éclaté, boulette au sol',G.S.f.ballon);
     await G.action('boulette');v('« Je t\'appelle… », tout disparaît, transition vers Solène',dit(G,'Je t\'appelle')&&G.S.f.ballonParti&&!G.aObjet('boulette')&&dit(G,'côté de Solène')&&G.S.f.finRod);
-    v('Rod ressort : devanture « The English Pub »',G.S.scene==='devanture'&&G.S.f.vraiNom&&dit(G,'The English Pub'));
+    v('Rod ressort : devanture « The English Pub », puis Solène',G.S.f.vraiNom&&dit(G,'The English Pub')&&G.S.scene==='bonbons'&&G.S.perso==='solene');
   },
   async mdp(G){
     v('mot de passe inconnu refusé',G.motDePasse('9')===false);
     G.S.tenue='neutre';v('mot de passe 1 : chapitre 1 à Londres, tenue de sorcier',G.motDePasse('1')&&G.S.scene==='londres'&&G.S.tenue==='');
+    await null;v('mot de passe 3 : chapitre de Solène',G.motDePasse('3')&&G.S.scene==='bonbons'&&G.S.perso==='solene');
     await null;v('mot de passe 2 : chapitre de Rod devant le pub',G.motDePasse('2')&&G.S.scene==='devanture'&&G.S.perso==='rod'&&G.S.verrou==='rod'&&G.S.f.busNormal);
     await null;v('mot de passe 0 : intro',G.motDePasse(' 0 ')&&G.S.scene==='appart');
+  },
+  async solene(G){
+    await G.debutSolene();G.switchPerso('rod');
+    v('Solène au magasin de bonbons, seule jouable',G.S.scene==='bonbons'&&G.S.perso==='solene'&&G.S.verrou==='solene'&&dit(G,"j'en aurai jamais"));
+    for(const o of['etageres','sucettes','chocolats','nounours_etal','bonbons_bleus','berlingots','cannes','barbe','enfants','vigile'])await G.action(o,'regarder');
+    await G.action('enfants');await G.action('vigile');
+    await G.action('porte_bonbons');v('sans rien, Solène ne part pas',G.S.scene==='bonbons'&&!G.S.f.joute);
+    v('le gros nounours se « vole »',G.SCENES.bonbons.objets.find(o=>o.id==='gros_nounours').voler);
+    await G.action('gros_nounours');v('nounours volé, dans le sac',G.aObjet('nounours'));
+    G.window.TEST.choix.push('Sur instagroom ?',...G.JOUTE.map(x=>x[1]));
+    await G.action('porte_bonbons');
+    v('le vigile répète sa phrase après une erreur',G.window.TEST.log.filter(l=>l==='vigile: Je vous ai vue.').length===2);
+    v('joute gagnée, singe en chocolat rendu',dit(G,"je pensais que c'était un nounours")&&!G.aObjet('nounours'));
+    v('magasin de vêtements puis retrouvailles',dit(G,'magasin de vêtements')&&dit(G,"Vous n'allez pas me croire !")&&G.S.f.retrouves&&G.S.verrou===null);
+    v('on enchaîne au studio, à suivre',G.S.scene==='quai'&&dit(G,'Dans le studio')&&dit(G,'carton: À suivre'));
   },
   async londres(G){
     await G.go('londres');v('scène de départ',G.S.scene==='londres');
