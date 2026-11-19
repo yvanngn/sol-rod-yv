@@ -1171,13 +1171,13 @@ Object.assign(SPEC,{
 });
 Object.assign(OBJETS,{
   paille:{nom:'Paille',desc:"Une paille en plastique. Une espèce en voie de disparition.",icone:c=>{R(5,1,2,10,'#f2f2f2',c);R(5,3,2,1,'#e04a4a',c);R(5,6,2,1,'#e04a4a',c)}},
-  flechette:{nom:'Fléchette',desc:"Une fléchette ramassée sous la cible. Pointe un peu tordue, plumes jaunes.",icone:c=>{R(2,5,6,2,'#c0c0c8',c);R(1,5,1,2,'#888',c);R(8,3,3,6,'#f0c040',c)}},
-  sarbacane:{nom:'Sarbacane',desc:"Une paille avec une fléchette dedans. Ma sarbacane maison. Les ingénieurs n'ont qu'à bien se tenir.",icone:c=>{R(1,5,10,2,'#f2f2f2',c);R(3,5,1,2,'#e04a4a',c);R(10,4,2,4,'#f0c040',c)}},
-  boulette:{nom:'Boulette de papier',desc:"Une boulette de papier tombée du ballon.",icone:c=>{R(3,3,6,6,'#efe8d0',c);R(4,4,2,1,'#b8b0a0',c);R(6,7,2,1,'#b8b0a0',c)}},
+  flechette:{nom:'Fléchette',desc:"Une fléchette piquante comme la sauce.",icone:c=>{R(2,5,6,2,'#c0c0c8',c);R(1,5,1,2,'#888',c);R(8,3,3,6,'#f0c040',c)}},
+  sarbacane:{nom:'Sarbacane',desc:"Une sarbacane, c'est ingénieux !",icone:c=>{R(1,5,10,2,'#f2f2f2',c);R(3,5,1,2,'#e04a4a',c);R(10,4,2,4,'#f0c040',c)}},
+  boulette:{nom:'Boulette de papier',desc:"Une simple boule de papier.",icone:c=>{R(3,3,6,6,'#efe8d0',c);R(4,4,2,1,'#b8b0a0',c);R(6,7,2,1,'#b8b0a0',c)}},
 });
 // combinaisons d'objets de l'inventaire
 COMBOS[cle('flechette','paille')]=async()=>{retirer('flechette');retirer('paille');ajouter('sarbacane');sfx('clic');
-  await say('rod',"Une fléchette dans une paille… et voilà une sarbacane. Les années de collège n'auront pas servi à rien.")};
+  await say('rod',"Hey c'est pas bête ça, je vais pouvoir tirer plus fort.")};
 
 // ----- passage d'Yvan à Rod -----
 async function debutRod(){
@@ -1214,34 +1214,34 @@ SCENES.pub={nom:'Chaos Order',
   },
   objets:[
     {id:'joueurs',nom:'joueurs de fléchettes',humain:true,x:52,y:118,w:46,h:42,dessin(){[['joueur1',62],['joueur2',88]].forEach(([n,x])=>{const a=anim(n);a.marche=false;a.dir='g';drawPerso(n,x)})},
-      regarder:"Deux types qui jouent aux fléchettes. Concentration maximale. Comme des tireurs d'élite. Avec des pintes.",
+      regarder:"Ils ont l'air irra…cibles ! Haha",
       parler:()=>dire([['joueur',"Chut. Je vise."],['moi',"…Il vise depuis dix minutes."]])},
-    {id:'cible',nom:'cible',x:28,y:54,w:24,h:24,regarder:"Une cible de fléchettes. Un peu de travers. Comme les joueurs.",prendre:"Je ne pars pas avec la cible. On me casserait les deux jambes."},
+    {id:'cible',nom:'cible',x:28,y:54,w:24,h:24,regarder:"Une cible de fléchettes.",prendre:"Je ne suis pas un voleur."},
     {id:'flechette',nom:'fléchette',x:30,y:150,w:18,h:10,defaut:'prendre',cache:()=>S.f.flechette,
       dessin(){P(34,156,8,1,'#c0c0c8');P(33,156,1,1,'#888');P(42,155,3,3,'#f0c040')},
-      regarder:"Une fléchette par terre, sous la cible. Quelqu'un a raté son coup.",
+      regarder:"Quelqu'un a raté son coup.",
       prendre:async()=>{S.f.flechette=1;ajouter('flechette');await say('rod',"Personne ne la réclame ? Je la garde.")}},
-    {id:'toilettes',nom:'toilettes',x:106,y:82,w:28,h:78,defaut:'utiliser',regarder:"Les toilettes. Enfin.",utiliser:allerToilettes},
+    {id:'toilettes',nom:'toilettes',x:106,y:82,w:28,h:78,defaut:'utiliser',regarder:"C'est soit les toilettes, soit la cuisine vu l'odeur.",utiliser:allerToilettes},
     {id:'barman',nom:'barman',humain:true,x:261,y:96,w:20,h:18,
       dessin(){const a=anim('barman');a.marche=false;a.dir='face';drawPerso('barman',270,SOL-12);
         const t=Date.now()/220;P(271+Math.round(Math.cos(t)*2),112,6,8,'rgba(220,240,255,.6)');P(270+Math.round(Math.sin(t)*3),115,7,4,'#f0ece0')},
-      regarder:"Le barman. Il essuie le même verre depuis que je suis entré. Il doit être très propre, ce verre.",
-      parler:()=>dire([['barman',"Qu'est-ce que je vous sers ?"],['rod',"Juste les toilettes, merci."],['barman',"Au fond à gauche. Et on consomme après, hein."]])},
+      regarder:"Le barman n'a pas l'air commode. Ni armoire.",
+      parler:()=>dire([['barman',"Qu'est-ce que je vous sers ?"],['rod',"Juste les toilettes, merci."],['barman',"Là-bas au fond. Et on consomme après, hein."]])},
     {id:'comptoir',nom:'comptoir',x:150,y:124,w:150,h:36,loin:1,
       dessin(){P(150,122,150,5,'#7a4a24');P(150,122,150,1,'#a8784a');P(150,127,150,33,'#4a2814');for(let x=154;x<296;x+=24){P(x,131,20,20,'#3e2210');P(x,131,20,1,'#6a4020')}P(150,154,150,2,'#c9a040');
         [[238],[248]].forEach(([x])=>{P(x,108,3,14,'#c9a040');P(x-1,104,5,5,'#1a1a1a')});
         g.fillStyle='#e8d8b8';g.beginPath();g.ellipse(198,121,8,3,0,0,7);g.fill();if(!S.f.cacahuetesFin)for(let i=0;i<6;i++)P(192+i*2,118+(i%2),2,2,'#c89050');
         P(222,108,7,14,'rgba(220,240,255,.5)');for(let i=0;i<7;i++)P(222+i,101+(i%3),1,9,['#f2f2f2','#e04a4a','#4a8ae0'][i%3]);
         [178,226,286].forEach(x=>{P(x+8,112,5,10,'rgba(230,170,60,.85)');P(x+8,111,5,2,'#fff8e0')})},
-      regarder:"Un vrai comptoir en bois, poisseux juste ce qu'il faut."},
+      regarder:"Un vrai comptoir en bois."},
     {id:'clients',nom:'clients au comptoir',humain:true,x:162,y:114,w:136,h:46,
       dessin(){[['client1',172],['client2',222],['client3',284]].forEach(([n,x])=>{const a=anim(n);a.marche=false;a.dir='dos';drawPerso(n,x,152);P(x-7,140,14,3,'#6a4020');P(x-1,143,2,17,'#2a160c')})},
-      regarder:"Des habitués, de dos, accoudés au comptoir. Ils n'ont pas bougé depuis 1987.",
+      regarder:"Des poivrots, ça fait pitié… Si j'avais le temps, je me serais bien joint à eux.",
       parler:()=>dire([['client',"Mmmh."],['moi',"Conversation passionnante. Je reviendrai."]])},
-    {id:'cacahuetes',nom:'cacahuètes',x:188,y:112,w:20,h:12,defaut:'prendre',regarder:"Un bol de cacahuètes. Offertes. Touchées par cinquante mains avant moi.",
-      prendre:async()=>{sfx('manger');if(!S.f.cacahuetes){S.f.cacahuetes=1;await say('rod',"Mmh. La différence avec la barre du métro, c'est que ça a du goût.")}else await say('rod',"Encore une poignée… Bon, j'arrête, je vais devoir payer un loyer.")}},
+    {id:'cacahuetes',nom:'cacahuètes',x:188,y:112,w:20,h:12,defaut:'prendre',regarder:"Un bol de cacahuètes qui ont dû être touchées par cinquante mains sales avant moi.",
+      prendre:async()=>{sfx('manger');if(!S.f.cacahuetes){S.f.cacahuetes=1;await say('rod',"Mmh. La différence avec la barre du métro, c'est que ça a du goût.")}else await say('rod',"Encore une poignée… Comme ça je ne viens plus les mains vides la prochaine fois chez Solène.")}},
     {id:'pailles',nom:'verre de pailles',x:219,y:98,w:13,h:24,defaut:'regarder',cache:()=>false,
-      regarder:"Un verre plein de pailles en plastique. Tiens, il y en a encore ici.",
+      regarder:"Un verre plein de pailles.",
       prendre:async()=>{if(S.f.paille)return say('rod',"J'en ai déjà une. Pensons aux tortues.");S.f.paille=1;ajouter('paille');await say('rod',"Je t'emprunte une paille.")}},
     {id:'entree',nom:'porte du pub',x:300,y:92,w:20,h:68,regarder:"La porte qui donne sur la rue.",utiliser:"Pas tout de suite. Je suis venu pour les toilettes, je repars avec les toilettes. Enfin… façon de parler."},
     {id:'manteau_pub',nom:'',x:0,y:0,w:0,h:0,cache:()=>S.pnj.wc==null,dessin(){drawPerso('manteau',S.pnj.wc)}},
@@ -1252,7 +1252,7 @@ SCENES.pub={nom:'Chaos Order',
   dessinAvant:()=>vignette(),
   async entree(){
     await noir(false);
-    await dire([['rod',"Ah, un vrai pub anglais. Moquette qui colle, fléchettes et bière tiède. Parfait."],['rod',"Mais d'abord : les toilettes."]]);
+    await dire([['rod',"Ah, un vrai pub anglais. Odeur d'urine, fléchettes et bière tiède. Parfait."],['rod',"Mais d'abord : les toilettes."]]);
   },
 };
 async function allerToilettes(){
@@ -1261,7 +1261,7 @@ async function allerToilettes(){
     const a=anim('manteau');S.pnj.wc=120;
     if(!TEST&&!S.passe)while(S.pnj.wc<330){a.marche=true;a.dir='d';a.pas++;S.pnj.wc+=.55;await pause(16)}
     S.pnj.wc=null;a.marche=false;
-    await dire([['rod',"…Pardon."],['rod',"Long manteau noir et lunettes noires, dans un pub. Il se croit dans un film, lui."]]);
+    await dire([['rod',"…Pardon."],['rod',"Quel drôle de zigoto. Il fait peur."]]);
   }
   S.porteWC=0;
   await go('toilettes',{rod:40});
@@ -1286,25 +1286,25 @@ SCENES.toilettes={nom:'Toilettes du pub',
     if(S.f.ballon&&!S.f.boulette){P(178,153,7,6,'#efe8d0');P(179,154,3,1,'#b8b0a0');P(181,157,3,1,'#b8b0a0')}
   },
   objets:[
-    {id:'sortie_wc',nom:'retour au pub',x:0,y:92,w:16,h:68,defaut:'utiliser',regarder:"La porte. Le pub est derrière.",utiliser:()=>go('pub',{rod:98})},
+    {id:'sortie_wc',nom:'retour au pub',x:0,y:92,w:16,h:68,defaut:'utiliser',regarder:"La porte du pub.",utiliser:()=>go('pub',{rod:98})},
     {id:'urinoirs',nom:'urinoirs',x:70,y:100,w:80,h:36,regarder:"Bon. Je suis venu pour ça.",utiliser:"…C'est fait. On n'en parlera plus jamais."},
-    {id:'lavabo',nom:'lavabo',x:232,y:84,w:36,h:40,regarder:"Un lavabo et un miroir. J'ai une tête de type qui vient de traverser Londres sous la pluie.",utiliser:"Je me lave les mains. Je suis prof, je montre l'exemple."},
-    {id:'sechemain',nom:'sèche-mains',x:284,y:94,w:22,h:20,regarder:"Un sèche-mains. Il souffle autant qu'un ministre en conférence de presse.",utiliser:"Vrrrrr… Il sèche surtout ma patience."},
-    {id:'cabine_wc',nom:'cabine',x:166,y:70,w:40,h:90,regarder:"Une cabine fermée. « OCCUPÉ ». Je préfère ne rien savoir.",utiliser:"C'est occupé. Ou alors c'est fermé depuis 1987."},
+    {id:'lavabo',nom:'lavabo',x:232,y:84,w:36,h:40,regarder:"Un lavabo et un miroir. J'ai une tête de bleureurlour.",utiliser:"Bon allez je me lave les mains pour une fois."},
+    {id:'sechemain',nom:'sèche-mains',x:284,y:94,w:22,h:20,regarder:"Un sèche-mains. Ça me rappelle un dessin animé. Blanche-Fesse et le sèche-main.",utiliser:"Vrrrrr… Il marche celui-là au moins."},
+    {id:'cabine_wc',nom:'cabine',x:166,y:70,w:40,h:90,regarder:"Une cabine fermée. « OCCUPÉ ». Je préfère ne rien savoir.",utiliser:"C'est occupé. « It's occupède !! »"},
     {id:'ballon',nom:'ballon rouge',x:168,y:14,w:36,h:60,cache:()=>S.f.ballon,
-      regarder:"Un ballon de baudruche rouge, coincé au plafond. Avec un singe dessiné dessus… un singe aux cymbales. Il a un regard de fou.",
-      prendre:"Trop haut. Même en sautant. Surtout en sautant.",
-      with:{flechette:async()=>{sfx('fleche');await pause(500);await dire([['rod',"Allez… dans le mille !"],['rod',"…Elle monte, elle touche, et elle retombe à plat. Pas assez de force."],['rod',"Je la ramasse. Il me faudrait de quoi la propulser."]])},
+      regarder:"Un ballon rouge. C'est quoi ce dessin bizarre ?",
+      prendre:"Trop haut. Même en sautant.",
+      with:{flechette:async()=>{sfx('fleche');await pause(500);await dire([['rod',"Allez… dans le mille !"],['rod',"…Pas assez de force."],['rod',"Je la ramasse. Il me faudrait quelque chose en plus je pense."]])},
         paille:"Souffler dans une paille vide sur un ballon ? Je vais juste le décoiffer.",
         sarbacane:async()=>{sfx('souffle');await pause(450);sfx('pop');S.f.ballon=1;S.flash=.5;await pause(400);
-          await dire([['rod',"BAM ! En plein dans le singe."],['rod',"Tiens, une boulette de papier est tombée du ballon."]])}}},
-    {id:'boulette',nom:'boulette de papier',x:172,y:148,w:18,h:14,defaut:'prendre',cache:()=>!S.f.ballon||S.f.boulette,regarder:"Une boulette de papier, tombée du ballon.",prendre:lireBoulette},
+          await dire([['rod',"BAM ! En plein dans le mille."],['rod',"Tiens, keskecé ?"]])}}},
+    {id:'boulette',nom:'boulette de papier',x:172,y:148,w:18,h:14,defaut:'prendre',cache:()=>!S.f.ballon||S.f.boulette,regarder:"Une boulette de papier.",prendre:lireBoulette},
   ],
   ambiance:{nuit:.22,voile:'#000',teinte:'rgba(140,255,190,.2)'},
   lumieres:()=>[{x:104,y:10,r:120,c:'rgba(220,255,240,.25)'},...(S.papierBrille?[{x:S.pos.rod??180,y:120,r:60,c:'rgba(255,230,150,.6)'}]:[]),...persoLumiere(30)],
   particules(){if(S.papierBrille)emettre(60,()=>({k:'papier',scene:'toilettes',x:(S.pos.rod??180)+(Math.random()-.5)*50,y:110+(Math.random()-.5)*50,vx:(Math.random()-.5),vy:-.3-Math.random(),vie:40+Math.random()*30,t:1,c:'#fff3b0',glow:1}))},
   dessinAvant:()=>vignette(),
-  async entree(){await say('rod',"Des toilettes de pub anglais. Carrelage vert, néon qui clignote. Exactement comme dans les films.")},
+  async entree(){await say('rod',"Des toilettes de pub anglais.")},
 };
 async function lireBoulette(){
   S.f.boulette=1;ajouter('boulette');
@@ -1317,7 +1317,7 @@ async function lireBoulette(){
   await noir(true);S.f.vraiNom=1;
   await go('devanture',{rod:160});anim('rod').dir='face';
   await noir(false);await pause(600);
-  await dire([['rod',"…« The English Pub » ?"],['rod',"C'était écrit « Chaos Order » tout à l'heure. J'en suis sûr. Enfin… presque sûr."]]);
+  await dire([['rod',"…« The English Pub » ?"],['rod',"Il y a quelque chose d'étrange dans ce coin…"]]);
   await noir(true);
   await carton("Pendant ce temps, du côté de Solène…");
   S.f.finRod=1;
@@ -1352,10 +1352,10 @@ SCENES.devanture={nom:'Devanture du pub',reflet:1,
     for(let i=0;i<50;i++){const x=(i*61+t/12)%W,y=(i*37+t/3)%H;P(x,y,1,3,'rgba(210,225,240,.4)')}
   },
   objets:[
-    {id:'porte_pub',nom:'porte du pub',x:140,y:90,w:40,h:70,defaut:'utiliser',regarder:()=>say('rod',S.f.vraiNom?"La porte du pub. Je n'y retourne pas tout de suite.":"Une porte en bois, une poignée en laiton. Ça sent la bière d'ici."),
+    {id:'porte_pub',nom:'porte du pub',x:140,y:90,w:40,h:70,defaut:'utiliser',regarder:()=>say('rod',S.f.vraiNom?"La porte du pub. Je n'y retourne pas tout de suite.":"Ça sent la bière d'ici."),
       utiliser:async()=>{if(S.f.vraiNom)return say('rod',"Non. J'ai eu ma dose de mystère pour aujourd'hui.");await marcher('rod',160);anim('rod').dir='dos';await go('pub',{rod:296})}},
     {id:'enseigne',nom:'enseigne',x:30,y:64,w:260,h:22,loin:1,regarder:()=>say('rod',S.f.vraiNom?"« The English Pub ». Original. Très original.":"« Chaos Order ». Drôle de nom pour un pub. Ça promet.")},
-    {id:'vitrines',nom:'vitrines',x:34,y:92,w:252,h:52,loin:1,regarder:"Des vitrines dorées, des silhouettes accoudées au comptoir. Ça a l'air chaleureux. Et poisseux."},
+    {id:'vitrines',nom:'vitrines',x:34,y:92,w:252,h:52,loin:1,regarder:"Ça a l'air chaleureux. Et poisseux."},
     {id:'ardoise',nom:'ardoise',x:232,y:124,w:26,h:34,regarder:"« Happy hour de 17 h à 19 h ». Il est 14 h. Évidemment."},
   ],
   ambiance:{nuit:.3,voile:'#1a2440',teinte:'rgba(90,130,200,.3)'},

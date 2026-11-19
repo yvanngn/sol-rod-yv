@@ -95,72 +95,72 @@ Corrige directement le texte (garde le numéro) et renvoie-moi la liste. 🆕 = 
 
 ## Chapitre 1 — Rod : pub, toilettes, ballon (`src/js/chapitre1_rod.js`)
 
-86. 🆕 *objet (inventaire)* — Une paille en plastique. Une espèce en voie de disparition.  `chapitre1_rod.js:13`
-87. 🆕 *objet (inventaire)* — Une fléchette ramassée sous la cible. Pointe un peu tordue, plumes jaunes.  `chapitre1_rod.js:14`
-88. 🆕 *objet (inventaire)* — Une paille avec une fléchette dedans. Ma sarbacane maison. Les ingénieurs n'ont qu'à bien se tenir.  `chapitre1_rod.js:15`
-89. 🆕 *objet (inventaire)* — Une boulette de papier tombée du ballon.  `chapitre1_rod.js:16`
-90. 🆕 **Rod** — Une fléchette dans une paille… et voilà une sarbacane. Les années de collège n'auront pas servi à rien.  `chapitre1_rod.js:20`
-91. 🆕 *regarder* — Deux types qui jouent aux fléchettes. Concentration maximale. Comme des tireurs d'élite. Avec des pintes.  `chapitre1_rod.js:57`
-92. 🆕 **héros courant** — …Il vise depuis dix minutes.  `chapitre1_rod.js:58`
-93. 🆕 — Chut. Je vise.  `chapitre1_rod.js:58`
-94. 🆕 *regarder* — Une cible de fléchettes. Un peu de travers. Comme les joueurs.  `chapitre1_rod.js:59`
-95. 🆕 *prendre* — Je ne pars pas avec la cible. On me casserait les deux jambes.  `chapitre1_rod.js:59`
-96. 🆕 *regarder* — Une fléchette par terre, sous la cible. Quelqu'un a raté son coup.  `chapitre1_rod.js:62`
-97. 🆕 **Rod** — Personne ne la réclame ? Je la garde.  `chapitre1_rod.js:63`
-98. 🆕 *regarder* — Les toilettes. Enfin.  `chapitre1_rod.js:64`
-99. 🆕 *regarder* — Le barman. Il essuie le même verre depuis que je suis entré. Il doit être très propre, ce verre.  `chapitre1_rod.js:68`
-100. 🆕 **Rod** — Juste les toilettes, merci.  `chapitre1_rod.js:69`
-101. 🆕 — Qu'est-ce que je vous sers ?  `chapitre1_rod.js:69`
-102. 🆕 — Au fond à gauche. Et on consomme après, hein.  `chapitre1_rod.js:69`
-103. 🆕 *regarder* — Un vrai comptoir en bois, poisseux juste ce qu'il faut.  `chapitre1_rod.js:76`
-104. 🆕 *regarder* — Des habitués, de dos, accoudés au comptoir. Ils n'ont pas bougé depuis 1987.  `chapitre1_rod.js:79`
-105. 🆕 **héros courant** — Conversation passionnante. Je reviendrai.  `chapitre1_rod.js:80`
-106. 🆕 *regarder* — Un bol de cacahuètes. Offertes. Touchées par cinquante mains avant moi.  `chapitre1_rod.js:81`
-107. 🆕 **Rod** — Mmh. La différence avec la barre du métro, c'est que ça a du goût.  `chapitre1_rod.js:82`
-108. 🆕 **Rod** — Encore une poignée… Bon, j'arrête, je vais devoir payer un loyer.  `chapitre1_rod.js:82`
-109. 🆕 *regarder* — Un verre plein de pailles en plastique. Tiens, il y en a encore ici.  `chapitre1_rod.js:84`
-110. 🆕 **Rod** — J'en ai déjà une. Pensons aux tortues.  `chapitre1_rod.js:85`
-111. 🆕 **Rod** — Je t'emprunte une paille.  `chapitre1_rod.js:85`
-112. 🆕 *regarder* — La porte qui donne sur la rue.  `chapitre1_rod.js:86`
-113. 🆕 *utiliser* — Pas tout de suite. Je suis venu pour les toilettes, je repars avec les toilettes. Enfin… façon de parler.  `chapitre1_rod.js:86`
-114. 🆕 **Rod** — Ah, un vrai pub anglais. Moquette qui colle, fléchettes et bière tiède. Parfait.  `chapitre1_rod.js:95`
-115. 🆕 **Rod** — Mais d'abord : les toilettes.  `chapitre1_rod.js:95`
-116. 🆕 **Rod** — …Pardon.  `chapitre1_rod.js:104`
-117. 🆕 **Rod** — Long manteau noir et lunettes noires, dans un pub. Il se croit dans un film, lui.  `chapitre1_rod.js:104`
-118. 🆕 *regarder* — La porte. Le pub est derrière.  `chapitre1_rod.js:129`
-119. 🆕 *regarder* — Bon. Je suis venu pour ça.  `chapitre1_rod.js:130`
-120. 🆕 *utiliser* — …C'est fait. On n'en parlera plus jamais.  `chapitre1_rod.js:130`
-121. 🆕 *regarder* — Un lavabo et un miroir. J'ai une tête de type qui vient de traverser Londres sous la pluie.  `chapitre1_rod.js:131`
-122. 🆕 *utiliser* — Je me lave les mains. Je suis prof, je montre l'exemple.  `chapitre1_rod.js:131`
-123. 🆕 *regarder* — Un sèche-mains. Il souffle autant qu'un ministre en conférence de presse.  `chapitre1_rod.js:132`
-124. 🆕 *utiliser* — Vrrrrr… Il sèche surtout ma patience.  `chapitre1_rod.js:132`
-125. 🆕 *regarder* — Une cabine fermée. « OCCUPÉ ». Je préfère ne rien savoir.  `chapitre1_rod.js:133`
-126. 🆕 *utiliser* — C'est occupé. Ou alors c'est fermé depuis 1987.  `chapitre1_rod.js:133`
-127. 🆕 *regarder* — Un ballon de baudruche rouge, coincé au plafond. Avec un singe dessiné dessus… un singe aux cymbales. Il a un regard de fou.  `chapitre1_rod.js:135`
-128. 🆕 *prendre* — Trop haut. Même en sautant. Surtout en sautant.  `chapitre1_rod.js:136`
-129. 🆕 **Rod** — Allez… dans le mille !  `chapitre1_rod.js:137`
-130. 🆕 **Rod** — …Elle monte, elle touche, et elle retombe à plat. Pas assez de force.  `chapitre1_rod.js:137`
-131. 🆕 **Rod** — Je la ramasse. Il me faudrait de quoi la propulser.  `chapitre1_rod.js:137`
-132. 🆕 — Souffler dans une paille vide sur un ballon ? Je vais juste le décoiffer.  `chapitre1_rod.js:138`
-133. 🆕 **Rod** — BAM ! En plein dans le singe.  `chapitre1_rod.js:140`
-134. 🆕 **Rod** — Tiens, une boulette de papier est tombée du ballon.  `chapitre1_rod.js:140`
-135. 🆕 *regarder* — Une boulette de papier, tombée du ballon.  `chapitre1_rod.js:141`
-136. 🆕 **Rod** — Des toilettes de pub anglais. Carrelage vert, néon qui clignote. Exactement comme dans les films.  `chapitre1_rod.js:147`
-137. 🆕 **Rod** — Une boulette de papier… Il y a quelque chose d'écrit.  `chapitre1_rod.js:151`
-138. 🆕 **Rod** — « Je t'appelle… »  `chapitre1_rod.js:152`
-139. 🆕 **Rod** — Hein ? Le papier… le ballon… Plus rien. J'ai rêvé ou quoi ?  `chapitre1_rod.js:155`
-140. 🆕 **Rod** — Et j'ai même pas encore bu.  `chapitre1_rod.js:155`
-141. 🆕 **Rod** — …« The English Pub » ?  `chapitre1_rod.js:160`
-142. 🆕 **Rod** — C'était écrit « Chaos Order » tout à l'heure. J'en suis sûr. Enfin… presque sûr.  `chapitre1_rod.js:160`
-143. 🆕 — Pendant ce temps, du côté de Solène…  `chapitre1_rod.js:162`
-144. 🆕 **Rod** — La porte du pub. Je n'y retourne pas tout de suite.  `chapitre1_rod.js:195`
-145. 🆕 — Une porte en bois, une poignée en laiton. Ça sent la bière d'ici.  `chapitre1_rod.js:195`
-146. 🆕 **Rod** — Non. J'ai eu ma dose de mystère pour aujourd'hui.  `chapitre1_rod.js:196`
-147. 🆕 **Rod** — « The English Pub ». Original. Très original.  `chapitre1_rod.js:197`
-148. 🆕 — « Chaos Order ». Drôle de nom pour un pub. Ça promet.  `chapitre1_rod.js:197`
-149. 🆕 *regarder* — Des vitrines dorées, des silhouettes accoudées au comptoir. Ça a l'air chaleureux. Et poisseux.  `chapitre1_rod.js:198`
-150. 🆕 *regarder* — « Happy hour de 17 h à 19 h ». Il est 14 h. Évidemment.  `chapitre1_rod.js:199`
-151. 🆕 **Rod** — « Chaos Order »… Drôle de nom pour un pub. Bon, tant qu'il y a des toilettes.  `chapitre1_rod.js:204`
+86. *objet (inventaire)* — Une paille en plastique. Une espèce en voie de disparition.  `chapitre1_rod.js:13`
+87. 🆕 *objet (inventaire)* — Une fléchette piquante comme la sauce.  `chapitre1_rod.js:14`
+88. 🆕 *objet (inventaire)* — Une sarbacane, c'est ingénieux !  `chapitre1_rod.js:15`
+89. 🆕 *objet (inventaire)* — Une simple boule de papier.  `chapitre1_rod.js:16`
+90. 🆕 **Rod** — Hey c'est pas bête ça, je vais pouvoir tirer plus fort.  `chapitre1_rod.js:20`
+91. 🆕 *regarder* — Ils ont l'air irra…cibles ! Haha  `chapitre1_rod.js:57`
+92. **héros courant** — …Il vise depuis dix minutes.  `chapitre1_rod.js:58`
+93. — Chut. Je vise.  `chapitre1_rod.js:58`
+94. 🆕 *regarder* — Une cible de fléchettes.  `chapitre1_rod.js:59`
+95. 🆕 *prendre* — Je ne suis pas un voleur.  `chapitre1_rod.js:59`
+96. 🆕 *regarder* — Quelqu'un a raté son coup.  `chapitre1_rod.js:62`
+97. **Rod** — Personne ne la réclame ? Je la garde.  `chapitre1_rod.js:63`
+98. 🆕 *regarder* — C'est soit les toilettes, soit la cuisine vu l'odeur.  `chapitre1_rod.js:64`
+99. 🆕 *regarder* — Le barman n'a pas l'air commode. Ni armoire.  `chapitre1_rod.js:68`
+100. **Rod** — Juste les toilettes, merci.  `chapitre1_rod.js:69`
+101. — Qu'est-ce que je vous sers ?  `chapitre1_rod.js:69`
+102. 🆕 — Là-bas au fond. Et on consomme après, hein.  `chapitre1_rod.js:69`
+103. 🆕 *regarder* — Un vrai comptoir en bois.  `chapitre1_rod.js:76`
+104. 🆕 *regarder* — Des poivrots, ça fait pitié… Si j'avais le temps, je me serais bien joint à eux.  `chapitre1_rod.js:79`
+105. **héros courant** — Conversation passionnante. Je reviendrai.  `chapitre1_rod.js:80`
+106. 🆕 *regarder* — Un bol de cacahuètes qui ont dû être touchées par cinquante mains sales avant moi.  `chapitre1_rod.js:81`
+107. **Rod** — Mmh. La différence avec la barre du métro, c'est que ça a du goût.  `chapitre1_rod.js:82`
+108. 🆕 **Rod** — Encore une poignée… Comme ça je ne viens plus les mains vides la prochaine fois chez Solène.  `chapitre1_rod.js:82`
+109. 🆕 *regarder* — Un verre plein de pailles.  `chapitre1_rod.js:84`
+110. **Rod** — J'en ai déjà une. Pensons aux tortues.  `chapitre1_rod.js:85`
+111. **Rod** — Je t'emprunte une paille.  `chapitre1_rod.js:85`
+112. *regarder* — La porte qui donne sur la rue.  `chapitre1_rod.js:86`
+113. *utiliser* — Pas tout de suite. Je suis venu pour les toilettes, je repars avec les toilettes. Enfin… façon de parler.  `chapitre1_rod.js:86`
+114. 🆕 **Rod** — Ah, un vrai pub anglais. Odeur d'urine, fléchettes et bière tiède. Parfait.  `chapitre1_rod.js:95`
+115. **Rod** — Mais d'abord : les toilettes.  `chapitre1_rod.js:95`
+116. **Rod** — …Pardon.  `chapitre1_rod.js:104`
+117. 🆕 **Rod** — Quel drôle de zigoto. Il fait peur.  `chapitre1_rod.js:104`
+118. 🆕 *regarder* — La porte du pub.  `chapitre1_rod.js:129`
+119. *regarder* — Bon. Je suis venu pour ça.  `chapitre1_rod.js:130`
+120. *utiliser* — …C'est fait. On n'en parlera plus jamais.  `chapitre1_rod.js:130`
+121. 🆕 *regarder* — Un lavabo et un miroir. J'ai une tête de bleureurlour.  `chapitre1_rod.js:131`
+122. 🆕 *utiliser* — Bon allez je me lave les mains pour une fois.  `chapitre1_rod.js:131`
+123. 🆕 *regarder* — Un sèche-mains. Ça me rappelle un dessin animé. Blanche-Fesse et le sèche-main.  `chapitre1_rod.js:132`
+124. 🆕 *utiliser* — Vrrrrr… Il marche celui-là au moins.  `chapitre1_rod.js:132`
+125. *regarder* — Une cabine fermée. « OCCUPÉ ». Je préfère ne rien savoir.  `chapitre1_rod.js:133`
+126. 🆕 *utiliser* — C'est occupé. « It's occupède !! »  `chapitre1_rod.js:133`
+127. 🆕 *regarder* — Un ballon rouge. C'est quoi ce dessin bizarre ?  `chapitre1_rod.js:135`
+128. 🆕 *prendre* — Trop haut. Même en sautant.  `chapitre1_rod.js:136`
+129. **Rod** — Allez… dans le mille !  `chapitre1_rod.js:137`
+130. 🆕 **Rod** — …Pas assez de force.  `chapitre1_rod.js:137`
+131. 🆕 **Rod** — Je la ramasse. Il me faudrait quelque chose en plus je pense.  `chapitre1_rod.js:137`
+132. — Souffler dans une paille vide sur un ballon ? Je vais juste le décoiffer.  `chapitre1_rod.js:138`
+133. 🆕 **Rod** — BAM ! En plein dans le mille.  `chapitre1_rod.js:140`
+134. 🆕 **Rod** — Tiens, keskecé ?  `chapitre1_rod.js:140`
+135. 🆕 *regarder* — Une boulette de papier.  `chapitre1_rod.js:141`
+136. 🆕 **Rod** — Des toilettes de pub anglais.  `chapitre1_rod.js:147`
+137. **Rod** — Une boulette de papier… Il y a quelque chose d'écrit.  `chapitre1_rod.js:151`
+138. **Rod** — « Je t'appelle… »  `chapitre1_rod.js:152`
+139. **Rod** — Hein ? Le papier… le ballon… Plus rien. J'ai rêvé ou quoi ?  `chapitre1_rod.js:155`
+140. **Rod** — Et j'ai même pas encore bu.  `chapitre1_rod.js:155`
+141. **Rod** — …« The English Pub » ?  `chapitre1_rod.js:160`
+142. 🆕 **Rod** — Il y a quelque chose d'étrange dans ce coin…  `chapitre1_rod.js:160`
+143. — Pendant ce temps, du côté de Solène…  `chapitre1_rod.js:162`
+144. **Rod** — La porte du pub. Je n'y retourne pas tout de suite.  `chapitre1_rod.js:195`
+145. 🆕 — Ça sent la bière d'ici.  `chapitre1_rod.js:195`
+146. **Rod** — Non. J'ai eu ma dose de mystère pour aujourd'hui.  `chapitre1_rod.js:196`
+147. **Rod** — « The English Pub ». Original. Très original.  `chapitre1_rod.js:197`
+148. — « Chaos Order ». Drôle de nom pour un pub. Ça promet.  `chapitre1_rod.js:197`
+149. 🆕 *regarder* — Ça a l'air chaleureux. Et poisseux.  `chapitre1_rod.js:198`
+150. *regarder* — « Happy hour de 17 h à 19 h ». Il est 14 h. Évidemment.  `chapitre1_rod.js:199`
+151. **Rod** — « Chaos Order »… Drôle de nom pour un pub. Bon, tant qu'il y a des toilettes.  `chapitre1_rod.js:204`
 
 ## Londres (base), studio, Quai des Brumes (`src/js/scenes.js`)
 
@@ -230,7 +230,7 @@ Corrige directement le texte (garde le numéro) et renvoie-moi la liste. 🆕 = 
 212. *défaut* — On ne donne pas d'objets à ce qui n'est pas une personne.  `moteur.js:14`
 213. *défaut* — Non merci, garde-le.  `moteur.js:14`
 214. *défaut* — Pour une personne, essaie plutôt Donner.  `moteur.js:15`
-215. 🆕 **héros courant** — Ces deux-là ne vont pas ensemble.  `moteur.js:67`
+215. **héros courant** — Ces deux-là ne vont pas ensemble.  `moteur.js:67`
 216. *portrait* — Yvan. Lunettes, moustache, sac de parc d'attractions. Ex-guitariste du groupe.  `moteur.js:78`
 217. *portrait* — Rod. Barbe, pull rouge, avis tranché sur le foot, le rap et la politique.  `moteur.js:79`
 218. *portrait* — Solène. Psy, lectrice de BD compulsive, amie d'enfance des deux autres.  `moteur.js:80`

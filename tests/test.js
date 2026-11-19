@@ -57,11 +57,11 @@ const scenarios={
     v('Rod devant le pub « Chaos Order », seul jouable',G.S.scene==='devanture'&&G.S.perso==='rod'&&G.S.verrou==='rod'&&dit(G,'Chaos Order'));
     await G.action('porte_pub');v('Rod entre dans le pub',G.S.scene==='pub');
     await G.action('cacahuetes');v('cacahuètes : ça a du goût',dit(G,'ça a du goût'));
-    await G.action('pailles');v('pailles : il y en a encore ici',dit(G,'il y en a encore ici'));
+    await G.action('pailles');v('pailles : regarder',dit(G,'Un verre plein de pailles'));
     await G.action('pailles','prendre');await G.action('flechette');v('paille et fléchette prises',G.aObjet('paille')&&G.aObjet('flechette'));
     for(const o of['barman','clients','joueurs'])await G.action(o);
     await G.action('toilettes');v('l\'homme au manteau sort des toilettes, Rod entre',G.S.scene==='toilettes'&&G.S.f.manteauWC);
-    await G.action('ballon',undefined,'flechette');v('fléchette seule : tombe à plat',dit(G,'à plat')&&G.aObjet('flechette')&&!G.S.f.ballon);
+    await G.action('ballon',undefined,'flechette');v('fléchette seule : pas assez de force',dit(G,'Pas assez de force')&&G.aObjet('flechette')&&!G.S.f.ballon);
     await G.combiner('flechette','paille');v('fléchette + paille = sarbacane',G.aObjet('sarbacane')&&!G.aObjet('paille')&&!G.aObjet('flechette'));
     await G.action('ballon',undefined,'sarbacane');v('ballon éclaté, boulette au sol',G.S.f.ballon);
     await G.action('boulette');v('« Je t\'appelle… », tout disparaît, transition vers Solène',dit(G,'Je t\'appelle')&&G.S.f.ballonParti&&!G.aObjet('boulette')&&dit(G,'côté de Solène')&&G.S.f.finRod);
