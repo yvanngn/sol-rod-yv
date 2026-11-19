@@ -9,7 +9,7 @@ function flou(px,fn){g.save();if(FLOU&&!TEST)g.filter=`blur(${px}px)`;fn();g.res
 // --- lumière : voile sombre percé par les sources, puis halo additif (bloom) ---
 const LC=document.createElement('canvas');LC.width=W;LC.height=H;const lg=LC.getContext('2d');
 function eclairer(sc){
-  const A=sc.ambiance;if(!A)return;const L=typeof sc.lumieres==='function'?sc.lumieres():(sc.lumieres||[]);
+  const A=sc.ambiance;if(!A)return;const L=(typeof sc.lumieres==='function'?sc.lumieres():(sc.lumieres||[])).map(l=>({...l,x:l.x-Math.round(S.cam)}));
   lg.globalCompositeOperation='source-over';lg.clearRect(0,0,W,H);lg.fillStyle=A.voile;lg.globalAlpha=A.nuit;lg.fillRect(0,0,W,H);lg.globalAlpha=1;
   lg.globalCompositeOperation='destination-out';
   for(const l of L){const v=l.vacille?1+Math.sin(Date.now()/90+l.x)*.06:1,d=lg.createRadialGradient(l.x,l.y,0,l.x,l.y,l.r*v);
@@ -45,4 +45,4 @@ const GR=document.createElement('canvas');GR.width=W;GR.height=H;
 function grain(){g.globalAlpha=.035;g.drawImage(GR,(Math.random()*6|0)-3,(Math.random()*6|0)-3);g.globalAlpha=1}
 
 // Chaîne de rendu appelée par dessiner()
-function postEffets(sc){particules(sc);eclairer(sc);sc.premierPlan&&sc.premierPlan();sc.dessinAvant&&sc.dessinAvant(g);grain()}
+function postEffets(sc){eclairer(sc);sc.premierPlan&&sc.premierPlan();sc.dessinAvant&&sc.dessinAvant(g);grain()}

@@ -89,7 +89,7 @@ function profil(s,f,bob){ // regarde vers la droite
   P(-1+o,T+1,3,11,arm);P(-1+o,T+1,1,11,shade(arm,1.2));P(-1+o,T+12,3,2,s.skin);
 }
 // marche animée (remplace celle du moteur)
-marcher=function(n,x){x=Math.max(8,Math.min(W-8,x));const a=anim(n);
+marcher=function(n,x){x=Math.max(8,Math.min((SCENES[S.scene]?.largeur||W)-8,x));const a=anim(n);
   if(TEST){S.pos[n]=x;return Promise.resolve()}
   return new Promise(r=>{const pas=()=>{const d=x-S.pos[n];
     if(Math.abs(d)<1.5){S.pos[n]=x;a.marche=false;a.dir='face';return r()}

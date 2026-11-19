@@ -80,6 +80,8 @@ Drapeaux d'histoire utilisés : `S.f.pose`, `S.f.traverse`, `S.f.fin`, `S.f.cabi
 
 - 19/11/2026 : bulle des joueurs de fléchettes nette (texte HTML). Rod : plus de « …Pardon. » quand l'homme au manteau sort ; en entrant aux toilettes : « Qu'est-ce que c'est que ça ? ». Chapitre 3 (Solène) codé jusqu'au studio. Mot de passe 3.
 
+- 19/11/2026 : mots de passe plus affichés dans le menu. Magasin de bonbons agrandi (2 écrans de large, la caméra suit Solène) et en profondeur (mur du fond lointain, îlots au milieu, étals au premier plan avec enseignes : sucettes, chocolats, nounours, bonbons bleus, cannes & berlingots, barbe à papa). Solène entre par la porte (clochette), pause, les enfants courent, « Ohlala, j'en aurai jamais, c'est sûr et certain ! ». Gros nounours en chocolat façon nounours à la guimauve, marron, à hauteur de Solène.
+
 ## 6. Idées de Claude (💡 à valider)
 - (aucune en attente)
 

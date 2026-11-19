@@ -51,7 +51,7 @@ function pubFlechettes(){const t=Date.now(),D=DARTS;
 }
 function bulleJoueur(){const D=DARTS,el=$('bulleJ');if(TEST||!el)return;
   if(!D.bulle||Date.now()-D.bulle.t>2200){el.hidden=true;return}
-  if(el.textContent!==D.bulle.txt)el.textContent=D.bulle.txt;el.style.left=(D.px[D.bulle.n]/W*100)+'%';el.style.top=((SOL-60)/H*100)+'%';el.hidden=false}
+  if(el.textContent!==D.bulle.txt)el.textContent=D.bulle.txt;el.style.left=((D.px[D.bulle.n]-S.cam)/W*100)+'%';el.style.top=((SOL-60)/H*100)+'%';el.hidden=false}
 SCENES.pub={nom:'Chaos Order',
   dessin(){const t=Date.now();
     vgrad(0,96,'#1f3a2c','#16281f');for(let x=0;x<W;x+=10)P(x,8,1,88,'rgba(255,255,255,.04)');

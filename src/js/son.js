@@ -123,6 +123,7 @@ function sfx(nom,arg){
     case 'souffle':bruit(t,.35,.25,'bandpass',900,o,2500);break;
     case 'pop':bruit(t,.12,.6,'lowpass',2500,o);osc('sine',90,t,.2,.25,o);bruit(t+.02,.3,.2,'highpass',4000,o);break;
     case 'toc':bruit(t,.05,.18,'lowpass',700,o);break;
+    case 'clochette':[0,.12].forEach(d=>{osc('sine',2637,t+d,.6,.05,SON.rev);osc('sine',3520,t+d,.3,.02,o)});break;
     case 'sifflet':[0,.05].forEach(d=>{const x=osc('sawtooth',880,t+d,1.6,.04,SON.rev,.1,.4);x.frequency.linearRampToValueAtTime(940,t+1.4)});bruit(t,1.8,.1,'highpass',4000,o);break;
   }
 }

@@ -40,6 +40,7 @@ existants : on invente tout — Académie d'Hiverlune, Quai des Brumes…).
 - Son (`son.js`, Web Audio synthétisé) : musique par scène `MUSIQUE_SCENE` (thèmes `THEMES` : anniv, soir, magie, brumes ; voix = [instrument, [[midi|accord|null, temps]…]]),
   ambiances `AMBIANCE_SCENE`, bruitages `sfx(nom)`. Menu ⚙ : musique / bruitages avec bouton couper + curseur de volume (`volume(type,v)`, `regler(type,oui)`, mémorisés), revoir le tuto. Démarre au premier geste du joueur.
 - Mots de passe (menu ⚙, `main.js`) : `CHAPITRES` = { '0': intro, '1': chapitre 1 (Yvan), '2': chapitre 2 (Rod), '3': chapitre 3 (Solène) } ; le code recharge la page avec `#chN`. Ajouter un chapitre = une entrée dans `CHAPITRES`.
+- Scènes larges : `largeur:640` sur la scène → la caméra suit le héros (`S.cam`, clics et lumières décalés automatiquement ; `S.camSnap` au changement de scène). Exemple : `bonbons`.
 - Mise en scène : `noir(true/false)` (fondu), `carton(texte)`, `titreJeu()`, `tuto()`, `anim(n).rire`.
 
 ## Tests

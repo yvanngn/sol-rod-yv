@@ -13,6 +13,7 @@ function charger(){
 }
 const v=(nom,c)=>{if(c){ok++}else{ko++;console.log('ÉCHEC :',nom)}};
 const dit=(G,t)=>G.window.TEST.log.some(l=>l.includes(t));
+const W_=320;
 const scenarios={
   async graphisme(G){let ok2=true;try{for(const n of['yvan','rod','solene'])for(const d of['face','d','g','dos']){G.S.anim[n]={dir:d,pas:7,marche:true};G.drawPerso(n,100)}
     for(const k in G.SCENES){G.S.f.traverse=0;G.SCENES[k].dessin(CTX);(G.SCENES[k].objets||[]).forEach(o=>o.dessin&&o.dessin(CTX));if(k==='bus'){G.S.f.busNormal=1;G.SCENES[k].dessin(CTX);G.S.f.busNormal=0}G.SCENES[k].devant&&G.SCENES[k].devant();G.S.scene=k;G.SCENES[k].dessinAvant&&G.SCENES[k].dessinAvant();G.postEffets(G.SCENES[k]);G.reflets()}}catch(e){ok2=false;console.log(e.message)}v('dessin persos, décors, lumières, particules, reflets',ok2)},
@@ -80,8 +81,8 @@ const scenarios={
   },
   async solene(G){
     await G.debutSolene();G.switchPerso('rod');
-    v('Solène au magasin de bonbons, seule jouable',G.S.scene==='bonbons'&&G.S.perso==='solene'&&G.S.verrou==='solene'&&dit(G,"j'en aurai jamais"));
-    for(const o of['etageres','sucettes','chocolats','nounours_etal','bonbons_bleus','berlingots','cannes','barbe','enfants','vigile'])await G.action(o,'regarder');
+    v('Solène au magasin de bonbons, seule jouable',G.S.scene==='bonbons'&&G.S.perso==='solene'&&G.S.verrou==='solene'&&dit(G,"c'est sûr et certain")&&G.SCENES.bonbons.largeur>W_);
+    for(const o of['etageres','ilots','sucettes','chocolats','nounours_etal','bonbons_bleus','cannes','barbe','enfants','vigile','gros_nounours'])await G.action(o,'regarder');
     await G.action('enfants');await G.action('vigile');
     await G.action('porte_bonbons');v('sans rien, Solène ne part pas',G.S.scene==='bonbons'&&!G.S.f.joute);
     v('le gros nounours se « vole »',G.SCENES.bonbons.objets.find(o=>o.id==='gros_nounours').voler);
