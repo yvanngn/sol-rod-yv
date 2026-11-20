@@ -168,7 +168,7 @@ Corrige directement le texte (garde le numéro) et renvoie-moi la liste. 🆕 = 
 
 ## Chapitre 3 — Solène : bonbons, vigile, retrouvailles (`src/js/chapitre3_solene.js`)
 
-156. 🆕 *objet (inventaire)* — Une bonne grosse guimauve ! Miam !  `chapitre3_solene.js:9`
+156. *objet (inventaire)* — Une bonne grosse guimauve ! Miam !  `chapitre3_solene.js:9`
 157. — Je vous ai vue.  `chapitre3_solene.js:14`
 158. — Et mes fesses aussi ?  `chapitre3_solene.js:14`
 159. — Vous allez me suivre.  `chapitre3_solene.js:15`
@@ -183,22 +183,22 @@ Corrige directement le texte (garde le numéro) et renvoie-moi la liste. 🆕 = 
 168. — Pour la prochaine aussi, j'espère.  `chapitre3_solene.js:19`
 169. — Dépêchez-vous de partir avant que je ne change d'avis.  `chapitre3_solene.js:20`
 170. — OK, mais je peux avoir un bonbon ?  `chapitre3_solene.js:20`
-171. 🆕 *regarder* — Réglisse, fraises, crocodiles… Mon dentiste va pleurer.  `chapitre3_solene.js:77`
-172. 🆕 *regarder* — Encore des bonbons ! Partout !!  `chapitre3_solene.js:78`
-173. 🆕 *regarder* — Des sucettes de toutes les couleurs.  `chapitre3_solene.js:79`
-174. 🆕 *regarder* — Des tablettes de chocolat. Ahh si seulement François aussi en avait !  `chapitre3_solene.js:80`
-175. 🆕 *regarder* — Des nounours en guimauve de toutes les couleurs. Ils me regardent avec envie.  `chapitre3_solene.js:81`
-176. 🆕 *regarder* — Des schtroumpfs ! Bouuuh je suis Gargamel !  `chapitre3_solene.js:82`
-177. 🆕 *regarder* — Des cannes en sucre et des roudoudous à 1 franc !  `chapitre3_solene.js:83`
-178. 🆕 *regarder* — Une machine à barbe à papa. J'en rêve !  `chapitre3_solene.js:84`
-179. 🆕 *regarder* — Un énorme nounours en chocolat !  `chapitre3_solene.js:86`
-180. 🆕 **Solène** — Hop. Dans le sac à dos. Ni vu, ni connu !  `chapitre3_solene.js:87`
-181. 🆕 **Solène** — Une psy qui vole un nounours. Il faudra que j'en parle à ma psy.  `chapitre3_solene.js:87`
-182. 🆕 *regarder* — Deux enfants qui courent partout. Amenez-moi un flingue ! Pour moi !  `chapitre3_solene.js:90`
+171. *regarder* — Réglisse, fraises, crocodiles… Mon dentiste va pleurer.  `chapitre3_solene.js:77`
+172. *regarder* — Encore des bonbons ! Partout !!  `chapitre3_solene.js:78`
+173. *regarder* — Des sucettes de toutes les couleurs.  `chapitre3_solene.js:79`
+174. *regarder* — Des tablettes de chocolat. Ahh si seulement François aussi en avait !  `chapitre3_solene.js:80`
+175. *regarder* — Des nounours en guimauve de toutes les couleurs. Ils me regardent avec envie.  `chapitre3_solene.js:81`
+176. *regarder* — Des schtroumpfs ! Bouuuh je suis Gargamel !  `chapitre3_solene.js:82`
+177. *regarder* — Des cannes en sucre et des roudoudous à 1 franc !  `chapitre3_solene.js:83`
+178. *regarder* — Une machine à barbe à papa. J'en rêve !  `chapitre3_solene.js:84`
+179. *regarder* — Un énorme nounours en chocolat !  `chapitre3_solene.js:86`
+180. **Solène** — Hop. Dans le sac à dos. Ni vu, ni connu !  `chapitre3_solene.js:87`
+181. **Solène** — Une psy qui vole un nounours. Il faudra que j'en parle à ma psy.  `chapitre3_solene.js:87`
+182. *regarder* — Deux enfants qui courent partout. Amenez-moi un flingue ! Pour moi !  `chapitre3_solene.js:90`
 183. **Un enfant** — On a le droit à UN bonbon ! UN ! UN !  `chapitre3_solene.js:91`
 184. **Solène** — …Et vous en êtes à combien ?  `chapitre3_solene.js:91`
 185. **Un enfant** — Quarante-deux !  `chapitre3_solene.js:91`
-186. 🆕 *regarder* — Un vigile immense !  `chapitre3_solene.js:94`
+186. *regarder* — Un vigile immense !  `chapitre3_solene.js:94`
 187. **Solène** — Bonjour !  `chapitre3_solene.js:95`
 188. **Solène** — Très bavard. J'adore.  `chapitre3_solene.js:95`
 189. *regarder* — La porte du magasin, avec sa petite clochette.  `chapitre3_solene.js:96`
