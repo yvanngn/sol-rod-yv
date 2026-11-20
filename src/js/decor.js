@@ -13,7 +13,7 @@ SCENES.londres.dessin=()=>{
   batiment(0,32,58,'#6e5649','#ffd98a');batiment(58,48,52,'#83695a','#ffe7a8');batiment(110,28,70,'#5b4a4c','#ffd98a');batiment(180,44,60,'#776154','#ffe1a0');
   // studio
   P(240,18,80,SOL-18,'#241a3a');P(240,18,80,3,'#3b2d5c');vgrad(24,40,'#f6d77a','#c99a3a',244,72);
-  g.fillStyle='#241a3a';g.font='bold 8px Georgia';g.fillText('STUDIO TOUR',249,35);
+  g.fillStyle='#241a3a';g.font='bold 8px Georgia';texte('STUDIO TOUR',249,35);
   for(let i=0;i<7;i++)halo(248+i*10,44,6,'rgb(255,220,140)',.6),P(247+i*10,43,2,2,'#fff3c4');
   P(272,106,34,54,'#100a1c');P(274,108,30,52,'#3a2d5c');P(288,108,1,52,'#241a3a');vgrad(108,160,'rgba(255,210,120,.25)','rgba(0,0,0,0)',274,30);
   // trottoir mouillé
@@ -33,14 +33,14 @@ SCENES.londres.dessinAvant=()=>vignette();
 SCENES.quai.dessin=()=>{
   P(0,0,W,SOL,'#3a221d');
   for(let y=22;y<SOL;y+=8)for(let x=(y/8%2)*8-8;x<W;x+=16){const v=.85+((x*13+y*7)%9)/30;P(x,y,15,7,shade('#7a3b2e',v));P(x,y,15,1,shade('#7a3b2e',v*1.2))}
-  vgrad(0,26,'#120d1c','#241a32');g.fillStyle='#f0c766';g.font='bold 7px Georgia';g.fillText('PHOTO SOUVENIR — TRAVERSEZ LE MUR',64,15);
+  vgrad(0,26,'#120d1c','#241a32');g.fillStyle='#f0c766';g.font='bold 7px Georgia';texte('PHOTO SOUVENIR — TRAVERSEZ LE MUR',64,15);
   // panneau suspendu
-  P(166,22,1,14,'#555');P(194,22,1,14,'#555');P(150,36,60,18,'#1b1424');P(150,36,60,1,'#f0c766');g.fillStyle='#fff';g.font='bold 7px Georgia';g.fillText('Quai  ?',163,49);
+  P(166,22,1,14,'#555');P(194,22,1,14,'#555');P(150,36,60,18,'#1b1424');P(150,36,60,1,'#f0c766');g.fillStyle='#fff';g.font='bold 7px Georgia';texte('Quai  ?',163,49);
   // spot sur le chariot
   halo(232,120,70,'rgb(255,214,150)',.35);
   // boutique
   P(18,58,44,76,'#1b1824');P(22,62,36,44,'#2e5a46');for(let i=0;i<4;i++)P(25+i*8,70,5,26,['#c8242c','#e8c35a','#2a5ab8','#3a8a4a'][i]);
-  P(22,62,36,1,'#7fd0a8');g.fillStyle='#f0c766';g.font='bold 7px Georgia';g.fillText('Boutique',26,118);halo(40,84,30,'rgb(120,220,170)',.2);
+  P(22,62,36,1,'#7fd0a8');g.fillStyle='#f0c766';g.font='bold 7px Georgia';texte('Boutique',26,118);halo(40,84,30,'rgb(120,220,170)',.2);
   vgrad(SOL,H,'#6a6470','#3e3944');P(0,SOL,W,1,'#b0a9b8');for(let x=0;x<W;x+=40)P(x,SOL+6,30,1,'#58525e');
 };
 SCENES.quai.dessinAvant=()=>vignette();
@@ -60,7 +60,7 @@ SCENES.autre.dessin=()=>{const t=T0();
   for(let i=0;i<5;i++){P(i*80-20,64,60,22,'#1d1538');P(i*80,54,20,10,'#1d1538');P(i*80+8,46,4,8,'#1d1538')}});
   // lanternes flottantes
   for(let i=0;i<6;i++){const x=22+i*52,y=30+Math.sin(t/600+i)*4;halo(x+3,y+4,18,'rgb(255,190,90)',.45);P(x,y,7,9,'#ffcf6a');P(x+1,y+1,5,7,'#fff0b8');P(x,y,7,1,'#8a5a2a');P(x,y+8,7,1,'#8a5a2a')}
-  g.fillStyle='#e8c35a';g.font='bold 7px Georgia';g.fillText("QUAI DES BRUMES — départ pour l'Académie d'Hiverlune",22,80);
+  g.fillStyle='#e8c35a';g.font='bold 7px Georgia';texte("QUAI DES BRUMES — départ pour l'Académie d'Hiverlune",22,80);
   // train
   P(0,88,W,50,'#174f3b');P(0,88,W,3,'#2f8a68');P(0,132,W,4,'#0e3326');P(0,108,W,2,'#c9a44a');
   for(let x=8;x<W;x+=36){P(x,94,22,12,'#ffe3a0');P(x,94,22,1,'#fff6d8');halo(x+11,100,16,'rgb(255,220,150)',.25)}

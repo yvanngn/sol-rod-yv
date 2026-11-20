@@ -61,9 +61,9 @@ SCENES.pub={nom:'Chaos Order',
     P(22,82,36,36,'#2a160c');cibleFlechettes(40,100);P(64,84,20,26,'#1a1a18');P(64,84,20,1,'#6a4020');for(let i=0;i<5;i++)P(67,88+i*4,6+(i*5)%9,1,'#d8d8d0');
     // porte des toilettes
     P(106,92,28,68,'#2a160c');if(S.porteWC){P(109,95,22,65,'#0e1a14');vgrad(95,160,'rgba(150,255,190,.25)','rgba(0,0,0,0)',109,22)}else{P(109,95,22,65,'#5a3420');P(112,100,16,24,'#4a2a18');P(112,130,16,24,'#4a2a18');P(126,128,3,3,'#c9a040')}
-    P(112,82,16,9,'#c9a040');g.fillStyle='#2a160c';g.font="bold 7px Georgia";g.fillText('WC',114,89);
+    P(112,82,16,9,'#c9a040');g.fillStyle='#2a160c';g.font="bold 7px Georgia";texte('WC',114,89);
     // enseigne + étagères de bouteilles + miroir
-    P(176,22,120,14,'#1a0e08');P(176,22,120,1,'#c9a040');g.fillStyle='#e8c35a';g.font="bold 8px Georgia";g.fillText('CHAOS ORDER',206,32);
+    P(176,22,120,14,'#1a0e08');P(176,22,120,1,'#c9a040');g.fillStyle='#e8c35a';g.font="bold 8px Georgia";texte('CHAOS ORDER',206,32);
     P(166,40,140,58,'#2a160c');vgrad(44,94,'rgba(200,220,230,.18)','rgba(120,140,150,.08)',196,80);
     for(let r=0;r<2;r++){P(166,64+r*26,140,3,'#6a4020');for(let i=0;i<22;i++){const x=168+i*6.2,h=10+(i*7+r*3)%6;P(x,64+r*26-h,4,h,['#2a6a3a','#8a4a1a','#c8c0a0','#3a2a5a','#a02a2a','#d8a030'][(i+r)%6]);P(x+1,64+r*26-h-2,2,2,'#222')}}
     // porte d'entrée
@@ -196,7 +196,7 @@ SCENES.devanture={nom:'Devanture du pub',reflet:1,
     P(20,60,280,100,'#1e4a34');P(20,60,280,2,'#3a7a5a');P(20,158,280,2,'#12301f');
     // enseigne
     P(30,64,260,22,'#0e2618');P(32,66,256,18,'#163a28');P(32,66,256,1,'#c9a040');P(32,83,256,1,'#c9a040');
-    g.fillStyle='#f0c766';g.font="bold 13px Georgia";g.textAlign='center';g.fillText(vrai?'THE ENGLISH PUB':'CHAOS ORDER',160,80);g.textAlign='left';
+    g.fillStyle='#f0c766';g.font="bold 13px Georgia";g.textAlign='center';texte(vrai?'THE ENGLISH PUB':'CHAOS ORDER',160,80);g.textAlign='left';
     // vitrines éclairées
     [[34,92],[196,92]].forEach(([x,y])=>{P(x,y,90,52,'#c8902a');vgrad(y,y+52,'#ffd890','#c87a2a',x+2,86);
       for(let i=0;i<3;i++){P(x+8+i*28,y+24,10,28,'#3a2214');P(x+10+i*28,y+18,6,7,'#3a2214')}P(x+44,y,2,52,'#1e4a34');P(x,y+26,90,2,'#1e4a34');P(x,y+50,90,4,'#12301f')});

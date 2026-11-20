@@ -62,6 +62,9 @@ Drapeaux d'histoire utilisés : `S.f.pose`, `S.f.traverse`, `S.f.fin`, `S.f.cabi
 | Ballon au singe (Rod) | Fléchette (pub) + Paille (pub) combinées en sarbacane, utilisée sur le ballon | Ballon éclaté, boulette « Je t'appelle… », tout disparaît ; transition vers Solène |
 
 ## 5. Contradictions et points à vérifier
+- « Fin du chapitre 1 » s'affiche après la partie de Solène, alors que les mots de passe numérotent 1 = Yvan, 2 = Rod, 3 = Solène. À trancher : tout cet ensemble est-il le chapitre 1 (avec 3 parties), ou garde-t-on 3 chapitres ?
+- Le château demandé « très inspiré de celui d'un film » est dessiné comme un château original (tours pointues, lac, pont), pas comme une copie.
+- L'ancienne énigme de la photo (Rod pose, Yvan prend la photo, scène « Quai des Brumes ») n'est plus jouée : remplacée par la photo du touriste et le réveil.
 - Joute : « Je vous ai vu » écrit « Je vous ai vue » (le vigile parle à Solène) ; « vieilesse » corrigé en « vieillesse », « 3eme » en « 3e ».
 - Les schtroumpfs en bonbon sont nommés dans le texte mais dessinés comme de simples bonbons bleus (pas de personnage connu dessiné).
 - Numérotation (19/11/2026, demande de l'utilisateur) : chapitre 1 = Yvan, chapitre 2 = Rod, chapitre 3 = Solène (à venir). Mots de passe du menu : 0 intro, 1, 2. Le fichier de code de Rod s'appelle encore `chapitre1_rod.js`.
@@ -83,6 +86,8 @@ Drapeaux d'histoire utilisés : `S.f.pose`, `S.f.traverse`, `S.f.fin`, `S.f.cabi
 - 19/11/2026 : mots de passe plus affichés dans le menu. Magasin de bonbons agrandi (2 écrans de large, la caméra suit Solène) et en profondeur (mur du fond lointain, îlots au milieu, étals au premier plan avec enseignes : sucettes, chocolats, nounours, bonbons bleus, cannes & berlingots, barbe à papa). Solène entre par la porte (clochette), pause, les enfants courent, « Ohlala, j'en aurai jamais, c'est sûr et certain ! ». Gros nounours en chocolat façon nounours à la guimauve, marron, à hauteur de Solène.
 
 - 20/11/2026 : répliques du chapitre 2 validées telles quelles ; répliques du chapitre 3 corrigées par l'utilisateur (Solène parle de François, de Gargamel, des roudoudous à 1 franc ; le nounours dans l'inventaire devient « Une bonne grosse guimauve ! Miam ! »).
+
+- 20/11/2026 : pancartes nettes (texte haute résolution). Solène sort visiblement le singe en chocolat de son sac. Studio agrandi (2 écrans) : Rod fait le pitre sur une statue de loup-garou, Yvan fait semblant de voler sur un balai, Solène demande à un touriste de les photographier ; les 3 poussent le chariot, « Un… Deux… Trois ! », scintillement, le mur les avale. Noir, gros plan sur Solène qui se réveille (« Euuuh… les gars ? »), la caméra recule, Rod « What ? », Yvan « C'est quoi ça ? », la caméra tourne vers un grand château au bord d'un lac (dessin original), puis « Fin du chapitre 1 ».
 
 ## 6. Idées de Claude (💡 à valider)
 - (aucune en attente)

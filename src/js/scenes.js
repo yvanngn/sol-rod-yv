@@ -12,7 +12,7 @@ SCENES.londres={nom:'Londres',
     [[0,30,60,'#6b5a52'],[60,45,50,'#7c6a5e'],[110,25,70,'#5e5050'],[180,40,60,'#706260']].forEach(([x,y,w,c])=>{
       R(x,y,w,SOL-y,c);for(let i=x+6;i<x+w-6;i+=12)for(let j=y+8;j<SOL-20;j+=16)R(i,j,6,9,'#cfd8e0')});
     // studio
-    R(240,20,80,SOL-20,'#2b2140');R(244,26,72,12,'#e8c35a');g.fillStyle='#2b2140';g.font='7px monospace';g.fillText('STUDIO TOUR',252,35);
+    R(240,20,80,SOL-20,'#2b2140');R(244,26,72,12,'#e8c35a');g.fillStyle='#2b2140';g.font='7px monospace';texte('STUDIO TOUR',252,35);
     R(274,110,30,50,'#140e22');R(276,112,26,46,'#3a2d5c');
     R(0,SOL,W,20,'#4b4b55');R(0,SOL,W,2,'#8b8b95');
     // cabine
@@ -60,10 +60,10 @@ SCENES.quai={nom:'Studio',
   dessin(g){
     R(0,0,W,SOL,'#3a2a2a');
     for(let y=0;y<SOL;y+=8)for(let x=(y/8%2)*8;x<W;x+=16)R(x,y,15,7,'#7a3b2e');
-    R(0,0,W,22,'#1b1424');g.fillStyle='#e8c35a';g.font='7px monospace';g.fillText('— PHOTO SOUVENIR : TRAVERSEZ LE MUR —',58,14);
-    R(150,40,60,18,'#1b1424');g.fillStyle='#fff';g.fillText('QUAI  ?',163,52);
+    R(0,0,W,22,'#1b1424');g.fillStyle='#e8c35a';g.font='7px monospace';texte('— PHOTO SOUVENIR : TRAVERSEZ LE MUR —',58,14);
+    R(150,40,60,18,'#1b1424');g.fillStyle='#fff';texte('QUAI  ?',163,52);
     R(0,SOL,W,20,'#5a5560');R(0,SOL,W,2,'#9a95a0');
-    R(20,60,40,70,'#22202a');R(24,64,32,40,'#5e7');g.fillStyle='#123';g.fillText('Boutique',25,118);
+    R(20,60,40,70,'#22202a');R(24,64,32,40,'#5e7');g.fillStyle='#123';texte('Boutique',25,118);
   },
   objets:[
     {id:'chariot',nom:'chariot à bagages',x:212,y:116,w:40,h:44,cache:()=>S.f.traverse,
@@ -108,7 +108,7 @@ SCENES.autre={nom:'Quai des Brumes',
     R(0,92,W,46,'#1e6b4f');for(let x=8;x<W;x+=36)R(x,98,22,14,'#ffe9a8');R(0,136,W,4,'#111');
     for(let x=10;x<W;x+=40){R(x,138,14,8,'#222')}
     R(0,SOL-14,W,14,'#3a3448');R(0,SOL,W,20,'#2a2436');
-    g.fillStyle='#e8c35a';g.font='7px monospace';g.fillText('QUAI DES BRUMES — départ pour l\'Académie d\'Hiverlune',20,84);
+    g.fillStyle='#e8c35a';g.font='7px monospace';texte('QUAI DES BRUMES — départ pour l\'Académie d\'Hiverlune',20,84);
   },
   objets:[
     {id:'train',nom:'train vert',x:0,y:92,w:W,h:48,loin:1,regarder:"Un train à vapeur vert émeraude. Il fume des volutes qui ont la forme de petits oiseaux."},

@@ -45,7 +45,7 @@ Object.assign(ob('bus'),{nom:'bus-musée',defaut:'utiliser',
   regarder:()=>say('moi',S.f.busNormal?"Juste un bus. Ça me rassure et ça m'inquiète à la fois.":"Un bus avec une pancarte : « MUSÉE DES CURIOSITÉS — ENTRÉE LIBRE »."),
   utiliser:entrerBus});
 SCENES.londres.objets.push(
-  {id:'pancarte',nom:'pancarte du bus',x:154,y:141,w:34,h:9,loin:1,dessin(){if(S.f.busNormal)return;P(154,141,34,9,'#f3e2b0');P(154,141,34,1,'#fff6d8');g.fillStyle='#5a1020';g.font="bold 7px Georgia";g.fillText('MUSÉE',159,148)},
+  {id:'pancarte',nom:'pancarte du bus',x:154,y:141,w:34,h:9,loin:1,dessin(){if(S.f.busNormal)return;P(154,141,34,9,'#f3e2b0');P(154,141,34,1,'#fff6d8');g.fillStyle='#5a1020';g.font="bold 7px Georgia";texte('MUSÉE',159,148)},
     cache:()=>S.f.busNormal,regarder:()=>ob('bus').regarder()},
   {id:'passants',nom:'',x:0,y:0,w:0,h:0,dessin:passants},
   {id:'manteau',nom:'',x:0,y:0,w:0,h:0,cache:()=>S.pnj.manteau==null,dessin(){drawPerso('manteau',S.pnj.manteau)}},
@@ -80,13 +80,13 @@ SCENES.cabine={nom:'Cabine téléphonique',fixe:1,
     // montants rouges et petits carreaux
     P(0,0,30,H,'#a51a24');P(290,0,30,H,'#a51a24');P(0,0,W,14,'#8a141c');P(28,0,2,H,'#e0434c');P(290,0,2,H,'#e0434c');
     for(let x of[30,60,230,260])P(x,14,2,H-14,'#c3202b');for(let y=40;y<H;y+=36){P(30,y,60,2,'#c3202b');P(230,y,60,2,'#c3202b')}
-    g.fillStyle='#fff';P(110,3,100,9,'#f3eee0');g.fillStyle='#8a141c';g.font="bold 8px Georgia";g.fillText('TELEPHONE',130,11);
+    g.fillStyle='#fff';P(110,3,100,9,'#f3eee0');g.fillStyle='#8a141c';g.font="bold 8px Georgia";texte('TELEPHONE',130,11);
     // panneau du fond
     P(90,14,140,H-14,'#2a2226');P(90,14,140,2,'#3e3438');P(90,14,2,H-14,'#3e3438');
     [[98,30,16,10,'#f0c766'],[100,46,12,14,'#7ad0ff'],[206,28,14,9,'#ff8ab0'],[208,44,12,12,'#b8f08a']].forEach(([x,y,w,h,c])=>{P(x,y,w,h,c);P(x+2,y+3,w-4,1,'#333');P(x+2,y+6,w-6,1,'#333')});
     // boîtier du téléphone
     P(126,26,72,92,'#1a1a1e');P(126,26,72,2,'#3a3a40');P(196,26,2,92,'#0c0c0e');
-    P(134,34,56,12,'#0e1a12');g.fillStyle='#5aff8a';g.font="bold 7px Georgia";g.fillText(S.cab==='sonne'?'APPEL…':'INSÉRER',140,43);
+    P(134,34,56,12,'#0e1a12');g.fillStyle='#5aff8a';g.font="bold 7px Georgia";texte(S.cab==='sonne'?'APPEL…':'INSÉRER',140,43);
     P(176,52,10,3,'#000');P(175,51,12,1,'#55555c');
     for(let r=0;r<4;r++)for(let c=0;c<3;c++){P(140+c*12,58+r*12,9,9,'#b8b8c0');P(140+c*12,58+r*12,9,1,'#e0e0e8');P(143+c*12,61+r*12,3,3,'#55555c')}
     P(176,64,10,40,'#26262c');P(178,66,6,36,'#0c0c0e');
@@ -179,7 +179,7 @@ SCENES.bus={nom:'Bus-musée',
     {id:'hote',nom:"l'hôte",humain:true,x:30,y:112,w:24,h:48,cache:BIZARRE,dessin(){const a=anim('hote');a.marche=false;a.dir='face';drawPerso('hote',40);
         P(24,132,32,28,'#5a3020');P(22,130,36,3,'#8a5a30');P(22,130,36,1,'#b88a50');for(let y=137;y<158;y+=7)P(26,y,28,1,'#4a2418');
         P(43,121,12,9,'#2a2a2e');P(44,122,10,3,'#5aff8a');P(45,127,2,1,'#888');P(49,127,2,1,'#888');P(25,124,6,6,'#f0ece0');P(26,125,4,1,'#8a8a8a');
-        P(27,140,24,9,'#f3e2b0');g.fillStyle='#5a1020';g.font="bold 7px Georgia";g.fillText('0 £',33,147)},
+        P(27,140,24,9,'#f3e2b0');g.fillStyle='#5a1020';g.font="bold 7px Georgia";texte('0 £',33,147)},
       regarder:"Un drôle de gus qui a l'air de faire la tronche.",
       parler:()=>dire([['hote',"Entrez, entrez ! C'est gratuit ! N'ayez pas peur !"],['moi',"C'est le « n'ayez pas peur » qui me fait peur."]]),
       with:{piece:()=>say('hote',"Gardez-la, mon ami. Ici, tout est gratuit… presque tout.")}},

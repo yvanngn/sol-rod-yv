@@ -82,3 +82,4 @@ header{position:relative}
 .reglage.mdp{grid-template-columns:1fr auto}.reglage.mdp .pct{grid-column:1/-1;order:3}.reglage.mdp input{grid-column:auto;font:inherit;background:#1a1430;color:var(--texte);border:1px solid var(--bord);border-radius:8px;padding:4px 8px;height:auto;width:100%}.reglage.mdp button{width:auto!important;padding:0 12px}
 .reglage.mdp .nom{grid-column:1/-1}.reglage.mdp #mdpOK{background:var(--or);color:#1b1407;border-radius:8px;height:30px}
 #bulleJ{position:absolute;transform:translate(-50%,-100%);background:rgba(10,6,4,.82);color:#fff3d0;font-family:"Fondamento",Georgia,serif;font-size:clamp(11px,1.6vw,15px);padding:3px 9px;border-radius:10px;border:1px solid var(--bord);white-space:nowrap;pointer-events:none;z-index:2}
+#cvT{position:absolute;left:0;top:0;width:100%;aspect-ratio:16/9;pointer-events:none}

@@ -47,18 +47,18 @@ const ETALS=[ // étals au premier plan : x, largeur, enseigne
 SCENES.bonbons={nom:'Le magasin de bonbons',largeur:LGB,
   dessin(){const t=Date.now();
     // fond : mur du fond lointain, haut et petit (profondeur)
-    vgrad(0,92,'#ffd6e8','#ffc2dc');for(let x=0;x<LGB;x+=16)P(x,0,8,92,'rgba(255,255,255,.22)');
+    vgrad(0,92,'#ffd6e8','#ffc2dc',0,LGB);for(let x=0;x<LGB;x+=16)P(x,0,8,92,'rgba(255,255,255,.22)');
     P(0,0,LGB,8,'#e84a8a');for(let x=0;x<LGB;x+=12){g.fillStyle=(x/12)%3?((x/12)%3===1?'#ffe080':'#7ad0ff'):'#ff9ad0';g.beginPath();g.moveTo(x,8);g.lineTo(x+12,8);g.lineTo(x+6,15);g.fill()}
-    P(250,18,140,14,'#e84a8a');P(250,18,140,1,'#fff');g.fillStyle='#fff';g.font="bold 9px Georgia";g.textAlign='center';g.fillText('CONFISERIE',320,28);g.textAlign='left';
+    P(250,18,140,14,'#e84a8a');P(250,18,140,1,'#fff');g.fillStyle='#fff';g.font="bold 9px Georgia";g.textAlign='center';texte('CONFISERIE',320,28);g.textAlign='left';
     for(let r=0;r<2;r++){P(10,52+r*20,LGB-20,2,'#c88a5a');for(let i=0;i<46;i++){const cc=[['#ff4a4a','#ffe040'],['#4ab0ff','#fff'],['#7ae07a','#ff7ab0'],['#ffa040','#7a4ab0'],['#c84aff','#ffe040']][(i+r)%5];bocal(14+i*13.5,38+r*20,cc[0],cc[1],.65)}}
     // sol en perspective : lignes qui fuient vers le fond
-    vgrad(92,H,'#f6e6f2','#e0c4dc');for(let i=-12;i<=12;i++){g.strokeStyle='rgba(232,74,138,.12)';g.beginPath();g.moveTo(320+i*28,92);g.lineTo(320+i*60,H);g.stroke()}
+    vgrad(92,H,'#f6e6f2','#e0c4dc',0,LGB);for(let i=-12;i<=12;i++){g.strokeStyle='rgba(232,74,138,.12)';g.beginPath();g.moveTo(320+i*28,92);g.lineTo(320+i*60,H);g.stroke()}
     for(let k=1;k<6;k++){const y=92+(H-92)*(k/6)**1.5;P(0,y,LGB,1,'rgba(232,74,138,.12)')}
     // îlots du milieu (plus loin, plus petits)
     [[90,'#7ad0ff'],[250,'#ffe080'],[410,'#b8f08a']].forEach(([x,c])=>{P(x,96,90,18,'#d88aa8');P(x,96,90,2,'#f0b0c8');for(let i=0;i<9;i++){P(x+4+i*9.5,88,7,8,i%2?c:'#ff9ad0');P(x+5+i*9.5,86,5,2,'#fff')}});
     // étals du premier plan
     for(const[x,w,nom]of ETALS){P(x,118,w,24,'#c8783a');P(x,118,w,2,'#e8a060');P(x+4,124,w-8,16,'#a85a2a');P(x+2,142,4,18,'#8a4a20');P(x+w-6,142,4,18,'#8a4a20');
-      P(x+6,127,w-12,10,'#fff3f8');P(x+6,127,w-12,1,'#e84a8a');g.fillStyle='#c8246a';g.font="bold 7px Georgia";g.textAlign='center';g.fillText(nom,x+w/2,135);g.textAlign='left'}
+      P(x+6,127,w-12,10,'#fff3f8');P(x+6,127,w-12,1,'#e84a8a');g.fillStyle='#c8246a';g.font="bold 7px Georgia";g.textAlign='center';texte(nom,x+w/2,135);g.textAlign='left'}
     // contenus
     [[48,'#ff4a8a'],[62,'#4ab0ff'],[76,'#7ae07a'],[90,'#ffa040'],[104,'#c84aff']].forEach(([x,c],i)=>{P(x,98-i%2*4,1,20,'#f2f2f2');for(let k=0;k<3;k++){g.strokeStyle=k%2?'#fff':c;g.lineWidth=2;g.beginPath();g.arc(x,94-i%2*4,6-k*2,0,7);g.stroke()}g.lineWidth=1});
     for(let i=0;i<10;i++){P(140+i*6,112-(i%3)*3,5,8,i%2?'#5a2a10':'#7a3a18');P(141+i*6,113-(i%3)*3,3,1,'#c99a3a')}
@@ -71,7 +71,9 @@ SCENES.bonbons={nom:'Le magasin de bonbons',largeur:LGB,
     // porte d'entrée (à droite)
     P(604,56,36,104,'#7a3a5a');if(S.porteB){P(608,60,28,100,'#3a6a8a');vgrad(60,160,'rgba(255,255,255,.25)','rgba(0,0,0,0)',608,28)}else{P(608,60,28,46,'#cfe6ff');P(608,110,28,48,'#8a4a6a')}P(610,52,6,4,'#f0c766');
     // le singe en chocolat dans la main de Solène
-    if(S.choco&&S.pos.solene!=null)singeChoco(S.pos.solene+12,SOL-26);
+    if(S.choco&&S.pos.solene!=null){const x=S.pos.solene,u=Math.min(1,(Date.now()-(S.chocoT||0))/800);
+      P(x+8,SOL-20,10,12,'#6a4a2a');P(x+8,SOL-20,10,2,'#8a6a40');P(x+9,SOL-24,8,4,'#5a3a20');
+      singeChoco(x+13,SOL-16-14*u);if(u>=1&&(Date.now()/250|0)%2)P(x+22,SOL-48,2,6,'#fff3b0'),P(x+22,SOL-40,2,2,'#fff3b0')}
   },
   objets:[
     {id:'etageres',nom:'bocaux du fond',x:10,y:30,w:620,h:50,loin:1,regarder:"Réglisse, fraises, crocodiles… Mon dentiste va pleurer."},
@@ -126,7 +128,7 @@ async function sortirBonbons(){
   }
   anim('vigile').tremble=true;await pause(900);anim('vigile').tremble=false;
   await say('solene',"…Bon, bon. Je fouille mon sac.");
-  sfx('papier');await pause(500);retirer('nounours');S.choco=1;
+  sfx('papier');await pause(500);retirer('nounours');S.choco=1;S.chocoT=Date.now();await pause(900);sfx('tada');await pause(700);
   await dire([['solene',"Tenez… je pensais que c'était un nounours."],['solene',"…C'est un singe. En chocolat. Avec des cymbales. J'aurais juré que c'était un nounours."]]);
   sfx('magie');S.papierBrille=1;await pause(1100);sfx('eblouit');S.flash=1;await pause(300);S.flash=1;S.choco=0;S.papierBrille=0;
   await go('vetements',{solene:150});
@@ -134,7 +136,7 @@ async function sortirBonbons(){
 
 // ----- Le magasin de vêtements (après le scintillement) -----
 SCENES.vetements={nom:'Magasin de vêtements',
-  dessin(){vgrad(0,SOL,'#e8e4dc','#cfc8bc');P(0,0,W,10,'#2a2a2a');P(20,16,80,14,'#c8242c');g.fillStyle='#fff';g.font="bold 9px Georgia";g.fillText('SOLDES -50 %',27,26);
+  dessin(){vgrad(0,SOL,'#e8e4dc','#cfc8bc');P(0,0,W,10,'#2a2a2a');P(20,16,80,14,'#c8242c');g.fillStyle='#fff';g.font="bold 9px Georgia";texte('SOLDES -50 %',27,26);
     [[40,'#3a6ab0'],[110,'#c8a030'],[220,'#7a2a5a']].forEach(([x,c])=>{P(x,52,60,2,'#888');for(let i=0;i<8;i++){P(x+2+i*7,54,1,4,'#888');P(x+i*7,58,6,30,shade(c,.8+(i%3)*.15))}P(x+2,54,2,106,'#888');P(x+56,54,2,106,'#888')});
     [[180,'#f2f2f2'],[290,'#1a1a1a']].forEach(([x,c])=>{P(x-6,70,12,12,'#d8c8b0');P(x-8,82,16,30,c);P(x-1,112,2,36,'#888');P(x-8,148,16,3,'#888')});
     P(140,60,26,80,'#9ab0b8');P(142,62,22,76,'#c8d8e0');vgrad(SOL,H,'#b8b0a8','#988f88')},
@@ -163,9 +165,8 @@ async function retrouvailles(){
   await say('tous',"Vous n'allez pas me croire !");
   await noir(true);
   sfx('bip');await say('narr',"Le contrôleur scanne les trois billets. Bip, bip, bip.");
-  S.f.vu_quai=1;await go('quai',{yvan:80,rod:120,solene:160});
+  S.f.vu_quai=1;await go('quai',{yvan:220,rod:250,solene:280});
   await noir(false);
   await SCENES.quai.entree();
-  await carton("À suivre…");
 }
 MUSIQUE_SCENE.bonbons='bonbons';MUSIQUE_SCENE.vetements='magie';

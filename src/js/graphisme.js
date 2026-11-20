@@ -21,12 +21,15 @@ function drawPerso(n,x,y=SOL){
   const f=a.marche?Math.floor(a.pas/5)%4:0,bob=a.rire?((Date.now()/110|0)%2?-1:0):(f%2?-1:0),pr=a.dir==='g'||a.dir==='d';
   g.save();g.translate(x,y);if(a.dir==='g')g.scale(-1,1);
   if(s.cape)cape(s,bob,pr,a.dir==='dos');
+  dortCourant=!!(S.dort&&S.dort[n]);
   if(pr)profil(s,f,bob);else face(s,f,bob,a.dir==='dos');
+  dortCourant=false;
   if(s.robe)robe(s,bob,pr);if(s.echarpe)echarpe(s,bob,pr,a.dir==='dos');if(s.chapeau)chapeau(s,bob,pr);
   g.restore();
   if(n===S.perso&&!TEST&&!S.reflet){const t=Date.now()/300;P(x-1,y-48+Math.round(Math.sin(t)),3,2,'#f0c766');P(x,y-46+Math.round(Math.sin(t)),1,1,'#f0c766')}
 }
-function cligne(){return(Date.now()/120|0)%35===0}
+let dortCourant=false;
+function cligne(){return dortCourant||(Date.now()/120|0)%35===0}
 function face(s,f,bob,dos){
   const L=13,lg=f===1?2:0,ld=f===3?2:0,T=-L-15+bob,H0=T-11,ey=H0+5,arm=s.veste||shade(s.top,.85),sw=f===1?1:f===3?-1:0;
   // jambes

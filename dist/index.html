@@ -84,6 +84,7 @@ header{position:relative}
 .reglage.mdp{grid-template-columns:1fr auto}.reglage.mdp .pct{grid-column:1/-1;order:3}.reglage.mdp input{grid-column:auto;font:inherit;background:#1a1430;color:var(--texte);border:1px solid var(--bord);border-radius:8px;padding:4px 8px;height:auto;width:100%}.reglage.mdp button{width:auto!important;padding:0 12px}
 .reglage.mdp .nom{grid-column:1/-1}.reglage.mdp #mdpOK{background:var(--or);color:#1b1407;border-radius:8px;height:30px}
 #bulleJ{position:absolute;transform:translate(-50%,-100%);background:rgba(10,6,4,.82);color:#fff3d0;font-family:"Fondamento",Georgia,serif;font-size:clamp(11px,1.6vw,15px);padding:3px 9px;border-radius:10px;border:1px solid var(--bord);white-space:nowrap;pointer-events:none;z-index:2}
+#cvT{position:absolute;left:0;top:0;width:100%;aspect-ratio:16/9;pointer-events:none}
 </style></head>
 <body>
 <div id="jeu">
@@ -92,7 +93,7 @@ header{position:relative}
       <div class="reglage"><span class="nom">Musique</span><span class="pct" id="pMus"></span><button id="tMus"></button><input type="range" id="vMus" min="0" max="100" aria-label="Volume de la musique"></div>
       <div class="reglage"><span class="nom">Bruitages</span><span class="pct" id="pSfx"></span><button id="tSfx"></button><input type="range" id="vSfx" min="0" max="100" aria-label="Volume des bruitages"></div><div class="reglage mdp"><span class="nom">🔑 Mot de passe</span><span class="pct" id="mdpMsg"></span><input id="mdp" inputmode="numeric" autocomplete="off" placeholder="ex. 1" aria-label="Mot de passe"><button id="mdpOK">Aller</button></div>
       <button id="tTuto">❓ Revoir le tuto</button></div></header>
-  <div id="scene"><canvas id="cv" width="320" height="180"></canvas>
+  <div id="scene"><canvas id="cv" width="320" height="180"></canvas><canvas id="cvT" width="1280" height="720"></canvas>
     <div id="info"></div><div id="etiquette" hidden></div><div id="roue" hidden></div>
     <div id="noir"></div>
     <div id="titre" hidden><span class="etoiles">✦ ✧ ✦</span><h2>Witch'rok</h2><small>Cliquer pour continuer</small></div>
@@ -125,6 +126,11 @@ const DEF={regarder:"Rien de spécial.",prendre:"Je ne peux pas prendre ça.",ut
   utiliserSurPersonne:"Pour une personne, essaie plutôt Donner."};
 const OBJETS={}; // id -> {nom, icone(g)}
 const SCENES={};
+const cvT=document.getElementById('cvT'),gT=cvT&&cvT.getContext?cvT.getContext('2d'):null,KT=4;
+// Texte des panneaux : dessiné net sur une couche haute résolution, à la bonne place (caméra, zoom compris)
+function texte(t,x,y){if(TEST||!gT)return;const m=g.getTransform(),sx=m.a*x+m.c*y+m.e,sy=m.b*x+m.d*y+m.f,k=Math.hypot(m.a,m.b);
+  gT.font=g.font.replace(/(\d+(?:\.\d+)?)px/,(a,n)=>(n*k*KT)+'px');gT.fillStyle=g.fillStyle;gT.textAlign=g.textAlign;gT.textBaseline=g.textBaseline;
+  gT.shadowColor='rgba(0,0,0,.5)';gT.shadowBlur=2;gT.fillText(t,sx*KT,sy*KT)}
 const R=(x,y,w,h,c,ctx=g)=>{ctx.fillStyle=c;ctx.fillRect(Math.round(x),Math.round(y),w,h)};
 
 // ----- Dialogues -----
@@ -190,7 +196,7 @@ const PORTRAITS={yvan:"Yvan. Lunettes, moustache, sac de parc d'attractions. Ex-
   solene:"Solène. Psy, lectrice de BD compulsive, amie d'enfance des deux autres."};
 function objetsCliquables(){const sc=SCENES[S.scene];return[...(sc.objets||[]).filter(o=>!o.cache||!o.cache()),...heroObjets()]}
 function dessiner(){
-  const sc=SCENES[S.scene];if(TEST)return;requestAnimationFrame(dessiner);if(!sc)return;g.clearRect(0,0,W,H);
+  const sc=SCENES[S.scene];if(TEST)return;requestAnimationFrame(dessiner);if(!sc)return;g.clearRect(0,0,W,H);if(gT)gT.clearRect(0,0,W*KT,H*KT);
   const LG=sc.largeur||W,pp=S.pos[S.perso]??LG/2,cible_=Math.max(0,Math.min(LG-W,pp-W/2));S.cam=S.camSnap?cible_:S.cam+(cible_-S.cam)*.12;S.camSnap=0;
   g.save();g.translate(-Math.round(S.cam),0);sc.dessin(g);
   (sc.objets||[]).forEach(o=>o.dessin&&(!o.cache||!o.cache())&&o.dessin(g));
@@ -283,12 +289,15 @@ function drawPerso(n,x,y=SOL){
   const f=a.marche?Math.floor(a.pas/5)%4:0,bob=a.rire?((Date.now()/110|0)%2?-1:0):(f%2?-1:0),pr=a.dir==='g'||a.dir==='d';
   g.save();g.translate(x,y);if(a.dir==='g')g.scale(-1,1);
   if(s.cape)cape(s,bob,pr,a.dir==='dos');
+  dortCourant=!!(S.dort&&S.dort[n]);
   if(pr)profil(s,f,bob);else face(s,f,bob,a.dir==='dos');
+  dortCourant=false;
   if(s.robe)robe(s,bob,pr);if(s.echarpe)echarpe(s,bob,pr,a.dir==='dos');if(s.chapeau)chapeau(s,bob,pr);
   g.restore();
   if(n===S.perso&&!TEST&&!S.reflet){const t=Date.now()/300;P(x-1,y-48+Math.round(Math.sin(t)),3,2,'#f0c766');P(x,y-46+Math.round(Math.sin(t)),1,1,'#f0c766')}
 }
-function cligne(){return(Date.now()/120|0)%35===0}
+let dortCourant=false;
+function cligne(){return dortCourant||(Date.now()/120|0)%35===0}
 function face(s,f,bob,dos){
   const L=13,lg=f===1?2:0,ld=f===3?2:0,T=-L-15+bob,H0=T-11,ey=H0+5,arm=s.veste||shade(s.top,.85),sw=f===1?1:f===3?-1:0;
   // jambes
@@ -553,6 +562,8 @@ function sfx(nom,arg){
     case 'pop':bruit(t,.12,.6,'lowpass',2500,o);osc('sine',90,t,.2,.25,o);bruit(t+.02,.3,.2,'highpass',4000,o);break;
     case 'toc':bruit(t,.05,.18,'lowpass',700,o);break;
     case 'clochette':[0,.12].forEach(d=>{osc('sine',2637,t+d,.6,.05,SON.rev);osc('sine',3520,t+d,.3,.02,o)});break;
+    case 'hurlement':{const x=osc('sawtooth',300,t,1.4,.05,SON.rev,.2,.4);x.frequency.linearRampToValueAtTime(620,t+.5);x.frequency.linearRampToValueAtTime(380,t+1.4);break}
+    case 'tada':[0,4,7,12].forEach((n,i)=>osc('sine',MIDI(76+n),t+i*.06,.7,.06,SON.rev));break;
     case 'sifflet':[0,.05].forEach(d=>{const x=osc('sawtooth',880,t+d,1.6,.04,SON.rev,.1,.4);x.frequency.linearRampToValueAtTime(940,t+1.4)});bruit(t,1.8,.1,'highpass',4000,o);break;
   }
 }
@@ -593,7 +604,7 @@ SCENES.londres={nom:'Londres',
     [[0,30,60,'#6b5a52'],[60,45,50,'#7c6a5e'],[110,25,70,'#5e5050'],[180,40,60,'#706260']].forEach(([x,y,w,c])=>{
       R(x,y,w,SOL-y,c);for(let i=x+6;i<x+w-6;i+=12)for(let j=y+8;j<SOL-20;j+=16)R(i,j,6,9,'#cfd8e0')});
     // studio
-    R(240,20,80,SOL-20,'#2b2140');R(244,26,72,12,'#e8c35a');g.fillStyle='#2b2140';g.font='7px monospace';g.fillText('STUDIO TOUR',252,35);
+    R(240,20,80,SOL-20,'#2b2140');R(244,26,72,12,'#e8c35a');g.fillStyle='#2b2140';g.font='7px monospace';texte('STUDIO TOUR',252,35);
     R(274,110,30,50,'#140e22');R(276,112,26,46,'#3a2d5c');
     R(0,SOL,W,20,'#4b4b55');R(0,SOL,W,2,'#8b8b95');
     // cabine
@@ -641,10 +652,10 @@ SCENES.quai={nom:'Studio',
   dessin(g){
     R(0,0,W,SOL,'#3a2a2a');
     for(let y=0;y<SOL;y+=8)for(let x=(y/8%2)*8;x<W;x+=16)R(x,y,15,7,'#7a3b2e');
-    R(0,0,W,22,'#1b1424');g.fillStyle='#e8c35a';g.font='7px monospace';g.fillText('— PHOTO SOUVENIR : TRAVERSEZ LE MUR —',58,14);
-    R(150,40,60,18,'#1b1424');g.fillStyle='#fff';g.fillText('QUAI  ?',163,52);
+    R(0,0,W,22,'#1b1424');g.fillStyle='#e8c35a';g.font='7px monospace';texte('— PHOTO SOUVENIR : TRAVERSEZ LE MUR —',58,14);
+    R(150,40,60,18,'#1b1424');g.fillStyle='#fff';texte('QUAI  ?',163,52);
     R(0,SOL,W,20,'#5a5560');R(0,SOL,W,2,'#9a95a0');
-    R(20,60,40,70,'#22202a');R(24,64,32,40,'#5e7');g.fillStyle='#123';g.fillText('Boutique',25,118);
+    R(20,60,40,70,'#22202a');R(24,64,32,40,'#5e7');g.fillStyle='#123';texte('Boutique',25,118);
   },
   objets:[
     {id:'chariot',nom:'chariot à bagages',x:212,y:116,w:40,h:44,cache:()=>S.f.traverse,
@@ -689,7 +700,7 @@ SCENES.autre={nom:'Quai des Brumes',
     R(0,92,W,46,'#1e6b4f');for(let x=8;x<W;x+=36)R(x,98,22,14,'#ffe9a8');R(0,136,W,4,'#111');
     for(let x=10;x<W;x+=40){R(x,138,14,8,'#222')}
     R(0,SOL-14,W,14,'#3a3448');R(0,SOL,W,20,'#2a2436');
-    g.fillStyle='#e8c35a';g.font='7px monospace';g.fillText('QUAI DES BRUMES — départ pour l\'Académie d\'Hiverlune',20,84);
+    g.fillStyle='#e8c35a';g.font='7px monospace';texte('QUAI DES BRUMES — départ pour l\'Académie d\'Hiverlune',20,84);
   },
   objets:[
     {id:'train',nom:'train vert',x:0,y:92,w:W,h:48,loin:1,regarder:"Un train à vapeur vert émeraude. Il fume des volutes qui ont la forme de petits oiseaux."},
@@ -718,7 +729,7 @@ SCENES.londres.dessin=()=>{
   batiment(0,32,58,'#6e5649','#ffd98a');batiment(58,48,52,'#83695a','#ffe7a8');batiment(110,28,70,'#5b4a4c','#ffd98a');batiment(180,44,60,'#776154','#ffe1a0');
   // studio
   P(240,18,80,SOL-18,'#241a3a');P(240,18,80,3,'#3b2d5c');vgrad(24,40,'#f6d77a','#c99a3a',244,72);
-  g.fillStyle='#241a3a';g.font='bold 8px Georgia';g.fillText('STUDIO TOUR',249,35);
+  g.fillStyle='#241a3a';g.font='bold 8px Georgia';texte('STUDIO TOUR',249,35);
   for(let i=0;i<7;i++)halo(248+i*10,44,6,'rgb(255,220,140)',.6),P(247+i*10,43,2,2,'#fff3c4');
   P(272,106,34,54,'#100a1c');P(274,108,30,52,'#3a2d5c');P(288,108,1,52,'#241a3a');vgrad(108,160,'rgba(255,210,120,.25)','rgba(0,0,0,0)',274,30);
   // trottoir mouillé
@@ -738,14 +749,14 @@ SCENES.londres.dessinAvant=()=>vignette();
 SCENES.quai.dessin=()=>{
   P(0,0,W,SOL,'#3a221d');
   for(let y=22;y<SOL;y+=8)for(let x=(y/8%2)*8-8;x<W;x+=16){const v=.85+((x*13+y*7)%9)/30;P(x,y,15,7,shade('#7a3b2e',v));P(x,y,15,1,shade('#7a3b2e',v*1.2))}
-  vgrad(0,26,'#120d1c','#241a32');g.fillStyle='#f0c766';g.font='bold 7px Georgia';g.fillText('PHOTO SOUVENIR — TRAVERSEZ LE MUR',64,15);
+  vgrad(0,26,'#120d1c','#241a32');g.fillStyle='#f0c766';g.font='bold 7px Georgia';texte('PHOTO SOUVENIR — TRAVERSEZ LE MUR',64,15);
   // panneau suspendu
-  P(166,22,1,14,'#555');P(194,22,1,14,'#555');P(150,36,60,18,'#1b1424');P(150,36,60,1,'#f0c766');g.fillStyle='#fff';g.font='bold 7px Georgia';g.fillText('Quai  ?',163,49);
+  P(166,22,1,14,'#555');P(194,22,1,14,'#555');P(150,36,60,18,'#1b1424');P(150,36,60,1,'#f0c766');g.fillStyle='#fff';g.font='bold 7px Georgia';texte('Quai  ?',163,49);
   // spot sur le chariot
   halo(232,120,70,'rgb(255,214,150)',.35);
   // boutique
   P(18,58,44,76,'#1b1824');P(22,62,36,44,'#2e5a46');for(let i=0;i<4;i++)P(25+i*8,70,5,26,['#c8242c','#e8c35a','#2a5ab8','#3a8a4a'][i]);
-  P(22,62,36,1,'#7fd0a8');g.fillStyle='#f0c766';g.font='bold 7px Georgia';g.fillText('Boutique',26,118);halo(40,84,30,'rgb(120,220,170)',.2);
+  P(22,62,36,1,'#7fd0a8');g.fillStyle='#f0c766';g.font='bold 7px Georgia';texte('Boutique',26,118);halo(40,84,30,'rgb(120,220,170)',.2);
   vgrad(SOL,H,'#6a6470','#3e3944');P(0,SOL,W,1,'#b0a9b8');for(let x=0;x<W;x+=40)P(x,SOL+6,30,1,'#58525e');
 };
 SCENES.quai.dessinAvant=()=>vignette();
@@ -765,7 +776,7 @@ SCENES.autre.dessin=()=>{const t=T0();
   for(let i=0;i<5;i++){P(i*80-20,64,60,22,'#1d1538');P(i*80,54,20,10,'#1d1538');P(i*80+8,46,4,8,'#1d1538')}});
   // lanternes flottantes
   for(let i=0;i<6;i++){const x=22+i*52,y=30+Math.sin(t/600+i)*4;halo(x+3,y+4,18,'rgb(255,190,90)',.45);P(x,y,7,9,'#ffcf6a');P(x+1,y+1,5,7,'#fff0b8');P(x,y,7,1,'#8a5a2a');P(x,y+8,7,1,'#8a5a2a')}
-  g.fillStyle='#e8c35a';g.font='bold 7px Georgia';g.fillText("QUAI DES BRUMES — départ pour l'Académie d'Hiverlune",22,80);
+  g.fillStyle='#e8c35a';g.font='bold 7px Georgia';texte("QUAI DES BRUMES — départ pour l'Académie d'Hiverlune",22,80);
   // train
   P(0,88,W,50,'#174f3b');P(0,88,W,3,'#2f8a68');P(0,132,W,4,'#0e3326');P(0,108,W,2,'#c9a44a');
   for(let x=8;x<W;x+=36){P(x,94,22,12,'#ffe3a0');P(x,94,22,1,'#fff6d8');halo(x+11,100,16,'rgb(255,220,150)',.25)}
@@ -938,7 +949,7 @@ Object.assign(ob('bus'),{nom:'bus-musée',defaut:'utiliser',
   regarder:()=>say('moi',S.f.busNormal?"Juste un bus. Ça me rassure et ça m'inquiète à la fois.":"Un bus avec une pancarte : « MUSÉE DES CURIOSITÉS — ENTRÉE LIBRE »."),
   utiliser:entrerBus});
 SCENES.londres.objets.push(
-  {id:'pancarte',nom:'pancarte du bus',x:154,y:141,w:34,h:9,loin:1,dessin(){if(S.f.busNormal)return;P(154,141,34,9,'#f3e2b0');P(154,141,34,1,'#fff6d8');g.fillStyle='#5a1020';g.font="bold 7px Georgia";g.fillText('MUSÉE',159,148)},
+  {id:'pancarte',nom:'pancarte du bus',x:154,y:141,w:34,h:9,loin:1,dessin(){if(S.f.busNormal)return;P(154,141,34,9,'#f3e2b0');P(154,141,34,1,'#fff6d8');g.fillStyle='#5a1020';g.font="bold 7px Georgia";texte('MUSÉE',159,148)},
     cache:()=>S.f.busNormal,regarder:()=>ob('bus').regarder()},
   {id:'passants',nom:'',x:0,y:0,w:0,h:0,dessin:passants},
   {id:'manteau',nom:'',x:0,y:0,w:0,h:0,cache:()=>S.pnj.manteau==null,dessin(){drawPerso('manteau',S.pnj.manteau)}},
@@ -973,13 +984,13 @@ SCENES.cabine={nom:'Cabine téléphonique',fixe:1,
     // montants rouges et petits carreaux
     P(0,0,30,H,'#a51a24');P(290,0,30,H,'#a51a24');P(0,0,W,14,'#8a141c');P(28,0,2,H,'#e0434c');P(290,0,2,H,'#e0434c');
     for(let x of[30,60,230,260])P(x,14,2,H-14,'#c3202b');for(let y=40;y<H;y+=36){P(30,y,60,2,'#c3202b');P(230,y,60,2,'#c3202b')}
-    g.fillStyle='#fff';P(110,3,100,9,'#f3eee0');g.fillStyle='#8a141c';g.font="bold 8px Georgia";g.fillText('TELEPHONE',130,11);
+    g.fillStyle='#fff';P(110,3,100,9,'#f3eee0');g.fillStyle='#8a141c';g.font="bold 8px Georgia";texte('TELEPHONE',130,11);
     // panneau du fond
     P(90,14,140,H-14,'#2a2226');P(90,14,140,2,'#3e3438');P(90,14,2,H-14,'#3e3438');
     [[98,30,16,10,'#f0c766'],[100,46,12,14,'#7ad0ff'],[206,28,14,9,'#ff8ab0'],[208,44,12,12,'#b8f08a']].forEach(([x,y,w,h,c])=>{P(x,y,w,h,c);P(x+2,y+3,w-4,1,'#333');P(x+2,y+6,w-6,1,'#333')});
     // boîtier du téléphone
     P(126,26,72,92,'#1a1a1e');P(126,26,72,2,'#3a3a40');P(196,26,2,92,'#0c0c0e');
-    P(134,34,56,12,'#0e1a12');g.fillStyle='#5aff8a';g.font="bold 7px Georgia";g.fillText(S.cab==='sonne'?'APPEL…':'INSÉRER',140,43);
+    P(134,34,56,12,'#0e1a12');g.fillStyle='#5aff8a';g.font="bold 7px Georgia";texte(S.cab==='sonne'?'APPEL…':'INSÉRER',140,43);
     P(176,52,10,3,'#000');P(175,51,12,1,'#55555c');
     for(let r=0;r<4;r++)for(let c=0;c<3;c++){P(140+c*12,58+r*12,9,9,'#b8b8c0');P(140+c*12,58+r*12,9,1,'#e0e0e8');P(143+c*12,61+r*12,3,3,'#55555c')}
     P(176,64,10,40,'#26262c');P(178,66,6,36,'#0c0c0e');
@@ -1072,7 +1083,7 @@ SCENES.bus={nom:'Bus-musée',
     {id:'hote',nom:"l'hôte",humain:true,x:30,y:112,w:24,h:48,cache:BIZARRE,dessin(){const a=anim('hote');a.marche=false;a.dir='face';drawPerso('hote',40);
         P(24,132,32,28,'#5a3020');P(22,130,36,3,'#8a5a30');P(22,130,36,1,'#b88a50');for(let y=137;y<158;y+=7)P(26,y,28,1,'#4a2418');
         P(43,121,12,9,'#2a2a2e');P(44,122,10,3,'#5aff8a');P(45,127,2,1,'#888');P(49,127,2,1,'#888');P(25,124,6,6,'#f0ece0');P(26,125,4,1,'#8a8a8a');
-        P(27,140,24,9,'#f3e2b0');g.fillStyle='#5a1020';g.font="bold 7px Georgia";g.fillText('0 £',33,147)},
+        P(27,140,24,9,'#f3e2b0');g.fillStyle='#5a1020';g.font="bold 7px Georgia";texte('0 £',33,147)},
       regarder:"Un drôle de gus qui a l'air de faire la tronche.",
       parler:()=>dire([['hote',"Entrez, entrez ! C'est gratuit ! N'ayez pas peur !"],['moi',"C'est le « n'ayez pas peur » qui me fait peur."]]),
       with:{piece:()=>say('hote',"Gardez-la, mon ami. Ici, tout est gratuit… presque tout.")}},
@@ -1235,9 +1246,9 @@ SCENES.pub={nom:'Chaos Order',
     P(22,82,36,36,'#2a160c');cibleFlechettes(40,100);P(64,84,20,26,'#1a1a18');P(64,84,20,1,'#6a4020');for(let i=0;i<5;i++)P(67,88+i*4,6+(i*5)%9,1,'#d8d8d0');
     // porte des toilettes
     P(106,92,28,68,'#2a160c');if(S.porteWC){P(109,95,22,65,'#0e1a14');vgrad(95,160,'rgba(150,255,190,.25)','rgba(0,0,0,0)',109,22)}else{P(109,95,22,65,'#5a3420');P(112,100,16,24,'#4a2a18');P(112,130,16,24,'#4a2a18');P(126,128,3,3,'#c9a040')}
-    P(112,82,16,9,'#c9a040');g.fillStyle='#2a160c';g.font="bold 7px Georgia";g.fillText('WC',114,89);
+    P(112,82,16,9,'#c9a040');g.fillStyle='#2a160c';g.font="bold 7px Georgia";texte('WC',114,89);
     // enseigne + étagères de bouteilles + miroir
-    P(176,22,120,14,'#1a0e08');P(176,22,120,1,'#c9a040');g.fillStyle='#e8c35a';g.font="bold 8px Georgia";g.fillText('CHAOS ORDER',206,32);
+    P(176,22,120,14,'#1a0e08');P(176,22,120,1,'#c9a040');g.fillStyle='#e8c35a';g.font="bold 8px Georgia";texte('CHAOS ORDER',206,32);
     P(166,40,140,58,'#2a160c');vgrad(44,94,'rgba(200,220,230,.18)','rgba(120,140,150,.08)',196,80);
     for(let r=0;r<2;r++){P(166,64+r*26,140,3,'#6a4020');for(let i=0;i<22;i++){const x=168+i*6.2,h=10+(i*7+r*3)%6;P(x,64+r*26-h,4,h,['#2a6a3a','#8a4a1a','#c8c0a0','#3a2a5a','#a02a2a','#d8a030'][(i+r)%6]);P(x+1,64+r*26-h-2,2,2,'#222')}}
     // porte d'entrée
@@ -1370,7 +1381,7 @@ SCENES.devanture={nom:'Devanture du pub',reflet:1,
     P(20,60,280,100,'#1e4a34');P(20,60,280,2,'#3a7a5a');P(20,158,280,2,'#12301f');
     // enseigne
     P(30,64,260,22,'#0e2618');P(32,66,256,18,'#163a28');P(32,66,256,1,'#c9a040');P(32,83,256,1,'#c9a040');
-    g.fillStyle='#f0c766';g.font="bold 13px Georgia";g.textAlign='center';g.fillText(vrai?'THE ENGLISH PUB':'CHAOS ORDER',160,80);g.textAlign='left';
+    g.fillStyle='#f0c766';g.font="bold 13px Georgia";g.textAlign='center';texte(vrai?'THE ENGLISH PUB':'CHAOS ORDER',160,80);g.textAlign='left';
     // vitrines éclairées
     [[34,92],[196,92]].forEach(([x,y])=>{P(x,y,90,52,'#c8902a');vgrad(y,y+52,'#ffd890','#c87a2a',x+2,86);
       for(let i=0;i<3;i++){P(x+8+i*28,y+24,10,28,'#3a2214');P(x+10+i*28,y+18,6,7,'#3a2214')}P(x+44,y,2,52,'#1e4a34');P(x,y+26,90,2,'#1e4a34');P(x,y+50,90,4,'#12301f')});
@@ -1449,18 +1460,18 @@ const ETALS=[ // étals au premier plan : x, largeur, enseigne
 SCENES.bonbons={nom:'Le magasin de bonbons',largeur:LGB,
   dessin(){const t=Date.now();
     // fond : mur du fond lointain, haut et petit (profondeur)
-    vgrad(0,92,'#ffd6e8','#ffc2dc');for(let x=0;x<LGB;x+=16)P(x,0,8,92,'rgba(255,255,255,.22)');
+    vgrad(0,92,'#ffd6e8','#ffc2dc',0,LGB);for(let x=0;x<LGB;x+=16)P(x,0,8,92,'rgba(255,255,255,.22)');
     P(0,0,LGB,8,'#e84a8a');for(let x=0;x<LGB;x+=12){g.fillStyle=(x/12)%3?((x/12)%3===1?'#ffe080':'#7ad0ff'):'#ff9ad0';g.beginPath();g.moveTo(x,8);g.lineTo(x+12,8);g.lineTo(x+6,15);g.fill()}
-    P(250,18,140,14,'#e84a8a');P(250,18,140,1,'#fff');g.fillStyle='#fff';g.font="bold 9px Georgia";g.textAlign='center';g.fillText('CONFISERIE',320,28);g.textAlign='left';
+    P(250,18,140,14,'#e84a8a');P(250,18,140,1,'#fff');g.fillStyle='#fff';g.font="bold 9px Georgia";g.textAlign='center';texte('CONFISERIE',320,28);g.textAlign='left';
     for(let r=0;r<2;r++){P(10,52+r*20,LGB-20,2,'#c88a5a');for(let i=0;i<46;i++){const cc=[['#ff4a4a','#ffe040'],['#4ab0ff','#fff'],['#7ae07a','#ff7ab0'],['#ffa040','#7a4ab0'],['#c84aff','#ffe040']][(i+r)%5];bocal(14+i*13.5,38+r*20,cc[0],cc[1],.65)}}
     // sol en perspective : lignes qui fuient vers le fond
-    vgrad(92,H,'#f6e6f2','#e0c4dc');for(let i=-12;i<=12;i++){g.strokeStyle='rgba(232,74,138,.12)';g.beginPath();g.moveTo(320+i*28,92);g.lineTo(320+i*60,H);g.stroke()}
+    vgrad(92,H,'#f6e6f2','#e0c4dc',0,LGB);for(let i=-12;i<=12;i++){g.strokeStyle='rgba(232,74,138,.12)';g.beginPath();g.moveTo(320+i*28,92);g.lineTo(320+i*60,H);g.stroke()}
     for(let k=1;k<6;k++){const y=92+(H-92)*(k/6)**1.5;P(0,y,LGB,1,'rgba(232,74,138,.12)')}
     // îlots du milieu (plus loin, plus petits)
     [[90,'#7ad0ff'],[250,'#ffe080'],[410,'#b8f08a']].forEach(([x,c])=>{P(x,96,90,18,'#d88aa8');P(x,96,90,2,'#f0b0c8');for(let i=0;i<9;i++){P(x+4+i*9.5,88,7,8,i%2?c:'#ff9ad0');P(x+5+i*9.5,86,5,2,'#fff')}});
     // étals du premier plan
     for(const[x,w,nom]of ETALS){P(x,118,w,24,'#c8783a');P(x,118,w,2,'#e8a060');P(x+4,124,w-8,16,'#a85a2a');P(x+2,142,4,18,'#8a4a20');P(x+w-6,142,4,18,'#8a4a20');
-      P(x+6,127,w-12,10,'#fff3f8');P(x+6,127,w-12,1,'#e84a8a');g.fillStyle='#c8246a';g.font="bold 7px Georgia";g.textAlign='center';g.fillText(nom,x+w/2,135);g.textAlign='left'}
+      P(x+6,127,w-12,10,'#fff3f8');P(x+6,127,w-12,1,'#e84a8a');g.fillStyle='#c8246a';g.font="bold 7px Georgia";g.textAlign='center';texte(nom,x+w/2,135);g.textAlign='left'}
     // contenus
     [[48,'#ff4a8a'],[62,'#4ab0ff'],[76,'#7ae07a'],[90,'#ffa040'],[104,'#c84aff']].forEach(([x,c],i)=>{P(x,98-i%2*4,1,20,'#f2f2f2');for(let k=0;k<3;k++){g.strokeStyle=k%2?'#fff':c;g.lineWidth=2;g.beginPath();g.arc(x,94-i%2*4,6-k*2,0,7);g.stroke()}g.lineWidth=1});
     for(let i=0;i<10;i++){P(140+i*6,112-(i%3)*3,5,8,i%2?'#5a2a10':'#7a3a18');P(141+i*6,113-(i%3)*3,3,1,'#c99a3a')}
@@ -1473,7 +1484,9 @@ SCENES.bonbons={nom:'Le magasin de bonbons',largeur:LGB,
     // porte d'entrée (à droite)
     P(604,56,36,104,'#7a3a5a');if(S.porteB){P(608,60,28,100,'#3a6a8a');vgrad(60,160,'rgba(255,255,255,.25)','rgba(0,0,0,0)',608,28)}else{P(608,60,28,46,'#cfe6ff');P(608,110,28,48,'#8a4a6a')}P(610,52,6,4,'#f0c766');
     // le singe en chocolat dans la main de Solène
-    if(S.choco&&S.pos.solene!=null)singeChoco(S.pos.solene+12,SOL-26);
+    if(S.choco&&S.pos.solene!=null){const x=S.pos.solene,u=Math.min(1,(Date.now()-(S.chocoT||0))/800);
+      P(x+8,SOL-20,10,12,'#6a4a2a');P(x+8,SOL-20,10,2,'#8a6a40');P(x+9,SOL-24,8,4,'#5a3a20');
+      singeChoco(x+13,SOL-16-14*u);if(u>=1&&(Date.now()/250|0)%2)P(x+22,SOL-48,2,6,'#fff3b0'),P(x+22,SOL-40,2,2,'#fff3b0')}
   },
   objets:[
     {id:'etageres',nom:'bocaux du fond',x:10,y:30,w:620,h:50,loin:1,regarder:"Réglisse, fraises, crocodiles… Mon dentiste va pleurer."},
@@ -1528,7 +1541,7 @@ async function sortirBonbons(){
   }
   anim('vigile').tremble=true;await pause(900);anim('vigile').tremble=false;
   await say('solene',"…Bon, bon. Je fouille mon sac.");
-  sfx('papier');await pause(500);retirer('nounours');S.choco=1;
+  sfx('papier');await pause(500);retirer('nounours');S.choco=1;S.chocoT=Date.now();await pause(900);sfx('tada');await pause(700);
   await dire([['solene',"Tenez… je pensais que c'était un nounours."],['solene',"…C'est un singe. En chocolat. Avec des cymbales. J'aurais juré que c'était un nounours."]]);
   sfx('magie');S.papierBrille=1;await pause(1100);sfx('eblouit');S.flash=1;await pause(300);S.flash=1;S.choco=0;S.papierBrille=0;
   await go('vetements',{solene:150});
@@ -1536,7 +1549,7 @@ async function sortirBonbons(){
 
 // ----- Le magasin de vêtements (après le scintillement) -----
 SCENES.vetements={nom:'Magasin de vêtements',
-  dessin(){vgrad(0,SOL,'#e8e4dc','#cfc8bc');P(0,0,W,10,'#2a2a2a');P(20,16,80,14,'#c8242c');g.fillStyle='#fff';g.font="bold 9px Georgia";g.fillText('SOLDES -50 %',27,26);
+  dessin(){vgrad(0,SOL,'#e8e4dc','#cfc8bc');P(0,0,W,10,'#2a2a2a');P(20,16,80,14,'#c8242c');g.fillStyle='#fff';g.font="bold 9px Georgia";texte('SOLDES -50 %',27,26);
     [[40,'#3a6ab0'],[110,'#c8a030'],[220,'#7a2a5a']].forEach(([x,c])=>{P(x,52,60,2,'#888');for(let i=0;i<8;i++){P(x+2+i*7,54,1,4,'#888');P(x+i*7,58,6,30,shade(c,.8+(i%3)*.15))}P(x+2,54,2,106,'#888');P(x+56,54,2,106,'#888')});
     [[180,'#f2f2f2'],[290,'#1a1a1a']].forEach(([x,c])=>{P(x-6,70,12,12,'#d8c8b0');P(x-8,82,16,30,c);P(x-1,112,2,36,'#888');P(x-8,148,16,3,'#888')});
     P(140,60,26,80,'#9ab0b8');P(142,62,22,76,'#c8d8e0');vgrad(SOL,H,'#b8b0a8','#988f88')},
@@ -1565,12 +1578,169 @@ async function retrouvailles(){
   await say('tous',"Vous n'allez pas me croire !");
   await noir(true);
   sfx('bip');await say('narr',"Le contrôleur scanne les trois billets. Bip, bip, bip.");
-  S.f.vu_quai=1;await go('quai',{yvan:80,rod:120,solene:160});
+  S.f.vu_quai=1;await go('quai',{yvan:220,rod:250,solene:280});
   await noir(false);
   await SCENES.quai.entree();
-  await carton("À suivre…");
 }
 MUSIQUE_SCENE.bonbons='bonbons';MUSIQUE_SCENE.vetements='magie';
+
+// ===== Fin du chapitre : le studio (grand), la photo au chariot, le réveil devant le château =====
+Object.assign(AUTRES,{touriste:'Le touriste'});Object.assign(COUL,{touriste:'#a0f0d0'});
+SPEC.touriste={skin:'#f0c0a0',hair:'#c8a060',coiffure:'court',top:'#3ab0a0',pants:'#e8d8b0',shoes:'#8a6a4a',lunettes:1};
+const LGS=640,MUR_X=452;
+function loupGarou(x,y){ // statue de loup-garou en pierre (création originale)
+  const p='#8a8a92',pc='#a8a8b0',po='#5a5a62';
+  P(x-16,y-10,32,10,'#6a6a72');P(x-16,y-10,32,2,'#9a9aa2');
+  P(x-6,y-26,5,16,po);P(x+2,y-26,5,16,po);P(x-8,y-12,7,3,po);P(x+2,y-12,7,3,po);
+  ell(x,y-36,11,13,p);ell(x-3,y-38,5,7,pc);
+  P(x-16,y-48,5,18,p);P(x+11,y-48,5,18,p);P(x-18,y-50,4,4,po);P(x+14,y-50,4,4,po);[-1,1].forEach(k=>{P(x+k*16-1,y-52,1,3,'#eee');P(x+k*16+1,y-52,1,3,'#eee')});
+  ell(x,y-54,8,8,p);P(x-1,y-52,10,5,p);P(x+8,y-51,2,2,po);P(x+1,y-48,8,1,'#eee');
+  g.fillStyle=p;g.beginPath();g.moveTo(x-7,y-58);g.lineTo(x-4,y-68);g.lineTo(x-1,y-59);g.fill();g.beginPath();g.moveTo(x+1,y-59);g.lineTo(x+4,y-68);g.lineTo(x+7,y-58);g.fill();
+  P(x-3,y-56,2,2,'#d02020');P(x+3,y-56,2,2,'#d02020');
+}
+function balaiStand(x,y){P(x-1,y-30,2,30,'#5a3a20');P(x-10,y-2,20,2,'#5a3a20');P(x-22,y-34,40,2,'#8a5a2a');g.fillStyle='#c8a050';g.beginPath();g.moveTo(x+18,y-36);g.lineTo(x+30,y-40);g.lineTo(x+30,y-28);g.lineTo(x+18,y-32);g.fill();for(let i=0;i<4;i++)P(x+20+i*3,y-38+i,1,8,'#a88030')}
+SCENES.quai={nom:'Studio',largeur:LGS,
+  dessin(){const t=Date.now();
+    P(0,0,LGS,SOL,'#3a221d');
+    for(let y=22;y<SOL;y+=8)for(let x=(y/8%2)*8-8;x<LGS;x+=16){const v=.85+((x*13+y*7)%9)/30;P(x,y,15,7,shade('#7a3b2e',v));P(x,y,15,1,shade('#7a3b2e',v*1.2))}
+    vgrad(0,26,'#120d1c','#241a32',0,LGS);
+    // affiches de films (génériques) et poutres
+    [[120,'#2a3a6a'],[330,'#5a2a4a'],[560,'#2a5a3a']].forEach(([x,c])=>{P(x,30,34,46,'#c9a040');P(x+2,32,30,42,c);P(x+6,38,22,20,shade(c,1.5));P(x+6,62,22,2,'#e8d8a0');P(x+6,66,16,2,'#e8d8a0')});
+    // boutique
+    P(18,58,84,76,'#1b1824');P(22,62,76,44,'#2e5a46');for(let i=0;i<8;i++)P(25+i*9,70,6,26,['#c8242c','#e8c35a','#2a5ab8','#3a8a4a'][i%4]);P(22,62,76,1,'#7fd0a8');
+    g.fillStyle='#f0c766';g.font="bold 10px Georgia";g.textAlign='center';texte('Boutique',60,120);g.textAlign='left';
+    // grande enseigne photo
+    P(360,22,200,16,'#1b1424');P(360,22,200,1,'#f0c766');g.fillStyle='#f0c766';g.font="bold 9px Georgia";g.textAlign='center';texte('PHOTO SOUVENIR — POUSSEZ LE CHARIOT',460,33);
+    // pilier du quai avec son panneau
+    P(MUR_X,44,48,116,'#5a2a20');for(let y=48;y<SOL;y+=8)for(let x=MUR_X+((y/8)%2)*6;x<MUR_X+48;x+=12)P(x,y,11,7,shade('#7a3b2e',.9+((x+y)%5)/20));
+    P(MUR_X+4,52,40,16,'#1b1424');g.fillStyle='#fff';g.font="bold 10px Georgia";texte('Quai ?',MUR_X+24,64);g.textAlign='left';
+    halo(MUR_X-10,120,80,'rgb(255,214,150)',.3);
+    vgrad(SOL,H,'#6a6470','#3e3944',0,LGS);P(0,SOL,LGS,1,'#b0a9b8');for(let x=0;x<LGS;x+=40)P(x,SOL+6,30,1,'#58525e');
+  },
+  objets:[
+    {id:'boutique',nom:'boutique',x:18,y:58,w:84,h:76,regarder:"Des écharpes, des baguettes en plastique, des mugs. Tout à 40 £.",
+      utiliser:()=>say('moi',S.perso==='solene'?"Plus tard. On a déjà assez dépensé en bonbons… enfin, moi.":"Plus tard. Solène a confisqué ma carte bleue.")},
+    {id:'loup',nom:'statue de loup-garou',x:150,y:88,w:40,h:72,defaut:'utiliser',dessin(){loupGarou(170,SOL)},
+      regarder:"Une statue de loup-garou grandeur nature. Les crocs, les griffes… et une étiquette « Ne pas monter dessus ».",
+      utiliser:async()=>{if(S.perso!=='rod')return say('moi',"Je ne monte pas là-dessus. Je laisse ça à Rod.");
+        await marcher('rod',188);anim('rod').dir='g';
+        if(!TEST)for(let i=0;i<20;i++){S.posY.rod=SOL-i*.5;await pause(16)}
+        await say('rod',"Aouuuuuh !");sfx('hurlement');
+        anim('rod').tremble=true;await dire([['rod',"Rodolphe, le loup-garou des salles des profs ! Terreur des réunions pédagogiques !"]]);anim('rod').tremble=false;
+        delete S.posY.rod;await say('rod',"…Bon, je descends avant qu'un vigile arrive. J'ai déjà donné aujourd'hui.")}},
+    {id:'balai',nom:'balai volant',x:258,y:118,w:64,h:42,defaut:'utiliser',dessin(){if(!S.balai)balaiStand(282,SOL)},
+      regarder:"Un balai de sorcier sur son support, pour les photos. Paille dorée, manche verni.",
+      utiliser:async()=>{if(S.perso!=='yvan')return say('moi',"Le balai, c'est le truc d'Yvan. Il a même la tenue.");
+        await marcher('yvan',282);anim('yvan').dir='d';S.balai=1;
+        await say('yvan',"Accrochez-vous… Décollage !");sfx('whoosh');
+        if(!TEST){const t0=Date.now();while(Date.now()-t0<2200){S.posY.yvan=SOL-4-Math.abs(Math.sin((Date.now()-t0)/180))*7;await pause(16)}}
+        delete S.posY.yvan;S.balai=0;
+        await say('yvan',"…Bon. Ça ne vole pas. Mais dans ma tête, je suis déjà au-dessus de la Tamise.")}},
+    {id:'chariot',nom:'chariot à bagages',get x(){return 404+(S.chariotDx||0)},y:116,w:44,h:44,
+      dessin(){if(S.avale)return;dessinChariot(S.chariotDx||0)},
+      regarder:"Un chariot à moitié encastré dans le pilier. Tout le monde fait la même photo. On va faire la même photo.",
+      prendre:"Il est vissé au sol. Logique, sinon les gens partiraient avec.",
+      utiliser:"Il faudrait que quelqu'un nous prenne en photo en train de le pousser. Tous les trois."},
+    {id:'touriste',nom:'touriste',humain:true,x:553,y:118,w:14,h:42,
+      dessin(){const a=anim('touriste');a.marche=false;a.dir='g';drawPerso('touriste',560);P(550,132,7,5,'#222');P(551,133,2,2,'#8ac')},
+      regarder:"Un touriste en chemise à fleurs, avec un gros appareil photo. Il a l'air serviable.",
+      parler:async()=>{if(S.perso!=='solene')return say('moi',"Je laisse Solène lui demander. Elle a le sens du contact.");await photoTouriste()}},
+  ],
+  heros:{},
+  devant(){if(S.avale){dessinChariot(S.chariotDx||0);P(MUR_X,44,48,116,'#5a2a20');for(let y=48;y<SOL;y+=8)for(let x=MUR_X+((y/8)%2)*6;x<MUR_X+48;x+=12)P(x,y,11,7,shade('#7a3b2e',.9+((x+y)%5)/20))}
+    if(S.balai&&S.pos.yvan!=null){const y=S.posY.yvan??SOL;P(S.pos.yvan-16,y-14,32,2,'#8a5a2a');g.fillStyle='#c8a050';g.beginPath();g.moveTo(S.pos.yvan-16,y-16);g.lineTo(S.pos.yvan-26,y-20);g.lineTo(S.pos.yvan-26,y-8);g.lineTo(S.pos.yvan-16,y-12);g.fill()}},
+  ambiance:{nuit:.45,voile:'#140a12',teinte:'rgba(255,160,90,.25)'},
+  lumieres:()=>[{x:430,y:126,r:80,c:'rgba(255,210,150,.4)'},{x:60,y:84,r:50,c:'rgba(120,230,170,.3)'},{x:170,y:110,r:46,c:'rgba(200,210,255,.25)'},{x:282,y:126,r:36,c:'rgba(255,220,150,.3)'},{x:560,y:120,r:36},...persoLumiere(30)],
+  particules(){if(S.studioBrille)emettre(90,()=>({k:'trav',scene:'quai',x:380+Math.random()*90,y:100+Math.random()*60,vx:(Math.random()-.5)*.8,vy:-.4-Math.random(),vie:40+Math.random()*30,t:1,c:['#fff3b0','#b9a8ff','#8ff0d0'][Math.random()*3|0],glow:1}));
+    emettre(20,()=>({k:'poussiere',scene:'quai',x:400+Math.random()*80,y:40+Math.random()*110,vx:(Math.random()-.5)*.15,vy:-.05-Math.random()*.1,vie:200+Math.random()*200,t:1,c:'#ffe8c0',a:.7}))},
+  premierPlan(){faisceau(414,10,392,80,0,SOL,'rgba(255,220,160,.18)')},
+  dessinAvant:()=>vignette(),
+  async entree(){await dire([['narr',"Dans le studio, un décor de gare. Un chariot sort à moitié d'un mur de briques."],['rod',"Ah, LA photo. Allez, on la fait."]])},
+};
+function dessinChariot(dx){const x=404+dx;
+  P(x,124,30,3,'#b8b8c0');P(x,124,30,1,'#e6e6ee');P(x-4,112,2,14,'#b8b8c0');P(x-4,112,6,2,'#b8b8c0');
+  P(x+2,128,26,22,'#6b4426');P(x+2,128,26,2,'#8a5a34');P(x+4,131,22,7,'#c8a060');P(x+4,131,22,1,'#e8c890');P(x+9,141,12,7,'#3a5a8a');P(x+14,140,2,2,'#e8c35a');
+  P(x+1,150,32,3,'#b8b8c0');[[x+8,156],[x+26,156]].forEach(([a,b])=>{P(a-2,b-2,5,5,'#1a1a1a');P(a-1,b-1,2,2,'#666')})}
+let pilierDevant=0;
+async function photoTouriste(){
+  await dire([['solene',"Excusez-moi ! Vous pourriez nous prendre en photo, tous les trois, en train de pousser le chariot ?"],['touriste',"Of course ! Mettez-vous bien ensemble, derrière le chariot."]]);
+  S.verrou='solene';
+  await Promise.all([marcher('yvan',372),marcher('rod',386),marcher('solene',400)]);
+  ['yvan','rod','solene'].forEach(n=>anim(n).dir='d');
+  await dire([['solene',"Allez, les garçons, on pousse !"],['touriste',"Un…"],['touriste',"Deux…"],['touriste',"Trois !"]]);
+  sfx('photo');S.flash=1;await pause(300);sfx('magie');S.studioBrille=1;await pause(900);
+  // le chariot avance dans le mur et les avale
+  S.avale=1;sfx('whoosh');
+  if(!TEST&&!S.passe){for(let i=0;i<110;i++){S.chariotDx=(S.chariotDx||0)+.8;
+    for(const n of['yvan','rod','solene'])if(S.pos[n]!=null){const a=anim(n);a.marche=true;a.dir='d';a.pas++;S.pos[n]+=.8;if(S.pos[n]>MUR_X+10){S.pos[n]=null;a.marche=false}}
+    await pause(16)}}
+  ['yvan','rod','solene'].forEach(n=>{S.pos[n]=null;anim(n).marche=false});
+  await noir(true);S.studioBrille=0;S.avale=0;S.chariotDx=0;
+  await pause(1200);
+  await go('reveil',{yvan:null,rod:null,solene:null});
+}
+
+// ----- Le réveil : gros plan sur Solène, la caméra recule, puis tourne vers le château -----
+S.rv={z:7,cx:62,cy:121};
+const tween=async(o,k,v,ms)=>{if(TEST||S.passe){o[k]=v;return}const a=o[k],t0=Date.now();while(Date.now()-t0<ms){const u=(Date.now()-t0)/ms,e=u<.5?2*u*u:1-(-2*u+2)**2/2;o[k]=a+(v-a)*e;await pause(16)}o[k]=v};
+function chateau(x0,y0){ // grand château original, perché au-dessus d'un lac
+  const m='#2a2440',l='#3a3458',f='#ffd88a';
+  g.fillStyle='#1a1630';g.beginPath();g.moveTo(x0-70,y0+40);g.lineTo(x0-40,y0+6);g.lineTo(x0+40,y0+2);g.lineTo(x0+90,y0+40);g.fill();
+  const tours=[[-46,-30,8],[-30,-46,9],[-12,-22,7],[4,-62,11],[22,-38,8],[38,-50,9],[56,-26,7],[70,-34,7]];
+  P(x0-52,y0-18,130,24,m);P(x0-52,y0-18,130,2,l);
+  for(const[dx,h,w]of tours){P(x0+dx-w/2,y0+h,w,-h+6,m);P(x0+dx-w/2,y0+h,1,-h+6,l);g.fillStyle='#3a2a5a';g.beginPath();g.moveTo(x0+dx-w/2-2,y0+h);g.lineTo(x0+dx,y0+h-w*2.2);g.lineTo(x0+dx+w/2+2,y0+h);g.fill();
+    for(let k=0;k<3;k++)if((dx+k)%2===0)P(x0+dx-1,y0+h+6+k*8,2,3,f);P(x0+dx,y0+h-w*2.2-4,1,4,'#888')}
+  for(let i=0;i<16;i++)P(x0-48+i*8,y0-10+(i%3)*5,2,3,(i*7)%3?f:'#ffb060');
+  // pont
+  P(x0-110,y0+22,64,3,'#2a2440');for(let i=0;i<5;i++){g.fillStyle='#2a2440';g.beginPath();g.arc(x0-102+i*13,y0+30,5,Math.PI,0);g.fill()}
+}
+function herbe(x){for(let i=-17;i<18;i++)P(x+i,145+((i*7)&3),1,16,['#2e6a3e','#3a7a4a','#24583a'][(i+18)%3])}
+SCENES.reveil={nom:'…',fixe:1,
+  dessin(){const t=Date.now(),R=S.rv;
+    g.save();g.translate(W/2,H/2);g.scale(R.z,R.z);g.translate(-R.cx,-R.cy);
+    // ciel d'aube, étoiles, montagnes
+    vgrad(-200,140,'#1a1440','#e8906a',-200,1100);
+    for(let i=0;i<80;i++){g.globalAlpha=.3+.7*Math.abs(Math.sin(t/900+i));P((i*53)%900-100,(i*29)%70-40,1,1,'#fff')}g.globalAlpha=1;
+    g.fillStyle='#3a2a50';g.beginPath();g.moveTo(-200,110);for(let x=-200;x<=900;x+=40)g.lineTo(x,70+Math.sin(x/70)*18+((x/40)%2)*10);g.lineTo(900,140);g.lineTo(-200,140);g.fill();
+    // lac
+    vgrad(110,150,'#4a5a8a','#2a3460',300,600);for(let i=0;i<14;i++)P(320+i*20,118+(i%4)*6,10,1,'rgba(255,220,180,.35)');
+    chateau(520,92);
+    for(let i=0;i<12;i++){const k=i/12;P(470+i*9,112+(i%3)*4,3,1,'rgba(255,216,138,.45)')}
+    // prairie
+    vgrad(130,200,'#2e5a3a','#1a3a24',-200,1100);for(let x=-200;x<900;x+=5)P(x,128+((x*7)%5),1,4,'#3a7a4a');
+    [[20,'#ff8ab0'],[86,'#ffe080'],[150,'#b9a8ff'],[210,'#ff8ab0'],[260,'#ffe080']].forEach(([x,c])=>{P(x,150,2,2,c);P(x+30,158,2,2,c)});
+    // Solène assise (sa tête est le centre du gros plan au début)
+    S.dort={solene:R.yeuxSolene===0,yvan:!R.reveilYvan,rod:!R.reveilRod};
+    S.anim.solene={dir:'face',pas:0,marche:false};drawPerso('solene',62,SOL);herbe(62);
+    // Yvan et Rod allongés, puis assis
+    [['yvan',112,R.reveilYvan],['rod',150,R.reveilRod]].forEach(([n,x,ok])=>{S.anim[n]={dir:'face',pas:0,marche:false};
+      if(ok){drawPerso(n,x,SOL);herbe(x)}else{g.save();g.translate(x,SOL-2);g.rotate(-Math.PI/2);drawPerso(n,0,0);g.restore()}});
+    S.dort=null;
+    // lucioles
+    for(let i=0;i<14;i++){const x=(i*61+t/40)%420-40,y=110+Math.sin(t/700+i)*20;halo(x,y,4,'rgb(255,240,150)',.8)}
+    g.restore();
+  },
+  objets:[],
+  ambiance:{nuit:.1,voile:'#000',teinte:'rgba(200,150,255,.15)'},
+  lumieres:()=>[],
+  dessinAvant:()=>vignette(),
+  async entree(){
+    const R=S.rv;Object.assign(R,{z:7,cx:62,cy:121,yeuxSolene:0,reveilYvan:0,reveilRod:0});
+    await noir(false);await pause(1200);
+    R.yeuxSolene=1;await pause(700);R.yeuxSolene=0;await pause(300);R.yeuxSolene=1;await pause(600);
+    await tween(R,'z',3,2200);
+    await say('solene',"Euuuh… les gars ?");
+    await Promise.all([tween(R,'z',1.6,2200),tween(R,'cx',105,2200),tween(R,'cy',135,2200)]);
+    R.reveilRod=1;await say('rod',"What ?");
+    R.reveilYvan=1;await say('yvan',"C'est quoi ça ?");
+    await pause(500);
+    await Promise.all([tween(R,'z',1,4200),tween(R,'cx',500,4200),tween(R,'cy',96,4200)]);
+    await pause(3500);
+    await carton("Fin du chapitre 1",5000);
+    S.f.finChapitre1=1;
+  },
+};
+MUSIQUE_SCENE.reveil='brumes';
 
 // ===== Chapitres et mots de passe (0 = intro, 1 = chapitre 1, …) =====
 const CHAPITRES={

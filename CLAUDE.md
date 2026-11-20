@@ -15,9 +15,9 @@ existants : on invente tout — Académie d'Hiverlune, Quai des Brumes…).
 - Chapitre 1 (`chapitre1.js`) : Rod part aux toilettes (gauche, futur pub), Solène acheter des bonbons (bas) → **Yvan seul** (`S.verrou='yvan'` : pas de changement de perso)
   → cabine : vue zoomée `cabine` (scène `fixe:1` sans perso qui marche ; `S.cab` = sonne / decroche pour le combiné ; pièce brillante, appel mystérieux) → bus-musée `bus` (hôte derrière sa caisse à l'entrée, momie, vaudou, citrouilles, alien, lapin géant, visiteuse, singe à fente — examiner par défaut) → pièce dans le singe : bus normal (`S.f.busNormal`) → sortie : l'homme au manteau entre → « Pendant ce temps, du côté de Rod… ».
 - **Chapitre 2** = partie de Rod (`chapitre1_rod.js`, `debutRod()`, `S.verrou='rod'`) : `devanture` (enseigne « CHAOS ORDER ») → `pub` (barman, clients de dos, joueurs de fléchettes, cacahuètes, pailles, fléchette par terre) → porte WC : l'homme au manteau sort → `toilettes` (ballon rouge au singe) : fléchette seule = tombe à plat ; **fléchette + paille = sarbacane** ; sarbacane → ballon éclate → boulette « Je t'appelle… » → tout disparaît → Rod ressort : `devanture` avec le vrai nom « THE ENGLISH PUB » (`S.f.vraiNom`) → « Pendant ce temps, du côté de Solène… ».
-- **Chapitre 3** = partie de Solène (`chapitre3_solene.js`, `debutSolene()`) : `bonbons` (étals, enfants qui courent, vigile immobile, gros nounours en chocolat = objet `voler:1` → libellé « Voler ») → sortie avec le nounours : joute verbale avec le vigile (`JOUTE` : 7 phrases dans l'ordre, les 7 réponses mélangées à chaque fois, erreur = il répète) → singe aux cymbales en chocolat rendu → scintillement → `vetements` → `retrouvailles()` dans la rue (« Vous n'allez pas me croire ! », `S.f.retrouves`, verrou levé) → `quai` (studio) → « À suivre… ».
+- **Chapitre 3** = partie de Solène (`chapitre3_solene.js`, `debutSolene()`) : `bonbons` (étals, enfants qui courent, vigile immobile, gros nounours en chocolat = objet `voler:1` → libellé « Voler ») → sortie avec le nounours : joute verbale avec le vigile (`JOUTE` : 7 phrases dans l'ordre, les 7 réponses mélangées à chaque fois, erreur = il répète) → singe aux cymbales en chocolat rendu → scintillement → `vetements` → `retrouvailles()` dans la rue (« Vous n'allez pas me croire ! », `S.f.retrouves`, verrou levé) → `quai` (studio large, `chapitre3_studio.js` : loup-garou pour Rod, balai pour Yvan, touriste pour Solène → photo à trois, le mur les avale) → `reveil` (gros plan sur Solène qui se réveille, caméra `S.rv` {z,cx,cy} animée par `tween`, château original) → « Fin du chapitre 1 ».
 - Combinaisons d'objets dans l'inventaire : `COMBOS[cle(a,b)]=async()=>…`, `combiner(a,b)` (clic objet sélectionné puis autre objet).
-- Plus tard (quand ils se retrouvent, `S.f.retrouves`) : `quai` (studio, photo du chariot) → `autre` (Quai des Brumes).
+- Ancienne fin (`autre`, Quai des Brumes, photo par Yvan) : plus jouée, code gardé dans `scenes.js`.
 - PNJ : apparence dans `SPEC` (hote, visiteur, visiteuse, manteau ; alien et lapin dessinés à la main dans `bus`), noms/couleurs des voix dans `AUTRES`/`COUL`. Sortie de scène : `partir(n,x)`, `descendre(n)` ; `anim(n).tremble`.
 - Yvan porte la tenue de sorcier (robe et cape noires, écharpe rouge, **pas de chapeau**) à partir du chapitre 1. Tenues : `SPEC` (chapitre en cours) et `NEUTRE` (intro), via `tenue(n)`.
 
@@ -41,10 +41,12 @@ existants : on invente tout — Académie d'Hiverlune, Quai des Brumes…).
   ambiances `AMBIANCE_SCENE`, bruitages `sfx(nom)`. Menu ⚙ : musique / bruitages avec bouton couper + curseur de volume (`volume(type,v)`, `regler(type,oui)`, mémorisés), revoir le tuto. Démarre au premier geste du joueur.
 - Mots de passe (menu ⚙, `main.js`) : `CHAPITRES` = { '0': intro, '1': chapitre 1 (Yvan), '2': chapitre 2 (Rod), '3': chapitre 3 (Solène) } ; le code recharge la page avec `#chN`. Ajouter un chapitre = une entrée dans `CHAPITRES`.
 - Scènes larges : `largeur:640` sur la scène → la caméra suit le héros (`S.cam`, clics et lumières décalés automatiquement ; `S.camSnap` au changement de scène). Exemple : `bonbons`.
+- Texte dans les décors : toujours `texte(t,x,y)` (jamais `g.fillText`) → couche haute résolution `#cvT`, nette, qui suit caméra et zoom.
+- Yeux fermés : `S.dort={nom:true}` pendant le dessin.
 - Mise en scène : `noir(true/false)` (fondu), `carton(texte)`, `titreJeu()`, `tuto()`, `anim(n).rire`.
 
 ## Tests
-- `sh tester.sh` (tout) ou `sh tester.sh quai` (groupes : graphisme, intro, son, yvan, rod, solene, mdp, passer, londres, quai, autre). Durées : suite complète ~1 s (Node, sans navigateur). Scénarios dans `tests/test.js`.
+- `sh tester.sh` (tout) ou `sh tester.sh quai` (groupes : graphisme, intro, son, yvan, rod, solene, quai (studio + réveil), mdp, passer, londres, autre). Durées : suite complète ~1 s (Node, sans navigateur). Scénarios dans `tests/test.js`.
 - Mode test : `window.TEST` → dialogues instantanés, choix pris dans `TEST.choix`, `action(id,verbe,objet)`.
 - Toute fonctionnalité ou correction = un test dans le groupe concerné. Ne tester que le groupe modifié.
 

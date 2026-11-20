@@ -124,6 +124,8 @@ function sfx(nom,arg){
     case 'pop':bruit(t,.12,.6,'lowpass',2500,o);osc('sine',90,t,.2,.25,o);bruit(t+.02,.3,.2,'highpass',4000,o);break;
     case 'toc':bruit(t,.05,.18,'lowpass',700,o);break;
     case 'clochette':[0,.12].forEach(d=>{osc('sine',2637,t+d,.6,.05,SON.rev);osc('sine',3520,t+d,.3,.02,o)});break;
+    case 'hurlement':{const x=osc('sawtooth',300,t,1.4,.05,SON.rev,.2,.4);x.frequency.linearRampToValueAtTime(620,t+.5);x.frequency.linearRampToValueAtTime(380,t+1.4);break}
+    case 'tada':[0,4,7,12].forEach((n,i)=>osc('sine',MIDI(76+n),t+i*.06,.7,.06,SON.rev));break;
     case 'sifflet':[0,.05].forEach(d=>{const x=osc('sawtooth',880,t+d,1.6,.04,SON.rev,.1,.4);x.frequency.linearRampToValueAtTime(940,t+1.4)});bruit(t,1.8,.1,'highpass',4000,o);break;
   }
 }

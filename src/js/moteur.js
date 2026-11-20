@@ -15,6 +15,11 @@ const DEF={regarder:"Rien de spécial.",prendre:"Je ne peux pas prendre ça.",ut
   utiliserSurPersonne:"Pour une personne, essaie plutôt Donner."};
 const OBJETS={}; // id -> {nom, icone(g)}
 const SCENES={};
+const cvT=document.getElementById('cvT'),gT=cvT&&cvT.getContext?cvT.getContext('2d'):null,KT=4;
+// Texte des panneaux : dessiné net sur une couche haute résolution, à la bonne place (caméra, zoom compris)
+function texte(t,x,y){if(TEST||!gT)return;const m=g.getTransform(),sx=m.a*x+m.c*y+m.e,sy=m.b*x+m.d*y+m.f,k=Math.hypot(m.a,m.b);
+  gT.font=g.font.replace(/(\d+(?:\.\d+)?)px/,(a,n)=>(n*k*KT)+'px');gT.fillStyle=g.fillStyle;gT.textAlign=g.textAlign;gT.textBaseline=g.textBaseline;
+  gT.shadowColor='rgba(0,0,0,.5)';gT.shadowBlur=2;gT.fillText(t,sx*KT,sy*KT)}
 const R=(x,y,w,h,c,ctx=g)=>{ctx.fillStyle=c;ctx.fillRect(Math.round(x),Math.round(y),w,h)};
 
 // ----- Dialogues -----
@@ -80,7 +85,7 @@ const PORTRAITS={yvan:"Yvan. Lunettes, moustache, sac de parc d'attractions. Ex-
   solene:"Solène. Psy, lectrice de BD compulsive, amie d'enfance des deux autres."};
 function objetsCliquables(){const sc=SCENES[S.scene];return[...(sc.objets||[]).filter(o=>!o.cache||!o.cache()),...heroObjets()]}
 function dessiner(){
-  const sc=SCENES[S.scene];if(TEST)return;requestAnimationFrame(dessiner);if(!sc)return;g.clearRect(0,0,W,H);
+  const sc=SCENES[S.scene];if(TEST)return;requestAnimationFrame(dessiner);if(!sc)return;g.clearRect(0,0,W,H);if(gT)gT.clearRect(0,0,W*KT,H*KT);
   const LG=sc.largeur||W,pp=S.pos[S.perso]??LG/2,cible_=Math.max(0,Math.min(LG-W,pp-W/2));S.cam=S.camSnap?cible_:S.cam+(cible_-S.cam)*.12;S.camSnap=0;
   g.save();g.translate(-Math.round(S.cam),0);sc.dessin(g);
   (sc.objets||[]).forEach(o=>o.dessin&&(!o.cache||!o.cache())&&o.dessin(g));

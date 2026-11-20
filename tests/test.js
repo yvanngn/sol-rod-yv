@@ -90,9 +90,9 @@ const scenarios={
     G.window.TEST.choix.push('Sur instagroom ?',...G.JOUTE.map(x=>x[1]));
     await G.action('porte_bonbons');
     v('le vigile répète sa phrase après une erreur',G.window.TEST.log.filter(l=>l==='vigile: Je vous ai vue.').length===2);
-    v('joute gagnée, singe en chocolat rendu',dit(G,"je pensais que c'était un nounours")&&!G.aObjet('nounours'));
+    v('Solène sort le singe de son sac, rendu',dit(G,"je pensais que c'était un nounours")&&!G.aObjet('nounours'));
     v('magasin de vêtements puis retrouvailles',dit(G,'magasin de vêtements')&&dit(G,"Vous n'allez pas me croire !")&&G.S.f.retrouves&&G.S.verrou===null);
-    v('on enchaîne au studio, à suivre',G.S.scene==='quai'&&dit(G,'Dans le studio')&&dit(G,'carton: À suivre'));
+    v('on enchaîne au studio',G.S.scene==='quai'&&dit(G,'Dans le studio'));
   },
   async londres(G){
     await G.go('londres');v('scène de départ',G.S.scene==='londres');
@@ -102,11 +102,16 @@ const scenarios={
     G.switchPerso('rod');await G.action('porte');v('entrée au studio',G.S.scene==='quai');
   },
   async quai(G){
-    await G.go('quai');G.switchPerso('yvan');
-    await G.action('chariot',undefined,'telephone');v('photo refusée sans pose',!G.S.f.traverse);
-    G.window.TEST.choix.push('p');await G.action('rod');v('Rod pose',G.S.f.pose);
-    await G.action('chariot',undefined,'telephone');v('traversée du mur',G.S.f.traverse&&G.S.scene==='autre');
-    v('héros réapparus',G.S.pos.rod===160&&G.S.pos.yvan===120);
+    G.S.f.retrouves=1;G.S.verrou=null;G.S.f.vu_quai=1;await G.go('quai',{yvan:220,rod:250,solene:280});
+    v('studio agrandi',G.SCENES.quai.largeur>320);
+    G.switchPerso('solene');await G.action('boutique','utiliser');v('Solène ne parle pas de sa carte bleue',!dit(G,'confisqué ma carte'));
+    G.switchPerso('rod');await G.action('loup');v('Rod fait le pitre sur le loup-garou',dit(G,'Aouuu'));
+    G.switchPerso('yvan');await G.action('balai');v('Yvan fait semblant de voler sur le balai',dit(G,'Décollage'));
+    await G.action('touriste');v('seule Solène demande la photo',G.S.scene==='quai');
+    G.switchPerso('solene');await G.action('touriste');
+    v('photo à trois, compte 1-2-3, avalés par le mur',dit(G,'Trois !')&&G.S.scene==='reveil');
+    v('réveil : Solène, puis les deux autres',dit(G,'les gars ?')&&dit(G,'rod: What ?')&&dit(G,"C'est quoi ça"));
+    v('fin du chapitre 1 devant le château',dit(G,'carton: Fin du chapitre 1')&&G.S.f.finChapitre1);
   },
   async autre(G){
     await G.go('autre');G.switchPerso('yvan');await G.action('solene');v('fin de l\'intro',G.S.f.fin);
