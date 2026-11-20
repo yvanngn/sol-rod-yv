@@ -99,6 +99,8 @@ Drapeaux d'histoire utilisés : `S.f.pose`, `S.f.traverse`, `S.f.fin`, `S.f.cabi
 
 - 20/11/2026 : dans la cabine, la pièce ronde dépasse de la fente du monnayeur (sous le clavier) et brille ; au pub, le verre de pailles est plus grand, déplacé près des pompes (plus caché par une cliente) et luit doucement tant que Rod n'a pas pris de paille.
 
+- 20/11/2026 : chute dans le mur un peu plus lente ; château enrichi (bannières aux remparts, lierre, horloge sur la grande tour, observatoire à coupole, gargouilles, cheminées qui fument, chemin éclairé sur la falaise, vitraux colorés).
+
 ## 6. Idées de Claude (💡 à valider)
 - (aucune en attente)
 

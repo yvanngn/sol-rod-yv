@@ -1690,7 +1690,7 @@ async function photoTouriste(){
   // flash de la photo : d'un coup, le chariot et les trois basculent dans le mur
   sfx('photo');S.flash=1;S.avale=1;sfx('whoosh');
   if(!TEST&&!S.passe){const d0={yvan:S.pos.yvan,rod:S.pos.rod,solene:S.pos.solene},t0=Date.now();
-    while(Date.now()-t0<260){const u=(Date.now()-t0)/260,dx=u*u*120;S.chariotDx=dx;
+    while(Date.now()-t0<650){const u=(Date.now()-t0)/650,dx=u*u*120;S.chariotDx=dx;
       for(const n of['yvan','rod','solene'])if(S.pos[n]!=null){S.pos[n]=d0[n]+dx;anim(n).dir='d';if(S.pos[n]>440)S.pos[n]=null}
       await pause(16)}}
   ['yvan','rod','solene'].forEach(n=>{S.pos[n]=null;anim(n).marche=false});
@@ -1748,6 +1748,23 @@ function chateau(x0,y0){ // grand château original et somptueux, perché sur un
   for(let i=0;i<26;i++){const x=x0-150+i*12,s=Math.sin(t/400+i);if(Math.abs(x-x0)<150){g.globalAlpha=.25+.2*s;P(x+s,y0+22+(i%3)*3,6,1,f);g.globalAlpha=1}}
   // barques à lanternes
   [[x0-170,y0+24],[x0+160,y0+20]].forEach(([bx,by],i)=>{const yy=by+Math.sin(t/700+i)*.8;P(bx-6,yy,12,2,'#2a1a14');P(bx-4,yy+2,8,1,'#1a100c');P(bx+3,yy-6,1,6,'#555');halo(bx+3,yy-7,6,'rgb(255,200,120)',.8)});
+  // bannières suspendues aux remparts
+  [-100,-60,60,100].forEach((dx,i)=>{const x=x0+dx,o=Math.sin(t/700+i)*1;P(x-4,y0-14,9,1,or);g.fillStyle=i%2?'#7a1a2a':'#1a3a7a';g.beginPath();g.moveTo(x-4,y0-13);g.lineTo(x+5,y0-13);g.lineTo(x+5+o,y0+2);g.lineTo(x+.5+o,y0-1);g.lineTo(x-4+o,y0+2);g.fill();P(x-1+o,y0-9,3,3,or)});
+  // lierre sur l'enceinte et le pied des tours
+  for(let i=0;i<40;i++){const x=x0-120+((i*37)%240),y=y0-14+((i*13)%16);P(x,y,2,2,i%3?'#2a5a3a':'#3a7a4a')}
+  // horloge sur la grande tour
+  {const cx=x0-26,cy=y0-80;g.fillStyle='#e8dcc0';g.beginPath();g.arc(cx,cy,4.5,0,7);g.fill();g.strokeStyle=or;g.beginPath();g.arc(cx,cy,4.5,0,7);g.stroke();
+    const h=t/40000,mn=t/3000;g.strokeStyle='#2a1a10';g.beginPath();g.moveTo(cx,cy);g.lineTo(cx+Math.sin(h)*2.5,cy-Math.cos(h)*2.5);g.moveTo(cx,cy);g.lineTo(cx+Math.sin(mn)*3.8,cy-Math.cos(mn)*3.8);g.stroke()}
+  // observatoire à coupole et lunette sur la tour de droite
+  {const cx=x0+76,cy=y0-92;g.fillStyle='#5a6a8a';g.beginPath();g.arc(cx,cy-2,8,Math.PI,0);g.fill();P(cx-1,cy-10,2,8,'#1a1428');g.save();g.translate(cx,cy-6);g.rotate(-.7);P(0,-1,12,2,'#c9a040');g.restore();halo(cx,cy-4,10,'rgb(150,200,255)',.3)}
+  // gargouilles aux angles du grand hall
+  [-42,40].forEach(dx=>{P(x0+dx,y0-66,4,3,'#4a4468');P(x0+dx+(dx<0?-2:3),y0-65,2,1,'#4a4468')});
+  // cheminées qui fument
+  [[-56,66],[56,70]].forEach(([dx,h],i)=>{const x=x0+dx+6,y=y0-h-6;P(x,y,3,6,m);for(let k=0;k<4;k++){const u=((t/1400+k/4+i*.3)%1);g.fillStyle=`rgba(220,220,240,${.35*(1-u)})`;g.beginPath();g.arc(x+1+u*8,y-u*22,1.5+u*3,0,7);g.fill()}});
+  // chemin éclairé qui serpente sur la falaise jusqu'à la porte
+  for(let i=0;i<9;i++){const u=i/8,x=x0-60+Math.sin(u*9)*22+u*60,y=y0+36-u*34;P(x,y,2,1,'#5a4a6a');if(i%2===0)halo(x,y-2,4,'rgb(255,210,140)',.8)}
+  // vitraux colorés du hall (reflets)
+  for(let k=-1;k<=1;k++){g.globalAlpha=.5;P(x0+k*22-4,y0-46,4,6,['#ff6a8a','#6ab0ff','#8af0a0'][k+1]);P(x0+k*22,y0-36,4,6,['#ffd060','#c88aff','#ff9a50'][k+1]);g.globalAlpha=1}
   // oiseaux
   for(let i=0;i<5;i++){const bx=x0-120+((t/40+i*70)%260),by=y0-120+Math.sin(t/900+i)*6+i*4,w=(t/150+i)%2<1?1:0;P(bx,by,2,1,'#1a1428');P(bx+2,by-w,2,1,'#1a1428');P(bx-2,by-w,2,1,'#1a1428')}
 }
