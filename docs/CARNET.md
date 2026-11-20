@@ -13,7 +13,7 @@ Yvan, Rod et Solène visitent un studio de cinéma à Londres. Ils tentent la ph
 |---|---|---|
 | Yvan | Fan de foot (écharpe vue plus de défaites que de victoires… c'est celle de Rod), adore photographier la bouffe (4 000 photos). Porte la tenue de sorcier dès le chapitre 1 : robe et cape noires, écharpe rouge, pas de chapeau. | ✅ |
 | Rod | A une écharpe de foot porte-bonheur ; jouait dans un groupe (« la setlist du groupe »). Au début du chapitre 1, part aux toilettes vers la gauche (où il y aura un pub anglais). | ✅ |
-| Solène | Garde les billets ; a « confisqué la carte bleue » d'Yvan. Au début du chapitre 1, part acheter des bonbons (vers le bas). | ✅ |
+| Solène | Garde les billets ; mentionne « François » (devant les chocolats — à préciser par l'utilisateur) ; a « confisqué la carte bleue » d'Yvan. Au début du chapitre 1, part acheter des bonbons (vers le bas). | ✅ |
 | L'hôte (PNJ) | **À l'intérieur du bus, derrière sa caisse à l'entrée** (corrigé le 15/11) : « dit de rentrer, que c'est gratuit et de ne pas avoir peur ». Disparaît quand le bus redevient normal. | — |
 | Visiteuse (PNJ) | Dame aux cheveux roses et jumelles, dans le bus. Le visiteur (touriste) a été retiré de l'intérieur le 15/11 ; les deux passent encore dehors (gens qui entrent et ressortent). | — |
 | Alien vert (curiosité) | « Un alien vert classique » : grosse tête, grands yeux noirs, cligne des yeux. | — |
@@ -81,6 +81,8 @@ Drapeaux d'histoire utilisés : `S.f.pose`, `S.f.traverse`, `S.f.fin`, `S.f.cabi
 - 19/11/2026 : bulle des joueurs de fléchettes nette (texte HTML). Rod : plus de « …Pardon. » quand l'homme au manteau sort ; en entrant aux toilettes : « Qu'est-ce que c'est que ça ? ». Chapitre 3 (Solène) codé jusqu'au studio. Mot de passe 3.
 
 - 19/11/2026 : mots de passe plus affichés dans le menu. Magasin de bonbons agrandi (2 écrans de large, la caméra suit Solène) et en profondeur (mur du fond lointain, îlots au milieu, étals au premier plan avec enseignes : sucettes, chocolats, nounours, bonbons bleus, cannes & berlingots, barbe à papa). Solène entre par la porte (clochette), pause, les enfants courent, « Ohlala, j'en aurai jamais, c'est sûr et certain ! ». Gros nounours en chocolat façon nounours à la guimauve, marron, à hauteur de Solène.
+
+- 20/11/2026 : répliques du chapitre 2 validées telles quelles ; répliques du chapitre 3 corrigées par l'utilisateur (Solène parle de François, de Gargamel, des roudoudous à 1 franc ; le nounours dans l'inventaire devient « Une bonne grosse guimauve ! Miam ! »).
 
 ## 6. Idées de Claude (💡 à valider)
 - (aucune en attente)

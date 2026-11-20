@@ -100,9 +100,9 @@ Corrige directement le texte (garde le numéro) et renvoie-moi la liste. 🆕 = 
 88. *objet (inventaire)* — Une sarbacane, c'est ingénieux !  `chapitre1_rod.js:15`
 89. *objet (inventaire)* — Une simple boule de papier.  `chapitre1_rod.js:16`
 90. **Rod** — Hey c'est pas bête ça, je vais pouvoir tirer plus fort.  `chapitre1_rod.js:20`
-91. 🆕 — Aïe, encore raté !  `chapitre1_rod.js:34`
-92. 🆕 — Je suis nul ce soir.  `chapitre1_rod.js:34`
-93. 🆕 — La cible a bougé ou… ?  `chapitre1_rod.js:34`
+91. — Aïe, encore raté !  `chapitre1_rod.js:34`
+92. — Je suis nul ce soir.  `chapitre1_rod.js:34`
+93. — La cible a bougé ou… ?  `chapitre1_rod.js:34`
 94. *regarder* — Ils ont l'air irra…cibles ! Haha  `chapitre1_rod.js:78`
 95. **Joueur de fléchettes** — Chut. Je vise.  `chapitre1_rod.js:79`
 96. **héros courant** — …Il vise depuis dix minutes.  `chapitre1_rod.js:79`
@@ -117,7 +117,7 @@ Corrige directement le texte (garde le numéro) et renvoie-moi la liste. 🆕 = 
 105. **Le barman** — Là-bas au fond. Et on consomme après, hein.  `chapitre1_rod.js:90`
 106. *regarder* — Un vrai comptoir en bois.  `chapitre1_rod.js:97`
 107. *regarder* — Des poivrots, ça fait pitié… Si j'avais le temps, je me serais bien joint à eux.  `chapitre1_rod.js:100`
-108. 🆕 **Un client** — Mmmh.  `chapitre1_rod.js:101`
+108. **Un client** — Mmmh.  `chapitre1_rod.js:101`
 109. **héros courant** — Conversation passionnante. Je reviendrai.  `chapitre1_rod.js:101`
 110. *regarder* — Un bol de cacahuètes qui ont dû être touchées par cinquante mains sales avant moi.  `chapitre1_rod.js:102`
 111. **Rod** — Mmh. La différence avec la barre du métro, c'est que ça a du goût.  `chapitre1_rod.js:103`
@@ -148,7 +148,7 @@ Corrige directement le texte (garde le numéro) et renvoie-moi la liste. 🆕 = 
 136. **Rod** — BAM ! En plein dans le mille.  `chapitre1_rod.js:162`
 137. **Rod** — Tiens, keskecé ?  `chapitre1_rod.js:162`
 138. *regarder* — Une boulette de papier.  `chapitre1_rod.js:163`
-139. 🆕 **Rod** — Qu'est-ce que c'est que ça ?  `chapitre1_rod.js:169`
+139. **Rod** — Qu'est-ce que c'est que ça ?  `chapitre1_rod.js:169`
 140. **Rod** — Une boulette de papier… Il y a quelque chose d'écrit.  `chapitre1_rod.js:173`
 141. **Rod** — « Je t'appelle… »  `chapitre1_rod.js:174`
 142. **Rod** — Hein ? Le papier… le ballon… Plus rien. J'ai rêvé ou quoi ?  `chapitre1_rod.js:177`
@@ -168,50 +168,50 @@ Corrige directement le texte (garde le numéro) et renvoie-moi la liste. 🆕 = 
 
 ## Chapitre 3 — Solène : bonbons, vigile, retrouvailles (`src/js/chapitre3_solene.js`)
 
-156. 🆕 *objet (inventaire)* — Un gros nounours en chocolat, au fond de mon sac à dos. Je n'ai rien vu. Je ne sais rien.  `chapitre3_solene.js:9`
-157. 🆕 — Je vous ai vue.  `chapitre3_solene.js:14`
-158. 🆕 — Et mes fesses aussi ?  `chapitre3_solene.js:14`
-159. 🆕 — Vous allez me suivre.  `chapitre3_solene.js:15`
-160. 🆕 — Sur instagroom ?  `chapitre3_solene.js:15`
-161. 🆕 — Venez ou j'appelle la police.  `chapitre3_solene.js:16`
-162. 🆕 — Ohla, don't stand so close to me.  `chapitre3_solene.js:16`
-163. 🆕 — Payez ou partez.  `chapitre3_solene.js:17`
-164. 🆕 — J'ai un 3e choix ?  `chapitre3_solene.js:17`
-165. 🆕 — Cette jeunesse…  `chapitre3_solene.js:18`
-166. 🆕 — Cette vieillesse…  `chapitre3_solene.js:18`
-167. 🆕 — Bon, ça ira pour cette fois.  `chapitre3_solene.js:19`
-168. 🆕 — Pour la prochaine aussi, j'espère.  `chapitre3_solene.js:19`
-169. 🆕 — Dépêchez-vous de partir avant que je ne change d'avis.  `chapitre3_solene.js:20`
-170. 🆕 — OK, mais je peux avoir un bonbon ?  `chapitre3_solene.js:20`
-171. 🆕 *regarder* — Des centaines de bocaux, jusqu'au fond du magasin. Réglisse, fraises, crocodiles… Mon dentiste va pleurer.  `chapitre3_solene.js:77`
-172. 🆕 *regarder* — Encore des îlots de bonbons, plus loin. Ce magasin n'a pas de fin.  `chapitre3_solene.js:78`
-173. 🆕 *regarder* — Des sucettes en spirale de toutes les couleurs. N'importe quel enfant serait aux anges. Moi aussi, d'ailleurs.  `chapitre3_solene.js:79`
-174. 🆕 *regarder* — Des tablettes de chocolat. Au lait, noir, aux noisettes. Mes trois amours.  `chapitre3_solene.js:80`
-175. 🆕 *regarder* — Des nounours en guimauve de toutes les couleurs. Ils me regardent avec leurs petits yeux tout mous.  `chapitre3_solene.js:81`
-176. 🆕 *regarder* — Des schtroumpfs en bonbon. Bleus, gélatineux, et d'un goût que personne n'a jamais su décrire.  `chapitre3_solene.js:82`
-177. 🆕 *regarder* — Des cannes en sucre rayées rouge et blanc, et des berlingots. Les bonbons de grand-mère, ceux qui collent aux dents pour toujours.  `chapitre3_solene.js:83`
-178. 🆕 *regarder* — Une machine à barbe à papa. Un nuage rose qui tourne tout seul. Hypnotique.  `chapitre3_solene.js:84`
-179. 🆕 *regarder* — Un énorme nounours en chocolat, de ma taille. Comme les petits nounours à la guimauve, mais géant. Il me fait de l'œil. Enfin… il me semble.  `chapitre3_solene.js:86`
-180. 🆕 **Solène** — Hop. Dans le sac à dos. Il rentre… de justesse.  `chapitre3_solene.js:87`
-181. 🆕 **Solène** — …J'ai fait ça, moi ? Une psy. Qui vole un nounours. Il faudra que j'en parle à quelqu'un.  `chapitre3_solene.js:87`
-182. 🆕 *regarder* — Deux enfants qui courent partout, du sucre plein les poches. Ils ne vont pas dormir avant jeudi.  `chapitre3_solene.js:90`
-183. 🆕 **Un enfant** — On a le droit à UN bonbon ! UN ! UN !  `chapitre3_solene.js:91`
-184. 🆕 **Solène** — …Et vous en êtes à combien ?  `chapitre3_solene.js:91`
-185. 🆕 **Un enfant** — Quarante-deux !  `chapitre3_solene.js:91`
-186. 🆕 *regarder* — Un vigile immense, près de l'entrée. Il n'a pas bougé d'un millimètre depuis que je suis entrée. Il cligne, au moins ?  `chapitre3_solene.js:94`
-187. 🆕 **Solène** — Bonjour !  `chapitre3_solene.js:95`
-188. 🆕 **Solène** — Très bavard. J'adore.  `chapitre3_solene.js:95`
-189. 🆕 *regarder* — La porte du magasin, avec sa petite clochette.  `chapitre3_solene.js:96`
-190. 🆕 **Solène** — Ohlala, j'en aurai jamais, c'est sûr et certain !  `chapitre3_solene.js:108`
-191. 🆕 **Solène** — Je ne vais quand même pas repartir sans rien.  `chapitre3_solene.js:114`
-192. 🆕 **Le vigile** — Halte.  `chapitre3_solene.js:117`
-193. 🆕 **Solène** — …Bon, bon. Je fouille mon sac.  `chapitre3_solene.js:128`
-194. 🆕 **Solène** — Tenez… je pensais que c'était un nounours.  `chapitre3_solene.js:130`
-195. 🆕 **Solène** — …C'est un singe. En chocolat. Avec des cymbales. J'aurais juré que c'était un nounours.  `chapitre3_solene.js:130`
-196. 🆕 **Solène** — …Hein ?  `chapitre3_solene.js:146`
-197. 🆕 **Solène** — Un magasin de vêtements ? Où sont passés les bonbons… et le vigile ?  `chapitre3_solene.js:146`
-198. 🆕 **Solène** — J'ai rêvé ou quoi ?  `chapitre3_solene.js:146`
-199. 🆕 **Yvan, Rod et Solène** — Vous n'allez pas me croire !  `chapitre3_solene.js:163`
+156. 🆕 *objet (inventaire)* — Une bonne grosse guimauve ! Miam !  `chapitre3_solene.js:9`
+157. — Je vous ai vue.  `chapitre3_solene.js:14`
+158. — Et mes fesses aussi ?  `chapitre3_solene.js:14`
+159. — Vous allez me suivre.  `chapitre3_solene.js:15`
+160. — Sur instagroom ?  `chapitre3_solene.js:15`
+161. — Venez ou j'appelle la police.  `chapitre3_solene.js:16`
+162. — Ohla, don't stand so close to me.  `chapitre3_solene.js:16`
+163. — Payez ou partez.  `chapitre3_solene.js:17`
+164. — J'ai un 3e choix ?  `chapitre3_solene.js:17`
+165. — Cette jeunesse…  `chapitre3_solene.js:18`
+166. — Cette vieillesse…  `chapitre3_solene.js:18`
+167. — Bon, ça ira pour cette fois.  `chapitre3_solene.js:19`
+168. — Pour la prochaine aussi, j'espère.  `chapitre3_solene.js:19`
+169. — Dépêchez-vous de partir avant que je ne change d'avis.  `chapitre3_solene.js:20`
+170. — OK, mais je peux avoir un bonbon ?  `chapitre3_solene.js:20`
+171. 🆕 *regarder* — Réglisse, fraises, crocodiles… Mon dentiste va pleurer.  `chapitre3_solene.js:77`
+172. 🆕 *regarder* — Encore des bonbons ! Partout !!  `chapitre3_solene.js:78`
+173. 🆕 *regarder* — Des sucettes de toutes les couleurs.  `chapitre3_solene.js:79`
+174. 🆕 *regarder* — Des tablettes de chocolat. Ahh si seulement François aussi en avait !  `chapitre3_solene.js:80`
+175. 🆕 *regarder* — Des nounours en guimauve de toutes les couleurs. Ils me regardent avec envie.  `chapitre3_solene.js:81`
+176. 🆕 *regarder* — Des schtroumpfs ! Bouuuh je suis Gargamel !  `chapitre3_solene.js:82`
+177. 🆕 *regarder* — Des cannes en sucre et des roudoudous à 1 franc !  `chapitre3_solene.js:83`
+178. 🆕 *regarder* — Une machine à barbe à papa. J'en rêve !  `chapitre3_solene.js:84`
+179. 🆕 *regarder* — Un énorme nounours en chocolat !  `chapitre3_solene.js:86`
+180. 🆕 **Solène** — Hop. Dans le sac à dos. Ni vu, ni connu !  `chapitre3_solene.js:87`
+181. 🆕 **Solène** — Une psy qui vole un nounours. Il faudra que j'en parle à ma psy.  `chapitre3_solene.js:87`
+182. 🆕 *regarder* — Deux enfants qui courent partout. Amenez-moi un flingue ! Pour moi !  `chapitre3_solene.js:90`
+183. **Un enfant** — On a le droit à UN bonbon ! UN ! UN !  `chapitre3_solene.js:91`
+184. **Solène** — …Et vous en êtes à combien ?  `chapitre3_solene.js:91`
+185. **Un enfant** — Quarante-deux !  `chapitre3_solene.js:91`
+186. 🆕 *regarder* — Un vigile immense !  `chapitre3_solene.js:94`
+187. **Solène** — Bonjour !  `chapitre3_solene.js:95`
+188. **Solène** — Très bavard. J'adore.  `chapitre3_solene.js:95`
+189. *regarder* — La porte du magasin, avec sa petite clochette.  `chapitre3_solene.js:96`
+190. **Solène** — Ohlala, j'en aurai jamais, c'est sûr et certain !  `chapitre3_solene.js:108`
+191. **Solène** — Je ne vais quand même pas repartir sans rien.  `chapitre3_solene.js:114`
+192. **Le vigile** — Halte.  `chapitre3_solene.js:117`
+193. **Solène** — …Bon, bon. Je fouille mon sac.  `chapitre3_solene.js:128`
+194. **Solène** — Tenez… je pensais que c'était un nounours.  `chapitre3_solene.js:130`
+195. **Solène** — …C'est un singe. En chocolat. Avec des cymbales. J'aurais juré que c'était un nounours.  `chapitre3_solene.js:130`
+196. **Solène** — …Hein ?  `chapitre3_solene.js:146`
+197. **Solène** — Un magasin de vêtements ? Où sont passés les bonbons… et le vigile ?  `chapitre3_solene.js:146`
+198. **Solène** — J'ai rêvé ou quoi ?  `chapitre3_solene.js:146`
+199. **Yvan, Rod et Solène** — Vous n'allez pas me croire !  `chapitre3_solene.js:163`
 200. **Narrateur** — Le contrôleur scanne les trois billets. Bip, bip, bip.  `chapitre3_solene.js:165`
 
 ## Londres (base), studio, Quai des Brumes (`src/js/scenes.js`)
