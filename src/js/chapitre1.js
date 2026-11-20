@@ -117,10 +117,15 @@ SCENES.cabine={nom:'Cabine téléphonique',fixe:1,
     if(S.cab==='sonne'){g.strokeStyle='rgba(255,240,180,.8)';for(let q=0;q<2;q++){const r=20+q*7+((t/80)%6);g.beginPath();g.arc(111,62,r,-.6,.6);g.stroke();g.beginPath();g.arc(111,62,r,Math.PI-.6,Math.PI+.6);g.stroke()}}
     if(k>0){P(hx-6,hy-4+parle,12,12,'#d9a77c');P(hx-8,hy-1+parle,3,8,'#c8946a');P(hx+5,hy+parle,3,7,'#c8946a');P(hx-6,hy-4+parle,12,1,'#ecc09a')}
     // la pièce sur la tablette, à côté du combiné
-    if(!S.f.piece){const b=.5+.5*Math.sin(t/150);halo(150,118,14,'rgb(255,220,120)',.4+b*.3);P(146,114,8,8,'#f0c766');P(147,115,6,6,'#ffe9a0');P(149,117,2,2,'#c99a3a');P(147,114,2,1,'#fff')}
+    // monnayeur : fente de retour des pièces, la pièce ronde en dépasse et brille
+    P(146,104,24,14,'#55555c');P(146,104,24,1,'#8a8a92');P(149,108,18,6,'#050506');
+    if(!S.f.piece){const b=.5+.5*Math.sin(t/150),ey=(t/600|0)%6===0?1:0;halo(158,111,18,'rgb(255,220,120)',.45+b*.35);
+      const r=(rr,c)=>{g.fillStyle=c;g.beginPath();g.arc(158,109-ey,rr,0,7);g.fill()};r(5.5,'#a87a20');r(4.6,'#f0c766');r(3.2,'#ffdc70');P(157,106-ey,2,6,'#c99a3a');P(155,106-ey,2,1,'#fff6c8');
+      if(b>.85){P(163,101,1,3,'#fff');P(162,102,3,1,'#fff')}}
+    P(148,112,20,6,'#55555c');P(148,112,20,1,'#9a9aa2');
   },
   objets:[
-    {id:'piece',nom:'pièce brillante',x:142,y:110,w:16,h:14,defaut:'prendre',cache:()=>S.f.piece,
+    {id:'piece',nom:'pièce brillante',x:148,y:100,w:20,h:18,defaut:'prendre',cache:()=>S.f.piece,
       regarder:"Une pièce oubliée juste à côté du combiné. Étrange, je ne vois pas de quel pays ça peut venir.",prendre:prendrePiece},
     {id:'combine',nom:'combiné',x:102,y:36,w:20,h:60,
       regarder:()=>say('moi',S.f.piece?"Le combiné. Raccroché. J'aimerais qu'il le reste.":"Un vieux combiné noir, bien lourd. Le fil est tout entortillé."),
@@ -132,7 +137,7 @@ SCENES.cabine={nom:'Cabine téléphonique',fixe:1,
       utiliser:async()=>{await go('londres',{yvan:56});anim('yvan').dir='face'}},
   ],
   ambiance:{nuit:.4,voile:'#05060c',teinte:'rgba(255,90,90,.2)'},
-  lumieres:()=>[{x:160,y:10,r:110,c:'rgba(255,230,190,.25)'},{x:162,y:40,r:30,c:'rgba(90,255,140,.2)'},...(S.f.piece?[]:[{x:150,y:118,r:20,c:'rgba(255,220,120,.4)',vacille:1}])],
+  lumieres:()=>[{x:160,y:10,r:110,c:'rgba(255,230,190,.25)'},{x:162,y:40,r:30,c:'rgba(90,255,140,.2)'},...(S.f.piece?[]:[{x:158,y:110,r:24,c:'rgba(255,220,120,.5)',vacille:1}])],
   dessinAvant:()=>vignette(),
   async entree(){S.f.cabine=1;await say('moi',"Il fait sombre là-dedans… Tiens ? Une pièce qui brille, posée à côté du combiné.")},
 };

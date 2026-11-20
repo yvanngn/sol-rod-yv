@@ -53,7 +53,7 @@ Drapeaux d'histoire utilisés : `S.f.pose`, `S.f.traverse`, `S.f.fin`, `S.f.cabi
 ## 4 bis. Énigmes et déclencheurs
 | Énigme | Il faut | Résultat |
 |---|---|---|
-| Cabine | Utiliser la cabine → **vue zoomée de l'intérieur** (téléphone, combiné, tablette, annuaire, vitres sous la pluie) | La pièce brille sur la tablette, à côté du combiné |
+| Cabine | Utiliser la cabine → **vue zoomée de l'intérieur** (téléphone, combiné, tablette, annuaire, vitres sous la pluie) | La pièce ronde dépasse de la fente du monnayeur et brille |
 | Pièce | Prendre la pièce | Le téléphone sonne (le combiné vibre), **Yvan décroche** (sa main tient le combiné), appel mystérieux, on raccroche |
 | Bus-musée | Utiliser le bus → l'hôte (« gratuit »), Yvan tremble, « …Mais c'est gratuit. », **pause**, il avance vers le centre, puis « ça a l'air plus grand dedans » (gag voulu par l'utilisateur) | Intérieur géant plein de curiosités |
 | Singe | Examiner le singe (action par défaut ; la fente est toujours visible) ; Utiliser la pièce sur le singe | Scintillement, Yvan ébloui, le bus redevient normal |
@@ -96,6 +96,8 @@ Drapeaux d'histoire utilisés : `S.f.pose`, `S.f.traverse`, `S.f.fin`, `S.f.cabi
 - 20/11/2026 : enseignes des étals ajustées à leur largeur ; espace entre le nom et la réplique dans les dialogues à choix ; le singe en chocolat est dessiné devant (Solène recule d'un pas, plus visible) ; au studio on joue Rod en premier ; château à l'opposé des personnages, la caméra fait un demi-tour (avec flou de mouvement) ; Rod et Yvan se redressent en deux temps (coude puis assis).
 
 - 20/11/2026 (lots 1 et 2) : pièce ronde dans l'inventaire ; Rod vise avec la sarbacane, la fléchette part, le ballon éclate, la fléchette retombe et Rod la récupère (la sarbacane reste dans l'inventaire) ; nounours en chocolat à la taille du sac à dos, sur un présentoir ; zoom sur le singe en chocolat ; « Ohlala, je veux tout ! » ; écran noir « Plus tard, dans le studio » après les retrouvailles ; plus de panneau « Quai ? », mur lisse, chariot encastré ; au flash, chariot et héros basculent d'un coup dans le mur ; réveil : herbe dès le début, garçons qui se redressent en pivotant sur les hanches (allongés → coude → assis).
+
+- 20/11/2026 : dans la cabine, la pièce ronde dépasse de la fente du monnayeur (sous le clavier) et brille ; au pub, le verre de pailles est plus grand, déplacé près des pompes (plus caché par une cliente) et luit doucement tant que Rod n'a pas pris de paille.
 
 ## 6. Idées de Claude (💡 à valider)
 - (aucune en attente)

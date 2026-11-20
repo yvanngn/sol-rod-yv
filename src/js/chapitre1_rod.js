@@ -92,7 +92,9 @@ SCENES.pub={nom:'Chaos Order',
       dessin(){P(150,122,150,5,'#7a4a24');P(150,122,150,1,'#a8784a');P(150,127,150,33,'#4a2814');for(let x=154;x<296;x+=24){P(x,131,20,20,'#3e2210');P(x,131,20,1,'#6a4020')}P(150,154,150,2,'#c9a040');
         [[238],[248]].forEach(([x])=>{P(x,108,3,14,'#c9a040');P(x-1,104,5,5,'#1a1a1a')});
         g.fillStyle='#e8d8b8';g.beginPath();g.ellipse(198,121,8,3,0,0,7);g.fill();if(!S.f.cacahuetesFin)for(let i=0;i<6;i++)P(192+i*2,118+(i%2),2,2,'#c89050');
-        P(222,108,7,14,'rgba(220,240,255,.5)');for(let i=0;i<7;i++)P(222+i,101+(i%3),1,9,['#f2f2f2','#e04a4a','#4a8ae0'][i%3]);
+        if(!S.f.paille){const b=.5+.5*Math.sin(Date.now()/260);halo(262,108,16,'rgb(255,240,200)',.25+b*.25);if(b>.9){P(268,96,1,3,'#fff');P(267,97,3,1,'#fff')}}
+        P(256,106,12,16,'rgba(220,240,255,.55)');P(256,106,1,16,'rgba(255,255,255,.8)');P(256,121,12,1,'rgba(255,255,255,.6)');
+        for(let i=0;i<(S.f.paille?8:9);i++){const x=257+i*1.2,h=14+(i%3)*3;P(Math.round(x),106-h+8,1,h,['#f2f2f2','#e04a4a','#4a8ae0','#ffd040'][i%4]);P(Math.round(x),106-h+8,1,1,'#fff')}
         [178,226,286].forEach(x=>{P(x+8,112,5,10,'rgba(230,170,60,.85)');P(x+8,111,5,2,'#fff8e0')})},
       regarder:"Un vrai comptoir en bois."},
     {id:'clients',nom:'clients au comptoir',humain:true,x:162,y:114,w:136,h:46,
@@ -101,7 +103,7 @@ SCENES.pub={nom:'Chaos Order',
       parler:()=>dire([['client',"Mmmh."],['moi',"Conversation passionnante. Je reviendrai."]])},
     {id:'cacahuetes',nom:'cacahuètes',x:188,y:112,w:20,h:12,defaut:'prendre',regarder:"Un bol de cacahuètes qui ont dû être touchées par cinquante mains sales avant moi.",
       prendre:async()=>{sfx('manger');if(!S.f.cacahuetes){S.f.cacahuetes=1;await say('rod',"Mmh. La différence avec la barre du métro, c'est que ça a du goût.")}else await say('rod',"Encore une poignée… Comme ça je ne viens plus les mains vides la prochaine fois chez Solène.")}},
-    {id:'pailles',nom:'verre de pailles',x:219,y:98,w:13,h:24,defaut:'regarder',cache:()=>false,
+    {id:'pailles',nom:'verre de pailles',x:253,y:90,w:18,h:32,defaut:'regarder',cache:()=>false,
       regarder:"Un verre plein de pailles.",
       prendre:async()=>{if(S.f.paille)return say('rod',"J'en ai déjà une. Pensons aux tortues.");S.f.paille=1;ajouter('paille');await say('rod',"Je t'emprunte une paille.")}},
     {id:'entree',nom:'porte du pub',x:300,y:92,w:20,h:68,regarder:"La porte qui donne sur la rue.",utiliser:"Pas tout de suite. Je suis venu pour les toilettes, je repars avec les toilettes. Enfin… façon de parler."},
