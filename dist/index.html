@@ -1690,7 +1690,7 @@ async function photoTouriste(){
   // flash de la photo : d'un coup, le chariot et les trois basculent dans le mur
   sfx('photo');S.flash=1;S.avale=1;sfx('whoosh');
   if(!TEST&&!S.passe){const d0={yvan:S.pos.yvan,rod:S.pos.rod,solene:S.pos.solene},t0=Date.now();
-    while(Date.now()-t0<650){const u=(Date.now()-t0)/650,dx=u*u*120;S.chariotDx=dx;
+    while(Date.now()-t0<1100){const u=(Date.now()-t0)/1100,dx=u*u*120;S.chariotDx=dx;
       for(const n of['yvan','rod','solene'])if(S.pos[n]!=null){S.pos[n]=d0[n]+dx;anim(n).dir='d';if(S.pos[n]>440)S.pos[n]=null}
       await pause(16)}}
   ['yvan','rod','solene'].forEach(n=>{S.pos[n]=null;anim(n).marche=false});
