@@ -1,11 +1,11 @@
-// ===== Chapitres et mots de passe (0 = intro, 1 = chapitre 1, …) =====
+// ===== Mots de passe des scènes du chapitre 1 (0 = intro, 1 = Yvan, 2 = Rod, 3 = Solène) =====
 const CHAPITRES={
   '0':{nom:"Intro",lancer:()=>go('appart')},
-  '1':{nom:"Chapitre 1 — Yvan",lancer:()=>{S.tenue='';S.posY={};return go('londres',{yvan:70,rod:110,solene:150})}},
-  '2':{nom:"Chapitre 2 — Rod",lancer:()=>{S.tenue='';S.posY={};
+  '1':{nom:"Scène 1 — Yvan",lancer:()=>{S.tenue='';S.posY={};return go('londres',{yvan:70,rod:110,solene:150})}},
+  '2':{nom:"Scène 2 — Rod",lancer:()=>{S.tenue='';S.posY={};
     Object.assign(S.f,{vu_londres:1,cabine:1,piece:1,hote:1,fente:1,singe:1,busNormal:1,manteau:1});MUSIQUE_SCENE.bus='magie';
     return debutRod()}},
-  '3':{nom:"Chapitre 3 — Solène",lancer:()=>{S.tenue='';S.posY={};
+  '3':{nom:"Scène 3 — Solène",lancer:()=>{S.tenue='';S.posY={};
     Object.assign(S.f,{vu_londres:1,cabine:1,piece:1,hote:1,fente:1,singe:1,busNormal:1,manteau:1,finYvan:1,flechette:1,paille:1,manteauWC:1,ballon:1,boulette:1,ballonParti:1,vraiNom:1});
     MUSIQUE_SCENE.bus='magie';S.persos.rod.inv=['echarpe','sarbacane'];return debutSolene()}},
 };

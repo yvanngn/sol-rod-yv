@@ -28,10 +28,10 @@ Yvan, Rod et Solène visitent un studio de cinéma à Londres. Ils tentent la ph
 | Partie | Scènes | État |
 |---|---|---|
 | Intro | `appart` (anniversaire, cadeau = tenue de sorcier, tenue neutre) → `salon` (Yvan sur son canapé) → carton « Un an plus tard » | ✅ |
-| Chapitre 1 — départ | `londres` : « Et nous voici à Londres », titre, tuto ; Rod part aux toilettes, Solène acheter des bonbons ; Yvan : « Encore seul… pour changer. » On joue les 3 **successivement**, sans pouvoir changer de perso (verrou). | ✅ 15/11/2026 |
-| Chapitre 1 — Yvan | Cabine (pièce brillante, appel mystérieux) → bus-musée (plus grand dedans, curiosités, singe aux cymbales) → pièce dans le singe → éblouissement → bus normal → sortie, l'homme au manteau entre → « Pendant ce temps, du côté de Rod… » | ✅ 15/11/2026 |
-| Chapitre 2 — Rod | Devanture du pub, enseigne « CHAOS ORDER » (on la voit avant que Rod entre). Pub anglais : clients de dos au comptoir, barman qui essuie un verre, joueurs de fléchettes à gauche. Cacahuètes (« la différence avec la barre de métro, c'est que ça a du goût »), verre de pailles (« tiens, il y en a encore ici »), fléchette par terre sous la cible. Porte des WC : l'homme au manteau en sort (1re fois). Toilettes : ballon rouge au singe ; fléchette lancée = tombe à plat ; paille + fléchette = sarbacane ; ballon éclaté → boulette « Je t'appelle… » → papier et ballon disparaissent en scintillant → étonnement de Rod → Rod ressort : la devanture porte son vrai nom « THE ENGLISH PUB » → « Pendant ce temps, du côté de Solène… » | ✅ 16/11/2026 |
-| Chapitre 3 — Solène | Magasin de bonbons très coloré (bocaux, sucettes, chocolats, nounours, schtroumpfs en bonbon, cannes, berlingots, barbe à papa), 2 enfants qui courent, vigile immobile près de l'entrée. « Ohlala, j'en aurai jamais assez ! C'est sûr ! ». Gros nounours en chocolat (taille doudou) : le prendre = « Voler », dans le sac à dos. En sortant : joute verbale avec le vigile (7 phrases dans l'ordre, les 7 réponses proposées à chaque fois dans un ordre mélangé, erreur = il répète). Puis Solène tend le « nounours » : c'est un singe aux cymbales en chocolat (« je pensais que c'était un nounours »). Scintillement → magasin de vêtements → retrouvailles dans la rue : « Vous n'allez pas me croire ! » → studio → à suivre. | ✅ 19/11/2026 |
+| Scène 1 — départ | `londres` : « Et nous voici à Londres », titre, tuto ; Rod part aux toilettes, Solène acheter des bonbons ; Yvan : « Encore seul… pour changer. » On joue les 3 **successivement**, sans pouvoir changer de perso (verrou). | ✅ 15/11/2026 |
+| Scène 1 — Yvan | Cabine (pièce brillante, appel mystérieux) → bus-musée (plus grand dedans, curiosités, singe aux cymbales) → pièce dans le singe → éblouissement → bus normal → sortie, l'homme au manteau entre → « Pendant ce temps, du côté de Rod… » | ✅ 15/11/2026 |
+| Scène 2 — Rod | Devanture du pub, enseigne « CHAOS ORDER » (on la voit avant que Rod entre). Pub anglais : clients de dos au comptoir, barman qui essuie un verre, joueurs de fléchettes à gauche. Cacahuètes (« la différence avec la barre de métro, c'est que ça a du goût »), verre de pailles (« tiens, il y en a encore ici »), fléchette par terre sous la cible. Porte des WC : l'homme au manteau en sort (1re fois). Toilettes : ballon rouge au singe ; fléchette lancée = tombe à plat ; paille + fléchette = sarbacane ; ballon éclaté → boulette « Je t'appelle… » → papier et ballon disparaissent en scintillant → étonnement de Rod → Rod ressort : la devanture porte son vrai nom « THE ENGLISH PUB » → « Pendant ce temps, du côté de Solène… » | ✅ 16/11/2026 |
+| Scène 3 — Solène | Magasin de bonbons très coloré (bocaux, sucettes, chocolats, nounours, schtroumpfs en bonbon, cannes, berlingots, barbe à papa), 2 enfants qui courent, vigile immobile près de l'entrée. « Ohlala, j'en aurai jamais assez ! C'est sûr ! ». Gros nounours en chocolat (taille doudou) : le prendre = « Voler », dans le sac à dos. En sortant : joute verbale avec le vigile (7 phrases dans l'ordre, les 7 réponses proposées à chaque fois dans un ordre mélangé, erreur = il répète). Puis Solène tend le « nounours » : c'est un singe aux cymbales en chocolat (« je pensais que c'était un nounours »). Scintillement → magasin de vêtements → retrouvailles dans la rue : « Vous n'allez pas me croire ! » → studio → à suivre. | ✅ 19/11/2026 |
 | Plus tard | `quai` (studio, photo du chariot) → `autre` (Quai des Brumes) : accessibles quand ils se sont retrouvés (`S.f.retrouves`). | ✅ (code) |
 
 Drapeaux d'histoire utilisés : `S.f.pose`, `S.f.traverse`, `S.f.fin`, `S.f.cabine`, `S.f.piece`, `S.f.hote`, `S.f.fente`, `S.f.singe`, `S.f.busNormal`, `S.f.manteau`, `S.f.finYvan`, `S.f.retrouves` (pas encore posé par l'histoire).
@@ -40,11 +40,11 @@ Drapeaux d'histoire utilisés : `S.f.pose`, `S.f.traverse`, `S.f.fin`, `S.f.cabi
 | Moment | Yvan | Rod | Solène |
 |---|---|---|---|
 | Début du chapitre 1 | Téléphone | Écharpe de foot | Billets |
-| Chapitre 1 — Yvan | + **Pièce brillante** (cabine) → **utilisée** dans le singe | — (parti) | — (partie, garde les Billets) |
+| Scène 1 — Yvan | + **Pièce brillante** (cabine) → **utilisée** dans le singe | — (parti) | — (partie, garde les Billets) |
 | Fin de la partie d'Yvan | Téléphone | Écharpe de foot | Billets |
 | Partie de Rod | — | + Fléchette (sous la cible) + Paille (comptoir) → combinées en **Sarbacane** → utilisée sur le ballon (reste dans l'inventaire) ; + Boulette (lue puis disparaît) | — |
 | Fin de la partie de Rod | Téléphone | Écharpe de foot, Sarbacane | Billets |
-| Chapitre 3 — Solène | — | — | + Gros nounours en chocolat (volé) → rendu au vigile (c'était un singe en chocolat) |
+| Scène 3 — Solène | — | — | + Gros nounours en chocolat (volé) → rendu au vigile (c'était un singe en chocolat) |
 | Fin du chapitre 3 (studio) | Téléphone | Écharpe de foot, Sarbacane | Billets |
 | Rue de Londres | — | Solène peut donner les **Billets** à Rod ou à Yvan | Billets → donnés |
 | Studio (quai) | Téléphone **utilisé** pour la photo du chariot | — | — |
@@ -62,7 +62,7 @@ Drapeaux d'histoire utilisés : `S.f.pose`, `S.f.traverse`, `S.f.fin`, `S.f.cabi
 | Ballon au singe (Rod) | Fléchette (pub) + Paille (pub) combinées en sarbacane, utilisée sur le ballon | Ballon éclaté, boulette « Je t'appelle… », tout disparaît ; transition vers Solène |
 
 ## 5. Contradictions et points à vérifier
-- « Fin du chapitre 1 » s'affiche après la partie de Solène, alors que les mots de passe numérotent 1 = Yvan, 2 = Rod, 3 = Solène. À trancher : tout cet ensemble est-il le chapitre 1 (avec 3 parties), ou garde-t-on 3 chapitres ?
+- ✅ Tranché le 20/11/2026 : tout le scénario actuel est le **chapitre 1** ; Yvan, Rod et Solène sont les **scènes** 1, 2 et 3 (mots de passe 1, 2, 3). Les objets du chapitre 1 sont gardés pour la suite.
 - Le château demandé « très inspiré de celui d'un film » est dessiné comme un château original (tours pointues, lac, pont), pas comme une copie.
 - L'ancienne énigme de la photo (Rod pose, Yvan prend la photo, scène « Quai des Brumes ») n'est plus jouée : remplacée par la photo du touriste et le réveil.
 - Joute : « Je vous ai vu » écrit « Je vous ai vue » (le vigile parle à Solène) ; « vieilesse » corrigé en « vieillesse », « 3eme » en « 3e ».
@@ -88,6 +88,8 @@ Drapeaux d'histoire utilisés : `S.f.pose`, `S.f.traverse`, `S.f.fin`, `S.f.cabi
 - 20/11/2026 : répliques du chapitre 2 validées telles quelles ; répliques du chapitre 3 corrigées par l'utilisateur (Solène parle de François, de Gargamel, des roudoudous à 1 franc ; le nounours dans l'inventaire devient « Une bonne grosse guimauve ! Miam ! »).
 
 - 20/11/2026 : pancartes nettes (texte haute résolution). Solène sort visiblement le singe en chocolat de son sac. Studio agrandi (2 écrans) : Rod fait le pitre sur une statue de loup-garou, Yvan fait semblant de voler sur un balai, Solène demande à un touriste de les photographier ; les 3 poussent le chariot, « Un… Deux… Trois ! », scintillement, le mur les avale. Noir, gros plan sur Solène qui se réveille (« Euuuh… les gars ? »), la caméra recule, Rod « What ? », Yvan « C'est quoi ça ? », la caméra tourne vers un grand château au bord d'un lac (dessin original), puis « Fin du chapitre 1 ».
+
+- 20/11/2026 : château agrandi et somptueux (falaise, cascade, enceinte crénelée, grand hall à vitraux et rosace, 10 tours à toits pointus, drapeaux, passerelles, pont à arches, aurore, reflets, barques à lanternes, oiseaux).
 
 ## 6. Idées de Claude (💡 à valider)
 - (aucune en attente)

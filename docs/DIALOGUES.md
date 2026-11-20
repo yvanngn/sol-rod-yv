@@ -241,10 +241,10 @@ Corrige directement le texte (garde le numéro) et renvoie-moi la liste. 🆕 = 
 223. 🆕 **Le touriste** — Un…  `chapitre3_studio.js:84`
 224. 🆕 **Le touriste** — Deux…  `chapitre3_studio.js:84`
 225. 🆕 **Le touriste** — Trois !  `chapitre3_studio.js:84`
-226. 🆕 **Solène** — Euuuh… les gars ?  `chapitre3_studio.js:146`
-227. 🆕 **Rod** — What ?  `chapitre3_studio.js:148`
-228. 🆕 **Yvan** — C'est quoi ça ?  `chapitre3_studio.js:149`
-229. 🆕 — Fin du chapitre 1  `chapitre3_studio.js:153`
+226. 🆕 **Solène** — Euuuh… les gars ?  `chapitre3_studio.js:185`
+227. 🆕 **Rod** — What ?  `chapitre3_studio.js:187`
+228. 🆕 **Yvan** — C'est quoi ça ?  `chapitre3_studio.js:188`
+229. 🆕 — Fin du chapitre 1  `chapitre3_studio.js:192`
 
 ## Londres (base), studio, Quai des Brumes (`src/js/scenes.js`)
 
