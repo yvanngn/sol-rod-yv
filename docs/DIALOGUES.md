@@ -145,176 +145,177 @@ Corrige directement le texte (garde le numéro) et renvoie-moi la liste. 🆕 = 
 133. **Rod** — …Pas assez de force.  `chapitre1_rod.js:159`
 134. **Rod** — Je la ramasse. Il me faudrait quelque chose en plus je pense.  `chapitre1_rod.js:159`
 135. — Souffler dans une paille vide sur un ballon ? Je vais juste le décoiffer.  `chapitre1_rod.js:160`
-136. **Rod** — BAM ! En plein dans le mille.  `chapitre1_rod.js:162`
-137. **Rod** — Tiens, keskecé ?  `chapitre1_rod.js:162`
-138. *regarder* — Une boulette de papier.  `chapitre1_rod.js:163`
-139. **Rod** — Qu'est-ce que c'est que ça ?  `chapitre1_rod.js:169`
-140. **Rod** — Une boulette de papier… Il y a quelque chose d'écrit.  `chapitre1_rod.js:173`
-141. **Rod** — « Je t'appelle… »  `chapitre1_rod.js:174`
-142. **Rod** — Hein ? Le papier… le ballon… Plus rien. J'ai rêvé ou quoi ?  `chapitre1_rod.js:177`
-143. **Rod** — Et j'ai même pas encore bu.  `chapitre1_rod.js:177`
-144. **Rod** — …« The English Pub » ?  `chapitre1_rod.js:182`
-145. **Rod** — Il y a quelque chose d'étrange dans ce coin…  `chapitre1_rod.js:182`
-146. — Pendant ce temps, du côté de Solène…  `chapitre1_rod.js:184`
-147. **Rod** — La porte du pub. Je n'y retourne pas tout de suite.  `chapitre1_rod.js:215`
-148. — Ça sent la bière d'ici.  `chapitre1_rod.js:215`
-149. **Rod** — Non. J'ai eu ma dose de mystère pour aujourd'hui.  `chapitre1_rod.js:216`
-150. **Rod** — « The English Pub ». Original. Très original.  `chapitre1_rod.js:217`
-151. — « Chaos Order ». Drôle de nom pour un pub. Ça promet.  `chapitre1_rod.js:217`
-152. *regarder* — Ça a l'air chaleureux. Et poisseux.  `chapitre1_rod.js:218`
-153. *regarder* — Ça a l'air chaleureux. Et poisseux.  `chapitre1_rod.js:219`
-154. *regarder* — « Happy hour de 17 h à 19 h ». Il est 14 h. Évidemment.  `chapitre1_rod.js:220`
-155. **Rod** — « Chaos Order »… Drôle de nom pour un pub. Bon, tant qu'il y a des toilettes.  `chapitre1_rod.js:225`
+136. **Rod** — BAM ! En plein dans le mille.  `chapitre1_rod.js:164`
+137. **Rod** — Tiens, keskecé ?  `chapitre1_rod.js:164`
+138. 🆕 **Rod** — Et je récupère ma fléchette. On ne sait jamais.  `chapitre1_rod.js:166`
+139. *regarder* — Une boulette de papier.  `chapitre1_rod.js:167`
+140. **Rod** — Qu'est-ce que c'est que ça ?  `chapitre1_rod.js:179`
+141. **Rod** — Une boulette de papier… Il y a quelque chose d'écrit.  `chapitre1_rod.js:183`
+142. **Rod** — « Je t'appelle… »  `chapitre1_rod.js:184`
+143. **Rod** — Hein ? Le papier… le ballon… Plus rien. J'ai rêvé ou quoi ?  `chapitre1_rod.js:187`
+144. **Rod** — Et j'ai même pas encore bu.  `chapitre1_rod.js:187`
+145. **Rod** — …« The English Pub » ?  `chapitre1_rod.js:192`
+146. **Rod** — Il y a quelque chose d'étrange dans ce coin…  `chapitre1_rod.js:192`
+147. — Pendant ce temps, du côté de Solène…  `chapitre1_rod.js:194`
+148. **Rod** — La porte du pub. Je n'y retourne pas tout de suite.  `chapitre1_rod.js:225`
+149. — Ça sent la bière d'ici.  `chapitre1_rod.js:225`
+150. **Rod** — Non. J'ai eu ma dose de mystère pour aujourd'hui.  `chapitre1_rod.js:226`
+151. **Rod** — « The English Pub ». Original. Très original.  `chapitre1_rod.js:227`
+152. — « Chaos Order ». Drôle de nom pour un pub. Ça promet.  `chapitre1_rod.js:227`
+153. *regarder* — Ça a l'air chaleureux. Et poisseux.  `chapitre1_rod.js:228`
+154. *regarder* — Ça a l'air chaleureux. Et poisseux.  `chapitre1_rod.js:229`
+155. *regarder* — « Happy hour de 17 h à 19 h ». Il est 14 h. Évidemment.  `chapitre1_rod.js:230`
+156. **Rod** — « Chaos Order »… Drôle de nom pour un pub. Bon, tant qu'il y a des toilettes.  `chapitre1_rod.js:235`
 
 ## Chapitre 3 — Solène : bonbons, vigile, retrouvailles (`src/js/chapitre3_solene.js`)
 
-156. *objet (inventaire)* — Une bonne grosse guimauve ! Miam !  `chapitre3_solene.js:9`
-157. — Je vous ai vue.  `chapitre3_solene.js:14`
-158. — Et mes fesses aussi ?  `chapitre3_solene.js:14`
-159. — Vous allez me suivre.  `chapitre3_solene.js:15`
-160. — Sur instagroom ?  `chapitre3_solene.js:15`
-161. — Venez ou j'appelle la police.  `chapitre3_solene.js:16`
-162. — Ohla, don't stand so close to me.  `chapitre3_solene.js:16`
-163. — Payez ou partez.  `chapitre3_solene.js:17`
-164. — J'ai un 3e choix ?  `chapitre3_solene.js:17`
-165. — Cette jeunesse…  `chapitre3_solene.js:18`
-166. — Cette vieillesse…  `chapitre3_solene.js:18`
-167. — Bon, ça ira pour cette fois.  `chapitre3_solene.js:19`
-168. — Pour la prochaine aussi, j'espère.  `chapitre3_solene.js:19`
-169. — Dépêchez-vous de partir avant que je ne change d'avis.  `chapitre3_solene.js:20`
-170. — OK, mais je peux avoir un bonbon ?  `chapitre3_solene.js:20`
-171. *regarder* — Réglisse, fraises, crocodiles… Mon dentiste va pleurer.  `chapitre3_solene.js:79`
-172. *regarder* — Encore des bonbons ! Partout !!  `chapitre3_solene.js:80`
-173. *regarder* — Des sucettes de toutes les couleurs.  `chapitre3_solene.js:81`
-174. *regarder* — Des tablettes de chocolat. Ahh si seulement François aussi en avait !  `chapitre3_solene.js:82`
-175. *regarder* — Des nounours en guimauve de toutes les couleurs. Ils me regardent avec envie.  `chapitre3_solene.js:83`
-176. *regarder* — Des schtroumpfs ! Bouuuh je suis Gargamel !  `chapitre3_solene.js:84`
-177. *regarder* — Des cannes en sucre et des roudoudous à 1 franc !  `chapitre3_solene.js:85`
-178. *regarder* — Une machine à barbe à papa. J'en rêve !  `chapitre3_solene.js:86`
-179. *regarder* — Un énorme nounours en chocolat !  `chapitre3_solene.js:88`
-180. **Solène** — Hop. Dans le sac à dos. Ni vu, ni connu !  `chapitre3_solene.js:89`
-181. **Solène** — Une psy qui vole un nounours. Il faudra que j'en parle à ma psy.  `chapitre3_solene.js:89`
-182. *regarder* — Deux enfants qui courent partout. Amenez-moi un flingue ! Pour moi !  `chapitre3_solene.js:92`
-183. **Un enfant** — On a le droit à UN bonbon ! UN ! UN !  `chapitre3_solene.js:93`
-184. **Solène** — …Et vous en êtes à combien ?  `chapitre3_solene.js:93`
-185. **Un enfant** — Quarante-deux !  `chapitre3_solene.js:93`
-186. *regarder* — Un vigile immense !  `chapitre3_solene.js:96`
-187. **Solène** — Bonjour !  `chapitre3_solene.js:97`
-188. **Solène** — Très bavard. J'adore.  `chapitre3_solene.js:97`
-189. *regarder* — La porte du magasin, avec sa petite clochette.  `chapitre3_solene.js:98`
-190. **Solène** — Ohlala, j'en aurai jamais, c'est sûr et certain !  `chapitre3_solene.js:110`
-191. **Solène** — Je ne vais quand même pas repartir sans rien.  `chapitre3_solene.js:116`
-192. **Le vigile** — Halte.  `chapitre3_solene.js:119`
-193. **Solène** — …Bon, bon. Je fouille mon sac.  `chapitre3_solene.js:130`
-194. **Solène** — Tenez… je pensais que c'était un nounours.  `chapitre3_solene.js:132`
-195. **Solène** — …C'est un singe. En chocolat. Avec des cymbales. J'aurais juré que c'était un nounours.  `chapitre3_solene.js:132`
-196. **Solène** — …Hein ?  `chapitre3_solene.js:148`
-197. **Solène** — Un magasin de vêtements ? Où sont passés les bonbons… et le vigile ?  `chapitre3_solene.js:148`
-198. **Solène** — J'ai rêvé ou quoi ?  `chapitre3_solene.js:148`
-199. **Yvan, Rod et Solène** — Vous n'allez pas me croire !  `chapitre3_solene.js:165`
-200. **Narrateur** — Le contrôleur scanne les trois billets. Bip, bip, bip.  `chapitre3_solene.js:167`
+157. *objet (inventaire)* — Une bonne grosse guimauve ! Miam !  `chapitre3_solene.js:9`
+158. — Je vous ai vue.  `chapitre3_solene.js:14`
+159. — Et mes fesses aussi ?  `chapitre3_solene.js:14`
+160. — Vous allez me suivre.  `chapitre3_solene.js:15`
+161. — Sur instagroom ?  `chapitre3_solene.js:15`
+162. — Venez ou j'appelle la police.  `chapitre3_solene.js:16`
+163. — Ohla, don't stand so close to me.  `chapitre3_solene.js:16`
+164. — Payez ou partez.  `chapitre3_solene.js:17`
+165. — J'ai un 3e choix ?  `chapitre3_solene.js:17`
+166. — Cette jeunesse…  `chapitre3_solene.js:18`
+167. — Cette vieillesse…  `chapitre3_solene.js:18`
+168. — Bon, ça ira pour cette fois.  `chapitre3_solene.js:19`
+169. — Pour la prochaine aussi, j'espère.  `chapitre3_solene.js:19`
+170. — Dépêchez-vous de partir avant que je ne change d'avis.  `chapitre3_solene.js:20`
+171. — OK, mais je peux avoir un bonbon ?  `chapitre3_solene.js:20`
+172. *regarder* — Réglisse, fraises, crocodiles… Mon dentiste va pleurer.  `chapitre3_solene.js:77`
+173. *regarder* — Encore des bonbons ! Partout !!  `chapitre3_solene.js:78`
+174. *regarder* — Des sucettes de toutes les couleurs.  `chapitre3_solene.js:79`
+175. *regarder* — Des tablettes de chocolat. Ahh si seulement François aussi en avait !  `chapitre3_solene.js:80`
+176. *regarder* — Des nounours en guimauve de toutes les couleurs. Ils me regardent avec envie.  `chapitre3_solene.js:81`
+177. *regarder* — Des schtroumpfs ! Bouuuh je suis Gargamel !  `chapitre3_solene.js:82`
+178. *regarder* — Des cannes en sucre et des roudoudous à 1 franc !  `chapitre3_solene.js:83`
+179. *regarder* — Une machine à barbe à papa. J'en rêve !  `chapitre3_solene.js:84`
+180. *regarder* — Un énorme nounours en chocolat !  `chapitre3_solene.js:86`
+181. **Solène** — Hop. Dans le sac à dos. Ni vu, ni connu !  `chapitre3_solene.js:87`
+182. **Solène** — Une psy qui vole un nounours. Il faudra que j'en parle à ma psy.  `chapitre3_solene.js:87`
+183. *regarder* — Deux enfants qui courent partout. Amenez-moi un flingue ! Pour moi !  `chapitre3_solene.js:90`
+184. **Un enfant** — On a le droit à UN bonbon ! UN ! UN !  `chapitre3_solene.js:91`
+185. **Solène** — …Et vous en êtes à combien ?  `chapitre3_solene.js:91`
+186. **Un enfant** — Quarante-deux !  `chapitre3_solene.js:91`
+187. *regarder* — Un vigile immense !  `chapitre3_solene.js:94`
+188. **Solène** — Bonjour !  `chapitre3_solene.js:95`
+189. **Solène** — Très bavard. J'adore.  `chapitre3_solene.js:95`
+190. *regarder* — La porte du magasin, avec sa petite clochette.  `chapitre3_solene.js:96`
+191. 🆕 **Solène** — Ohlala, je veux tout !  `chapitre3_solene.js:113`
+192. **Solène** — Je ne vais quand même pas repartir sans rien.  `chapitre3_solene.js:119`
+193. **Le vigile** — Halte.  `chapitre3_solene.js:122`
+194. **Solène** — …Bon, bon. Je fouille mon sac.  `chapitre3_solene.js:134`
+195. **Solène** — Tenez… je pensais que c'était un nounours.  `chapitre3_solene.js:137`
+196. **Solène** — …C'est un singe. En chocolat. Avec des cymbales. J'aurais juré que c'était un nounours.  `chapitre3_solene.js:137`
+197. **Solène** — …Hein ?  `chapitre3_solene.js:154`
+198. **Solène** — Un magasin de vêtements ? Où sont passés les bonbons… et le vigile ?  `chapitre3_solene.js:154`
+199. **Solène** — J'ai rêvé ou quoi ?  `chapitre3_solene.js:154`
+200. **Yvan, Rod et Solène** — Vous n'allez pas me croire !  `chapitre3_solene.js:171`
+201. 🆕 — Plus tard, dans le studio  `chapitre3_solene.js:173`
 
 ## Studio et réveil (`src/js/chapitre3_studio.js`)
 
-201. *regarder* — Des écharpes, des mugs, des stylos ! Tout à 100 £… l'unité. Et des baguettes de sorcier ! 500 £.  `chapitre3_studio.js:35`
-202. **héros courant** — Plus tard. On a déjà assez dépensé en bonbons…  `chapitre3_studio.js:36`
-203. — Plus tard, pour l'instant c'est l'heure de profiter.  `chapitre3_studio.js:36`
-204. *regarder* — Une statue de loup-garou grandeur nature. Y'a marqué quoi là ? « Ne pas mordre ? ».  `chapitre3_studio.js:38`
-205. **héros courant** — Je ne monte pas là-dessus. Je laisse ça à Rod.  `chapitre3_studio.js:39`
-206. **Rod** — Aouuuuuh !  `chapitre3_studio.js:42`
-207. **Rod** — Rodolphe, le loup-garou des salles des profs !  `chapitre3_studio.js:43`
-208. **Rod** — …Bon, assez fait le mariole.  `chapitre3_studio.js:44`
-209. *regarder* — Un balai de sorcier pour les photos.  `chapitre3_studio.js:46`
-210. **héros courant** — Le balai, c'est pour Yvan qui en a un bien enfoncé dans le derrière.  `chapitre3_studio.js:47`
-211. **Yvan** — Accrochez-vous… Décollage !  `chapitre3_studio.js:49`
-212. **Yvan** — …Je suis pas un peu vieux pour ces conneries ?  `chapitre3_studio.js:52`
-213. *regarder* — Un chariot à moitié encastré dans le mur.  `chapitre3_studio.js:55`
-214. *prendre* — Il est vissé au sol. Dommage, ça aurait fait joli dans mes toilettes.  `chapitre3_studio.js:56`
-215. *utiliser* — Il faudrait que quelqu'un nous prenne en photo en train de le pousser.  `chapitre3_studio.js:57`
-216. *regarder* — Un touriste en chemise à fleurs, avec un gros appareil photo. Il a l'air serviable.  `chapitre3_studio.js:60`
-217. **héros courant** — Je parle pas aux gens.  `chapitre3_studio.js:61`
-218. **Narrateur** — Dans le studio, un décor de gare. Un chariot sort à moitié d'un mur de briques.  `chapitre3_studio.js:72`
-219. **Rod** — Ah, LA photo. Allez, on la fait.  `chapitre3_studio.js:72`
-220. **Solène** — Excusez-moi ! Vous pourriez nous prendre en photo ? Can you take me in the ass ?  `chapitre3_studio.js:80`
-221. **Le touriste** — Of course ! Mettez-vous bien ensemble, derrière le chariot.  `chapitre3_studio.js:80`
-222. **Solène** — Allez, les garçons, on pousse !  `chapitre3_studio.js:84`
-223. **Le touriste** — Un…  `chapitre3_studio.js:84`
-224. **Le touriste** — Deux…  `chapitre3_studio.js:84`
-225. **Le touriste** — Trois !  `chapitre3_studio.js:84`
-226. **Solène** — Euuuh… les gars ?  `chapitre3_studio.js:185`
-227. **Rod** — What ?  `chapitre3_studio.js:187`
-228. **Yvan** — C'est quoi ça ?  `chapitre3_studio.js:188`
-229. — Fin du chapitre 1  `chapitre3_studio.js:192`
+202. *regarder* — Des écharpes, des mugs, des stylos ! Tout à 100 £… l'unité. Et des baguettes de sorcier ! 500 £.  `chapitre3_studio.js:30`
+203. **héros courant** — Plus tard. On a déjà assez dépensé en bonbons…  `chapitre3_studio.js:31`
+204. — Plus tard, pour l'instant c'est l'heure de profiter.  `chapitre3_studio.js:31`
+205. *regarder* — Une statue de loup-garou grandeur nature. Y'a marqué quoi là ? « Ne pas mordre ? ».  `chapitre3_studio.js:33`
+206. **héros courant** — Je ne monte pas là-dessus. Je laisse ça à Rod.  `chapitre3_studio.js:34`
+207. **Rod** — Aouuuuuh !  `chapitre3_studio.js:37`
+208. **Rod** — Rodolphe, le loup-garou des salles des profs !  `chapitre3_studio.js:38`
+209. **Rod** — …Bon, assez fait le mariole.  `chapitre3_studio.js:39`
+210. *regarder* — Un balai de sorcier pour les photos.  `chapitre3_studio.js:41`
+211. **héros courant** — Le balai, c'est pour Yvan qui en a un bien enfoncé dans le derrière.  `chapitre3_studio.js:42`
+212. **Yvan** — Accrochez-vous… Décollage !  `chapitre3_studio.js:44`
+213. **Yvan** — …Je suis pas un peu vieux pour ces conneries ?  `chapitre3_studio.js:47`
+214. *regarder* — Un chariot à moitié encastré dans le mur.  `chapitre3_studio.js:50`
+215. *prendre* — Il est vissé au sol. Dommage, ça aurait fait joli dans mes toilettes.  `chapitre3_studio.js:51`
+216. *utiliser* — Il faudrait que quelqu'un nous prenne en photo en train de le pousser.  `chapitre3_studio.js:52`
+217. *regarder* — Un touriste en chemise à fleurs, avec un gros appareil photo. Il a l'air serviable.  `chapitre3_studio.js:55`
+218. **héros courant** — Je parle pas aux gens.  `chapitre3_studio.js:56`
+219. **Narrateur** — Dans le studio, un décor de gare. Un chariot sort à moitié d'un mur de briques.  `chapitre3_studio.js:67`
+220. **Rod** — Ah, LA photo. Allez, on la fait.  `chapitre3_studio.js:67`
+221. **Solène** — Excusez-moi ! Vous pourriez nous prendre en photo ? Can you take me in the ass ?  `chapitre3_studio.js:75`
+222. **Le touriste** — Of course ! Mettez-vous bien ensemble, derrière le chariot.  `chapitre3_studio.js:75`
+223. **Solène** — Allez, les garçons, on pousse !  `chapitre3_studio.js:79`
+224. **Le touriste** — Un…  `chapitre3_studio.js:79`
+225. **Le touriste** — Deux…  `chapitre3_studio.js:79`
+226. **Le touriste** — Trois !  `chapitre3_studio.js:79`
+227. **Solène** — Euuuh… les gars ?  `chapitre3_studio.js:187`
+228. **Rod** — What ?  `chapitre3_studio.js:191`
+229. **Yvan** — C'est quoi ça ?  `chapitre3_studio.js:193`
+230. — Fin du chapitre 1  `chapitre3_studio.js:200`
 
 ## Londres (base), studio, Quai des Brumes (`src/js/scenes.js`)
 
-230. *objet (inventaire)* — Mon téléphone. 12 % de batterie, 4 000 photos de bouffe.  `scenes.js:3`
-231. *objet (inventaire)* — Trois billets pour la visite du studio. Créneau de 14 h.  `scenes.js:4`
-232. *objet (inventaire)* — Mon écharpe porte-bonheur. Elle a vu plus de défaites que de victoires.  `scenes.js:5`
-233. *regarder* — Une cabine rouge. Plus personne ne s'en sert, sauf pour les selfies.  `scenes.js:25`
-234. **héros courant** — Je décroche… tonalité. Personne au bout.  `scenes.js:26`
-235. **Rod** — Appelle le club, dis-leur qu'on achète un vrai numéro 9.  `scenes.js:26`
-236. *regarder* — Un bus à impériale. Rod a voulu monter devant en haut \"pour la vue\". On a vu la pluie.  `scenes.js:27`
-237. *regarder* — L'entrée du studio des films de sorciers. File d'attente modérée, excitation maximale.  `scenes.js:29`
-238. **héros courant** — Les billets sont dans mon sac, il faut que je les présente.  `scenes.js:31`
-239. — Sans billets, on ne passe pas. C'est Solène qui les a.  `scenes.js:31`
-240. **Narrateur** — Le contrôleur scanne les trois billets. Bip, bip, bip.  `scenes.js:32`
-241. **héros courant** — Solène ?  `scenes.js:38`
-242. — Tu as les billets ?  `scenes.js:39`
-243. **Solène** — Dans mon sac. Si quelqu'un veut les tenir, qu'il me les demande gentiment.  `scenes.js:40`
-244. — Prêt pour le studio ?  `scenes.js:43`
-245. — Le match de ce soir ?  `scenes.js:43`
-246. **Rod** — Grave. Mais je te préviens : si y a pas de section sur l'écologie des créatures magiques, je fais une réclamation.  `scenes.js:44`
-247. **Rod** — On va perdre. Mais on va perdre avec panache.  `scenes.js:45`
-248. **Rod** — Ok, je les garde. Comme je gardais la setlist du groupe. Enfin… presque.  `scenes.js:46`
-249. **Yvan** — Merci ! Je fonce.  `scenes.js:47`
-250. **Narrateur** — Et nous voici à Londres.  `scenes.js:51`
-251. **Rod** — Bon, le studio c'est juste là. Après, pub. Après, re-pub.  `scenes.js:54`
-252. **Solène** — Après, on joue. C'est moi qui masterise, je vous rappelle.  `scenes.js:55`
-253. *regarder* — Un chariot à moitié encastré dans le mur. Tout le monde fait la même photo. On va faire la même photo.  `scenes.js:71`
-254. *prendre* — Il est vissé au sol. Logique, sinon les gens partiraient avec.  `scenes.js:72`
-255. *utiliser* — Il faut quelqu'un qui pose et quelqu'un qui prend la photo.  `scenes.js:73`
-256. *regarder* — Des écharpes à 40 £. Rod a déjà la sienne, de foot.  `scenes.js:75`
-257. *utiliser* — Plus tard. Solène a confisqué ma carte bleue.  `scenes.js:75`
-258. **Rod** — Je bouge pas, je tiens la pose. Prends la photo !  `scenes.js:79`
-259. — Pose avec le chariot, Rod !  `scenes.js:80`
-260. **Rod** — Attends, je fais la pose du rappeur qui part en tournée.  `scenes.js:81`
-261. **Rod** — Vas-y, shoote !  `scenes.js:82`
-262. **Solène** — On dirait que ce mur a été pensé pour qu'on ait envie de le traverser.  `scenes.js:84`
-263. **Solène** — Note pour plus tard : demander aux concepteurs ce que ça dit d'eux.  `scenes.js:84`
-264. **Narrateur** — Dans le studio, un décor de gare. Un chariot sort à moitié d'un mur de briques.  `scenes.js:86`
-265. **Rod** — Ah, LA photo. Allez, on la fait.  `scenes.js:86`
-266. **héros courant** — C'est Yvan qui a le téléphone.  `scenes.js:89`
-267. **héros courant** — Personne ne pose. Faut que Rod se mette au chariot.  `scenes.js:90`
-268. **Rod** — Je peux pas me prendre en photo en poussant. Je suis pas une pieuvre.  `scenes.js:91`
-269. **héros courant** — Clic ! Attends… Rod, pousse un peu, pour faire genre.  `scenes.js:93`
-270. **Rod** — Comme ça ?  `scenes.js:93`
-271. **Rod** — Euh. Les gars. Le mur. Il est… mou.  `scenes.js:95`
-272. **Solène** — Rod ? ROD !  `scenes.js:95`
-273. **Solène** — Il a disparu. Dans le mur. Ok. Respire, Solène.  `scenes.js:97`
-274. **héros courant** — On le suit ?  `scenes.js:97`
-275. **Solène** — Évidemment qu'on le suit.  `scenes.js:97`
-276. *regarder* — Un train à vapeur vert émeraude. Il fume des volutes qui ont la forme de petits oiseaux.  `scenes.js:114`
-277. *regarder* — Des lanternes qui flottent. Sans fil. J'ai vérifié.  `scenes.js:115`
-278. **Solène** — Bon. Petit souci de cadre : d'habitude, c'est moi qui masterise la partie.  `scenes.js:118`
-279. **Solène** — Là, j'ai l'impression que quelqu'un d'autre tient l'écran du MJ.  `scenes.js:118`
-280. **Rod** — Je retire ce que j'ai dit. C'était pas un décor.  `scenes.js:119`
-281. **Narrateur** — De l'autre côté du mur, pas de boutique. Une gare plongée dans une nuit violette.  `scenes.js:121`
-282. **Rod** — …On est où, là ?  `scenes.js:121`
-283. **Narrateur** — Un sifflet retentit. Le train ouvre ses portes, rien que pour eux.  `scenes.js:123`
-284. **Narrateur** — FIN DE L'INTRODUCTION — à suivre…  `scenes.js:123`
+231. *objet (inventaire)* — Mon téléphone. 12 % de batterie, 4 000 photos de bouffe.  `scenes.js:3`
+232. *objet (inventaire)* — Trois billets pour la visite du studio. Créneau de 14 h.  `scenes.js:4`
+233. *objet (inventaire)* — Mon écharpe porte-bonheur. Elle a vu plus de défaites que de victoires.  `scenes.js:5`
+234. *regarder* — Une cabine rouge. Plus personne ne s'en sert, sauf pour les selfies.  `scenes.js:25`
+235. **héros courant** — Je décroche… tonalité. Personne au bout.  `scenes.js:26`
+236. **Rod** — Appelle le club, dis-leur qu'on achète un vrai numéro 9.  `scenes.js:26`
+237. *regarder* — Un bus à impériale. Rod a voulu monter devant en haut \"pour la vue\". On a vu la pluie.  `scenes.js:27`
+238. *regarder* — L'entrée du studio des films de sorciers. File d'attente modérée, excitation maximale.  `scenes.js:29`
+239. **héros courant** — Les billets sont dans mon sac, il faut que je les présente.  `scenes.js:31`
+240. — Sans billets, on ne passe pas. C'est Solène qui les a.  `scenes.js:31`
+241. **Narrateur** — Le contrôleur scanne les trois billets. Bip, bip, bip.  `scenes.js:32`
+242. **héros courant** — Solène ?  `scenes.js:38`
+243. — Tu as les billets ?  `scenes.js:39`
+244. **Solène** — Dans mon sac. Si quelqu'un veut les tenir, qu'il me les demande gentiment.  `scenes.js:40`
+245. — Prêt pour le studio ?  `scenes.js:43`
+246. — Le match de ce soir ?  `scenes.js:43`
+247. **Rod** — Grave. Mais je te préviens : si y a pas de section sur l'écologie des créatures magiques, je fais une réclamation.  `scenes.js:44`
+248. **Rod** — On va perdre. Mais on va perdre avec panache.  `scenes.js:45`
+249. **Rod** — Ok, je les garde. Comme je gardais la setlist du groupe. Enfin… presque.  `scenes.js:46`
+250. **Yvan** — Merci ! Je fonce.  `scenes.js:47`
+251. **Narrateur** — Et nous voici à Londres.  `scenes.js:51`
+252. **Rod** — Bon, le studio c'est juste là. Après, pub. Après, re-pub.  `scenes.js:54`
+253. **Solène** — Après, on joue. C'est moi qui masterise, je vous rappelle.  `scenes.js:55`
+254. *regarder* — Un chariot à moitié encastré dans le mur. Tout le monde fait la même photo. On va faire la même photo.  `scenes.js:71`
+255. *prendre* — Il est vissé au sol. Logique, sinon les gens partiraient avec.  `scenes.js:72`
+256. *utiliser* — Il faut quelqu'un qui pose et quelqu'un qui prend la photo.  `scenes.js:73`
+257. *regarder* — Des écharpes à 40 £. Rod a déjà la sienne, de foot.  `scenes.js:75`
+258. *utiliser* — Plus tard. Solène a confisqué ma carte bleue.  `scenes.js:75`
+259. **Rod** — Je bouge pas, je tiens la pose. Prends la photo !  `scenes.js:79`
+260. — Pose avec le chariot, Rod !  `scenes.js:80`
+261. **Rod** — Attends, je fais la pose du rappeur qui part en tournée.  `scenes.js:81`
+262. **Rod** — Vas-y, shoote !  `scenes.js:82`
+263. **Solène** — On dirait que ce mur a été pensé pour qu'on ait envie de le traverser.  `scenes.js:84`
+264. **Solène** — Note pour plus tard : demander aux concepteurs ce que ça dit d'eux.  `scenes.js:84`
+265. **Narrateur** — Dans le studio, un décor de gare. Un chariot sort à moitié d'un mur de briques.  `scenes.js:86`
+266. **Rod** — Ah, LA photo. Allez, on la fait.  `scenes.js:86`
+267. **héros courant** — C'est Yvan qui a le téléphone.  `scenes.js:89`
+268. **héros courant** — Personne ne pose. Faut que Rod se mette au chariot.  `scenes.js:90`
+269. **Rod** — Je peux pas me prendre en photo en poussant. Je suis pas une pieuvre.  `scenes.js:91`
+270. **héros courant** — Clic ! Attends… Rod, pousse un peu, pour faire genre.  `scenes.js:93`
+271. **Rod** — Comme ça ?  `scenes.js:93`
+272. **Rod** — Euh. Les gars. Le mur. Il est… mou.  `scenes.js:95`
+273. **Solène** — Rod ? ROD !  `scenes.js:95`
+274. **Solène** — Il a disparu. Dans le mur. Ok. Respire, Solène.  `scenes.js:97`
+275. **héros courant** — On le suit ?  `scenes.js:97`
+276. **Solène** — Évidemment qu'on le suit.  `scenes.js:97`
+277. *regarder* — Un train à vapeur vert émeraude. Il fume des volutes qui ont la forme de petits oiseaux.  `scenes.js:114`
+278. *regarder* — Des lanternes qui flottent. Sans fil. J'ai vérifié.  `scenes.js:115`
+279. **Solène** — Bon. Petit souci de cadre : d'habitude, c'est moi qui masterise la partie.  `scenes.js:118`
+280. **Solène** — Là, j'ai l'impression que quelqu'un d'autre tient l'écran du MJ.  `scenes.js:118`
+281. **Rod** — Je retire ce que j'ai dit. C'était pas un décor.  `scenes.js:119`
+282. **Narrateur** — De l'autre côté du mur, pas de boutique. Une gare plongée dans une nuit violette.  `scenes.js:121`
+283. **Rod** — …On est où, là ?  `scenes.js:121`
+284. **Narrateur** — Un sifflet retentit. Le train ouvre ses portes, rien que pour eux.  `scenes.js:123`
+285. **Narrateur** — FIN DE L'INTRODUCTION — à suivre…  `scenes.js:123`
 
 ## Réponses par défaut et portraits (`src/js/moteur.js`)
 
-285. *regarder* — Rien de spécial.  `moteur.js:12`
-286. *prendre* — Je ne peux pas prendre ça.  `moteur.js:12`
-287. *utiliser* — Ça ne donne rien.  `moteur.js:12`
-288. *parler* — Ça ne répond pas. Heureusement.  `moteur.js:13`
-289. *défaut* — Donner quoi ? Choisis d'abord un objet.  `moteur.js:13`
-290. *défaut* — On ne donne pas d'objets à ce qui n'est pas une personne.  `moteur.js:14`
-291. *défaut* — Non merci, garde-le.  `moteur.js:14`
-292. *défaut* — Pour une personne, essaie plutôt Donner.  `moteur.js:15`
-293. **héros courant** — Ces deux-là ne vont pas ensemble.  `moteur.js:72`
-294. *portrait* — Yvan. Lunettes, moustache, sac de parc d'attractions. Ex-guitariste du groupe.  `moteur.js:83`
-295. *portrait* — Rod. Barbe, pull rouge, avis tranché sur le foot, le rap et la politique.  `moteur.js:84`
-296. *portrait* — Solène. Psy, lectrice de BD compulsive, amie d'enfance des deux autres.  `moteur.js:85`
+286. *regarder* — Rien de spécial.  `moteur.js:12`
+287. *prendre* — Je ne peux pas prendre ça.  `moteur.js:12`
+288. *utiliser* — Ça ne donne rien.  `moteur.js:12`
+289. *parler* — Ça ne répond pas. Heureusement.  `moteur.js:13`
+290. *défaut* — Donner quoi ? Choisis d'abord un objet.  `moteur.js:13`
+291. *défaut* — On ne donne pas d'objets à ce qui n'est pas une personne.  `moteur.js:14`
+292. *défaut* — Non merci, garde-le.  `moteur.js:14`
+293. *défaut* — Pour une personne, essaie plutôt Donner.  `moteur.js:15`
+294. **héros courant** — Ces deux-là ne vont pas ensemble.  `moteur.js:72`
+295. *portrait* — Yvan. Lunettes, moustache, sac de parc d'attractions. Ex-guitariste du groupe.  `moteur.js:83`
+296. *portrait* — Rod. Barbe, pull rouge, avis tranché sur le foot, le rap et la politique.  `moteur.js:84`
+297. *portrait* — Solène. Psy, lectrice de BD compulsive, amie d'enfance des deux autres.  `moteur.js:85`

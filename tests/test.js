@@ -69,6 +69,7 @@ const scenarios={
     await G.action('ballon',undefined,'flechette');v('fléchette seule : pas assez de force',dit(G,'Pas assez de force')&&G.aObjet('flechette')&&!G.S.f.ballon);
     await G.combiner('flechette','paille');v('fléchette + paille = sarbacane',G.aObjet('sarbacane')&&!G.aObjet('paille')&&!G.aObjet('flechette'));
     await G.action('ballon',undefined,'sarbacane');v('ballon éclaté, boulette au sol',G.S.f.ballon);
+    v('Rod tire à la sarbacane puis récupère sa fléchette',dit(G,'je récupère ma fléchette')&&G.aObjet('sarbacane')&&G.S.tir===null);
     await G.action('boulette');v('« Je t\'appelle… », tout disparaît, transition vers Solène',dit(G,'Je t\'appelle')&&G.S.f.ballonParti&&!G.aObjet('boulette')&&dit(G,'côté de Solène')&&G.S.f.finRod);
     v('Rod ressort : devanture « The English Pub », puis Solène',G.S.f.vraiNom&&dit(G,'The English Pub')&&G.S.scene==='bonbons'&&G.S.perso==='solene');
   },
@@ -83,7 +84,7 @@ const scenarios={
   },
   async solene(G){
     await G.debutSolene();G.switchPerso('rod');
-    v('Solène au magasin de bonbons, seule jouable',G.S.scene==='bonbons'&&G.S.perso==='solene'&&G.S.verrou==='solene'&&dit(G,"c'est sûr et certain")&&G.SCENES.bonbons.largeur>W_);
+    v('Solène au magasin de bonbons, seule jouable',G.S.scene==='bonbons'&&G.S.perso==='solene'&&G.S.verrou==='solene'&&dit(G,'Ohlala, je veux tout !')&&G.SCENES.bonbons.largeur>W_);
     for(const o of['etageres','ilots','sucettes','chocolats','nounours_etal','bonbons_bleus','cannes','barbe','enfants','vigile','gros_nounours'])await G.action(o,'regarder');
     await G.action('enfants');await G.action('vigile');
     await G.action('porte_bonbons');v('sans rien, Solène ne part pas',G.S.scene==='bonbons'&&!G.S.f.joute);
@@ -94,6 +95,9 @@ const scenarios={
     v('le vigile répète sa phrase après une erreur',G.window.TEST.log.filter(l=>l==='vigile: Je vous ai vue.').length===2);
     v('enseignes des étals : le texte tient dans l\'étal',G.ETALS.every(([x,w,nom])=>nom.length*G.tailleEnseigne(nom,w-12)*.72<=w-12));
     v('nom et réplique séparés dans les dialogues à choix',/<\/b> /.test(G.S.derniere));
+    v('nounours à la taille du sac à dos',G.SCENES.bonbons.objets.find(o=>o.id==='gros_nounours').h<=20);
+    v('zoom sur le singe puis retour à la normale',G.S.zoom===null);
+    v('écran de transition « Plus tard, dans le studio »',dit(G,'carton: Plus tard, dans le studio')&&!dit(G,'Bip, bip, bip'));
     v('le singe est dessiné devant les personnages, Solène à l\'écart du vigile',typeof G.SCENES.bonbons.devant==='function'&&G.S.f.revealX<=550);
     v('Solène sort le singe de son sac, rendu',dit(G,"je pensais que c'était un nounours")&&!G.aObjet('nounours'));
     v('magasin de vêtements puis retrouvailles',dit(G,'magasin de vêtements')&&dit(G,"Vous n'allez pas me croire !")&&G.S.f.retrouves&&G.S.verrou===null);

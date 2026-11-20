@@ -82,7 +82,7 @@ SCENES.bonbons={nom:'Le magasin de bonbons',largeur:LGB,
     {id:'bonbons_bleus',nom:'étal des schtroumpfs',x:322,y:100,w:74,h:42,regarder:"Des schtroumpfs ! Bouuuh je suis Gargamel !"},
     {id:'cannes',nom:'étal des cannes et berlingots',x:480,y:88,w:74,h:54,regarder:"Des cannes en sucre et des roudoudous à 1 franc !"},
     {id:'barbe',nom:'barbe à papa',x:562,y:88,w:30,h:72,regarder:"Une machine à barbe à papa. J'en rêve !"},
-    {id:'gros_nounours',nom:'gros nounours en chocolat',x:416,y:116,w:30,h:44,defaut:'prendre',voler:1,cache:()=>S.f.nounours,dessin(){grosNounours(431,SOL)},
+    {id:'gros_nounours',nom:'gros nounours en chocolat',x:420,y:118,w:22,h:20,defaut:'prendre',voler:1,cache:()=>S.f.nounours,dessin(){P(418,SOL-22,26,22,'#e84a8a');P(418,SOL-22,26,2,'#ffb0d0');P(420,SOL-18,22,16,'#c8306a');g.save();g.translate(431,SOL-22);g.scale(.42,.42);grosNounours(0,0);g.restore()},
       regarder:"Un énorme nounours en chocolat !",
       prendre:async()=>{S.f.nounours=1;ajouter('nounours');sfx('papier');await dire([['solene',"Hop. Dans le sac à dos. Ni vu, ni connu !"],['solene',"Une psy qui vole un nounours. Il faudra que j'en parle à ma psy."]])}},
     {id:'enfants',nom:'enfants',humain:true,get x(){return enfantX(0)-6},y:126,w:12,h:34,
@@ -96,7 +96,7 @@ SCENES.bonbons={nom:'Le magasin de bonbons',largeur:LGB,
     {id:'porte_bonbons',nom:'sortie',x:604,y:56,w:36,h:104,defaut:'utiliser',regarder:"La porte du magasin, avec sa petite clochette.",utiliser:sortirBonbons},
   ],
   ambiance:{nuit:.12,voile:'#200010',teinte:'rgba(255,150,200,.2)'},
-  lumieres:()=>[{x:160,y:20,r:150,c:'rgba(255,230,240,.22)'},{x:480,y:20,r:150,c:'rgba(255,230,240,.22)'},{x:431,y:130,r:30,c:'rgba(255,200,120,.3)'},...persoLumiere(30)],
+  lumieres:()=>[{x:160,y:20,r:150,c:'rgba(255,230,240,.22)'},{x:480,y:20,r:150,c:'rgba(255,230,240,.22)'},{x:431,y:128,r:22,c:'rgba(255,200,120,.35)'},...persoLumiere(30)],
   particules(){emettre(30,()=>({k:'sucre',scene:'bonbons',x:Math.random()*LGB,y:Math.random()*150,vx:(Math.random()-.5)*.1,vy:.05,vie:300,t:1,c:['#fff','#ffb0e0','#b0e0ff'][Math.random()*3|0],a:.6}));
     if(S.papierBrille)emettre(60,()=>({k:'choco',scene:'bonbons',x:(S.pos.solene??500)+(Math.random()-.5)*60,y:110+(Math.random()-.5)*50,vx:(Math.random()-.5),vy:-.3-Math.random(),vie:40+Math.random()*30,t:1,c:'#fff3b0',glow:1}))},
   devant(){
@@ -110,7 +110,7 @@ SCENES.bonbons={nom:'Le magasin de bonbons',largeur:LGB,
     S.porteB=1;sfx('clochette');await pause(400);
     await marcher('solene',548);S.porteB=0;anim('solene').dir='face';
     await pause(1400);
-    await say('solene',"Ohlala, j'en aurai jamais, c'est sûr et certain !");
+    await say('solene',"Ohlala, je veux tout !");
   },
 };
 async function sortirBonbons(){
@@ -132,8 +132,10 @@ async function sortirBonbons(){
   anim('vigile').tremble=true;await pause(900);anim('vigile').tremble=false;
   await marcher('solene',548);anim('solene').dir='d';S.f.revealX=S.pos.solene;
   await say('solene',"…Bon, bon. Je fouille mon sac.");
-  sfx('papier');await pause(500);retirer('nounours');S.choco=1;S.chocoT=Date.now();await pause(900);sfx('tada');await pause(700);
+  sfx('papier');await pause(500);retirer('nounours');S.choco=1;S.chocoT=Date.now();await pause(900);sfx('tada');
+  S.zoom={z:1,cx:S.pos.solene+13,cy:SOL-30};await tween(S.zoom,'z',2.6,900);
   await dire([['solene',"Tenez… je pensais que c'était un nounours."],['solene',"…C'est un singe. En chocolat. Avec des cymbales. J'aurais juré que c'était un nounours."]]);
+  await tween(S.zoom,'z',1,600);S.zoom=null;
   sfx('magie');S.papierBrille=1;await pause(1100);sfx('eblouit');S.flash=1;await pause(300);S.flash=1;S.choco=0;S.papierBrille=0;
   await go('vetements',{solene:150});
 }
@@ -168,7 +170,7 @@ async function retrouvailles(){
   await arriverBas('solene',192);
   await say('tous',"Vous n'allez pas me croire !");
   await noir(true);
-  sfx('bip');await say('narr',"Le contrôleur scanne les trois billets. Bip, bip, bip.");
+  await carton("Plus tard, dans le studio",3200);
   S.f.vu_quai=1;S.perso='rod';ui();await go('quai',{yvan:220,rod:250,solene:280});
   await noir(false);
   await SCENES.quai.entree();

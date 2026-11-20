@@ -10,7 +10,7 @@ Object.assign(SPEC,{
 });
 S.pnj={};
 OBJETS.piece={nom:'Pièce brillante',desc:"Une pièce dorée qui brille toute seule. Elle était à côté du combiné… et le téléphone a sonné dès que je l'ai prise.",
-  icone:c=>{R(3,3,6,6,'#f0c766',c);R(4,4,4,4,'#ffe9a0',c);R(5,5,2,2,'#c99a3a',c)}};
+  icone:c=>{const r=(x,y,rr,col)=>{c.fillStyle=col;c.beginPath();c.arc(x,y,rr,0,7);c.fill()};r(6,6,5.6,'#a87a20');r(6,6,4.8,'#f0c766');r(6,6,3.4,'#ffdc70');c.fillStyle='#c99a3a';c.fillRect(5,3,2,6);c.fillRect(4,4,4,1);c.fillRect(4,7,4,1);c.fillStyle='#fff6c8';c.fillRect(3,3,2,1);c.fillRect(3,4,1,1)}};
 const poly=(pts,c)=>{g.fillStyle=c;g.beginPath();pts.forEach(([x,y],i)=>i?g.lineTo(x,y):g.moveTo(x,y));g.fill()};
 
 // ----- déplacements de sortie de scène -----

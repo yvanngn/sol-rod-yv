@@ -23,9 +23,6 @@ SCENES.quai={nom:'Studio',largeur:LGS,
     // boutique
     P(18,58,84,76,'#1b1824');P(22,62,76,44,'#2e5a46');for(let i=0;i<8;i++)P(25+i*9,70,6,26,['#c8242c','#e8c35a','#2a5ab8','#3a8a4a'][i%4]);P(22,62,76,1,'#7fd0a8');
     g.fillStyle='#f0c766';g.font="bold 10px Georgia";g.textAlign='center';texte('Boutique',60,120);g.textAlign='left';
-    // pilier du quai avec son panneau
-    P(MUR_X,44,48,116,'#5a2a20');for(let y=48;y<SOL;y+=8)for(let x=MUR_X+((y/8)%2)*6;x<MUR_X+48;x+=12)P(x,y,11,7,shade('#7a3b2e',.9+((x+y)%5)/20));
-    P(MUR_X+4,52,40,16,'#1b1424');g.fillStyle='#fff';g.font="bold 10px Georgia";texte('Quai ?',MUR_X+24,64);g.textAlign='left';
     halo(MUR_X-10,120,80,'rgb(255,214,150)',.3);
     vgrad(SOL,H,'#6a6470','#3e3944',0,LGS);P(0,SOL,LGS,1,'#b0a9b8');for(let x=0;x<LGS;x+=40)P(x,SOL+6,30,1,'#58525e');
   },
@@ -49,7 +46,7 @@ SCENES.quai={nom:'Studio',largeur:LGS,
         delete S.posY.yvan;S.balai=0;
         await say('yvan',"…Je suis pas un peu vieux pour ces conneries ?")}},
     {id:'chariot',nom:'chariot à bagages',get x(){return 404+(S.chariotDx||0)},y:116,w:44,h:44,
-      dessin(){if(S.avale)return;dessinChariot(S.chariotDx||0)},
+      dessin(){if(S.avale)return;dessinChariot(S.chariotDx||0);murDevant(422,436)},
       regarder:"Un chariot à moitié encastré dans le mur.",
       prendre:"Il est vissé au sol. Dommage, ça aurait fait joli dans mes toilettes.",
       utiliser:"Il faudrait que quelqu'un nous prenne en photo en train de le pousser."},
@@ -59,7 +56,7 @@ SCENES.quai={nom:'Studio',largeur:LGS,
       parler:async()=>{if(S.perso!=='solene')return say('moi',"Je parle pas aux gens.");await photoTouriste()}},
   ],
   heros:{},
-  devant(){if(S.avale){dessinChariot(S.chariotDx||0);P(MUR_X,44,48,116,'#5a2a20');for(let y=48;y<SOL;y+=8)for(let x=MUR_X+((y/8)%2)*6;x<MUR_X+48;x+=12)P(x,y,11,7,shade('#7a3b2e',.9+((x+y)%5)/20))}
+  devant(){if(S.avale){dessinChariot(S.chariotDx||0);murDevant(422,520)}
     if(S.balai&&S.pos.yvan!=null){const y=S.posY.yvan??SOL;P(S.pos.yvan-16,y-14,32,2,'#8a5a2a');g.fillStyle='#c8a050';g.beginPath();g.moveTo(S.pos.yvan-16,y-16);g.lineTo(S.pos.yvan-26,y-20);g.lineTo(S.pos.yvan-26,y-8);g.lineTo(S.pos.yvan-16,y-12);g.fill()}},
   ambiance:{nuit:.45,voile:'#140a12',teinte:'rgba(255,160,90,.25)'},
   lumieres:()=>[{x:430,y:126,r:80,c:'rgba(255,210,150,.4)'},{x:60,y:84,r:50,c:'rgba(120,230,170,.3)'},{x:170,y:110,r:46,c:'rgba(200,210,255,.25)'},{x:282,y:126,r:36,c:'rgba(255,220,150,.3)'},{x:560,y:120,r:36},...persoLumiere(30)],
@@ -80,12 +77,13 @@ async function photoTouriste(){
   await Promise.all([marcher('yvan',372),marcher('rod',386),marcher('solene',400)]);
   ['yvan','rod','solene'].forEach(n=>anim(n).dir='d');
   await dire([['solene',"Allez, les garçons, on pousse !"],['touriste',"Un…"],['touriste',"Deux…"],['touriste',"Trois !"]]);
-  sfx('photo');S.flash=1;await pause(300);sfx('magie');S.studioBrille=1;await pause(900);
-  // le chariot avance dans le mur et les avale
-  S.avale=1;sfx('whoosh');
-  if(!TEST&&!S.passe){for(let i=0;i<110;i++){S.chariotDx=(S.chariotDx||0)+.8;
-    for(const n of['yvan','rod','solene'])if(S.pos[n]!=null){const a=anim(n);a.marche=true;a.dir='d';a.pas++;S.pos[n]+=.8;if(S.pos[n]>MUR_X+10){S.pos[n]=null;a.marche=false}}
-    await pause(16)}}
+  sfx('magie');S.studioBrille=1;await pause(700);
+  // flash de la photo : d'un coup, le chariot et les trois basculent dans le mur
+  sfx('photo');S.flash=1;S.avale=1;sfx('whoosh');
+  if(!TEST&&!S.passe){const d0={yvan:S.pos.yvan,rod:S.pos.rod,solene:S.pos.solene},t0=Date.now();
+    while(Date.now()-t0<260){const u=(Date.now()-t0)/260,dx=u*u*120;S.chariotDx=dx;
+      for(const n of['yvan','rod','solene'])if(S.pos[n]!=null){S.pos[n]=d0[n]+dx;anim(n).dir='d';if(S.pos[n]>440)S.pos[n]=null}
+      await pause(16)}}
   ['yvan','rod','solene'].forEach(n=>{S.pos[n]=null;anim(n).marche=false});
   await noir(true);S.studioBrille=0;S.avale=0;S.chariotDx=0;
   await pause(1200);
@@ -166,8 +164,12 @@ SCENES.reveil={nom:'…',fixe:1,
     S.dort={solene:R.yeuxSolene===0,yvan:R.leveYvan<.3,rod:R.leveRod<.3};
     S.anim.solene={dir:'face',pas:0,marche:false};drawPerso('solene',62,SOL);herbe(62);
     [['yvan',112,R.leveYvan],['rod',150,R.leveRod]].forEach(([n,x,k])=>{S.anim[n]={dir:'face',pas:0,marche:false};
-      const tr=k>0&&k<1?Math.sin(t/40)*.6:0;
-      g.save();g.translate(x+14*(1-k),SOL-2*(1-k));g.rotate(-Math.PI/2*(1-k)+tr*.02);drawPerso(n,0,0);g.restore();if(k>.6)herbe(x)});
+      // jambes allongées dans l'herbe (devant), buste qui pivote sur les hanches : allongé (k=0) → appuyé sur un coude → assis (k=1)
+      const s=tenue(n),hy=SOL-12,ang=-Math.PI/2*(1-k)*(1-k*.15)+(k>0&&k<1?Math.sin(t/45)*.02:0);
+      P(x,hy,16,4,s.pants);P(x+16,hy,3,4,s.shoes);
+      g.save();g.translate(x,hy);g.rotate(ang);g.beginPath();g.rect(-30,-60,60,61);g.clip();drawPerso(n,0,12);g.restore();
+      if(k>.15&&k<.95){const ax=x-10*(1-k),ay=hy+1;P(ax-1,ay-8*k,3,8*k+2,s.top==='#24202c'?'#24202c':shade(s.top,.85))}
+      herbe(x+6)});
     S.dort=null;
     // lucioles
     for(let i=0;i<20;i++){const x=(i*61+t/40)%1000-40,y=110+Math.sin(t/700+i)*20;halo(x,y,4,'rgb(255,240,150)',.8)}
@@ -185,9 +187,9 @@ SCENES.reveil={nom:'…',fixe:1,
     await say('solene',"Euuuh… les gars ?");
     await Promise.all([tween(R,'z',1.6,2200),tween(R,'cx',105,2200),tween(R,'cy',135,2200)]);
     // Rod se redresse (en deux temps : il s'appuie sur un coude, puis s'assoit)
-    await tween(R,'leveRod',.35,600);await pause(250);await tween(R,'leveRod',1,700);
+    await tween(R,'leveRod',.4,700);await pause(350);await tween(R,'leveRod',1,900);
     await say('rod',"What ?");
-    await tween(R,'leveYvan',.35,600);await pause(250);await tween(R,'leveYvan',1,700);
+    await tween(R,'leveYvan',.4,700);await pause(350);await tween(R,'leveYvan',1,900);
     await say('yvan',"C'est quoi ça ?");
     await pause(500);
     // demi-tour de la caméra : on découvre le château, à l'opposé
@@ -200,3 +202,8 @@ SCENES.reveil={nom:'…',fixe:1,
   },
 };
 MUSIQUE_SCENE.reveil='brumes';
+
+// briques identiques au mur du fond, redessinées par-dessus (le chariot et les héros « entrent » dans le mur)
+function murDevant(x0,x1){g.save();g.beginPath();g.rect(x0,22,x1-x0,SOL-22);g.clip();
+  P(x0,22,x1-x0,SOL-22,'#3a221d');for(let y=22;y<SOL;y+=8)for(let x=(y/8%2)*8-8;x<LGS;x+=16){if(x+15<x0||x>x1)continue;const v=.85+((x*13+y*7)%9)/30;P(x,y,15,7,shade('#7a3b2e',v));P(x,y,15,1,shade('#7a3b2e',v*1.2))}
+  g.restore();P(x0,108,1,52,'rgba(0,0,0,.35)');P(x0+1,108,2,52,'rgba(0,0,0,.15)')}

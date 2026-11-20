@@ -198,7 +198,7 @@ function objetsCliquables(){const sc=SCENES[S.scene];return[...(sc.objets||[]).f
 function dessiner(){
   const sc=SCENES[S.scene];if(TEST)return;requestAnimationFrame(dessiner);if(!sc)return;g.clearRect(0,0,W,H);if(gT)gT.clearRect(0,0,W*KT,H*KT);
   const LG=sc.largeur||W,pp=S.pos[S.perso]??LG/2,cible_=Math.max(0,Math.min(LG-W,pp-W/2));S.cam=S.camSnap?cible_:S.cam+(cible_-S.cam)*.12;S.camSnap=0;
-  g.save();g.translate(-Math.round(S.cam),0);sc.dessin(g);
+  g.save();if(S.zoom){g.translate(W/2,H/2);g.scale(S.zoom.z,S.zoom.z);g.translate(-S.zoom.cx,-S.zoom.cy);const k=Math.min(1,S.zoom.z-1);g.translate((S.zoom.cx-W/2-Math.round(S.cam))*(1-k),(S.zoom.cy-H/2)*(1-k))}else g.translate(-Math.round(S.cam),0);sc.dessin(g);
   (sc.objets||[]).forEach(o=>o.dessin&&(!o.cache||!o.cache())&&o.dessin(g));
   sc.reflet&&reflets();
   Object.keys(NOMS).filter(n=>S.pos[n]!=null).sort((a,b)=>S.pos[a]-S.pos[b]).forEach(n=>drawPerso(n,S.pos[n],S.posY[n]??SOL));
@@ -914,7 +914,7 @@ Object.assign(SPEC,{
 });
 S.pnj={};
 OBJETS.piece={nom:'Pièce brillante',desc:"Une pièce dorée qui brille toute seule. Elle était à côté du combiné… et le téléphone a sonné dès que je l'ai prise.",
-  icone:c=>{R(3,3,6,6,'#f0c766',c);R(4,4,4,4,'#ffe9a0',c);R(5,5,2,2,'#c99a3a',c)}};
+  icone:c=>{const r=(x,y,rr,col)=>{c.fillStyle=col;c.beginPath();c.arc(x,y,rr,0,7);c.fill()};r(6,6,5.6,'#a87a20');r(6,6,4.8,'#f0c766');r(6,6,3.4,'#ffdc70');c.fillStyle='#c99a3a';c.fillRect(5,3,2,6);c.fillRect(4,4,4,1);c.fillRect(4,7,4,1);c.fillStyle='#fff6c8';c.fillRect(3,3,2,1);c.fillRect(3,4,1,1)}};
 const poly=(pts,c)=>{g.fillStyle=c;g.beginPath();pts.forEach(([x,y],i)=>i?g.lineTo(x,y):g.moveTo(x,y));g.fill()};
 
 // ----- déplacements de sortie de scène -----
@@ -1343,13 +1343,23 @@ SCENES.toilettes={nom:'Toilettes du pub',
       prendre:"Trop haut. Même en sautant.",
       with:{flechette:async()=>{sfx('fleche');await pause(500);await dire([['rod',"Allez… dans le mille !"],['rod',"…Pas assez de force."],['rod',"Je la ramasse. Il me faudrait quelque chose en plus je pense."]])},
         paille:"Souffler dans une paille vide sur un ballon ? Je vais juste le décoiffer.",
-        sarbacane:async()=>{sfx('souffle');await pause(450);sfx('pop');S.f.ballon=1;S.flash=.5;await pause(400);
-          await dire([['rod',"BAM ! En plein dans le mille."],['rod',"Tiens, keskecé ?"]])}}},
+        sarbacane:async()=>{await marcher('rod',160);anim('rod').dir='d';S.tir={phase:'vise'};await pause(600);
+          sfx('souffle');S.tir={phase:'vol',t0:Date.now()};await pause(420);
+          sfx('pop');S.f.ballon=1;S.flash=.5;S.tir={phase:'chute',t0:Date.now()};await pause(700);S.tir={phase:'sol'};
+          await dire([['rod',"BAM ! En plein dans le mille."],['rod',"Tiens, keskecé ?"]]);
+          await marcher('rod',176);anim('rod').dir='d';S.tir=null;sfx('clic');
+          await say('rod',"Et je récupère ma fléchette. On ne sait jamais.")}}},
     {id:'boulette',nom:'boulette de papier',x:172,y:148,w:18,h:14,defaut:'prendre',cache:()=>!S.f.ballon||S.f.boulette,regarder:"Une boulette de papier.",prendre:lireBoulette},
   ],
   ambiance:{nuit:.22,voile:'#000',teinte:'rgba(140,255,190,.2)'},
   lumieres:()=>[{x:104,y:10,r:120,c:'rgba(220,255,240,.25)'},...(S.papierBrille?[{x:S.pos.rod??180,y:120,r:60,c:'rgba(255,230,150,.6)'}]:[]),...persoLumiere(30)],
   particules(){if(S.papierBrille)emettre(60,()=>({k:'papier',scene:'toilettes',x:(S.pos.rod??180)+(Math.random()-.5)*50,y:110+(Math.random()-.5)*50,vx:(Math.random()-.5),vy:-.3-Math.random(),vie:40+Math.random()*30,t:1,c:'#fff3b0',glow:1}))},
+  devant(){const T=S.tir;if(!T)return;const x=S.pos.rod??160,bx=186,by=40;
+    if(T.phase==='vise'||T.phase==='vol'){P(x+3,SOL-33,2,2,'#f2f2f2');g.strokeStyle='#f2f2f2';g.lineWidth=2;g.beginPath();g.moveTo(x+3,SOL-32);g.lineTo(x+13,SOL-44);g.stroke();g.lineWidth=1;P(x+5,SOL-36,2,1,'#e04a4a')}
+    const dard=(px,py,a)=>{g.save();g.translate(px,py);g.rotate(a);P(-4,0,6,1,'#c0c0c8');P(2,-1,3,3,'#f0c040');g.restore()};
+    if(T.phase==='vol'){const u=Math.min(1,(Date.now()-T.t0)/400);dard(x+13+(bx-x-13)*u,SOL-44+(by-SOL+44)*u,Math.atan2(by-SOL+44,bx-x-13))}
+    if(T.phase==='chute'){const u=Math.min(1,(Date.now()-T.t0)/650);dard(bx+4*u,by+(SOL-2-by)*u*u,u*3)}
+    if(T.phase==='sol')dard(190,SOL-2,0)},
   dessinAvant:()=>vignette(),
   async entree(){await say('rod',"Qu'est-ce que c'est que ça ?")},
 };
@@ -1495,7 +1505,7 @@ SCENES.bonbons={nom:'Le magasin de bonbons',largeur:LGB,
     {id:'bonbons_bleus',nom:'étal des schtroumpfs',x:322,y:100,w:74,h:42,regarder:"Des schtroumpfs ! Bouuuh je suis Gargamel !"},
     {id:'cannes',nom:'étal des cannes et berlingots',x:480,y:88,w:74,h:54,regarder:"Des cannes en sucre et des roudoudous à 1 franc !"},
     {id:'barbe',nom:'barbe à papa',x:562,y:88,w:30,h:72,regarder:"Une machine à barbe à papa. J'en rêve !"},
-    {id:'gros_nounours',nom:'gros nounours en chocolat',x:416,y:116,w:30,h:44,defaut:'prendre',voler:1,cache:()=>S.f.nounours,dessin(){grosNounours(431,SOL)},
+    {id:'gros_nounours',nom:'gros nounours en chocolat',x:420,y:118,w:22,h:20,defaut:'prendre',voler:1,cache:()=>S.f.nounours,dessin(){P(418,SOL-22,26,22,'#e84a8a');P(418,SOL-22,26,2,'#ffb0d0');P(420,SOL-18,22,16,'#c8306a');g.save();g.translate(431,SOL-22);g.scale(.42,.42);grosNounours(0,0);g.restore()},
       regarder:"Un énorme nounours en chocolat !",
       prendre:async()=>{S.f.nounours=1;ajouter('nounours');sfx('papier');await dire([['solene',"Hop. Dans le sac à dos. Ni vu, ni connu !"],['solene',"Une psy qui vole un nounours. Il faudra que j'en parle à ma psy."]])}},
     {id:'enfants',nom:'enfants',humain:true,get x(){return enfantX(0)-6},y:126,w:12,h:34,
@@ -1509,7 +1519,7 @@ SCENES.bonbons={nom:'Le magasin de bonbons',largeur:LGB,
     {id:'porte_bonbons',nom:'sortie',x:604,y:56,w:36,h:104,defaut:'utiliser',regarder:"La porte du magasin, avec sa petite clochette.",utiliser:sortirBonbons},
   ],
   ambiance:{nuit:.12,voile:'#200010',teinte:'rgba(255,150,200,.2)'},
-  lumieres:()=>[{x:160,y:20,r:150,c:'rgba(255,230,240,.22)'},{x:480,y:20,r:150,c:'rgba(255,230,240,.22)'},{x:431,y:130,r:30,c:'rgba(255,200,120,.3)'},...persoLumiere(30)],
+  lumieres:()=>[{x:160,y:20,r:150,c:'rgba(255,230,240,.22)'},{x:480,y:20,r:150,c:'rgba(255,230,240,.22)'},{x:431,y:128,r:22,c:'rgba(255,200,120,.35)'},...persoLumiere(30)],
   particules(){emettre(30,()=>({k:'sucre',scene:'bonbons',x:Math.random()*LGB,y:Math.random()*150,vx:(Math.random()-.5)*.1,vy:.05,vie:300,t:1,c:['#fff','#ffb0e0','#b0e0ff'][Math.random()*3|0],a:.6}));
     if(S.papierBrille)emettre(60,()=>({k:'choco',scene:'bonbons',x:(S.pos.solene??500)+(Math.random()-.5)*60,y:110+(Math.random()-.5)*50,vx:(Math.random()-.5),vy:-.3-Math.random(),vie:40+Math.random()*30,t:1,c:'#fff3b0',glow:1}))},
   devant(){
@@ -1523,7 +1533,7 @@ SCENES.bonbons={nom:'Le magasin de bonbons',largeur:LGB,
     S.porteB=1;sfx('clochette');await pause(400);
     await marcher('solene',548);S.porteB=0;anim('solene').dir='face';
     await pause(1400);
-    await say('solene',"Ohlala, j'en aurai jamais, c'est sûr et certain !");
+    await say('solene',"Ohlala, je veux tout !");
   },
 };
 async function sortirBonbons(){
@@ -1545,8 +1555,10 @@ async function sortirBonbons(){
   anim('vigile').tremble=true;await pause(900);anim('vigile').tremble=false;
   await marcher('solene',548);anim('solene').dir='d';S.f.revealX=S.pos.solene;
   await say('solene',"…Bon, bon. Je fouille mon sac.");
-  sfx('papier');await pause(500);retirer('nounours');S.choco=1;S.chocoT=Date.now();await pause(900);sfx('tada');await pause(700);
+  sfx('papier');await pause(500);retirer('nounours');S.choco=1;S.chocoT=Date.now();await pause(900);sfx('tada');
+  S.zoom={z:1,cx:S.pos.solene+13,cy:SOL-30};await tween(S.zoom,'z',2.6,900);
   await dire([['solene',"Tenez… je pensais que c'était un nounours."],['solene',"…C'est un singe. En chocolat. Avec des cymbales. J'aurais juré que c'était un nounours."]]);
+  await tween(S.zoom,'z',1,600);S.zoom=null;
   sfx('magie');S.papierBrille=1;await pause(1100);sfx('eblouit');S.flash=1;await pause(300);S.flash=1;S.choco=0;S.papierBrille=0;
   await go('vetements',{solene:150});
 }
@@ -1581,7 +1593,7 @@ async function retrouvailles(){
   await arriverBas('solene',192);
   await say('tous',"Vous n'allez pas me croire !");
   await noir(true);
-  sfx('bip');await say('narr',"Le contrôleur scanne les trois billets. Bip, bip, bip.");
+  await carton("Plus tard, dans le studio",3200);
   S.f.vu_quai=1;S.perso='rod';ui();await go('quai',{yvan:220,rod:250,solene:280});
   await noir(false);
   await SCENES.quai.entree();
@@ -1613,9 +1625,6 @@ SCENES.quai={nom:'Studio',largeur:LGS,
     // boutique
     P(18,58,84,76,'#1b1824');P(22,62,76,44,'#2e5a46');for(let i=0;i<8;i++)P(25+i*9,70,6,26,['#c8242c','#e8c35a','#2a5ab8','#3a8a4a'][i%4]);P(22,62,76,1,'#7fd0a8');
     g.fillStyle='#f0c766';g.font="bold 10px Georgia";g.textAlign='center';texte('Boutique',60,120);g.textAlign='left';
-    // pilier du quai avec son panneau
-    P(MUR_X,44,48,116,'#5a2a20');for(let y=48;y<SOL;y+=8)for(let x=MUR_X+((y/8)%2)*6;x<MUR_X+48;x+=12)P(x,y,11,7,shade('#7a3b2e',.9+((x+y)%5)/20));
-    P(MUR_X+4,52,40,16,'#1b1424');g.fillStyle='#fff';g.font="bold 10px Georgia";texte('Quai ?',MUR_X+24,64);g.textAlign='left';
     halo(MUR_X-10,120,80,'rgb(255,214,150)',.3);
     vgrad(SOL,H,'#6a6470','#3e3944',0,LGS);P(0,SOL,LGS,1,'#b0a9b8');for(let x=0;x<LGS;x+=40)P(x,SOL+6,30,1,'#58525e');
   },
@@ -1639,7 +1648,7 @@ SCENES.quai={nom:'Studio',largeur:LGS,
         delete S.posY.yvan;S.balai=0;
         await say('yvan',"…Je suis pas un peu vieux pour ces conneries ?")}},
     {id:'chariot',nom:'chariot à bagages',get x(){return 404+(S.chariotDx||0)},y:116,w:44,h:44,
-      dessin(){if(S.avale)return;dessinChariot(S.chariotDx||0)},
+      dessin(){if(S.avale)return;dessinChariot(S.chariotDx||0);murDevant(422,436)},
       regarder:"Un chariot à moitié encastré dans le mur.",
       prendre:"Il est vissé au sol. Dommage, ça aurait fait joli dans mes toilettes.",
       utiliser:"Il faudrait que quelqu'un nous prenne en photo en train de le pousser."},
@@ -1649,7 +1658,7 @@ SCENES.quai={nom:'Studio',largeur:LGS,
       parler:async()=>{if(S.perso!=='solene')return say('moi',"Je parle pas aux gens.");await photoTouriste()}},
   ],
   heros:{},
-  devant(){if(S.avale){dessinChariot(S.chariotDx||0);P(MUR_X,44,48,116,'#5a2a20');for(let y=48;y<SOL;y+=8)for(let x=MUR_X+((y/8)%2)*6;x<MUR_X+48;x+=12)P(x,y,11,7,shade('#7a3b2e',.9+((x+y)%5)/20))}
+  devant(){if(S.avale){dessinChariot(S.chariotDx||0);murDevant(422,520)}
     if(S.balai&&S.pos.yvan!=null){const y=S.posY.yvan??SOL;P(S.pos.yvan-16,y-14,32,2,'#8a5a2a');g.fillStyle='#c8a050';g.beginPath();g.moveTo(S.pos.yvan-16,y-16);g.lineTo(S.pos.yvan-26,y-20);g.lineTo(S.pos.yvan-26,y-8);g.lineTo(S.pos.yvan-16,y-12);g.fill()}},
   ambiance:{nuit:.45,voile:'#140a12',teinte:'rgba(255,160,90,.25)'},
   lumieres:()=>[{x:430,y:126,r:80,c:'rgba(255,210,150,.4)'},{x:60,y:84,r:50,c:'rgba(120,230,170,.3)'},{x:170,y:110,r:46,c:'rgba(200,210,255,.25)'},{x:282,y:126,r:36,c:'rgba(255,220,150,.3)'},{x:560,y:120,r:36},...persoLumiere(30)],
@@ -1670,12 +1679,13 @@ async function photoTouriste(){
   await Promise.all([marcher('yvan',372),marcher('rod',386),marcher('solene',400)]);
   ['yvan','rod','solene'].forEach(n=>anim(n).dir='d');
   await dire([['solene',"Allez, les garçons, on pousse !"],['touriste',"Un…"],['touriste',"Deux…"],['touriste',"Trois !"]]);
-  sfx('photo');S.flash=1;await pause(300);sfx('magie');S.studioBrille=1;await pause(900);
-  // le chariot avance dans le mur et les avale
-  S.avale=1;sfx('whoosh');
-  if(!TEST&&!S.passe){for(let i=0;i<110;i++){S.chariotDx=(S.chariotDx||0)+.8;
-    for(const n of['yvan','rod','solene'])if(S.pos[n]!=null){const a=anim(n);a.marche=true;a.dir='d';a.pas++;S.pos[n]+=.8;if(S.pos[n]>MUR_X+10){S.pos[n]=null;a.marche=false}}
-    await pause(16)}}
+  sfx('magie');S.studioBrille=1;await pause(700);
+  // flash de la photo : d'un coup, le chariot et les trois basculent dans le mur
+  sfx('photo');S.flash=1;S.avale=1;sfx('whoosh');
+  if(!TEST&&!S.passe){const d0={yvan:S.pos.yvan,rod:S.pos.rod,solene:S.pos.solene},t0=Date.now();
+    while(Date.now()-t0<260){const u=(Date.now()-t0)/260,dx=u*u*120;S.chariotDx=dx;
+      for(const n of['yvan','rod','solene'])if(S.pos[n]!=null){S.pos[n]=d0[n]+dx;anim(n).dir='d';if(S.pos[n]>440)S.pos[n]=null}
+      await pause(16)}}
   ['yvan','rod','solene'].forEach(n=>{S.pos[n]=null;anim(n).marche=false});
   await noir(true);S.studioBrille=0;S.avale=0;S.chariotDx=0;
   await pause(1200);
@@ -1756,8 +1766,12 @@ SCENES.reveil={nom:'…',fixe:1,
     S.dort={solene:R.yeuxSolene===0,yvan:R.leveYvan<.3,rod:R.leveRod<.3};
     S.anim.solene={dir:'face',pas:0,marche:false};drawPerso('solene',62,SOL);herbe(62);
     [['yvan',112,R.leveYvan],['rod',150,R.leveRod]].forEach(([n,x,k])=>{S.anim[n]={dir:'face',pas:0,marche:false};
-      const tr=k>0&&k<1?Math.sin(t/40)*.6:0;
-      g.save();g.translate(x+14*(1-k),SOL-2*(1-k));g.rotate(-Math.PI/2*(1-k)+tr*.02);drawPerso(n,0,0);g.restore();if(k>.6)herbe(x)});
+      // jambes allongées dans l'herbe (devant), buste qui pivote sur les hanches : allongé (k=0) → appuyé sur un coude → assis (k=1)
+      const s=tenue(n),hy=SOL-12,ang=-Math.PI/2*(1-k)*(1-k*.15)+(k>0&&k<1?Math.sin(t/45)*.02:0);
+      P(x,hy,16,4,s.pants);P(x+16,hy,3,4,s.shoes);
+      g.save();g.translate(x,hy);g.rotate(ang);g.beginPath();g.rect(-30,-60,60,61);g.clip();drawPerso(n,0,12);g.restore();
+      if(k>.15&&k<.95){const ax=x-10*(1-k),ay=hy+1;P(ax-1,ay-8*k,3,8*k+2,s.top==='#24202c'?'#24202c':shade(s.top,.85))}
+      herbe(x+6)});
     S.dort=null;
     // lucioles
     for(let i=0;i<20;i++){const x=(i*61+t/40)%1000-40,y=110+Math.sin(t/700+i)*20;halo(x,y,4,'rgb(255,240,150)',.8)}
@@ -1775,9 +1789,9 @@ SCENES.reveil={nom:'…',fixe:1,
     await say('solene',"Euuuh… les gars ?");
     await Promise.all([tween(R,'z',1.6,2200),tween(R,'cx',105,2200),tween(R,'cy',135,2200)]);
     // Rod se redresse (en deux temps : il s'appuie sur un coude, puis s'assoit)
-    await tween(R,'leveRod',.35,600);await pause(250);await tween(R,'leveRod',1,700);
+    await tween(R,'leveRod',.4,700);await pause(350);await tween(R,'leveRod',1,900);
     await say('rod',"What ?");
-    await tween(R,'leveYvan',.35,600);await pause(250);await tween(R,'leveYvan',1,700);
+    await tween(R,'leveYvan',.4,700);await pause(350);await tween(R,'leveYvan',1,900);
     await say('yvan',"C'est quoi ça ?");
     await pause(500);
     // demi-tour de la caméra : on découvre le château, à l'opposé
@@ -1790,6 +1804,11 @@ SCENES.reveil={nom:'…',fixe:1,
   },
 };
 MUSIQUE_SCENE.reveil='brumes';
+
+// briques identiques au mur du fond, redessinées par-dessus (le chariot et les héros « entrent » dans le mur)
+function murDevant(x0,x1){g.save();g.beginPath();g.rect(x0,22,x1-x0,SOL-22);g.clip();
+  P(x0,22,x1-x0,SOL-22,'#3a221d');for(let y=22;y<SOL;y+=8)for(let x=(y/8%2)*8-8;x<LGS;x+=16){if(x+15<x0||x>x1)continue;const v=.85+((x*13+y*7)%9)/30;P(x,y,15,7,shade('#7a3b2e',v));P(x,y,15,1,shade('#7a3b2e',v*1.2))}
+  g.restore();P(x0,108,1,52,'rgba(0,0,0,.35)');P(x0+1,108,2,52,'rgba(0,0,0,.15)')}
 
 // ===== Mots de passe des scènes du chapitre 1 (0 = intro, 1 = Yvan, 2 = Rod, 3 = Solène) =====
 const CHAPITRES={

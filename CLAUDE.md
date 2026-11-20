@@ -44,6 +44,7 @@ existants : on invente tout — Académie d'Hiverlune, Quai des Brumes…).
 - Scènes larges : `largeur:640` sur la scène → la caméra suit le héros (`S.cam`, clics et lumières décalés automatiquement ; `S.camSnap` au changement de scène). Exemple : `bonbons`.
 - Texte dans les décors : toujours `texte(t,x,y)` (jamais `g.fillText`) → couche haute résolution `#cvT`, nette, qui suit caméra et zoom.
 - Yeux fermés : `S.dort={nom:true}` pendant le dessin.
+- Zoom de mise en scène dans une scène normale : `S.zoom={z,cx,cy}` (coordonnées du monde), animé avec `tween`, remis à `null` après.
 - Mise en scène : `noir(true/false)` (fondu), `carton(texte)`, `titreJeu()`, `tuto()`, `anim(n).rire`.
 
 ## Tests

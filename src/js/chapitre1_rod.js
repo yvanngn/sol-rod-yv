@@ -158,13 +158,23 @@ SCENES.toilettes={nom:'Toilettes du pub',
       prendre:"Trop haut. Même en sautant.",
       with:{flechette:async()=>{sfx('fleche');await pause(500);await dire([['rod',"Allez… dans le mille !"],['rod',"…Pas assez de force."],['rod',"Je la ramasse. Il me faudrait quelque chose en plus je pense."]])},
         paille:"Souffler dans une paille vide sur un ballon ? Je vais juste le décoiffer.",
-        sarbacane:async()=>{sfx('souffle');await pause(450);sfx('pop');S.f.ballon=1;S.flash=.5;await pause(400);
-          await dire([['rod',"BAM ! En plein dans le mille."],['rod',"Tiens, keskecé ?"]])}}},
+        sarbacane:async()=>{await marcher('rod',160);anim('rod').dir='d';S.tir={phase:'vise'};await pause(600);
+          sfx('souffle');S.tir={phase:'vol',t0:Date.now()};await pause(420);
+          sfx('pop');S.f.ballon=1;S.flash=.5;S.tir={phase:'chute',t0:Date.now()};await pause(700);S.tir={phase:'sol'};
+          await dire([['rod',"BAM ! En plein dans le mille."],['rod',"Tiens, keskecé ?"]]);
+          await marcher('rod',176);anim('rod').dir='d';S.tir=null;sfx('clic');
+          await say('rod',"Et je récupère ma fléchette. On ne sait jamais.")}}},
     {id:'boulette',nom:'boulette de papier',x:172,y:148,w:18,h:14,defaut:'prendre',cache:()=>!S.f.ballon||S.f.boulette,regarder:"Une boulette de papier.",prendre:lireBoulette},
   ],
   ambiance:{nuit:.22,voile:'#000',teinte:'rgba(140,255,190,.2)'},
   lumieres:()=>[{x:104,y:10,r:120,c:'rgba(220,255,240,.25)'},...(S.papierBrille?[{x:S.pos.rod??180,y:120,r:60,c:'rgba(255,230,150,.6)'}]:[]),...persoLumiere(30)],
   particules(){if(S.papierBrille)emettre(60,()=>({k:'papier',scene:'toilettes',x:(S.pos.rod??180)+(Math.random()-.5)*50,y:110+(Math.random()-.5)*50,vx:(Math.random()-.5),vy:-.3-Math.random(),vie:40+Math.random()*30,t:1,c:'#fff3b0',glow:1}))},
+  devant(){const T=S.tir;if(!T)return;const x=S.pos.rod??160,bx=186,by=40;
+    if(T.phase==='vise'||T.phase==='vol'){P(x+3,SOL-33,2,2,'#f2f2f2');g.strokeStyle='#f2f2f2';g.lineWidth=2;g.beginPath();g.moveTo(x+3,SOL-32);g.lineTo(x+13,SOL-44);g.stroke();g.lineWidth=1;P(x+5,SOL-36,2,1,'#e04a4a')}
+    const dard=(px,py,a)=>{g.save();g.translate(px,py);g.rotate(a);P(-4,0,6,1,'#c0c0c8');P(2,-1,3,3,'#f0c040');g.restore()};
+    if(T.phase==='vol'){const u=Math.min(1,(Date.now()-T.t0)/400);dard(x+13+(bx-x-13)*u,SOL-44+(by-SOL+44)*u,Math.atan2(by-SOL+44,bx-x-13))}
+    if(T.phase==='chute'){const u=Math.min(1,(Date.now()-T.t0)/650);dard(bx+4*u,by+(SOL-2-by)*u*u,u*3)}
+    if(T.phase==='sol')dard(190,SOL-2,0)},
   dessinAvant:()=>vignette(),
   async entree(){await say('rod',"Qu'est-ce que c'est que ça ?")},
 };
