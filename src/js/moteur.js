@@ -26,7 +26,7 @@ const R=(x,y,w,h,c,ctx=g)=>{ctx.fillStyle=c;ctx.fillRect(Math.round(x),Math.roun
 let clicSuivant=null;
 function say(qui,txt){
   const q=qui==='moi'?S.perso:qui;
-  const b=$('bulle');b.innerHTML=`<b style="color:${COUL[q]||COUL.narr}">${NOMS[q]||AUTRES[q]||''}</b>${txt}`;b.hidden=false;
+  const b=$('bulle');b.innerHTML=`<b style="color:${COUL[q]||COUL.narr}">${NOMS[q]||AUTRES[q]||''}</b> ${txt}`;b.hidden=false;
   S.derniere=b.innerHTML;sfx('voix',q);
   if(TEST)TEST.log.push(q+': '+txt);
   if((TEST&&!TEST.lent)||S.passe){b.hidden=true;return Promise.resolve()}

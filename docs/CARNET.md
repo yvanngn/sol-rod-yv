@@ -93,6 +93,8 @@ Drapeaux d'histoire utilisés : `S.f.pose`, `S.f.traverse`, `S.f.fin`, `S.f.cabi
 
 - 20/11/2026 : répliques du studio et du réveil corrigées par l'utilisateur ; toutes les répliques sont validées.
 
+- 20/11/2026 : enseignes des étals ajustées à leur largeur ; espace entre le nom et la réplique dans les dialogues à choix ; le singe en chocolat est dessiné devant (Solène recule d'un pas, plus visible) ; au studio on joue Rod en premier ; château à l'opposé des personnages, la caméra fait un demi-tour (avec flou de mouvement) ; Rod et Yvan se redressent en deux temps (coude puis assis).
+
 ## 6. Idées de Claude (💡 à valider)
 - (aucune en attente)
 

@@ -8,7 +8,7 @@ function charger(){
   const ctx={window:{TEST:{log:[],choix:[]}},document,setTimeout,Promise,console,Math,Date,Error,Object,requestAnimationFrame:()=>{}};
   vm.createContext(ctx);
   const h=fs.readFileSync(__dirname+'/../dist/index.html','utf8');
-  vm.runInContext(h.match(/<script>([\s\S]*)<\/script>/)[1]+';this.S=S;this.action=action;this.go=go;this.switchPerso=switchPerso;this.aObjet=aObjet;this.drawPerso=drawPerso;this.SCENES=SCENES;this.debutSolene=debutSolene;this.JOUTE=JOUTE;this.DARTS=DARTS;this.pubFlechettes=pubFlechettes;this.motDePasse=motDePasse;this.debutRod=debutRod;this.combiner=combiner;this.SON=SON;this.regler=regler;this.volume=volume;this.tenue=tenue;this.postEffets=postEffets;this.reflets=reflets;this.passer=passer',ctx);
+  vm.runInContext(h.match(/<script>([\s\S]*)<\/script>/)[1]+';this.S=S;this.action=action;this.go=go;this.switchPerso=switchPerso;this.aObjet=aObjet;this.drawPerso=drawPerso;this.SCENES=SCENES;this.ETALS=ETALS;this.tailleEnseigne=tailleEnseigne;this.CHATEAU_X=CHATEAU_X;this.debutSolene=debutSolene;this.JOUTE=JOUTE;this.DARTS=DARTS;this.pubFlechettes=pubFlechettes;this.motDePasse=motDePasse;this.debutRod=debutRod;this.combiner=combiner;this.SON=SON;this.regler=regler;this.volume=volume;this.tenue=tenue;this.postEffets=postEffets;this.reflets=reflets;this.passer=passer',ctx);
   return ctx;
 }
 const v=(nom,c)=>{if(c){ok++}else{ko++;console.log('ÉCHEC :',nom)}};
@@ -90,9 +90,12 @@ const scenarios={
     G.window.TEST.choix.push('Sur instagroom ?',...G.JOUTE.map(x=>x[1]));
     await G.action('porte_bonbons');
     v('le vigile répète sa phrase après une erreur',G.window.TEST.log.filter(l=>l==='vigile: Je vous ai vue.').length===2);
+    v('enseignes des étals : le texte tient dans l\'étal',G.ETALS.every(([x,w,nom])=>nom.length*G.tailleEnseigne(nom,w-12)*.72<=w-12));
+    v('nom et réplique séparés dans les dialogues à choix',/<\/b> /.test(G.S.derniere));
+    v('le singe est dessiné devant les personnages, Solène à l\'écart du vigile',typeof G.SCENES.bonbons.devant==='function'&&G.S.f.revealX<=550);
     v('Solène sort le singe de son sac, rendu',dit(G,"je pensais que c'était un nounours")&&!G.aObjet('nounours'));
     v('magasin de vêtements puis retrouvailles',dit(G,'magasin de vêtements')&&dit(G,"Vous n'allez pas me croire !")&&G.S.f.retrouves&&G.S.verrou===null);
-    v('on enchaîne au studio',G.S.scene==='quai'&&dit(G,'Dans le studio'));
+    v('on enchaîne au studio, en jouant Rod',G.S.scene==='quai'&&dit(G,'Dans le studio')&&G.S.perso==='rod');
   },
   async londres(G){
     await G.go('londres');v('scène de départ',G.S.scene==='londres');
@@ -111,6 +114,8 @@ const scenarios={
     G.switchPerso('solene');await G.action('touriste');
     v('photo à trois, compte 1-2-3, avalés par le mur',dit(G,'Trois !')&&G.S.scene==='reveil');
     v('réveil : Solène, puis les deux autres',dit(G,'les gars ?')&&dit(G,'rod: What ?')&&dit(G,"C'est quoi ça"));
+    v('château à l\'opposé des persos : la caméra fait un demi-tour',G.CHATEAU_X-150>400&&G.S.rv.cx===G.CHATEAU_X);
+    v('Rod et Yvan se sont relevés',G.S.rv.leveRod===1&&G.S.rv.leveYvan===1);
     v('fin du chapitre 1 devant le château',dit(G,'carton: Fin du chapitre 1')&&G.S.f.finChapitre1);
   },
   async autre(G){
