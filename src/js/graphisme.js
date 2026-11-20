@@ -4,8 +4,14 @@ function shade(hex,f){const n=parseInt(hex.slice(1),16);let r=n>>16,v=(n>>8)&255
   return'#'+((1<<24)|(r<<16)|(v<<8)|b).toString(16).slice(1)}
 const P=(x,y,w,h,c)=>{g.fillStyle=c;g.fillRect(x,y,w,h)};
 function vgrad(y0,y1,c1,c2,x0=0,w=W){const d=g.createLinearGradient(0,y0,0,y1);d.addColorStop(0,c1);d.addColorStop(1,c2);g.fillStyle=d;g.fillRect(x0,y0,w,y1-y0)}
-function halo(x,y,r,c,a=.5){const d=g.createRadialGradient(x,y,0,x,y,r);d.addColorStop(0,c.replace(')',`,${a})`).replace('rgb','rgba'));d.addColorStop(1,'rgba(0,0,0,0)');g.fillStyle=d;g.fillRect(x-r,y-r,r*2,r*2)}
-function vignette(){const d=g.createRadialGradient(W/2,H/2,H*.45,W/2,H/2,H);d.addColorStop(0,'rgba(0,0,0,0)');d.addColorStop(1,'rgba(0,0,0,.55)');g.fillStyle=d;g.fillRect(0,0,W,H)}
+const SPR={};
+function sprite(c0){let s=SPR[c0];if(s)return s;s=document.createElement('canvas');s.width=s.height=64;const k=s.getContext('2d'),d=k.createRadialGradient(32,32,0,32,32,32);
+  d.addColorStop(0,c0);d.addColorStop(1,'rgba(0,0,0,0)');k.fillStyle=d;k.fillRect(0,0,64,64);return SPR[c0]=s}
+function halo(x,y,r,c,a=.5){if(TEST)return;const aa=Math.round(a*20)/20;g.drawImage(sprite(c.replace(')',`,${aa})`).replace('rgb','rgba')),x-r,y-r,r*2,r*2)}
+function haloLent(x,y,r,c,a=.5){const d=g.createRadialGradient(x,y,0,x,y,r);d.addColorStop(0,c.replace(')',`,${a})`).replace('rgb','rgba'));d.addColorStop(1,'rgba(0,0,0,0)');g.fillStyle=d;g.fillRect(x-r,y-r,r*2,r*2)}
+let VIG=null;
+function vignette(){if(TEST)return;if(!VIG){VIG=document.createElement('canvas');VIG.width=W;VIG.height=H;const k=VIG.getContext('2d'),d=k.createRadialGradient(W/2,H/2,H*.45,W/2,H/2,H);d.addColorStop(0,'rgba(0,0,0,0)');d.addColorStop(1,'rgba(0,0,0,.55)');k.fillStyle=d;k.fillRect(0,0,W,H)}g.drawImage(VIG,0,0)}
+function vignetteLente(){const d=g.createRadialGradient(W/2,H/2,H*.45,W/2,H/2,H);d.addColorStop(0,'rgba(0,0,0,0)');d.addColorStop(1,'rgba(0,0,0,.55)');g.fillStyle=d;g.fillRect(0,0,W,H)}
 
 // Apparence d'après les photos
 const SPEC={
@@ -118,3 +124,10 @@ function echarpe(s,bob,pr,dos){const T=-28+bob,c=s.echarpe,f=shade(c,.65),h=shad
   P(-5,T-1,10,3,c);P(-5,T-1,10,1,h);
   if(dos){P(-3,T+2,3,7,c);P(-3,T+5,3,1,f);return}
   P(1,T+2,3,11,c);P(1,T+5,3,1,f);P(1,T+9,3,1,f);P(1,T+13,1,1,c);P(3,T+13,1,1,c)}
+
+// ----- Calques mis en cache (gros gain sur téléphone) -----
+const CACHE={};
+function calque(cle,x,y,w,h,ttl,fn){if(TEST){fn();return}let c=CACHE[cle];const t=performance.now();
+  if(!c||(ttl&&t-c.t>ttl)){if(!c){c={cv:document.createElement('canvas')};c.cv.width=w;c.cv.height=h;CACHE[cle]=c}
+    const k=c.cv.getContext('2d'),g0=g;k.setTransform(1,0,0,1,0,0);k.clearRect(0,0,w,h);k.translate(-x,-y);g=k;try{fn()}finally{g=g0}c.t=t}
+  g.drawImage(c.cv,x,y)}

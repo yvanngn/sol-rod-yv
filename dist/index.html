@@ -112,7 +112,9 @@ header{position:relative}
 <script>// ===== Moteur point and click =====
 const W=320,H=180,SOL=160;
 const TEST=typeof window!=='undefined'&&window.TEST;
-const cv=document.getElementById('cv'),g=cv.getContext('2d');
+const cv=document.getElementById('cv');let g=cv.getContext('2d');
+// Téléphone / tablette : on allège (pas de flou, 30 images/s)
+const MOBILE=typeof matchMedia==='function'&&matchMedia('(pointer:coarse)').matches;let derniereImg=0;
 const $=id=>document.getElementById(id);
 const S={cam:0,posY:{},scene:null,perso:'yvan',f:{},verbe:'regarder',sel:null,busy:false,
   persos:{yvan:{inv:['telephone']},rod:{inv:['echarpe']},solene:{inv:['billets']}},
@@ -196,7 +198,8 @@ const PORTRAITS={yvan:"Yvan. Lunettes, moustache, sac de parc d'attractions. Ex-
   solene:"Solène. Psy, lectrice de BD compulsive, amie d'enfance des deux autres."};
 function objetsCliquables(){const sc=SCENES[S.scene];return[...(sc.objets||[]).filter(o=>!o.cache||!o.cache()),...heroObjets()]}
 function dessiner(){
-  const sc=SCENES[S.scene];if(TEST)return;requestAnimationFrame(dessiner);if(!sc)return;g.clearRect(0,0,W,H);if(gT)gT.clearRect(0,0,W*KT,H*KT);
+  const sc=SCENES[S.scene];if(TEST)return;requestAnimationFrame(dessiner);if(!sc)return;
+  const now=performance.now();if(MOBILE&&now-derniereImg<31)return;derniereImg=now;g.clearRect(0,0,W,H);if(gT)gT.clearRect(0,0,W*KT,H*KT);
   const LG=sc.largeur||W,pp=S.pos[S.perso]??LG/2,cible_=Math.max(0,Math.min(LG-W,pp-W/2));S.cam=S.camSnap?cible_:S.cam+(cible_-S.cam)*.12;S.camSnap=0;
   g.save();if(S.zoom){g.translate(W/2,H/2);g.scale(S.zoom.z,S.zoom.z);g.translate(-S.zoom.cx,-S.zoom.cy);const k=Math.min(1,S.zoom.z-1);g.translate((S.zoom.cx-W/2-Math.round(S.cam))*(1-k),(S.zoom.cy-H/2)*(1-k))}else g.translate(-Math.round(S.cam),0);sc.dessin(g);
   (sc.objets||[]).forEach(o=>o.dessin&&(!o.cache||!o.cache())&&o.dessin(g));
@@ -272,8 +275,14 @@ function shade(hex,f){const n=parseInt(hex.slice(1),16);let r=n>>16,v=(n>>8)&255
   return'#'+((1<<24)|(r<<16)|(v<<8)|b).toString(16).slice(1)}
 const P=(x,y,w,h,c)=>{g.fillStyle=c;g.fillRect(x,y,w,h)};
 function vgrad(y0,y1,c1,c2,x0=0,w=W){const d=g.createLinearGradient(0,y0,0,y1);d.addColorStop(0,c1);d.addColorStop(1,c2);g.fillStyle=d;g.fillRect(x0,y0,w,y1-y0)}
-function halo(x,y,r,c,a=.5){const d=g.createRadialGradient(x,y,0,x,y,r);d.addColorStop(0,c.replace(')',`,${a})`).replace('rgb','rgba'));d.addColorStop(1,'rgba(0,0,0,0)');g.fillStyle=d;g.fillRect(x-r,y-r,r*2,r*2)}
-function vignette(){const d=g.createRadialGradient(W/2,H/2,H*.45,W/2,H/2,H);d.addColorStop(0,'rgba(0,0,0,0)');d.addColorStop(1,'rgba(0,0,0,.55)');g.fillStyle=d;g.fillRect(0,0,W,H)}
+const SPR={};
+function sprite(c0){let s=SPR[c0];if(s)return s;s=document.createElement('canvas');s.width=s.height=64;const k=s.getContext('2d'),d=k.createRadialGradient(32,32,0,32,32,32);
+  d.addColorStop(0,c0);d.addColorStop(1,'rgba(0,0,0,0)');k.fillStyle=d;k.fillRect(0,0,64,64);return SPR[c0]=s}
+function halo(x,y,r,c,a=.5){if(TEST)return;const aa=Math.round(a*20)/20;g.drawImage(sprite(c.replace(')',`,${aa})`).replace('rgb','rgba')),x-r,y-r,r*2,r*2)}
+function haloLent(x,y,r,c,a=.5){const d=g.createRadialGradient(x,y,0,x,y,r);d.addColorStop(0,c.replace(')',`,${a})`).replace('rgb','rgba'));d.addColorStop(1,'rgba(0,0,0,0)');g.fillStyle=d;g.fillRect(x-r,y-r,r*2,r*2)}
+let VIG=null;
+function vignette(){if(TEST)return;if(!VIG){VIG=document.createElement('canvas');VIG.width=W;VIG.height=H;const k=VIG.getContext('2d'),d=k.createRadialGradient(W/2,H/2,H*.45,W/2,H/2,H);d.addColorStop(0,'rgba(0,0,0,0)');d.addColorStop(1,'rgba(0,0,0,.55)');k.fillStyle=d;k.fillRect(0,0,W,H)}g.drawImage(VIG,0,0)}
+function vignetteLente(){const d=g.createRadialGradient(W/2,H/2,H*.45,W/2,H/2,H);d.addColorStop(0,'rgba(0,0,0,0)');d.addColorStop(1,'rgba(0,0,0,.55)');g.fillStyle=d;g.fillRect(0,0,W,H)}
 
 // Apparence d'après les photos
 const SPEC={
@@ -387,12 +396,19 @@ function echarpe(s,bob,pr,dos){const T=-28+bob,c=s.echarpe,f=shade(c,.65),h=shad
   if(dos){P(-3,T+2,3,7,c);P(-3,T+5,3,1,f);return}
   P(1,T+2,3,11,c);P(1,T+5,3,1,f);P(1,T+9,3,1,f);P(1,T+13,1,1,c);P(3,T+13,1,1,c)}
 
+// ----- Calques mis en cache (gros gain sur téléphone) -----
+const CACHE={};
+function calque(cle,x,y,w,h,ttl,fn){if(TEST){fn();return}let c=CACHE[cle];const t=performance.now();
+  if(!c||(ttl&&t-c.t>ttl)){if(!c){c={cv:document.createElement('canvas')};c.cv.width=w;c.cv.height=h;CACHE[cle]=c}
+    const k=c.cv.getContext('2d'),g0=g;k.setTransform(1,0,0,1,0,0);k.clearRect(0,0,w,h);k.translate(-x,-y);g=k;try{fn()}finally{g=g0}c.t=t}
+  g.drawImage(c.cv,x,y)}
+
 // ===== Effets « pixel art moderne » : parallaxe, lumière, profondeur, particules, reflets =====
 // Inspirations : Eastward / Sea of Stars (lumière dynamique), Owlboy (parallaxe),
 // HD-2D façon Octopath (flou de profondeur), Dex (pluie et néons).
 const cam=()=>((S.pos[S.perso]??160)-160)/160; // -1 … 1
 function couche(f,fn){g.save();g.translate(Math.round(-cam()*f),0);fn();g.restore()}
-const FLOU='filter' in g;
+const FLOU='filter' in g&&!MOBILE;
 function flou(px,fn){g.save();if(FLOU&&!TEST)g.filter=`blur(${px}px)`;fn();g.restore()}
 
 // --- lumière : voile sombre percé par les sources, puis halo additif (bloom) ---
@@ -401,11 +417,11 @@ function eclairer(sc){
   const A=sc.ambiance;if(!A)return;const L=(typeof sc.lumieres==='function'?sc.lumieres():(sc.lumieres||[])).map(l=>({...l,x:l.x-Math.round(S.cam)}));
   lg.globalCompositeOperation='source-over';lg.clearRect(0,0,W,H);lg.fillStyle=A.voile;lg.globalAlpha=A.nuit;lg.fillRect(0,0,W,H);lg.globalAlpha=1;
   lg.globalCompositeOperation='destination-out';
-  for(const l of L){const v=l.vacille?1+Math.sin(Date.now()/90+l.x)*.06:1,d=lg.createRadialGradient(l.x,l.y,0,l.x,l.y,l.r*v);
-    d.addColorStop(0,'rgba(0,0,0,1)');d.addColorStop(1,'rgba(0,0,0,0)');lg.fillStyle=d;lg.fillRect(l.x-l.r*1.1,l.y-l.r*1.1,l.r*2.2,l.r*2.2)}
+  const noir_=sprite('rgba(0,0,0,1)');
+  for(const l of L){const v=l.vacille?1+Math.sin(Date.now()/90+l.x)*.06:1,r=l.r*v;lg.drawImage(noir_,l.x-r,l.y-r,r*2,r*2)}
   g.drawImage(LC,0,0);
   g.save();g.globalCompositeOperation='lighter';
-  for(const l of L)if(l.c){const d=g.createRadialGradient(l.x,l.y,0,l.x,l.y,l.r*.7);d.addColorStop(0,l.c);d.addColorStop(1,'rgba(0,0,0,0)');g.fillStyle=d;g.fillRect(l.x-l.r,l.y-l.r,l.r*2,l.r*2)}
+  for(const l of L)if(l.c){const r=l.r*.7;g.drawImage(sprite(l.c),l.x-r,l.y-r,r*2,r*2)}
   g.restore();
   if(A.teinte){g.save();g.globalCompositeOperation='soft-light';g.fillStyle=A.teinte;g.fillRect(0,0,W,H);g.restore()}
 }
@@ -1772,20 +1788,22 @@ function herbe(x){for(let i=-17;i<18;i++)P(x+i,145+((i*7)&3),1,16,['#2e6a3e','#3
 const CHATEAU_X=900; // à l'opposé des personnages : la caméra fait un demi-tour pour le découvrir
 SCENES.reveil={nom:'…',fixe:1,
   dessin(){const t=Date.now(),R=S.rv;
-    g.save();if(R.flou&&FLOU)g.filter=`blur(${R.flou}px)`;g.translate(W/2,H/2);g.scale(R.z,R.z);g.translate(-R.cx,-R.cy);
+    g.save();g.imageSmoothingEnabled=false;g.translate(W/2,H/2);g.scale(R.z,R.z);g.translate(-R.cx,-R.cy);
+    calque('reveilFond',-300,-200,1600,400,0,()=>{
     // ciel d'aube, étoiles, montagnes
     vgrad(-200,140,'#1a1440','#e8906a',-300,1600);
     for(let i=0;i<140;i++){g.globalAlpha=.3+.7*Math.abs(Math.sin(t/900+i));P((i*53)%1500-200,(i*29)%70-40,1,1,'#fff')}g.globalAlpha=1;
     g.fillStyle='#3a2a50';g.beginPath();g.moveTo(-300,110);for(let x=-300;x<=1300;x+=40)g.lineTo(x,70+Math.sin(x/70)*18+((x/40)%2)*10);g.lineTo(1300,140);g.lineTo(-300,140);g.fill();
     // lac au pied du château
     vgrad(110,162,'#4a5a8a','#2a3460',640,700);for(let i=0;i<30;i++)P(660+i*20,118+(i%5)*8,10,1,'rgba(255,220,180,.3)');
-    chateau(CHATEAU_X,112);
     // prairie (côté personnages) et rive (côté château)
     vgrad(130,200,'#2e5a3a','#1a3a24',-300,1000);vgrad(160,200,'#2e5a3a','#1a3a24',700,700);
     g.fillStyle='#2e5a3a';g.beginPath();g.moveTo(690,130);g.quadraticCurveTo(712,150,732,160);g.lineTo(690,160);g.fill();
     for(let x=-300;x<700;x+=5)P(x,128+((x*7)%5),1,4,'#3a7a4a');for(let x=700;x<1300;x+=5)P(x,158+((x*7)%5),1,4,'#3a7a4a');
     [[20,'#ff8ab0'],[86,'#ffe080'],[150,'#b9a8ff'],[210,'#ff8ab0'],[260,'#ffe080'],[360,'#b9a8ff'],[480,'#ffe080'],[590,'#ff8ab0']].forEach(([x,c])=>{P(x,150,2,2,c);P(x+30,158,2,2,c)});
     for(let i=0;i<6;i++){const x=300+i*70;P(x,96,3,34,'#1e3a28');ell(x+1,92,9,12,'#1e3a28');ell(x-2,90,5,6,'#24452f')}
+    });
+    calque('reveilChateau',CHATEAU_X-230,-110,470,280,125,()=>chateau(CHATEAU_X,112));
     // Solène assise ; Yvan et Rod allongés qui se redressent (rotation autour des pieds)
     S.dort={solene:R.yeuxSolene===0,yvan:R.leveYvan<.3,rod:R.leveRod<.3};
     S.anim.solene={dir:'face',pas:0,marche:false};drawPerso('solene',62,SOL);herbe(62);
@@ -1798,7 +1816,7 @@ SCENES.reveil={nom:'…',fixe:1,
       herbe(x+6)});
     S.dort=null;
     // lucioles
-    for(let i=0;i<20;i++){const x=(i*61+t/40)%1000-40,y=110+Math.sin(t/700+i)*20;halo(x,y,4,'rgb(255,240,150)',.8)}
+    for(let i=0;i<20;i++){const x=(i*61+t/40)%1000-40,y=110+Math.sin(t/700+i)*20;P(x,y,1,1,'#fff6c0');halo(x,y,3,'rgb(255,240,150)',.6)}
     g.restore();
   },
   objets:[],

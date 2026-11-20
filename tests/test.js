@@ -25,6 +25,10 @@ const scenarios={
     v('chapitre 1 : Londres, titre puis tuto',G.S.scene==='londres'&&dit(G,'nous voici à Londres')&&dit(G,'titre')&&dit(G,'tuto'));
     v('Yvan en sorcier au chapitre 1',!!G.tenue('yvan').echarpe&&!G.tenue('yvan').chapeau&&G.S.posY.yvan==null);
   },
+  async perf(G){
+    v('calques mis en cache pour le réveil',/calque\('reveilFond'/.test(G.SCENES.reveil.dessin.toString())&&/calque\('reveilChateau'/.test(G.SCENES.reveil.dessin.toString()));
+    v('plus de flou pendant la rotation de la caméra',!/filter/.test(G.SCENES.reveil.dessin.toString()));
+  },
   async son(G){
     await G.go('appart');v('musique anniversaire au début puis thème magique à Londres',G.S.scene==='londres'&&G.SON.voulu==='magie');
     await G.go('autre');v('musique des brumes de l\'autre côté',G.SON.voulu==='brumes');

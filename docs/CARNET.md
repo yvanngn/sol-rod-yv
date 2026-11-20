@@ -111,3 +111,5 @@ Drapeaux d'histoire utilisés : `S.f.pose`, `S.f.traverse`, `S.f.fin`, `S.f.cabi
 - ❌ **Méditants** (sosies de John Lennon) : remplacés par l'alien vert et le lapin géant, le 15/11/2026.
 - ❌ **Visiteur** touriste à l'intérieur du bus : retiré le 15/11/2026 (il reste parmi les passants dehors).
 - ❌ **Raphaël** (bébé de Solène) et la **Tétine** : retirés le 15/11/2026, il n'était pas encore né à ce moment de l'histoire (demande de l'utilisateur).
+
+- ✅ 20/11/2026 Optimisation : halos et lumières en sprites, vignette en cache, réveil en calques (fond fixe, château 8×/s), plus de flou sur téléphone ni pendant la rotation, 30 images/s sur écran tactile.

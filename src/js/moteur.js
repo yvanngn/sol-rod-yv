@@ -1,7 +1,9 @@
 // ===== Moteur point and click =====
 const W=320,H=180,SOL=160;
 const TEST=typeof window!=='undefined'&&window.TEST;
-const cv=document.getElementById('cv'),g=cv.getContext('2d');
+const cv=document.getElementById('cv');let g=cv.getContext('2d');
+// Téléphone / tablette : on allège (pas de flou, 30 images/s)
+const MOBILE=typeof matchMedia==='function'&&matchMedia('(pointer:coarse)').matches;let derniereImg=0;
 const $=id=>document.getElementById(id);
 const S={cam:0,posY:{},scene:null,perso:'yvan',f:{},verbe:'regarder',sel:null,busy:false,
   persos:{yvan:{inv:['telephone']},rod:{inv:['echarpe']},solene:{inv:['billets']}},
@@ -85,7 +87,8 @@ const PORTRAITS={yvan:"Yvan. Lunettes, moustache, sac de parc d'attractions. Ex-
   solene:"Solène. Psy, lectrice de BD compulsive, amie d'enfance des deux autres."};
 function objetsCliquables(){const sc=SCENES[S.scene];return[...(sc.objets||[]).filter(o=>!o.cache||!o.cache()),...heroObjets()]}
 function dessiner(){
-  const sc=SCENES[S.scene];if(TEST)return;requestAnimationFrame(dessiner);if(!sc)return;g.clearRect(0,0,W,H);if(gT)gT.clearRect(0,0,W*KT,H*KT);
+  const sc=SCENES[S.scene];if(TEST)return;requestAnimationFrame(dessiner);if(!sc)return;
+  const now=performance.now();if(MOBILE&&now-derniereImg<31)return;derniereImg=now;g.clearRect(0,0,W,H);if(gT)gT.clearRect(0,0,W*KT,H*KT);
   const LG=sc.largeur||W,pp=S.pos[S.perso]??LG/2,cible_=Math.max(0,Math.min(LG-W,pp-W/2));S.cam=S.camSnap?cible_:S.cam+(cible_-S.cam)*.12;S.camSnap=0;
   g.save();if(S.zoom){g.translate(W/2,H/2);g.scale(S.zoom.z,S.zoom.z);g.translate(-S.zoom.cx,-S.zoom.cy);const k=Math.min(1,S.zoom.z-1);g.translate((S.zoom.cx-W/2-Math.round(S.cam))*(1-k),(S.zoom.cy-H/2)*(1-k))}else g.translate(-Math.round(S.cam),0);sc.dessin(g);
   (sc.objets||[]).forEach(o=>o.dessin&&(!o.cache||!o.cache())&&o.dessin(g));

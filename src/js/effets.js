@@ -3,7 +3,7 @@
 // HD-2D façon Octopath (flou de profondeur), Dex (pluie et néons).
 const cam=()=>((S.pos[S.perso]??160)-160)/160; // -1 … 1
 function couche(f,fn){g.save();g.translate(Math.round(-cam()*f),0);fn();g.restore()}
-const FLOU='filter' in g;
+const FLOU='filter' in g&&!MOBILE;
 function flou(px,fn){g.save();if(FLOU&&!TEST)g.filter=`blur(${px}px)`;fn();g.restore()}
 
 // --- lumière : voile sombre percé par les sources, puis halo additif (bloom) ---
@@ -12,11 +12,11 @@ function eclairer(sc){
   const A=sc.ambiance;if(!A)return;const L=(typeof sc.lumieres==='function'?sc.lumieres():(sc.lumieres||[])).map(l=>({...l,x:l.x-Math.round(S.cam)}));
   lg.globalCompositeOperation='source-over';lg.clearRect(0,0,W,H);lg.fillStyle=A.voile;lg.globalAlpha=A.nuit;lg.fillRect(0,0,W,H);lg.globalAlpha=1;
   lg.globalCompositeOperation='destination-out';
-  for(const l of L){const v=l.vacille?1+Math.sin(Date.now()/90+l.x)*.06:1,d=lg.createRadialGradient(l.x,l.y,0,l.x,l.y,l.r*v);
-    d.addColorStop(0,'rgba(0,0,0,1)');d.addColorStop(1,'rgba(0,0,0,0)');lg.fillStyle=d;lg.fillRect(l.x-l.r*1.1,l.y-l.r*1.1,l.r*2.2,l.r*2.2)}
+  const noir_=sprite('rgba(0,0,0,1)');
+  for(const l of L){const v=l.vacille?1+Math.sin(Date.now()/90+l.x)*.06:1,r=l.r*v;lg.drawImage(noir_,l.x-r,l.y-r,r*2,r*2)}
   g.drawImage(LC,0,0);
   g.save();g.globalCompositeOperation='lighter';
-  for(const l of L)if(l.c){const d=g.createRadialGradient(l.x,l.y,0,l.x,l.y,l.r*.7);d.addColorStop(0,l.c);d.addColorStop(1,'rgba(0,0,0,0)');g.fillStyle=d;g.fillRect(l.x-l.r,l.y-l.r,l.r*2,l.r*2)}
+  for(const l of L)if(l.c){const r=l.r*.7;g.drawImage(sprite(l.c),l.x-r,l.y-r,r*2,r*2)}
   g.restore();
   if(A.teinte){g.save();g.globalCompositeOperation='soft-light';g.fillStyle=A.teinte;g.fillRect(0,0,W,H);g.restore()}
 }

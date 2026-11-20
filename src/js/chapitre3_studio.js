@@ -163,20 +163,22 @@ function herbe(x){for(let i=-17;i<18;i++)P(x+i,145+((i*7)&3),1,16,['#2e6a3e','#3
 const CHATEAU_X=900; // à l'opposé des personnages : la caméra fait un demi-tour pour le découvrir
 SCENES.reveil={nom:'…',fixe:1,
   dessin(){const t=Date.now(),R=S.rv;
-    g.save();if(R.flou&&FLOU)g.filter=`blur(${R.flou}px)`;g.translate(W/2,H/2);g.scale(R.z,R.z);g.translate(-R.cx,-R.cy);
+    g.save();g.imageSmoothingEnabled=false;g.translate(W/2,H/2);g.scale(R.z,R.z);g.translate(-R.cx,-R.cy);
+    calque('reveilFond',-300,-200,1600,400,0,()=>{
     // ciel d'aube, étoiles, montagnes
     vgrad(-200,140,'#1a1440','#e8906a',-300,1600);
     for(let i=0;i<140;i++){g.globalAlpha=.3+.7*Math.abs(Math.sin(t/900+i));P((i*53)%1500-200,(i*29)%70-40,1,1,'#fff')}g.globalAlpha=1;
     g.fillStyle='#3a2a50';g.beginPath();g.moveTo(-300,110);for(let x=-300;x<=1300;x+=40)g.lineTo(x,70+Math.sin(x/70)*18+((x/40)%2)*10);g.lineTo(1300,140);g.lineTo(-300,140);g.fill();
     // lac au pied du château
     vgrad(110,162,'#4a5a8a','#2a3460',640,700);for(let i=0;i<30;i++)P(660+i*20,118+(i%5)*8,10,1,'rgba(255,220,180,.3)');
-    chateau(CHATEAU_X,112);
     // prairie (côté personnages) et rive (côté château)
     vgrad(130,200,'#2e5a3a','#1a3a24',-300,1000);vgrad(160,200,'#2e5a3a','#1a3a24',700,700);
     g.fillStyle='#2e5a3a';g.beginPath();g.moveTo(690,130);g.quadraticCurveTo(712,150,732,160);g.lineTo(690,160);g.fill();
     for(let x=-300;x<700;x+=5)P(x,128+((x*7)%5),1,4,'#3a7a4a');for(let x=700;x<1300;x+=5)P(x,158+((x*7)%5),1,4,'#3a7a4a');
     [[20,'#ff8ab0'],[86,'#ffe080'],[150,'#b9a8ff'],[210,'#ff8ab0'],[260,'#ffe080'],[360,'#b9a8ff'],[480,'#ffe080'],[590,'#ff8ab0']].forEach(([x,c])=>{P(x,150,2,2,c);P(x+30,158,2,2,c)});
     for(let i=0;i<6;i++){const x=300+i*70;P(x,96,3,34,'#1e3a28');ell(x+1,92,9,12,'#1e3a28');ell(x-2,90,5,6,'#24452f')}
+    });
+    calque('reveilChateau',CHATEAU_X-230,-110,470,280,125,()=>chateau(CHATEAU_X,112));
     // Solène assise ; Yvan et Rod allongés qui se redressent (rotation autour des pieds)
     S.dort={solene:R.yeuxSolene===0,yvan:R.leveYvan<.3,rod:R.leveRod<.3};
     S.anim.solene={dir:'face',pas:0,marche:false};drawPerso('solene',62,SOL);herbe(62);
@@ -189,7 +191,7 @@ SCENES.reveil={nom:'…',fixe:1,
       herbe(x+6)});
     S.dort=null;
     // lucioles
-    for(let i=0;i<20;i++){const x=(i*61+t/40)%1000-40,y=110+Math.sin(t/700+i)*20;halo(x,y,4,'rgb(255,240,150)',.8)}
+    for(let i=0;i<20;i++){const x=(i*61+t/40)%1000-40,y=110+Math.sin(t/700+i)*20;P(x,y,1,1,'#fff6c0');halo(x,y,3,'rgb(255,240,150)',.6)}
     g.restore();
   },
   objets:[],
