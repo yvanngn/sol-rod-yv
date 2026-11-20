@@ -40,7 +40,7 @@ existants : on invente tout — Académie d'Hiverlune, Quai des Brumes…).
 - Mobile (≤ 760 px) : la bulle et les choix s'affichent sous l'image (zone réservée sous le canvas), jamais par-dessus les personnages.
 - Son (`son.js`, Web Audio synthétisé) : musique par scène `MUSIQUE_SCENE` (thèmes `THEMES` : anniv, soir, magie, brumes ; voix = [instrument, [[midi|accord|null, temps]…]]),
   ambiances `AMBIANCE_SCENE`, bruitages `sfx(nom)`. Menu ⚙ : musique / bruitages avec bouton couper + curseur de volume (`volume(type,v)`, `regler(type,oui)`, mémorisés), revoir le tuto. Démarre au premier geste du joueur.
-- Mots de passe (menu ⚙, `main.js`) : `CHAPITRES` = mots de passe des **scènes** du chapitre 1 : { '0': intro, '1': scène 1 (Yvan), '2': scène 2 (Rod), '3': scène 3 (Solène) } ; le code recharge la page avec `#chN`. Ajouter un chapitre = une entrée dans `CHAPITRES`.
+- Mots de passe (menu ⚙, `main.js`) : `CHAPITRES` = mots de passe des **scènes** du chapitre 1 : { '0': intro, '1': scène 1 (Yvan), '2': scène 2 (Rod), '3': scène 3 (Solène), '4': studio, '5': réveil devant le château } ; le code recharge la page avec `#chN`. Ajouter un chapitre = une entrée dans `CHAPITRES`.
 - Scènes larges : `largeur:640` sur la scène → la caméra suit le héros (`S.cam`, clics et lumières décalés automatiquement ; `S.camSnap` au changement de scène). Exemple : `bonbons`.
 - Texte dans les décors : toujours `texte(t,x,y)` (jamais `g.fillText`) → couche haute résolution `#cvT`, nette, qui suit caméra et zoom.
 - Yeux fermés : `S.dort={nom:true}` pendant le dessin.

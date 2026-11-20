@@ -23,8 +23,6 @@ SCENES.quai={nom:'Studio',largeur:LGS,
     // boutique
     P(18,58,84,76,'#1b1824');P(22,62,76,44,'#2e5a46');for(let i=0;i<8;i++)P(25+i*9,70,6,26,['#c8242c','#e8c35a','#2a5ab8','#3a8a4a'][i%4]);P(22,62,76,1,'#7fd0a8');
     g.fillStyle='#f0c766';g.font="bold 10px Georgia";g.textAlign='center';texte('Boutique',60,120);g.textAlign='left';
-    // grande enseigne photo
-    P(360,22,200,16,'#1b1424');P(360,22,200,1,'#f0c766');g.fillStyle='#f0c766';g.font="bold 9px Georgia";g.textAlign='center';texte('PHOTO SOUVENIR — POUSSEZ LE CHARIOT',460,33);
     // pilier du quai avec son panneau
     P(MUR_X,44,48,116,'#5a2a20');for(let y=48;y<SOL;y+=8)for(let x=MUR_X+((y/8)%2)*6;x<MUR_X+48;x+=12)P(x,y,11,7,shade('#7a3b2e',.9+((x+y)%5)/20));
     P(MUR_X+4,52,40,16,'#1b1424');g.fillStyle='#fff';g.font="bold 10px Georgia";texte('Quai ?',MUR_X+24,64);g.textAlign='left';

@@ -91,7 +91,7 @@ header{position:relative}
   <header><h1>Witch'rok</h1><div class="droite"><div id="heros"></div><button id="menuBtn" title="Menu">⚙</button></div>
     <div id="menu" hidden>
       <div class="reglage"><span class="nom">Musique</span><span class="pct" id="pMus"></span><button id="tMus"></button><input type="range" id="vMus" min="0" max="100" aria-label="Volume de la musique"></div>
-      <div class="reglage"><span class="nom">Bruitages</span><span class="pct" id="pSfx"></span><button id="tSfx"></button><input type="range" id="vSfx" min="0" max="100" aria-label="Volume des bruitages"></div><div class="reglage mdp"><span class="nom">🔑 Mot de passe</span><span class="pct" id="mdpMsg"></span><input id="mdp" inputmode="numeric" autocomplete="off" placeholder="ex. 1" aria-label="Mot de passe"><button id="mdpOK">Aller</button></div>
+      <div class="reglage"><span class="nom">Bruitages</span><span class="pct" id="pSfx"></span><button id="tSfx"></button><input type="range" id="vSfx" min="0" max="100" aria-label="Volume des bruitages"></div><div class="reglage mdp"><span class="nom">🔑 Mot de passe</span><span class="pct" id="mdpMsg"></span><input id="mdp" inputmode="numeric" autocomplete="off" aria-label="Mot de passe"><button id="mdpOK">Aller</button></div>
       <button id="tTuto">❓ Revoir le tuto</button></div></header>
   <div id="scene"><canvas id="cv" width="320" height="180"></canvas><canvas id="cvT" width="1280" height="720"></canvas>
     <div id="info"></div><div id="etiquette" hidden></div><div id="roue" hidden></div>
@@ -1613,8 +1613,6 @@ SCENES.quai={nom:'Studio',largeur:LGS,
     // boutique
     P(18,58,84,76,'#1b1824');P(22,62,76,44,'#2e5a46');for(let i=0;i<8;i++)P(25+i*9,70,6,26,['#c8242c','#e8c35a','#2a5ab8','#3a8a4a'][i%4]);P(22,62,76,1,'#7fd0a8');
     g.fillStyle='#f0c766';g.font="bold 10px Georgia";g.textAlign='center';texte('Boutique',60,120);g.textAlign='left';
-    // grande enseigne photo
-    P(360,22,200,16,'#1b1424');P(360,22,200,1,'#f0c766');g.fillStyle='#f0c766';g.font="bold 9px Georgia";g.textAlign='center';texte('PHOTO SOUVENIR — POUSSEZ LE CHARIOT',460,33);
     // pilier du quai avec son panneau
     P(MUR_X,44,48,116,'#5a2a20');for(let y=48;y<SOL;y+=8)for(let x=MUR_X+((y/8)%2)*6;x<MUR_X+48;x+=12)P(x,y,11,7,shade('#7a3b2e',.9+((x+y)%5)/20));
     P(MUR_X+4,52,40,16,'#1b1424');g.fillStyle='#fff';g.font="bold 10px Georgia";texte('Quai ?',MUR_X+24,64);g.textAlign='left';
@@ -1803,6 +1801,10 @@ const CHAPITRES={
   '3':{nom:"Scène 3 — Solène",lancer:()=>{S.tenue='';S.posY={};
     Object.assign(S.f,{vu_londres:1,cabine:1,piece:1,hote:1,fente:1,singe:1,busNormal:1,manteau:1,finYvan:1,flechette:1,paille:1,manteauWC:1,ballon:1,boulette:1,ballonParti:1,vraiNom:1});
     MUSIQUE_SCENE.bus='magie';S.persos.rod.inv=['echarpe','sarbacane'];return debutSolene()}},
+  '4':{nom:"Scène 4 — Le studio",lancer:()=>{S.tenue='';S.posY={};Object.assign(S.f,{vu_londres:1,cabine:1,piece:1,hote:1,fente:1,singe:1,busNormal:1,manteau:1,finYvan:1,flechette:1,paille:1,manteauWC:1,ballon:1,boulette:1,ballonParti:1,vraiNom:1,finRod:1,nounours:1,joute:1,retrouves:1,vu_quai:1});
+    MUSIQUE_SCENE.bus='magie';S.persos.rod.inv=['echarpe','sarbacane'];S.verrou=null;S.perso='rod';ui();return go('quai',{yvan:220,rod:250,solene:280})}},
+  '5':{nom:"Scène 5 — Devant le château",lancer:()=>{S.tenue='';S.posY={};Object.assign(S.f,{vu_londres:1,cabine:1,piece:1,hote:1,fente:1,singe:1,busNormal:1,manteau:1,finYvan:1,flechette:1,paille:1,manteauWC:1,ballon:1,boulette:1,ballonParti:1,vraiNom:1,finRod:1,nounours:1,joute:1,retrouves:1,vu_quai:1});
+    S.persos.rod.inv=['echarpe','sarbacane'];S.verrou=null;S.perso='solene';ui();return go('reveil',{yvan:null,rod:null,solene:null})}},
 };
 function demarrer(code){const c=CHAPITRES[String(code).trim()];if(!c)return false;c.lancer();return true}
 function motDePasse(code){code=String(code).trim();const c=CHAPITRES[code];

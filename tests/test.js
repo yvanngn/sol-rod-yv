@@ -76,6 +76,8 @@ const scenarios={
     v('mot de passe inconnu refusé',G.motDePasse('9')===false);
     G.S.tenue='neutre';v('mot de passe 1 : chapitre 1 à Londres, tenue de sorcier',G.motDePasse('1')&&G.S.scene==='londres'&&G.S.tenue==='');
     await null;v('mot de passe 3 : chapitre de Solène',G.motDePasse('3')&&G.S.scene==='bonbons'&&G.S.perso==='solene');
+    await null;v('mot de passe 4 : le studio, on joue Rod',G.motDePasse('4')&&G.S.scene==='quai'&&G.S.perso==='rod'&&G.S.f.retrouves);
+    await null;v('mot de passe 5 : devant le château',G.motDePasse('5')&&G.S.scene==='reveil');
     await null;v('mot de passe 2 : chapitre de Rod devant le pub',G.motDePasse('2')&&G.S.scene==='devanture'&&G.S.perso==='rod'&&G.S.verrou==='rod'&&G.S.f.busNormal);
     await null;v('mot de passe 0 : intro',G.motDePasse(' 0 ')&&G.S.scene==='appart');
   },

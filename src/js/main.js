@@ -8,6 +8,10 @@ const CHAPITRES={
   '3':{nom:"Scène 3 — Solène",lancer:()=>{S.tenue='';S.posY={};
     Object.assign(S.f,{vu_londres:1,cabine:1,piece:1,hote:1,fente:1,singe:1,busNormal:1,manteau:1,finYvan:1,flechette:1,paille:1,manteauWC:1,ballon:1,boulette:1,ballonParti:1,vraiNom:1});
     MUSIQUE_SCENE.bus='magie';S.persos.rod.inv=['echarpe','sarbacane'];return debutSolene()}},
+  '4':{nom:"Scène 4 — Le studio",lancer:()=>{S.tenue='';S.posY={};Object.assign(S.f,{vu_londres:1,cabine:1,piece:1,hote:1,fente:1,singe:1,busNormal:1,manteau:1,finYvan:1,flechette:1,paille:1,manteauWC:1,ballon:1,boulette:1,ballonParti:1,vraiNom:1,finRod:1,nounours:1,joute:1,retrouves:1,vu_quai:1});
+    MUSIQUE_SCENE.bus='magie';S.persos.rod.inv=['echarpe','sarbacane'];S.verrou=null;S.perso='rod';ui();return go('quai',{yvan:220,rod:250,solene:280})}},
+  '5':{nom:"Scène 5 — Devant le château",lancer:()=>{S.tenue='';S.posY={};Object.assign(S.f,{vu_londres:1,cabine:1,piece:1,hote:1,fente:1,singe:1,busNormal:1,manteau:1,finYvan:1,flechette:1,paille:1,manteauWC:1,ballon:1,boulette:1,ballonParti:1,vraiNom:1,finRod:1,nounours:1,joute:1,retrouves:1,vu_quai:1});
+    S.persos.rod.inv=['echarpe','sarbacane'];S.verrou=null;S.perso='solene';ui();return go('reveil',{yvan:null,rod:null,solene:null})}},
 };
 function demarrer(code){const c=CHAPITRES[String(code).trim()];if(!c)return false;c.lancer();return true}
 function motDePasse(code){code=String(code).trim();const c=CHAPITRES[code];
