@@ -32,33 +32,33 @@ SCENES.quai={nom:'Studio',largeur:LGS,
     vgrad(SOL,H,'#6a6470','#3e3944',0,LGS);P(0,SOL,LGS,1,'#b0a9b8');for(let x=0;x<LGS;x+=40)P(x,SOL+6,30,1,'#58525e');
   },
   objets:[
-    {id:'boutique',nom:'boutique',x:18,y:58,w:84,h:76,regarder:"Des écharpes, des baguettes en plastique, des mugs. Tout à 40 £.",
-      utiliser:()=>say('moi',S.perso==='solene'?"Plus tard. On a déjà assez dépensé en bonbons… enfin, moi.":"Plus tard. Solène a confisqué ma carte bleue.")},
+    {id:'boutique',nom:'boutique',x:18,y:58,w:84,h:76,regarder:"Des écharpes, des mugs, des stylos ! Tout à 100 £… l'unité. Et des baguettes de sorcier ! 500 £.",
+      utiliser:()=>say('moi',S.perso==='solene'?"Plus tard. On a déjà assez dépensé en bonbons…":"Plus tard, pour l'instant c'est l'heure de profiter.")},
     {id:'loup',nom:'statue de loup-garou',x:150,y:88,w:40,h:72,defaut:'utiliser',dessin(){loupGarou(170,SOL)},
-      regarder:"Une statue de loup-garou grandeur nature. Les crocs, les griffes… et une étiquette « Ne pas monter dessus ».",
+      regarder:"Une statue de loup-garou grandeur nature. Y'a marqué quoi là ? « Ne pas mordre ? ».",
       utiliser:async()=>{if(S.perso!=='rod')return say('moi',"Je ne monte pas là-dessus. Je laisse ça à Rod.");
         await marcher('rod',188);anim('rod').dir='g';
         if(!TEST)for(let i=0;i<20;i++){S.posY.rod=SOL-i*.5;await pause(16)}
         await say('rod',"Aouuuuuh !");sfx('hurlement');
-        anim('rod').tremble=true;await dire([['rod',"Rodolphe, le loup-garou des salles des profs ! Terreur des réunions pédagogiques !"]]);anim('rod').tremble=false;
-        delete S.posY.rod;await say('rod',"…Bon, je descends avant qu'un vigile arrive. J'ai déjà donné aujourd'hui.")}},
+        anim('rod').tremble=true;await dire([['rod',"Rodolphe, le loup-garou des salles des profs !"]]);anim('rod').tremble=false;
+        delete S.posY.rod;await say('rod',"…Bon, assez fait le mariole.")}},
     {id:'balai',nom:'balai volant',x:258,y:118,w:64,h:42,defaut:'utiliser',dessin(){if(!S.balai)balaiStand(282,SOL)},
-      regarder:"Un balai de sorcier sur son support, pour les photos. Paille dorée, manche verni.",
-      utiliser:async()=>{if(S.perso!=='yvan')return say('moi',"Le balai, c'est le truc d'Yvan. Il a même la tenue.");
+      regarder:"Un balai de sorcier pour les photos.",
+      utiliser:async()=>{if(S.perso!=='yvan')return say('moi',"Le balai, c'est pour Yvan qui en a un bien enfoncé dans le derrière.");
         await marcher('yvan',282);anim('yvan').dir='d';S.balai=1;
         await say('yvan',"Accrochez-vous… Décollage !");sfx('whoosh');
         if(!TEST){const t0=Date.now();while(Date.now()-t0<2200){S.posY.yvan=SOL-4-Math.abs(Math.sin((Date.now()-t0)/180))*7;await pause(16)}}
         delete S.posY.yvan;S.balai=0;
-        await say('yvan',"…Bon. Ça ne vole pas. Mais dans ma tête, je suis déjà au-dessus de la Tamise.")}},
+        await say('yvan',"…Je suis pas un peu vieux pour ces conneries ?")}},
     {id:'chariot',nom:'chariot à bagages',get x(){return 404+(S.chariotDx||0)},y:116,w:44,h:44,
       dessin(){if(S.avale)return;dessinChariot(S.chariotDx||0)},
-      regarder:"Un chariot à moitié encastré dans le pilier. Tout le monde fait la même photo. On va faire la même photo.",
-      prendre:"Il est vissé au sol. Logique, sinon les gens partiraient avec.",
-      utiliser:"Il faudrait que quelqu'un nous prenne en photo en train de le pousser. Tous les trois."},
+      regarder:"Un chariot à moitié encastré dans le mur.",
+      prendre:"Il est vissé au sol. Dommage, ça aurait fait joli dans mes toilettes.",
+      utiliser:"Il faudrait que quelqu'un nous prenne en photo en train de le pousser."},
     {id:'touriste',nom:'touriste',humain:true,x:553,y:118,w:14,h:42,
       dessin(){const a=anim('touriste');a.marche=false;a.dir='g';drawPerso('touriste',560);P(550,132,7,5,'#222');P(551,133,2,2,'#8ac')},
       regarder:"Un touriste en chemise à fleurs, avec un gros appareil photo. Il a l'air serviable.",
-      parler:async()=>{if(S.perso!=='solene')return say('moi',"Je laisse Solène lui demander. Elle a le sens du contact.");await photoTouriste()}},
+      parler:async()=>{if(S.perso!=='solene')return say('moi',"Je parle pas aux gens.");await photoTouriste()}},
   ],
   heros:{},
   devant(){if(S.avale){dessinChariot(S.chariotDx||0);P(MUR_X,44,48,116,'#5a2a20');for(let y=48;y<SOL;y+=8)for(let x=MUR_X+((y/8)%2)*6;x<MUR_X+48;x+=12)P(x,y,11,7,shade('#7a3b2e',.9+((x+y)%5)/20))}
@@ -77,7 +77,7 @@ function dessinChariot(dx){const x=404+dx;
   P(x+1,150,32,3,'#b8b8c0');[[x+8,156],[x+26,156]].forEach(([a,b])=>{P(a-2,b-2,5,5,'#1a1a1a');P(a-1,b-1,2,2,'#666')})}
 let pilierDevant=0;
 async function photoTouriste(){
-  await dire([['solene',"Excusez-moi ! Vous pourriez nous prendre en photo, tous les trois, en train de pousser le chariot ?"],['touriste',"Of course ! Mettez-vous bien ensemble, derrière le chariot."]]);
+  await dire([['solene',"Excusez-moi ! Vous pourriez nous prendre en photo ? Can you take me in the ass ?"],['touriste',"Of course ! Mettez-vous bien ensemble, derrière le chariot."]]);
   S.verrou='solene';
   await Promise.all([marcher('yvan',372),marcher('rod',386),marcher('solene',400)]);
   ['yvan','rod','solene'].forEach(n=>anim(n).dir='d');

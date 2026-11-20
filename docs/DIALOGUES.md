@@ -216,35 +216,35 @@ Corrige directement le texte (garde le numéro) et renvoie-moi la liste. 🆕 = 
 
 ## Studio et réveil (`src/js/chapitre3_studio.js`)
 
-201. 🆕 *regarder* — Des écharpes, des baguettes en plastique, des mugs. Tout à 40 £.  `chapitre3_studio.js:35`
-202. 🆕 **héros courant** — Plus tard. On a déjà assez dépensé en bonbons… enfin, moi.  `chapitre3_studio.js:36`
-203. — Plus tard. Solène a confisqué ma carte bleue.  `chapitre3_studio.js:36`
-204. 🆕 *regarder* — Une statue de loup-garou grandeur nature. Les crocs, les griffes… et une étiquette « Ne pas monter dessus ».  `chapitre3_studio.js:38`
-205. 🆕 **héros courant** — Je ne monte pas là-dessus. Je laisse ça à Rod.  `chapitre3_studio.js:39`
-206. 🆕 **Rod** — Aouuuuuh !  `chapitre3_studio.js:42`
-207. 🆕 **Rod** — Rodolphe, le loup-garou des salles des profs ! Terreur des réunions pédagogiques !  `chapitre3_studio.js:43`
-208. 🆕 **Rod** — …Bon, je descends avant qu'un vigile arrive. J'ai déjà donné aujourd'hui.  `chapitre3_studio.js:44`
-209. 🆕 *regarder* — Un balai de sorcier sur son support, pour les photos. Paille dorée, manche verni.  `chapitre3_studio.js:46`
-210. 🆕 **héros courant** — Le balai, c'est le truc d'Yvan. Il a même la tenue.  `chapitre3_studio.js:47`
-211. 🆕 **Yvan** — Accrochez-vous… Décollage !  `chapitre3_studio.js:49`
-212. 🆕 **Yvan** — …Bon. Ça ne vole pas. Mais dans ma tête, je suis déjà au-dessus de la Tamise.  `chapitre3_studio.js:52`
-213. 🆕 *regarder* — Un chariot à moitié encastré dans le pilier. Tout le monde fait la même photo. On va faire la même photo.  `chapitre3_studio.js:55`
-214. *prendre* — Il est vissé au sol. Logique, sinon les gens partiraient avec.  `chapitre3_studio.js:56`
-215. 🆕 *utiliser* — Il faudrait que quelqu'un nous prenne en photo en train de le pousser. Tous les trois.  `chapitre3_studio.js:57`
-216. 🆕 *regarder* — Un touriste en chemise à fleurs, avec un gros appareil photo. Il a l'air serviable.  `chapitre3_studio.js:60`
-217. 🆕 **héros courant** — Je laisse Solène lui demander. Elle a le sens du contact.  `chapitre3_studio.js:61`
+201. *regarder* — Des écharpes, des mugs, des stylos ! Tout à 100 £… l'unité. Et des baguettes de sorcier ! 500 £.  `chapitre3_studio.js:35`
+202. **héros courant** — Plus tard. On a déjà assez dépensé en bonbons…  `chapitre3_studio.js:36`
+203. — Plus tard, pour l'instant c'est l'heure de profiter.  `chapitre3_studio.js:36`
+204. *regarder* — Une statue de loup-garou grandeur nature. Y'a marqué quoi là ? « Ne pas mordre ? ».  `chapitre3_studio.js:38`
+205. **héros courant** — Je ne monte pas là-dessus. Je laisse ça à Rod.  `chapitre3_studio.js:39`
+206. **Rod** — Aouuuuuh !  `chapitre3_studio.js:42`
+207. **Rod** — Rodolphe, le loup-garou des salles des profs !  `chapitre3_studio.js:43`
+208. **Rod** — …Bon, assez fait le mariole.  `chapitre3_studio.js:44`
+209. *regarder* — Un balai de sorcier pour les photos.  `chapitre3_studio.js:46`
+210. **héros courant** — Le balai, c'est pour Yvan qui en a un bien enfoncé dans le derrière.  `chapitre3_studio.js:47`
+211. **Yvan** — Accrochez-vous… Décollage !  `chapitre3_studio.js:49`
+212. **Yvan** — …Je suis pas un peu vieux pour ces conneries ?  `chapitre3_studio.js:52`
+213. *regarder* — Un chariot à moitié encastré dans le mur.  `chapitre3_studio.js:55`
+214. *prendre* — Il est vissé au sol. Dommage, ça aurait fait joli dans mes toilettes.  `chapitre3_studio.js:56`
+215. *utiliser* — Il faudrait que quelqu'un nous prenne en photo en train de le pousser.  `chapitre3_studio.js:57`
+216. *regarder* — Un touriste en chemise à fleurs, avec un gros appareil photo. Il a l'air serviable.  `chapitre3_studio.js:60`
+217. **héros courant** — Je parle pas aux gens.  `chapitre3_studio.js:61`
 218. **Narrateur** — Dans le studio, un décor de gare. Un chariot sort à moitié d'un mur de briques.  `chapitre3_studio.js:72`
 219. **Rod** — Ah, LA photo. Allez, on la fait.  `chapitre3_studio.js:72`
-220. 🆕 **Solène** — Excusez-moi ! Vous pourriez nous prendre en photo, tous les trois, en train de pousser le chariot ?  `chapitre3_studio.js:80`
-221. 🆕 **Le touriste** — Of course ! Mettez-vous bien ensemble, derrière le chariot.  `chapitre3_studio.js:80`
-222. 🆕 **Solène** — Allez, les garçons, on pousse !  `chapitre3_studio.js:84`
-223. 🆕 **Le touriste** — Un…  `chapitre3_studio.js:84`
-224. 🆕 **Le touriste** — Deux…  `chapitre3_studio.js:84`
-225. 🆕 **Le touriste** — Trois !  `chapitre3_studio.js:84`
-226. 🆕 **Solène** — Euuuh… les gars ?  `chapitre3_studio.js:185`
-227. 🆕 **Rod** — What ?  `chapitre3_studio.js:187`
-228. 🆕 **Yvan** — C'est quoi ça ?  `chapitre3_studio.js:188`
-229. 🆕 — Fin du chapitre 1  `chapitre3_studio.js:192`
+220. **Solène** — Excusez-moi ! Vous pourriez nous prendre en photo ? Can you take me in the ass ?  `chapitre3_studio.js:80`
+221. **Le touriste** — Of course ! Mettez-vous bien ensemble, derrière le chariot.  `chapitre3_studio.js:80`
+222. **Solène** — Allez, les garçons, on pousse !  `chapitre3_studio.js:84`
+223. **Le touriste** — Un…  `chapitre3_studio.js:84`
+224. **Le touriste** — Deux…  `chapitre3_studio.js:84`
+225. **Le touriste** — Trois !  `chapitre3_studio.js:84`
+226. **Solène** — Euuuh… les gars ?  `chapitre3_studio.js:185`
+227. **Rod** — What ?  `chapitre3_studio.js:187`
+228. **Yvan** — C'est quoi ça ?  `chapitre3_studio.js:188`
+229. — Fin du chapitre 1  `chapitre3_studio.js:192`
 
 ## Londres (base), studio, Quai des Brumes (`src/js/scenes.js`)
 

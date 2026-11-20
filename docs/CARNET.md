@@ -91,6 +91,8 @@ Drapeaux d'histoire utilisés : `S.f.pose`, `S.f.traverse`, `S.f.fin`, `S.f.cabi
 
 - 20/11/2026 : château agrandi et somptueux (falaise, cascade, enceinte crénelée, grand hall à vitraux et rosace, 10 tours à toits pointus, drapeaux, passerelles, pont à arches, aurore, reflets, barques à lanternes, oiseaux).
 
+- 20/11/2026 : répliques du studio et du réveil corrigées par l'utilisateur ; toutes les répliques sont validées.
+
 ## 6. Idées de Claude (💡 à valider)
 - (aucune en attente)
 
