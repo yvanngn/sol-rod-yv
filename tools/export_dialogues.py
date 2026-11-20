@@ -2,7 +2,7 @@
 import re,pathlib
 R=pathlib.Path(__file__).resolve().parent.parent
 FICHIERS=[("Intro","intro.js"),("Chapitre 1 — départ, Yvan, cabine, bus-musée","chapitre1.js"),("Chapitre 2 — Rod : pub, toilettes, ballon","chapitre1_rod.js"),("Chapitre 3 — Solène : bonbons, vigile, retrouvailles","chapitre3_solene.js"),("Londres (base), studio, Quai des Brumes","scenes.js"),("Réponses par défaut et portraits","moteur.js")]
-QUI={'moi':'héros courant','yvan':'Yvan','rod':'Rod','solene':'Solène','narr':'Narrateur','tel':'Voix au téléphone','hote':"L'hôte",'visiteuse':'Visiteuse','visiteur':'Visiteur'}
+QUI={'moi':'héros courant','yvan':'Yvan','rod':'Rod','solene':'Solène','narr':'Narrateur','tel':'Voix au téléphone','hote':"L'hôte",'visiteuse':'Visiteuse','visiteur':'Visiteur','barman':'Le barman','joueur':'Joueur de fléchettes','client':'Un client','vigile':'Le vigile','enfant':'Un enfant','tous':'Yvan, Rod et Solène'}
 CHAMP={'regarder':'regarder','prendre':'prendre','utiliser':'utiliser','parler':'parler','desc':'objet (inventaire)','donnerSansObjet':'défaut','donnerPasHumain':'défaut','donnerRefus':'défaut','utiliserSurPersonne':'défaut','yvan':'portrait','rod':'portrait','solene':'portrait'}
 CHAINE=r'"((?:[^"\\]|\\.){3,})"'
 anciennes=set()
